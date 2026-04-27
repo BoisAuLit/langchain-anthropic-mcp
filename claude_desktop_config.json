@@ -1,0 +1,45 @@
+{
+  "preferences": {
+    "coworkWebSearchEnabled": true,
+    "coworkScheduledTasksEnabled": false,
+    "ccdScheduledTasksEnabled": false,
+    "quickEntryShortcut": "off",
+    "menuBarEnabled": false
+  },
+  "mcpServers": {
+    "filesystem": {
+      "command": "/Users/bohaoli/.nvm/versions/node/v22.21.0/bin/npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/bohaoli/Desktop/tuto/tuto_langchain/official/001-foundation-langraph"
+      ],
+      "env": {
+        "PATH": "/Users/bohaoli/.nvm/versions/node/v22.21.0/bin:/opt/homebrew/bin:/usr/local/bin:/Users/bohaoli/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "NPM_CONFIG_LOGLEVEL": "silent",
+        "NODE_ENV": "production"
+      }
+    },
+    "research": {
+      "command": "/Users/bohaoli/.local/bin/uv",
+      "args": [
+        "run",
+        "--project",
+        "/Users/bohaoli/Desktop/tuto/tuto_langchain/official/001-foundation-langraph",
+        "/Users/bohaoli/Desktop/tuto/tuto_langchain/official/001-foundation-langraph/deep-learning-ai-MCP/005_full_mcp_server/research_server.py"
+      ],
+      "env": {
+        "PATH": "/Users/bohaoli/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    },
+    "fetch": {
+      "command": "/Users/bohaoli/.local/bin/uvx",
+      "args": ["mcp-server-fetch"],
+      "env": {
+        "PATH": "/Users/bohaoli/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin",
+        "NPM_CONFIG_LOGLEVEL": "silent",
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
