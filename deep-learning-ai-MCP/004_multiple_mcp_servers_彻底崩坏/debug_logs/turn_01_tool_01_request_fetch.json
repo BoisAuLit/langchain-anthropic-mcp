@@ -1,0 +1,13 @@
+{
+  "saved_at": "2026-04-26T16:58:20",
+  "data": {
+    "turn": 1,
+    "tool_call_number": 1,
+    "tool_use_id": "toolu_01T6TifX5Hz44jW83jMqUPUE",
+    "tool_name": "fetch",
+    "tool_args": {
+      "url": "https://modelcontextprotocol.io/docs/concepts/architecture",
+      "max_length": 100000
+    }
+  }
+}

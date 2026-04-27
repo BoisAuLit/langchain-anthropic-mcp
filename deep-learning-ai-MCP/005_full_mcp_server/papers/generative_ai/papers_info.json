@@ -1,0 +1,68 @@
+{
+  "2501.02842v1": {
+    "title": "Foundations of GenIR",
+    "authors": [
+      "Qingyao Ai",
+      "Jingtao Zhan",
+      "Yiqun Liu"
+    ],
+    "summary": "The chapter discusses the foundational impact of modern generative AI models on information access (IA) systems. In contrast to traditional AI, the large-scale training and superior data modeling of generative AI models enable them to produce high-quality, human-like responses, which brings brand new opportunities for the development of IA paradigms. In this chapter, we identify and introduce two of them in details, i.e., information generation and information synthesis. Information generation allows AI to create tailored content addressing user needs directly, enhancing user experience with immediate, relevant outputs. Information synthesis leverages the ability of generative AI to integrate and reorganize existing information, providing grounded responses and mitigating issues like model hallucination, which is particularly valuable in scenarios requiring precision and external knowledge. This chapter delves into the foundational aspects of generative models, including architecture, scaling, and training, and discusses their applications in multi-modal scenarios. Additionally, it examines the retrieval-augmented generation paradigm and other methods for corpus modeling and understanding, demonstrating how generative AI can enhance information access systems. It also summarizes potential challenges and fruitful directions for future studies.",
+    "pdf_url": "https://arxiv.org/pdf/2501.02842v1",
+    "published": "2025-01-06"
+  },
+  "2603.28944v1": {
+    "title": "AI prediction leads people to forgo guaranteed rewards",
+    "authors": [
+      "Aoi Naito",
+      "Hirokazu Shirado"
+    ],
+    "summary": "Artificial intelligence (AI) is understood to affect the content of people's decisions. Here, using a behavioral implementation of the classic Newcomb's paradox in 1,305 participants, we show that AI can also change how people decide. In this paradigm, belief in predictive authority can lead individuals to constrain decision-making, forgoing a guaranteed reward. Over 40% of participants treated AI as such a predictive authority. This significantly increased the odds of forgoing the guaranteed reward by a factor of 3.39 (95% CI: 2.45-4.70) compared with random framing, and reduced earnings by 10.7-42.9%. The effect appeared across AI presentations and decision contexts and persisted even when predictions failed. When people believe AI can predict their behavior, they may self-constrain it in anticipation of that prediction.",
+    "pdf_url": "https://arxiv.org/pdf/2603.28944v1",
+    "published": "2026-03-30"
+  },
+  "2601.16513v1": {
+    "title": "Competing Visions of Ethical AI: A Case Study of OpenAI",
+    "authors": [
+      "Melissa Wilfley",
+      "Mengting Ai",
+      "Madelyn Rose Sanfilippo"
+    ],
+    "summary": "Introduction. AI Ethics is framed distinctly across actors and stakeholder groups. We report results from a case study of OpenAI analysing ethical AI discourse. Method. Research addressed: How has OpenAI's public discourse leveraged 'ethics', 'safety', 'alignment' and adjacent related concepts over time, and what does discourse signal about framing in practice? A structured corpus, differentiating between communication for a general audience and communication with an academic audience, was assembled from public documentation. Analysis. Qualitative content analysis of ethical themes combined inductively derived and deductively applied codes. Quantitative analysis leveraged computational content analysis methods via NLP to model topics and quantify changes in rhetoric over time. Visualizations report aggregate results. For reproducible results, we have released our code at https://github.com/famous-blue-raincoat/AI_Ethics_Discourse. Results. Results indicate that safety and risk discourse dominate OpenAI's public communication and documentation, without applying academic and advocacy ethics frameworks or vocabularies. Conclusions. Implications for governance are presented, along with discussion of ethics-washing practices in industry.",
+    "pdf_url": "https://arxiv.org/pdf/2601.16513v1",
+    "published": "2026-01-23"
+  },
+  "2308.02033v1": {
+    "title": "AI and the EU Digital Markets Act: Addressing the Risks of Bigness in Generative AI",
+    "authors": [
+      "Ayse Gizem Yasar",
+      "Andrew Chong",
+      "Evan Dong",
+      "Thomas Krendl Gilbert",
+      "Sarah Hladikova",
+      "Roland Maio",
+      "Carlos Mougan",
+      "Xudong Shen",
+      "Shubham Singh",
+      "Ana-Andreea Stoica",
+      "Savannah Thais",
+      "Miri Zilka"
+    ],
+    "summary": "As AI technology advances rapidly, concerns over the risks of bigness in digital markets are also growing. The EU's Digital Markets Act (DMA) aims to address these risks. Still, the current framework may not adequately cover generative AI systems that could become gateways for AI-based services. This paper argues for integrating certain AI software as core platform services and classifying certain developers as gatekeepers under the DMA. We also propose an assessment of gatekeeper obligations to ensure they cover generative AI services. As the EU considers generative AI-specific rules and possible DMA amendments, this paper provides insights towards diversity and openness in generative AI services.",
+    "pdf_url": "https://arxiv.org/pdf/2308.02033v1",
+    "published": "2023-07-07"
+  },
+  "2510.16223v1": {
+    "title": "Case Study of GAI for Generating Novel Images for Real-World Embroidery",
+    "authors": [
+      "Kate Glazko",
+      "Anika Arugunta",
+      "Janelle Chan",
+      "Nancy Jimenez-Garcia",
+      "Tashfia Sharmin",
+      "Jennifer Mankoff"
+    ],
+    "summary": "In this paper, we present a case study exploring the potential use of Generative Artificial Intelligence (GAI) to address the real-world need of making the design of embroiderable art patterns more accessible. Through an auto-ethnographic case study by a disabled-led team, we examine the application of GAI as an assistive technology in generating embroidery patterns, addressing the complexity involved in designing culturally-relevant patterns as well as those that meet specific needs regarding detail and color. We detail the iterative process of prompt engineering custom GPTs tailored for producing specific visual outputs, emphasizing the nuances of achieving desirable results that align with real-world embroidery requirements. Our findings underscore the mixed outcomes of employing GAI for producing embroiderable images, from facilitating creativity and inclusion to navigating the unpredictability of AI-generated designs. Future work aims to refine GAI tools we explored for generating embroiderable images to make them more performant and accessible, with the goal of fostering more inclusion in the domains of creativity and making.",
+    "pdf_url": "https://arxiv.org/pdf/2510.16223v1",
+    "published": "2025-10-17"
+  }
+}

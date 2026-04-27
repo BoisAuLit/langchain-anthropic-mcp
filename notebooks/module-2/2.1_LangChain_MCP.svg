@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#333"/>
+    </marker>
+    <style>
+      .title{font-family:Arial, sans-serif;font-size:34px;font-weight:700;fill:#111}
+      .subtitle{font-family:Arial, sans-serif;font-size:18px;fill:#444}
+      .box{fill:#fff;stroke:#222;stroke-width:2.2;rx:20;ry:20}
+      .soft{fill:#f7f7f7;stroke:#333;stroke-width:1.8;rx:18;ry:18}
+      .blue{fill:#eaf3ff;stroke:#1f5fa8;stroke-width:2;rx:18;ry:18}
+      .green{fill:#ebfaef;stroke:#248044;stroke-width:2;rx:18;ry:18}
+      .yellow{fill:#fff8df;stroke:#9a7400;stroke-width:2;rx:18;ry:18}
+      .purple{fill:#f3eaff;stroke:#6b3fb5;stroke-width:2;rx:18;ry:18}
+      .text{font-family:Arial, sans-serif;font-size:20px;fill:#111}
+      .small{font-family:Arial, sans-serif;font-size:16px;fill:#333}
+      .tiny{font-family:Arial, sans-serif;font-size:14px;fill:#444}
+      .label{font-family:Arial, sans-serif;font-size:17px;font-weight:700;fill:#222}
+      .line{stroke:#333;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#666;stroke-width:2;fill:none;stroke-dasharray:8 6;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1400" height="900" fill="#ffffff"/>
+  <text x="700" y="60" text-anchor="middle" class="title" style="white-space: pre;">LangChain + MCP Architecture</text>
+  <text x="700" y="92" text-anchor="middle" class="subtitle" style="white-space: pre;">MCP is not only tools: it exposes Tools + Resources + Prompt Templates through one standard protocol</text>
+  <rect x="70" y="350" width="190" height="110" class="soft"/>
+  <text x="165" y="390" text-anchor="middle" class="label" style="white-space: pre;">User</text>
+  <text x="165" y="420" text-anchor="middle" class="small" style="white-space: pre;">asks a question</text>
+  <text x="165" y="444" text-anchor="middle" class="tiny" style="white-space: pre;">e.g. “analyze my data”</text>
+  <rect x="350" y="300" width="270" height="210" class="blue"/>
+  <text x="485" y="342" text-anchor="middle" class="label" style="white-space: pre;">LangChain Agent / App</text>
+  <text x="485" y="382" text-anchor="middle" class="small" style="white-space: pre;">Decision maker</text>
+  <text x="485" y="412" text-anchor="middle" class="small" style="white-space: pre;">Chooses what to use</text>
+  <text x="485" y="442" text-anchor="middle" class="small" style="white-space: pre;">Tools? Resources?</text>
+  <text x="485" y="472" text-anchor="middle" class="small" style="white-space: pre;">Prompt templates?</text>
+  <rect x="710" y="300" width="300" height="210" class="yellow"/>
+  <text x="860" y="342" text-anchor="middle" class="label" style="white-space: pre;">MultiServerMCPClient</text>
+  <text x="860" y="382" text-anchor="middle" class="small" style="white-space: pre;">MCP client manager</text>
+  <text x="860" y="412" text-anchor="middle" class="small" style="white-space: pre;">Connects to one or many</text>
+  <text x="860" y="442" text-anchor="middle" class="small" style="white-space: pre;">MCP servers</text>
+  <text x="860" y="472" text-anchor="middle" class="tiny" style="white-space: pre;">stdio / HTTP / SSE etc.</text>
+  <rect x="1100" y="165" width="233.24" height="492.515" class="purple" style=""/>
+  <text x="1220" y="205" text-anchor="middle" class="label" style="white-space: pre;">MCP Server</text>
+  <text x="1220" y="232" text-anchor="middle" class="tiny" style="white-space: pre;">external capability provider</text>
+  <rect x="1130" y="265" width="180" height="95" class="green"/>
+  <text x="1220" y="298" text-anchor="middle" class="label" style="white-space: pre;">Tools</text>
+  <text x="1220" y="326" text-anchor="middle" class="tiny" style="white-space: pre;">actions</text>
+  <text x="1220" y="348" text-anchor="middle" class="tiny" style="white-space: pre;">search / write / API</text>
+  <rect x="1130" y="395" width="180" height="95" class="green"/>
+  <text x="1220" y="428" text-anchor="middle" class="label" style="white-space: pre;">Resources</text>
+  <text x="1220" y="456" text-anchor="middle" class="tiny" style="white-space: pre;">readable context</text>
+  <text x="1220" y="478" text-anchor="middle" class="tiny" style="white-space: pre;">files / DB / docs</text>
+  <rect x="1130" y="525" width="180" height="110" class="green"/>
+  <text x="1220" y="558" text-anchor="middle" class="label" style="white-space: pre;">Prompts</text>
+  <text x="1220" y="586" text-anchor="middle" class="tiny" style="white-space: pre;">reusable templates</text>
+  <text x="1220" y="608" text-anchor="middle" class="tiny" style="white-space: pre;">workflows / roles</text>
+  <path d="M260 405 H345" class="line"/>
+  <path d="M620 405 H705" class="line"/>
+  <path d="M1010 405 H1095" class="line"/>
+  <path d="M1100 312 C1060 312 1050 365 1015 385" class="dash"/>
+  <path d="M1100 445 H1015" class="dash"/>
+  <path d="M 1100 580 C 1061.02 580 1051.27 492.475 1017.16 465.837" class="dash" style=""/>
+  <rect x="104.99" y="682.013" width="816.352" height="145" class="soft" style=""/>
+  <text x="135" y="715" class="label" style="white-space: pre;">Learner takeaway</text>
+  <text x="135" y="750" class="small" style="white-space: pre;">1. LangChain Agent is the brain: it decides what external capability is needed.</text>
+  <text x="135" y="780" class="small" style="white-space: pre;">2. MultiServerMCPClient is the connector: it discovers and exposes MCP server capabilities to your app.</text>
+  <text x="135" y="810" class="small" style="white-space: pre;">3. MCP Server is not just “tools”: it can provide actions, readable context, and reusable prompt templates.</text>
+  <rect x="358.715" y="545.209" width="501.181" height="103.314" class="box" style=""/>
+  <text x="380" y="575" class="small" style="white-space: pre;">client = MultiServerMCPClient({</text>
+  <text x="410" y="602" class="small" style="white-space: pre;">"local_server": {"transport": "stdio", "command": "python", ...}</text>
+  <text x="380" y="628" class="small" style="white-space: pre;">})</text>
+  <text x="700" y="870" text-anchor="middle" class="subtitle" style="white-space: pre;">Simple mental model: Agent = brain · MCP Client = connector · MCP Server = capability provider</text>
+</svg>

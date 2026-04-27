@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "saved_at": "2026-04-26T11:36:19",
+    "round": 1,
+    "stage_order": 1,
+    "stage": "before_api_call",
+    "query": "search for papers on agentic ai",
+    "messages_length": 1
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "search for papers on agentic ai"
+    }
+  ]
+}

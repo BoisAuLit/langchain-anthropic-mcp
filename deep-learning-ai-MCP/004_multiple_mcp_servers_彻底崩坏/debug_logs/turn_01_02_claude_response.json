@@ -1,0 +1,27 @@
+{
+  "saved_at": "2026-04-26T16:58:20",
+  "data": {
+    "turn": 1,
+    "response_content": [
+      {
+        "type": "text",
+        "text": "I'll start by fetching the website content simultaneously with checking the allowed directories!"
+      },
+      {
+        "type": "tool_use",
+        "id": "toolu_01T6TifX5Hz44jW83jMqUPUE",
+        "name": "fetch",
+        "input": {
+          "url": "https://modelcontextprotocol.io/docs/concepts/architecture",
+          "max_length": 100000
+        }
+      },
+      {
+        "type": "tool_use",
+        "id": "toolu_01R1twMPRkCCLLdMXjRRiXjD",
+        "name": "list_allowed_directories",
+        "input": {}
+      }
+    ]
+  }
+}

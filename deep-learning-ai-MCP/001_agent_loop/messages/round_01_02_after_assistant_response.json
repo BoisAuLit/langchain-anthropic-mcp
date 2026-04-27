@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "saved_at": "2026-04-26T11:36:20",
+    "round": 1,
+    "stage_order": 2,
+    "stage": "after_assistant_response",
+    "query": "search for papers on agentic ai",
+    "messages_length": 2
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "search for papers on agentic ai"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01E7GtbsLPtjmUfZgb4znjPE",
+          "name": "search_papers",
+          "input": {
+            "topic": "agentic ai"
+          }
+        }
+      ]
+    }
+  ]
+}

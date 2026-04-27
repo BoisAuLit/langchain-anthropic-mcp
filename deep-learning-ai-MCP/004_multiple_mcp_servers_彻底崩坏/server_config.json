@@ -1,0 +1,33 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/bohaoli/Desktop/tuto/tuto_langchain/official/001-foundation-langraph"
+      ],
+      "env": {
+        "NPM_CONFIG_LOGLEVEL": "silent",
+        "NODE_ENV": "production"
+      }
+    },
+
+    "research": {
+      "command": "uv",
+      "args": [
+        "run",
+        "/Users/bohaoli/Desktop/tuto/tuto_langchain/official/001-foundation-langraph/deep-learning-ai-MCP/004_connect_to_ref_servers/research_server.py"
+      ]
+    },
+
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "env": {
+        "NPM_CONFIG_LOGLEVEL": "silent",
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}

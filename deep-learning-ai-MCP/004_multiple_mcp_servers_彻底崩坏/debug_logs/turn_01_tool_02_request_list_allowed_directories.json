@@ -1,0 +1,10 @@
+{
+  "saved_at": "2026-04-26T16:58:21",
+  "data": {
+    "turn": 1,
+    "tool_call_number": 2,
+    "tool_use_id": "toolu_01R1twMPRkCCLLdMXjRRiXjD",
+    "tool_name": "list_allowed_directories",
+    "tool_args": {}
+  }
+}
