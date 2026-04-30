@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" font-family="Arial, sans-serif">
+  <rect width="1800" height="1200" fill="#FFFFFF"/>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="none" stroke="#555" stroke-width="1.2"/>
+    </marker>
+    <marker id="ad" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="none" stroke="#B85450" stroke-width="1.2"/>
+    </marker>
+    <marker id="ac" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="none" stroke="#D79B00" stroke-width="1.2"/>
+    </marker>
+  </defs>
+  <text x="900" y="38" text-anchor="middle" font-size="30" font-weight="bold" fill="#333" style="white-space: pre;">Wedding Planner — Multi-Agent Architecture</text>
+  <rect x="80" y="70" width="260" height="75" fill="#FFE6CC" stroke="#D79B00" stroke-width="1.5"/>
+  <text x="90" y="92" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">User Request</text>
+  <text x="90" y="110" font-size="13" fill="#555" style="white-space: pre;">"Plan our wedding"</text>
+  <text x="90" y="126" font-size="13" fill="#555" style="white-space: pre;">Paris, 80 guests, $50k, jazz</text>
+  <text x="90" y="140" font-size="12" fill="#888" style="white-space: pre;">→ calls plan_wedding()</text>
+  <line x1="210" y1="145" x2="210" y2="165" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="80" y="168" width="260" height="55" fill="#FFE6CC" stroke="#D79B00" stroke-width="1.5"/>
+  <text x="90" y="188" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Build WeddingContext</text>
+  <text x="90" y="206" font-size="12" fill="#555" style="white-space: pre;">dataclass with couple details</text>
+  <text x="90" y="218" font-size="12" fill="#888" style="white-space: pre;">read-only, injected at invoke time</text>
+  <line x1="210" y1="223" x2="210" y2="243" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="80" y="246" width="260" height="55" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
+  <text x="90" y="266" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">build_coordinator()</text>
+  <text x="90" y="282" font-size="12" fill="#555" style="white-space: pre;">wedding_planner.py</text>
+  <text x="90" y="296" font-size="12" fill="#888" style="white-space: pre;">async — connects MCP, builds agents</text>
+  <line x1="210" y1="301" x2="210" y2="321" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="80" y="324" width="260" height="70" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+  <text x="90" y="344" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">get_mcp_tools()</text>
+  <text x="90" y="360" font-size="12" fill="#555" style="white-space: pre;">mcp_servers.py</text>
+  <text x="90" y="376" font-size="12" fill="#555" style="white-space: pre;">stdio → search_web (Tavily)</text>
+  <text x="90" y="390" font-size="12" fill="#555" style="white-space: pre;">http  → search-flight (Kiwi)</text>
+  <line x1="210" y1="394" x2="210" y2="414" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="80" y="417" width="260" height="70" fill="#E1D5E7" stroke="#9673A6" stroke-width="1.5"/>
+  <text x="90" y="437" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Create 4 Subagents</text>
+  <text x="90" y="453" font-size="12" fill="#555" style="white-space: pre;">subagents.py</text>
+  <text x="90" y="469" font-size="12" fill="#555" style="white-space: pre;">venue, catering, transport, DJ</text>
+  <text x="90" y="483" font-size="12" fill="#888" style="white-space: pre;">each: create_agent() + own tools</text>
+  <line x1="210" y1="487" x2="210" y2="507" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="80" y="510" width="260" height="80" fill="#E1D5E7" stroke="#9673A6" stroke-width="1.5"/>
+  <text x="90" y="530" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Coordinator Agent</text>
+  <text x="90" y="548" font-size="12" fill="#555" style="white-space: pre;">model: gpt-5-nano</text>
+  <text x="90" y="564" font-size="12" fill="#555" style="white-space: pre;">tools: 4 wrappers + 2 state</text>
+  <text x="90" y="580" font-size="12" fill="#555" style="white-space: pre;">checkpointer: InMemorySaver</text>
+  <line x1="340" y1="550" x2="420" y2="550" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="350" y="542" font-size="11" fill="#888" style="white-space: pre;">ainvoke</text>
+  <rect x="420" y="510" width="240" height="100" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+  <text x="430" y="530" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Wrapper Tools (async)</text>
+  <text x="430" y="548" font-size="12" fill="#555" style="white-space: pre;">call_venue_agent(task)</text>
+  <text x="430" y="564" font-size="12" fill="#555" style="white-space: pre;">call_catering_agent(task)</text>
+  <text x="430" y="580" font-size="12" fill="#555" style="white-space: pre;">call_transport_agent(task)</text>
+  <text x="430" y="596" font-size="12" fill="#555" style="white-space: pre;">call_dj_agent(task)</text>
+  <line x1="660" y1="550" x2="740" y2="550" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="670" y="542" font-size="11" fill="#888" style="white-space: pre;">ainvoke</text>
+  <rect x="420" y="630" width="240" height="65" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+  <text x="430" y="650" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">State Tools</text>
+  <text x="430" y="668" font-size="12" fill="#555" style="white-space: pre;">read_planning_progress()</text>
+  <text x="430" y="684" font-size="12" fill="#555" style="white-space: pre;">write_final_plan(plan)</text>
+  <line x1="540" y1="695" x2="540" y2="740" stroke="#B85450" stroke-width="1.5" marker-end="url(#ad)"/>
+  <text x="548" y="722" font-size="11" fill="#B85450" style="white-space: pre;">reads/writes</text>
+  <rect x="740" y="440" width="250" height="65" fill="#E1D5E7" stroke="#9673A6" stroke-width="1.5"/>
+  <text x="750" y="460" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Venue Agent</text>
+  <text x="750" y="478" font-size="12" fill="#555" style="white-space: pre;">get_venue_reqs → reads context</text>
+  <text x="750" y="494" font-size="12" fill="#555" style="white-space: pre;">search_venues → MCP Tavily</text>
+  <rect x="740" y="515" width="250" height="65" fill="#E1D5E7" stroke="#9673A6" stroke-width="1.5"/>
+  <text x="750" y="535" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Catering Agent</text>
+  <text x="750" y="553" font-size="12" fill="#555" style="white-space: pre;">get_catering_reqs → reads context</text>
+  <text x="750" y="569" font-size="12" fill="#555" style="white-space: pre;">estimate_cost, suggest_menu</text>
+  <rect x="740" y="590" width="250" height="65" fill="#E1D5E7" stroke="#9673A6" stroke-width="1.5"/>
+  <text x="750" y="610" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Transport Agent</text>
+  <text x="750" y="628" font-size="12" fill="#555" style="white-space: pre;">get_transport_reqs → reads context</text>
+  <text x="750" y="644" font-size="12" fill="#555" style="white-space: pre;">search_flights → MCP Kiwi</text>
+  <rect x="740" y="665" width="250" height="65" fill="#E1D5E7" stroke="#9673A6" stroke-width="1.5"/>
+  <text x="750" y="685" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">DJ Agent</text>
+  <text x="750" y="703" font-size="12" fill="#555" style="white-space: pre;">get_music_prefs → reads context</text>
+  <text x="750" y="719" font-size="12" fill="#555" style="white-space: pre;">curate_playlist, save_to_state</text>
+  <rect x="1060" y="440" width="210" height="55" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+  <text x="1070" y="460" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Tavily API</text>
+  <text x="1070" y="478" font-size="12" fill="#555" style="white-space: pre;">MCP stdio (local subprocess)</text>
+  <text x="1070" y="492" font-size="12" fill="#555" style="white-space: pre;">mcp_servers.py → search_web</text>
+  <rect x="1060" y="590" width="210" height="55" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+  <text x="1070" y="610" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Kiwi.com API</text>
+  <text x="1070" y="628" font-size="12" fill="#555" style="white-space: pre;">MCP streamable_http (remote)</text>
+  <text x="1070" y="642" font-size="12" fill="#555" style="white-space: pre;">mcp.kiwi.com → search-flight</text>
+  <rect x="1060" y="515" width="210" height="55" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+  <text x="1070" y="535" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">OpenAI gpt-5-nano</text>
+  <text x="1070" y="553" font-size="12" fill="#555" style="white-space: pre;">LLM for all 5 agents</text>
+  <text x="1070" y="567" font-size="12" fill="#555" style="white-space: pre;">(coordinator + 4 subagents)</text>
+  <line x1="990" y1="470" x2="1058" y2="465" stroke="#82B366" stroke-width="1.2" marker-end="url(#a)"/>
+  <line x1="990" y1="620" x2="1058" y2="617" stroke="#82B366" stroke-width="1.2" marker-end="url(#a)"/>
+  <text x="998" y="462" font-size="10" fill="#82B366" style="white-space: pre;">MCP</text>
+  <text x="998" y="614" font-size="10" fill="#82B366" style="white-space: pre;">MCP</text>
+  <line x1="865" y1="730" x2="865" y2="760" stroke="#B85450" stroke-width="1.5" marker-end="url(#ad)"/>
+  <text x="875" y="752" font-size="11" fill="#B85450" style="white-space: pre;">Command(update={})</text>
+  <rect x="420" y="760" width="260" height="110" fill="#F8CECC" stroke="#B85450" stroke-width="1.5"/>
+  <text x="430" y="782" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">WeddingPlanState</text>
+  <text x="430" y="800" font-size="12" fill="#555" style="white-space: pre;">venue_result ← Venue Agent</text>
+  <text x="430" y="816" font-size="12" fill="#555" style="white-space: pre;">catering_result ← Catering</text>
+  <text x="430" y="832" font-size="12" fill="#555" style="white-space: pre;">transport_result ← Transport</text>
+  <text x="430" y="848" font-size="12" fill="#555" style="white-space: pre;">playlist_result ← DJ Agent</text>
+  <text x="430" y="864" font-size="12" font-weight="bold" fill="#B85450" style="white-space: pre;">final_plan ← Coordinator</text>
+  <line x1="865" y1="760" x2="682" y2="790" stroke="#B85450" stroke-width="1.2" marker-end="url(#ad)"/>
+  <rect x="80" y="760" width="260" height="110" fill="#FFE6CC" stroke="#D79B00" stroke-width="1.5"/>
+  <text x="90" y="782" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">WeddingContext</text>
+  <text x="90" y="800" font-size="12" fill="#555" style="white-space: pre;">couple_names, wedding_date</text>
+  <text x="90" y="816" font-size="12" fill="#555" style="white-space: pre;">wedding_location, guest_count</text>
+  <text x="90" y="832" font-size="12" fill="#555" style="white-space: pre;">budget_usd, music_style</text>
+  <text x="90" y="848" font-size="12" fill="#555" style="white-space: pre;">dietary_restrictions, home_city</text>
+  <text x="90" y="866" font-size="12" font-weight="bold" fill="#D79B00" style="white-space: pre;">READ-ONLY — via ToolRuntime</text>
+  <line x1="210" y1="760" x2="210" y2="592" stroke="#D79B00" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#ac)"/>
+  <line x1="212" y1="592" x2="340" y2="560" stroke="#D79B00" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#ac)"/>
+  <text x="140" y="680" font-size="11" fill="#D79B00" style="white-space: pre;">context=</text>
+  <text x="140" y="695" font-size="11" fill="#D79B00" style="white-space: pre;">(at invoke)</text>
+  <rect x="79.945" y="929.685" width="741.169" height="40" fill="#F5F5F5" stroke="#CCC" stroke-width="1" style=""/>
+  <text x="89.961" y="954.728" font-size="13" fill="#555" style="white-space: pre; font-size: 13px;">Context = what YOU know before the call (read-only)    |    State = what the AGENT builds during the call (mutable, persisted)</text>
+  <rect x="740" y="780" width="250" height="65" fill="#FFF2CC" stroke="#D6B656" stroke-width="1.5"/>
+  <text x="750" y="800" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Output</text>
+  <text x="750" y="818" font-size="12" fill="#555" style="white-space: pre;">AIMessage → terminal (final plan)</text>
+  <text x="750" y="834" font-size="12" fill="#555" style="white-space: pre;">plan.md → file system</text>
+  <line x1="680" y1="810" x2="738" y2="810" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="688" y="804" font-size="11" fill="#888" style="white-space: pre;">returns</text>
+  <rect x="740" y="860" width="250" height="50" fill="#F5F5F5" stroke="#999" stroke-width="1.5"/>
+  <text x="750" y="880" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">InMemorySaver</text>
+  <text x="750" y="898" font-size="12" fill="#555" style="white-space: pre;">Persists state across turns (thread_id)</text>
+  <line x1="740" y1="885" x2="682" y2="855" stroke="#999" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <rect x="1340" y="760" width="220" height="200" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+  <text x="1355" y="782" font-size="14" font-weight="bold" fill="#333" style="white-space: pre;">Legend</text>
+  <rect x="1355" y="795" width="14" height="11" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+  <text x="1376" y="805" font-size="12" fill="#555" style="white-space: pre;">Entry point / orchestration</text>
+  <rect x="1355" y="815" width="14" height="11" fill="#E1D5E7" stroke="#9673A6" stroke-width="1"/>
+  <text x="1376" y="825" font-size="12" fill="#555" style="white-space: pre;">Agents (coordinator + sub)</text>
+  <rect x="1355" y="835" width="14" height="11" fill="#D5E8D4" stroke="#82B366" stroke-width="1"/>
+  <text x="1376" y="845" font-size="12" fill="#555" style="white-space: pre;">Tools / MCP / External APIs</text>
+  <rect x="1355" y="855" width="14" height="11" fill="#FFE6CC" stroke="#D79B00" stroke-width="1"/>
+  <text x="1376" y="865" font-size="12" fill="#555" style="white-space: pre;">Context (read-only input)</text>
+  <rect x="1355" y="875" width="14" height="11" fill="#F8CECC" stroke="#B85450" stroke-width="1"/>
+  <text x="1376" y="885" font-size="12" fill="#555" style="white-space: pre;">State (mutable, accumulated)</text>
+  <rect x="1355" y="895" width="14" height="11" fill="#FFF2CC" stroke="#D6B656" stroke-width="1"/>
+  <text x="1376" y="905" font-size="12" fill="#555" style="white-space: pre;">Output (plan.md + terminal)</text>
+  <rect x="1355" y="915" width="14" height="11" fill="#F5F5F5" stroke="#999" stroke-width="1"/>
+  <text x="1376" y="925" font-size="12" fill="#555" style="white-space: pre;">Infrastructure / notes</text>
+  <line x1="1355" y1="940" x2="1395" y2="940" stroke="#555" stroke-width="1.2"/>
+  <text x="1400" y="944" font-size="12" fill="#555" style="white-space: pre;">Solid = runtime flow</text>
+  <line x1="1355" y1="955" x2="1395" y2="955" stroke="#999" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="1400" y="959" font-size="12" fill="#555" style="white-space: pre;">Dashed = data access</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1525" height="540" viewBox="0 0 1525 540">
+  <rect width="1525" height="540" fill="#f6f0f4"/>
+
+  <!-- Left labels -->
+  <rect x="50" y="133" width="423" height="102" rx="39" fill="#c487e8"/>
+  <text x="82" y="200" font-family="Courier New, monospace" font-size="44" fill="#000">ColourContext</text>
+
+  <rect x="50" y="269" width="423" height="102" rx="39" fill="#2ea3d2"/>
+  <text x="151" y="336" font-family="Courier New, monospace" font-size="44" fill="#000">Messages</text>
+
+  <!-- Main horizontal arrows -->
+  <line x1="510" y1="322" x2="654" y2="322" stroke="#000" stroke-width="9"/>
+  <polygon points="654,322 632,303 632,341" fill="#000"/>
+
+  <line x1="931" y1="319" x2="1077" y2="319" stroke="#000" stroke-width="9"/>
+  <polygon points="1077,319 1055,300 1055,338" fill="#000"/>
+
+  <!-- Curved dotted arrow -->
+  <path d="M510 183 C 685 92, 897 86, 1074 174" fill="none" stroke="#000" stroke-width="8" stroke-linecap="butt" stroke-dasharray="9 10"/>
+  <polygon points="1077,174 1049,156 1045,188" fill="#000" transform="rotate(-13 1060 172)"/>
+
+  <!-- Robot icon -->
+  <g fill="#000">
+    <!-- antenna -->
+    <circle cx="794" cy="204" r="20"/>
+    <rect x="786" y="224" width="16" height="31"/>
+    <!-- ears -->
+    <rect x="697" y="283" width="23" height="47" rx="9"/>
+    <rect x="871" y="283" width="23" height="47" rx="9"/>
+    <!-- head -->
+    <path d="M742 241 L849 241 Q877 241 877 269 L877 341 Q877 369 849 369 L742 369 Q714 369 714 341 L714 269 Q714 241 742 241 Z"/>
+  </g>
+  <circle cx="762" cy="289" r="17" fill="#f6f0f4"/>
+  <circle cx="824" cy="289" r="17" fill="#f6f0f4"/>
+  <rect x="771" y="327" width="47" height="15" rx="4" fill="#f6f0f4"/>
+
+  <!-- Tool Runtime box -->
+  <rect x="1160" y="133" width="263" height="238" rx="39" fill="#00ee16"/>
+  <text x="1235" y="237" font-family="Courier New, monospace" font-size="47" fill="#000">Tool</text>
+  <text x="1195" y="302" font-family="Courier New, monospace" font-size="47" fill="#000">Runtime</text>
+</svg>
