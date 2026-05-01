@@ -10,7 +10,7 @@
     "editorCursor.foreground": "#00ff00",
     "editor.findMatchBackground": "#0000ff",
     "editor.lineHighlightBackground": "#3a7e3a",
-    "statusBar.noFolderBackground": "#05284A",
-    "statusBar.noFolderForeground": "#F8FBFF"
+    "statusBar.noFolderBackground": "#0F3046",
+    "statusBar.noFolderForeground": "#F6FAFD"
   }
 }

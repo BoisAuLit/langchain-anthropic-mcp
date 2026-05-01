@@ -208,3 +208,4 @@ __marimo__/
 
 # LangSmith Studio
 **/.langgraph_api/
+.DS_Store

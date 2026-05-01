@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#fbf9fb"/>
+  <style>
+    .head { fill:#4c99d1; }
+    .cell { fill:#dff3fe; }
+    .txt { font-family: 'Courier New', Courier, monospace; fill:#050505; text-anchor:middle; dominant-baseline:middle; }
+    .h { font-size:56px; font-weight:400; }
+    .m { font-size:50px; font-weight:400; }
+    .s { font-size:34px; font-weight:400; }
+  </style>
+
+  <!-- Column 1 -->
+  <rect class="head" x="34" y="45" width="499" height="203"/>
+  <rect class="cell" x="34" y="266" width="499" height="203"/>
+  <rect class="cell" x="34" y="487" width="499" height="203"/>
+  <rect class="cell" x="34" y="708" width="499" height="204"/>
+
+  <!-- Column 2 -->
+  <rect class="head" x="550" y="45" width="498" height="203"/>
+  <rect class="cell" x="550" y="266" width="498" height="203"/>
+  <rect class="cell" x="550" y="487" width="498" height="203"/>
+  <rect class="cell" x="550" y="708" width="498" height="204"/>
+
+  <!-- Column 3 -->
+  <rect class="head" x="1065" y="45" width="499" height="203"/>
+  <rect class="cell" x="1065" y="266" width="499" height="203"/>
+  <rect class="cell" x="1065" y="487" width="499" height="203"/>
+  <rect class="cell" x="1065" y="708" width="499" height="204"/>
+
+  <!-- Header text -->
+  <text class="txt h" x="283.5" y="119"><tspan x="283.5">Wrap-style</tspan><tspan x="283.5" dy="80">Middleware</tspan></text>
+  <text class="txt h" x="799" y="119"><tspan x="799">Node-style</tspan><tspan x="799" dy="80">Middleware</tspan></text>
+  <text class="txt h" x="1314.5" y="119"><tspan x="1314.5">Tool</tspan><tspan x="1314.5" dy="80">Calls</tspan></text>
+
+  <!-- Row 2 text -->
+  <text class="txt m" x="283.5" y="367.5">ModelRequest</text>
+  <text class="txt m" x="799" y="341"><tspan x="799">State +</tspan><tspan x="799" dy="70">Runtime</tspan></text>
+  <text class="txt m" x="1314.5" y="367.5">ToolRuntime</text>
+
+  <!-- Row 3 text -->
+  <text class="txt s" x="283.5" y="552"><tspan x="283.5">Adjust an agent’s</tspan><tspan x="283.5" dy="46">tools, prompt, model</tspan><tspan x="283.5" dy="46">while running</tspan></text>
+  <text class="txt s" x="799" y="575"><tspan x="799">Adjust an agent’s</tspan><tspan x="799" dy="46">state while running</tspan></text>
+  <text class="txt s" x="1314.5" y="552"><tspan x="1314.5">Agent adjusts its own</tspan><tspan x="1314.5" dy="46">state or retrieves</tspan><tspan x="1314.5" dy="46">runtime context</tspan></text>
+
+  <!-- Row 4 text -->
+  <text class="txt s" x="283.5" y="773"><tspan x="283.5">e.g. Giving an agent</tspan><tspan x="283.5" dy="46">access to tools if the</tspan><tspan x="283.5" dy="46">user is internal</tspan></text>
+  <text class="txt s" x="799" y="796"><tspan x="799">e.g. Trimming messages</tspan><tspan x="799" dy="46">from long conversations</tspan></text>
+  <text class="txt s" x="1314.5" y="773"><tspan x="1314.5">e.g. Updating the state</tspan><tspan x="1314.5" dy="46">with the username when</tspan><tspan x="1314.5" dy="46">provided to the agent</tspan></text>
+</svg>
