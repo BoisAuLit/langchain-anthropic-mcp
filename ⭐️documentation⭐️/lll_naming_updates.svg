@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1612" height="782" viewBox="0 0 1612 782" xmlns:bx="https://boxy-svg.com">
+  <rect width="1612" height="782" fill="#ffffff"/>
+  <text x="806" y="72" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="700" fill="#555555" style="white-space: pre;">Naming Updates (Oct 2025)</text>
+  <text x="45" y="345" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="400" fill="#a9a1cf" style="white-space: pre;">LangSmith</text>
+  <text x="45" y="545" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="400" fill="#a9a1cf" style="white-space: pre;">LangGraph Platform</text>
+  <text x="45" y="710" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="400" fill="#a9a1cf" style="white-space: pre;">LangGraph Studio</text>
+  <g transform="translate(974 232)" fill="none" stroke="#b58caf" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <path d="M0 22 C14 5, 31 5, 46 22 C31 39, 14 39, 0 22 Z" fill="#f5edf6"/>
+    <circle cx="23" cy="22" r="10" fill="#b58caf" stroke="none"/>
+    <circle cx="23" cy="22" r="5" fill="#ffffff" opacity="0.45" stroke="none"/>
+  </g>
+  <g transform="translate(975 362)" opacity="0.95">
+    <rect x="0" y="30" width="9" height="31" fill="#4977a7"/>
+    <rect x="14" y="8" width="9" height="53" fill="#4977a7"/>
+    <rect x="28" y="19" width="9" height="42" fill="#4977a7"/>
+    <rect x="42" y="37" width="9" height="24" fill="#4977a7"/>
+    <line x1="0" y1="65" x2="58" y2="65" stroke="#4977a7" stroke-width="4"/>
+  </g>
+  <g transform="translate(978 505)" opacity="0.95">
+    <path d="M20 0 L39 11 L39 34 L20 45 L1 34 L1 11 Z" fill="#79a8a0"/>
+    <path d="M20 0 L20 23" stroke="#ffffff" stroke-width="3"/>
+    <path d="M11 13 L20 5 L29 13" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(977 669)" fill="none" stroke="#efa15f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <rect x="7" y="10" width="34" height="30" rx="2" fill="#fff6e8"/>
+    <path d="M24 0 L24 10"/>
+    <path d="M18 0 L30 0"/>
+    <path d="M10 40 L2 68"/>
+    <path d="M38 40 L48 68"/>
+    <path d="M5 55 L45 55"/>
+  </g>
+  <text x="1057" y="262" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="400" fill="#5d5d5d" style="white-space: pre;">LangSmith Observability</text>
+  <text x="1265" y="329" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="51" font-weight="700" fill="#c7a1f2" style="white-space: pre;">&amp;</text>
+  <text x="1057" y="394" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="400" fill="#5d5d5d" style="white-space: pre;">LangSmith Evaluation</text>
+  <text x="1057" y="545" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="400" fill="#5d5d5d" style="white-space: pre;">LangSmith Deployment</text>
+  <text x="1057" y="710" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="400" fill="#5d5d5d" style="white-space: pre;">LangSmith Studio</text>
+  <path d="M 359.44 319.71 H 910.781 L 910.781 304.71 L 950.781 324.71 L 910.781 344.71 L 910.781 329.71 H 359.44 V 319.71 Z" bx:shape="arrow 359.44 304.71 591.341 40 10 40 0 1@2b837942" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+  <path d="M 569.547 527.221 H 910.026 L 910.026 512.221 L 950.026 532.221 L 910.026 552.221 L 910.026 537.221 H 569.547 V 527.221 Z" bx:shape="arrow 569.547 512.221 380.479 40 10 40 0 1@f451808d" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+  <path d="M 506.22 693.526 H 913.53 L 913.53 678.526 L 953.53 698.526 L 913.53 718.526 L 913.53 703.526 H 506.22 V 693.526 Z" bx:shape="arrow 506.22 678.526 447.31 40 10 40 0 1@49f35ca1" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+</svg>
