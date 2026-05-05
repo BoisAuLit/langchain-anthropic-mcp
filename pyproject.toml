@@ -33,6 +33,7 @@ dependencies = [
     "anthropic>=0.84.0",
     "nest-asyncio>=1.6.0",
     "langfuse>=4.5.1",
+    "wikipedia>=1.4.0",
 ]
 
 [build-system]
