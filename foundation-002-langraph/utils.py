@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+import wikipedia  # noqa: E402
+wikipedia.set_user_agent("LangChainResearchBot/1.0 (bohaoli@research.local)")
+
 from langfuse.langchain import CallbackHandler  # noqa: E402
 
 langfuse_handler = CallbackHandler()
