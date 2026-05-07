@@ -1,5 +1,8 @@
 import json
-
+from rich.console import Console
+from rich.theme import Theme
+from rich.json import JSON
+from rich.panel import Panel
 
 def ppm(message):
     """Pretty print all details of a LangChain message."""
@@ -57,3 +60,53 @@ def ppms(messages):
         if hasattr(msg, "usage_metadata") and msg.usage_metadata:
             print("Usage:")
             print(msg.usage_metadata)
+
+from rich.console import Console
+from rich.theme import Theme
+from rich.json import JSON
+from rich.panel import Panel
+
+# 全局 console（只初始化一次）
+_custom_theme = Theme({
+    "json.key": "bold bright_white",
+    "json.str": "bold bright_yellow",
+    "json.string": "bold bright_yellow",
+    "json.number": "bright_cyan",
+    "json.bool": "bright_magenta",
+    "json.true": "bright_magenta",
+    "json.false": "bright_magenta",
+    "json.null": "bold bright_red",
+})
+
+_console = Console(theme=_custom_theme)
+
+
+def debug(obj, title="🧠 Debug"):
+    """
+    Pretty print any object (Item, dict, state, etc.) in a readable JSON format.
+
+    Args:
+        obj: Any object (Item, dict, list, etc.)
+        title: Optional title for the output panel
+    """
+
+    # 1. 优先用 .dict()
+    if hasattr(obj, "dict"):
+        try:
+            data = obj.dict()
+        except Exception:
+            data = str(obj)
+    # 2. 如果已经是 dict / list
+    elif isinstance(obj, (dict, list)):
+        data = obj
+    # 3. fallback
+    else:
+        data = str(obj)
+
+    _console.print(
+        Panel(
+            JSON.from_data(data),
+            title=title,
+            border_style="cyan",
+        )
+    )
