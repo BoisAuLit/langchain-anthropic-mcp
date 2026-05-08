@@ -18,6 +18,9 @@ from langgraph.graph import StateGraph, MessagesState, START, END
 from langgraph.store.base import BaseStore
 from langgraph.store.memory import InMemoryStore
 
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
 import configuration
 
 ## Utilities 
