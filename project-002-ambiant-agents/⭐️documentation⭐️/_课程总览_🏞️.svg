@@ -1,0 +1,350 @@
+<svg viewBox="0 0 1500 1500" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="50%" stop-color="#5b21b6"/>
+      <stop offset="100%" stop-color="#0e7490"/>
+    </linearGradient>
+    <linearGradient id="ambientGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+    <linearGradient id="chatGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="spectrumGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="50%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.45"/>
+    </filter>
+    <marker id="arrAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/>
+    </marker>
+    <marker id="arrPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9a8d4"/>
+    </marker>
+    <marker id="arrCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+
+  <rect width="1500" height="1500" fill="#0a0a12"/>
+
+  <!-- ===== TITLE ===== -->
+  <rect x="60" y="20" width="1380" height="80" rx="10" fill="url(#titleGrad)" filter="url(#shadow)"/>
+  <text x="750" y="56" text-anchor="middle" font-size="26" font-weight="700" fill="#f1f5f9">🌫️ Building Ambient Agents with LangGraph — 课程总览</text>
+  <text x="750" y="84" text-anchor="middle" font-size="13" fill="#cbd5e1" font-style="italic">让 agent 替你被动监听、后台干活、必要时通知你 —— 以 email assistant 为案例,讲透 6 大模块</text>
+
+  <!-- ===== BAND 1: WHAT IS AMBIENT (y=120-380) ===== -->
+  <text x="750" y="140" text-anchor="middle" font-size="18" font-weight="700" fill="#fbbf24">🎯 What — 它跟普通 Chat agent 有什么不同?</text>
+
+  <!-- Left: comparison table -->
+  <g transform="translate(60,160)">
+    <rect width="700" height="220" rx="10" fill="#14141c" stroke="#475569" stroke-width="1.5"/>
+    <!-- Two column headers -->
+    <rect x="20" y="20" width="320" height="36" rx="6" fill="url(#chatGrad)"/>
+    <text x="180" y="44" text-anchor="middle" font-size="15" font-weight="700" fill="#f1f5f9">💬 Chat Agent(对照组)</text>
+    <rect x="360" y="20" width="320" height="36" rx="6" fill="url(#ambientGrad)"/>
+    <text x="520" y="44" text-anchor="middle" font-size="15" font-weight="700" fill="#fde047">🌫️ Ambient Agent(本课主角)</text>
+
+    <!-- Row 1: trigger -->
+    <text x="20" y="82" font-size="12" fill="#cbd5e1">用户「主动」打字问</text>
+    <text x="360" y="82" font-size="12" fill="#bbf7d0">事件「触发」(新邮件到、定时器、webhook)</text>
+    <!-- Row 2: concurrency -->
+    <text x="20" y="106" font-size="12" fill="#cbd5e1">一次只处理 1 个请求</text>
+    <text x="360" y="106" font-size="12" fill="#bbf7d0">可以并发跑多个事件</text>
+    <!-- Row 3: latency -->
+    <text x="20" y="130" font-size="12" fill="#cbd5e1">用户在等 → 必须快</text>
+    <text x="360" y="130" font-size="12" fill="#bbf7d0">用户不等 → 慢一点没关系</text>
+    <!-- Row 4: notification -->
+    <text x="20" y="154" font-size="12" fill="#cbd5e1">同步答复</text>
+    <text x="360" y="154" font-size="12" fill="#bbf7d0">后台跑,必要时才「敲门」</text>
+    <!-- Row 5: needs HITL -->
+    <text x="20" y="178" font-size="12" fill="#cbd5e1">单次对话内的来回足够</text>
+    <text x="360" y="178" font-size="12" fill="#bbf7d0">敏感操作必须 HITL 把关</text>
+
+    <text x="350" y="208" text-anchor="middle" font-size="11" fill="#94a3b8" font-style="italic">→ ambient = "环境 / 周围",像呼吸一样默默运转,只在关键时刻浮出水面</text>
+  </g>
+
+  <!-- Right: Agency / Predictability spectrum -->
+  <g transform="translate(780,160)">
+    <rect width="660" height="220" rx="10" fill="#14141c" stroke="#475569" stroke-width="1.5"/>
+    <text x="330" y="36" text-anchor="middle" font-size="15" font-weight="700" fill="#fbbf24">⚖️ 核心张力:Agency ↔ Predictability</text>
+
+    <!-- Spectrum bar -->
+    <rect x="40" y="68" width="580" height="20" rx="10" fill="url(#spectrumGrad)"/>
+    <text x="40" y="106" font-size="11" font-weight="700" fill="#22d3ee">⚙️ Workflow</text>
+    <text x="38" y="120" font-size="10" fill="#67e8f9" font-style="italic">硬编码路径</text>
+    <text x="290" y="106" text-anchor="middle" font-size="11" font-weight="700" fill="#fbbf24">🔀 Router + Agent</text>
+    <text x="290" y="120" text-anchor="middle" font-size="10" fill="#fde68a" font-style="italic">(本课的架构)</text>
+    <text x="620" y="106" text-anchor="end" font-size="11" font-weight="700" fill="#f87171">🤖 Full Agent</text>
+    <text x="618" y="120" text-anchor="end" font-size="10" fill="#fca5a5" font-style="italic">完全自由决策</text>
+
+    <!-- Y axis labels -->
+    <text x="40" y="148" font-size="11" fill="#cbd5e1">Agency(自主性):</text>
+    <text x="170" y="148" font-size="11" font-weight="700" fill="#22d3ee">低</text>
+    <text x="190" y="148" font-size="11" fill="#cbd5e1">────→</text>
+    <text x="240" y="148" font-size="11" font-weight="700" fill="#f87171">高</text>
+
+    <text x="40" y="170" font-size="11" fill="#cbd5e1">Predictability(可预测):</text>
+    <text x="200" y="170" font-size="11" font-weight="700" fill="#22d3ee">高</text>
+    <text x="220" y="170" font-size="11" fill="#cbd5e1">────→</text>
+    <text x="270" y="170" font-size="11" font-weight="700" fill="#f87171">低</text>
+
+    <text x="40" y="198" font-size="11" fill="#fde68a" font-style="italic">💡 启发:能在白板上画清流程 → 用 workflow;到运行时才知怎么走 → 用 agent</text>
+  </g>
+
+  <!-- ===== BAND 2: ARCHITECTURE (y=400-920) ===== -->
+  <text x="750" y="420" text-anchor="middle" font-size="18" font-weight="700" fill="#fbbf24">🏗️ How — 一封邮件进来,系统怎么走完整条链?</text>
+
+  <!-- Email in (top center) -->
+  <g transform="translate(670,450)">
+    <rect width="160" height="50" rx="8" fill="url(#titleGrad)" filter="url(#shadow)"/>
+    <text x="80" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">📥 Email 进来</text>
+  </g>
+  <line x1="750" y1="505" x2="750" y2="540" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arrAmber)"/>
+
+  <!-- Triage Router -->
+  <g transform="translate(580,545)">
+    <rect width="340" height="100" rx="10" fill="#1e293b" stroke="#60a5fa" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="170" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">🔀 Triage Router(workflow 部分)</text>
+    <text x="170" y="50" text-anchor="middle" font-size="11" fill="#e2e8f0">model.with_structured_output(Schema)</text>
+    <text x="170" y="68" text-anchor="middle" font-size="11" fill="#e2e8f0">分类:Respond / Notify / Ignore</text>
+    <text x="170" y="88" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">用 Command 一次性{state 更新 + 跳转}</text>
+  </g>
+
+  <!-- Three branches from triage -->
+  <line x1="640" y1="645" x2="280" y2="700" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrCyan)"/>
+  <text x="350" y="666" font-size="11" font-weight="700" fill="#67e8f9">Notify</text>
+  <text x="350" y="680" font-size="10" fill="#a5f3fc" font-style="italic">→ 等用户决定</text>
+
+  <line x1="750" y1="645" x2="750" y2="700" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arrAmber)"/>
+  <text x="755" y="680" font-size="11" font-weight="700" fill="#fbbf24">Respond</text>
+
+  <line x1="860" y1="645" x2="1220" y2="700" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrAmber)"/>
+  <text x="1100" y="666" font-size="11" font-weight="700" fill="#cbd5e1">Ignore</text>
+  <text x="1100" y="680" font-size="10" fill="#94a3b8" font-style="italic">→ END</text>
+
+  <!-- triage_interrupt_handler (left branch) -->
+  <g transform="translate(80,705)">
+    <rect width="400" height="100" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2" filter="url(#shadow)"/>
+    <text x="200" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#fde047">⚠️ triage_interrupt_handler (M4)</text>
+    <text x="200" y="50" text-anchor="middle" font-size="11" fill="#fca5a5">interrupt(...) → 推到 Agent Inbox</text>
+    <text x="200" y="68" text-anchor="middle" font-size="11" fill="#fca5a5">用户:ignore / respond(给反馈)</text>
+    <text x="200" y="88" text-anchor="middle" font-size="10" fill="#fecaca" font-style="italic">resume 时带 Command(...)</text>
+  </g>
+
+  <!-- Response Agent (center) -->
+  <g transform="translate(560,705)">
+    <rect width="380" height="200" rx="10" fill="#1e293b" stroke="#60a5fa" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="190" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">🤖 Response Agent(subgraph)</text>
+
+    <g transform="translate(20,48)">
+      <rect width="160" height="60" rx="6" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+      <text x="80" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#fbbf24">🧠 llm_call</text>
+      <text x="80" y="38" text-anchor="middle" font-size="10" fill="#cbd5e1">bind_tools(...)</text>
+      <text x="80" y="52" text-anchor="middle" font-size="10" fill="#cbd5e1" font-style="italic">enforce tool call</text>
+    </g>
+
+    <g transform="translate(200,48)">
+      <rect width="160" height="60" rx="6" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="80" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#f9a8d4">🔧 tool_handler</text>
+      <text x="80" y="38" text-anchor="middle" font-size="10" fill="#fde68a">execute tool_calls</text>
+      <text x="80" y="52" text-anchor="middle" font-size="10" fill="#fde68a" font-style="italic">→ ToolMessage</text>
+    </g>
+
+    <line x1="180" y1="78" x2="200" y2="78" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrAmber)"/>
+    <path d="M 280,108 C 280,130 100,130 100,108" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrCyan)" stroke-dasharray="4,3" fill="none"/>
+    <text x="190" y="138" text-anchor="middle" font-size="10" fill="#67e8f9" font-style="italic">循环,直到 "done" tool 被调用</text>
+
+    <text x="20" y="166" font-size="11" font-weight="700" fill="#fbbf24">工具集:</text>
+    <text x="20" y="184" font-size="10" fill="#e2e8f0">write_email · schedule_meeting · check_calendar_availability ·</text>
+    <text x="20" y="198" font-size="10" fill="#e2e8f0">Question(问用户)· done(终止)</text>
+  </g>
+
+  <!-- interrupt_handler (right of response agent) -->
+  <g transform="translate(1020,705)">
+    <rect width="400" height="200" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2" filter="url(#shadow)"/>
+    <text x="200" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#fde047">🚦 interrupt_handler (M4)</text>
+    <text x="200" y="48" text-anchor="middle" font-size="11" fill="#fca5a5">敏感 tool call 前拦截,等用户决定</text>
+
+    <g transform="translate(20,62)">
+      <rect width="80" height="28" rx="4" fill="#1a2e1f" stroke="#4ade80" stroke-width="1"/>
+      <text x="40" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#bbf7d0">✅ accept</text>
+      <rect x="90" width="80" height="28" rx="4" fill="#2a2418" stroke="#fbbf24" stroke-width="1"/>
+      <text x="130" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#fde68a">✏️ edit</text>
+      <rect x="180" width="100" height="28" rx="4" fill="#0f2729" stroke="#22d3ee" stroke-width="1"/>
+      <text x="230" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#a5f3fc">💬 respond</text>
+      <rect x="290" width="70" height="28" rx="4" fill="#14141c" stroke="#94a3b8" stroke-width="1"/>
+      <text x="325" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#cbd5e1">🚫 ignore</text>
+    </g>
+
+    <text x="20" y="120" font-size="10" fill="#fecaca" font-style="italic">⚠️ 关键陷阱:edit 时要同时改 tool_call 本身,不能只改 args,</text>
+    <text x="20" y="135" font-size="10" fill="#fecaca" font-style="italic">否则 message 历史不一致,后续 LLM 会困惑</text>
+    <text x="20" y="160" font-size="11" font-weight="700" fill="#fde047">📮 Agent Inbox</text>
+    <text x="20" y="178" font-size="10" fill="#fca5a5">本质就是查看 interrupted threads 的 UI,resume 时</text>
+    <text x="20" y="192" font-size="10" fill="#fca5a5">用 Command(resume=...) 回传</text>
+  </g>
+
+  <!-- Arrows from Agent <-> interrupt_handler -->
+  <line x1="940" y1="800" x2="1020" y2="800" stroke="#f9a8d4" stroke-width="2" marker-end="url(#arrPink)" stroke-dasharray="6,3"/>
+  <line x1="1020" y1="820" x2="940" y2="820" stroke="#f9a8d4" stroke-width="2" marker-end="url(#arrPink)" stroke-dasharray="6,3"/>
+
+  <!-- Memory Store (below) -->
+  <g transform="translate(560,925)">
+    <rect width="380" height="100" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="190" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#fbbf24">🧠 LangGraph Store (M5 长期记忆)</text>
+    <text x="20" y="50" font-size="11" fill="#bbf7d0">3 个 namespace(各存一段字符串):</text>
+    <text x="20" y="68" font-size="11" fill="#bbf7d0">  • triage_preferences  · calendar_preferences  · response_preferences</text>
+    <text x="20" y="88" font-size="10" fill="#a7f3d0" font-style="italic">每次 HITL 反馈 → LLM 总结 → 改写 profile(with_structured_output 含 justification)</text>
+  </g>
+
+  <!-- Connection from interrupt handler down to memory -->
+  <path d="M 1220,905 C 1220,915 950,915 950,925" stroke="#4ade80" stroke-width="2" marker-end="url(#arrGreen)" stroke-dasharray="4,3" fill="none"/>
+  <text x="1100" y="918" font-size="10" fill="#86efac" font-style="italic" font-weight="600">反馈 → 更新 memory</text>
+
+  <!-- LangSmith observing all -->
+  <g transform="translate(80,925)">
+    <rect width="400" height="100" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2" filter="url(#shadow)"/>
+    <text x="200" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#fbbf24">🔭 LangSmith 全程观察(M3)</text>
+    <text x="20" y="50" font-size="11" fill="#a5f3fc">设置环境变量 → 全部节点自动 trace</text>
+    <text x="20" y="68" font-size="11" fill="#a5f3fc">支持:pytest(@decorator)+ Evaluate API(dataset 驱动)</text>
+    <text x="20" y="88" font-size="10" fill="#67e8f9" font-style="italic">3 种粒度:triage decision · tool calls · end-to-end(LLM-as-judge)</text>
+  </g>
+
+  <!-- ===== BAND 3: JOURNEY (y=1050-1320) ===== -->
+  <text x="750" y="1075" text-anchor="middle" font-size="18" font-weight="700" fill="#fbbf24">📚 When — 6 个模块,从 0 到部署的完整路径</text>
+
+  <!-- Module cards (6 columns) -->
+  <g transform="translate(60,1095)">
+    <!-- M1 LangGraph 101 -->
+    <g transform="translate(0,0)">
+      <rect width="220" height="200" rx="10" fill="#14141c" stroke="#94a3b8" stroke-width="2" filter="url(#shadow)"/>
+      <rect width="220" height="36" rx="10" fill="#475569"/>
+      <text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">M1 · LangGraph 101</text>
+      <text x="10" y="56" font-size="11" font-weight="700" fill="#fbbf24">🧱 基础</text>
+      <text x="10" y="76" font-size="10" fill="#e2e8f0">• Node + Edge + State</text>
+      <text x="10" y="92" font-size="10" fill="#e2e8f0">• MessagesState 累加</text>
+      <text x="10" y="108" font-size="10" fill="#e2e8f0">• conditional_edge 分支</text>
+      <text x="10" y="124" font-size="10" fill="#e2e8f0">• create_react_agent</text>
+      <text x="10" y="140" font-size="10" fill="#e2e8f0">• checkpointer(thread)</text>
+      <text x="10" y="156" font-size="10" fill="#e2e8f0">• interrupt(...) 暂停</text>
+      <text x="10" y="172" font-size="10" fill="#e2e8f0">• LangGraph Studio</text>
+      <text x="10" y="192" font-size="10" fill="#94a3b8" font-style="italic">→ 工具:bind_tools, .invoke</text>
+    </g>
+
+    <!-- M2 Build -->
+    <g transform="translate(230,0)">
+      <rect width="220" height="200" rx="10" fill="#14141c" stroke="#60a5fa" stroke-width="2" filter="url(#shadow)"/>
+      <rect width="220" height="36" rx="10" fill="#1e3a8a"/>
+      <text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">M2 · Build(🔵 蓝)</text>
+      <text x="10" y="56" font-size="11" font-weight="700" fill="#fbbf24">🏗️ 搭好 email assistant</text>
+      <text x="10" y="76" font-size="10" fill="#e2e8f0">• 定义 mock 工具集</text>
+      <text x="10" y="92" font-size="10" fill="#e2e8f0">• Triage Router(workflow)</text>
+      <text x="10" y="108" font-size="10" fill="#e2e8f0">  with_structured_output</text>
+      <text x="10" y="124" font-size="10" fill="#e2e8f0">• Response Agent(subgraph)</text>
+      <text x="10" y="140" font-size="10" fill="#e2e8f0">  llm_call + tool_handler</text>
+      <text x="10" y="156" font-size="10" fill="#e2e8f0">• Command 一步完成</text>
+      <text x="10" y="172" font-size="10" fill="#e2e8f0">  {update + goto}</text>
+      <text x="10" y="192" font-size="10" fill="#94a3b8" font-style="italic">→ 终止:调 "done" 工具</text>
+    </g>
+
+    <!-- M3 Evaluate -->
+    <g transform="translate(460,0)">
+      <rect width="220" height="200" rx="10" fill="#14141c" stroke="#fb923c" stroke-width="2" filter="url(#shadow)"/>
+      <rect width="220" height="36" rx="10" fill="#7c2d12"/>
+      <text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#fde047">M3 · Evaluate(🟠 橙)</text>
+      <text x="10" y="56" font-size="11" font-weight="700" fill="#fbbf24">🧪 你敢开它吗?</text>
+      <text x="10" y="76" font-size="10" fill="#e2e8f0">3 种评估粒度:</text>
+      <text x="10" y="92" font-size="10" fill="#fed7aa">  ① 路由决策(string)</text>
+      <text x="10" y="108" font-size="10" fill="#fed7aa">  ② tool call(name match)</text>
+      <text x="10" y="124" font-size="10" fill="#fed7aa">  ③ 整体 email(LLM judge)</text>
+      <text x="10" y="144" font-size="10" fill="#e2e8f0">2 种跑法:</text>
+      <text x="10" y="160" font-size="10" fill="#fed7aa">  • pytest @decorator</text>
+      <text x="10" y="176" font-size="10" fill="#fed7aa">  • LangSmith Evaluate API</text>
+      <text x="10" y="192" font-size="10" fill="#94a3b8" font-style="italic">→ judge criteria 不能太严/太松</text>
+    </g>
+
+    <!-- M4 HITL -->
+    <g transform="translate(690,0)">
+      <rect width="220" height="200" rx="10" fill="#14141c" stroke="#f87171" stroke-width="2" filter="url(#shadow)"/>
+      <rect width="220" height="36" rx="10" fill="#7f1d1d"/>
+      <text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#fde047">M4 · HITL(🌸 粉)</text>
+      <text x="10" y="56" font-size="11" font-weight="700" fill="#f9a8d4">👤 让人来把关</text>
+      <text x="10" y="76" font-size="10" fill="#fca5a5">2 个 interrupt 位点:</text>
+      <text x="10" y="92" font-size="10" fill="#fca5a5">  • Notify 后</text>
+      <text x="10" y="108" font-size="10" fill="#fca5a5">  • 敏感 tool call 前</text>
+      <text x="10" y="124" font-size="10" fill="#e2e8f0">4 种用户操作:</text>
+      <text x="10" y="140" font-size="10" fill="#fca5a5">  accept / edit / respond / ignore</text>
+      <text x="10" y="160" font-size="10" fill="#e2e8f0">新增 Question 工具:</text>
+      <text x="10" y="176" font-size="10" fill="#fca5a5">  agent 不确定时 → 直接问</text>
+      <text x="10" y="192" font-size="10" fill="#94a3b8" font-style="italic">→ UI:Agent Inbox</text>
+    </g>
+
+    <!-- M5 Memory -->
+    <g transform="translate(920,0)">
+      <rect width="220" height="200" rx="10" fill="#14141c" stroke="#4ade80" stroke-width="2" filter="url(#shadow)"/>
+      <rect width="220" height="36" rx="10" fill="#14532d"/>
+      <text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#fde047">M5 · Memory(🟢 绿)</text>
+      <text x="10" y="56" font-size="11" font-weight="700" fill="#bbf7d0">🧠 学会用户偏好</text>
+      <text x="10" y="76" font-size="10" fill="#e2e8f0">2 种 memory:</text>
+      <text x="10" y="92" font-size="10" fill="#a7f3d0">  • thread-scoped(checkpointer)</text>
+      <text x="10" y="108" font-size="10" fill="#a7f3d0">  • across-thread(store)</text>
+      <text x="10" y="128" font-size="10" fill="#e2e8f0">3 个 profile(用 str 起步):</text>
+      <text x="10" y="144" font-size="10" fill="#a7f3d0">  triage / calendar / response</text>
+      <text x="10" y="164" font-size="10" fill="#e2e8f0">更新机制:</text>
+      <text x="10" y="180" font-size="10" fill="#a7f3d0">  反馈 → LLM 总结 → 改写</text>
+      <text x="10" y="194" font-size="10" fill="#94a3b8" font-style="italic">→ 进阶:LangMem · 语义搜索</text>
+    </g>
+
+    <!-- M6 Deploy -->
+    <g transform="translate(1150,0)">
+      <rect width="220" height="200" rx="10" fill="#14141c" stroke="#a78bfa" stroke-width="2" filter="url(#shadow)"/>
+      <rect width="220" height="36" rx="10" fill="#5b21b6"/>
+      <text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#fde047">M6 · Deploy(🟣 紫)</text>
+      <text x="10" y="56" font-size="11" font-weight="700" fill="#c4b5fd">🚀 真正用起来</text>
+      <text x="10" y="76" font-size="10" fill="#e2e8f0">2 种部署:</text>
+      <text x="10" y="92" font-size="10" fill="#ddd6fe">  • langgraph dev(本地 + 文件)</text>
+      <text x="10" y="108" font-size="10" fill="#ddd6fe">  • LangGraph Platform(Postgres)</text>
+      <text x="10" y="128" font-size="10" fill="#e2e8f0">部署后:</text>
+      <text x="10" y="144" font-size="10" fill="#ddd6fe">  • 不用手动传 checkpointer</text>
+      <text x="10" y="160" font-size="10" fill="#ddd6fe">  • 平台自动注入 store</text>
+      <text x="10" y="176" font-size="10" fill="#ddd6fe">  • setup_cron 定时拉邮件</text>
+      <text x="10" y="194" font-size="10" fill="#94a3b8" font-style="italic">→ 接 Gmail API + Agent Inbox</text>
+    </g>
+  </g>
+
+  <!-- ===== BAND 4: KEY TAKEAWAYS ===== -->
+  <g transform="translate(60,1320)">
+    <rect width="1380" height="160" rx="10" fill="#14141c" stroke="#fbbf24" stroke-width="2" filter="url(#shadow)"/>
+    <text x="690" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">✨ 一图带走的 5 个核心收获</text>
+
+    <g transform="translate(20,42)">
+      <circle cx="8" cy="6" r="6" fill="#22d3ee"/>
+      <text x="22" y="11" font-size="12" fill="#e2e8f0"><tspan font-weight="700" fill="#22d3ee">1. ambient ≠ chat</tspan> — 事件触发 / 后台并发 / 按需通知,适合长任务和敏感场景</text>
+    </g>
+    <g transform="translate(20,68)">
+      <circle cx="8" cy="6" r="6" fill="#60a5fa"/>
+      <text x="22" y="11" font-size="12" fill="#e2e8f0"><tspan font-weight="700" fill="#60a5fa">2. workflow + agent 混搭</tspan> — 能在白板画清的部分用 workflow(triage router),开放部分用 agent(response)</text>
+    </g>
+    <g transform="translate(20,94)">
+      <circle cx="8" cy="6" r="6" fill="#f87171"/>
+      <text x="22" y="11" font-size="12" fill="#e2e8f0"><tspan font-weight="700" fill="#f87171">3. interrupt + Command = HITL</tspan> — interrupt 暂停,resume 时 Command 把用户决定塞回 state,4 种动作覆盖所有交互</text>
+    </g>
+    <g transform="translate(20,120)">
+      <circle cx="8" cy="6" r="6" fill="#4ade80"/>
+      <text x="22" y="11" font-size="12" fill="#e2e8f0"><tspan font-weight="700" fill="#4ade80">4. memory = 让反馈不白费</tspan> — checkpointer 管线程内,store 管跨线程,LLM 自己总结反馈成 profile,下次自动用上</text>
+    </g>
+    <g transform="translate(20,146)">
+      <circle cx="8" cy="6" r="6" fill="#a78bfa"/>
+      <text x="22" y="11" font-size="12" fill="#e2e8f0"><tspan font-weight="700" fill="#a78bfa">5. 架构可迁移</tspan> — 邮件只是例子;只要换 tools 文件夹(如 Slack/PagerDuty),整套架构都能用</text>
+    </g>
+  </g>
+</svg>

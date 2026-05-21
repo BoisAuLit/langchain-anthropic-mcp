@@ -1,0 +1,257 @@
+---------------------------------------------------------------------------
+NotFoundError                             Traceback (most recent call last)
+Cell In[14], line 17
+      5 # Example brief
+      6 research_brief = """I want to identify and evaluate the coffee shops in San Francisco that are considered the best based specifically  
+      7 on coffee quality. My research should focus on analyzing and comparing coffee shops within the San Francisco area, 
+      8 using coffee quality as the primary criterion. I am open regarding methods of assessing coffee quality (e.g.,      
+   (...)     14 the top coffee shops in San Francisco, emphasizing their coffee quality according to the latest available data as  
+     15 of July 2025."""
+---> 17 result = researcher_agent.invoke(
+     18     {"researcher_messages": [HumanMessage(content=f"{research_brief}.")]}
+     19 )
+     20 format_messages(result["researcher_messages"])
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/main.py:3880, in Pregel.invoke(self, input, config, context, stream_mode, print_mode, output_keys, interrupt_before, interrupt_after, durability, control, version, **kwargs)
+   3877             chunks.append(chunk)
+   3878 else:
+   3879     # v1: collect interrupts from updates stream
+-> 3880     for chunk in self.stream(
+   3881         input,
+   3882         config,
+   3883         context=context,
+   3884         stream_mode=(
+   3885             ["updates", "values"] if stream_mode == "values" else stream_mode
+   3886         ),
+   3887         print_mode=print_mode,
+   3888         output_keys=output_keys,
+   3889         interrupt_before=interrupt_before,
+   3890         interrupt_after=interrupt_after,
+   3891         durability=durability,
+   3892         control=control,
+   3893         **kwargs,
+   3894     ):
+   3895         if stream_mode == "values":
+   3896             if len(chunk) == 2:
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/main.py:2936, in Pregel.stream(self, input, config, context, stream_mode, print_mode, output_keys, interrupt_before, interrupt_after, durability, control, subgraphs, debug, version, **kwargs)
+   2934 for task in loop.match_cached_writes():
+   2935     loop.output_writes(task.id, task.writes, cached=True)
+-> 2936 for _ in runner.tick(
+   2937     [t for t in loop.tasks.values() if not t.writes],
+   2938     timeout=self.step_timeout,
+   2939     get_waiter=get_waiter,
+   2940     schedule_task=loop.accept_push,
+   2941 ):
+   2942     # emit output
+   2943     yield from _output(
+   2944         stream_mode,
+   2945         print_mode,
+   (...)   2951         _state_mapper,
+   2952     )
+   2953 loop.after_tick()
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/_runner.py:207, in PregelRunner.tick(self, tasks, reraise, timeout, retry_policy, get_waiter, schedule_task)
+    205 scheduled_error_handler = False
+    206 try:
+--> 207     run_with_retry(
+    208         t,
+    209         retry_policy,
+    210         configurable={
+    211             CONFIG_KEY_CALL: partial(
+    212                 _call,
+    213                 weakref.ref(t),
+    214                 retry_policy=retry_policy,
+    215                 futures=weakref.ref(futures),
+    216                 schedule_task=schedule_task,
+    217                 submit=self.submit,
+    218             ),
+    219         },
+    220     )
+    221     self.commit(t, None)
+    222 except Exception as exc:
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/_retry.py:585, in run_with_retry(task, retry_policy, configurable)
+    583     task.writes.clear()
+    584     # run the task
+--> 585     return task.proc.invoke(task.input, config)
+    586 except ParentCommand as exc:
+    587     ns: str = config[CONF][CONFIG_KEY_CHECKPOINT_NS]
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py:684, in RunnableSeq.invoke(self, input, config, **kwargs)
+    682     # run in context
+    683     with set_config_context(config, run) as context:
+--> 684         input = context.run(step.invoke, input, config, **kwargs)
+    685 else:
+    686     input = step.invoke(input, config)
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py:426, in RunnableCallable.invoke(self, input, config, **kwargs)
+    424         run_manager.on_chain_end(ret)
+    425 else:
+--> 426     ret = self.func(*args, **kwargs)
+    427 if self.recurse and isinstance(ret, Runnable):
+    428     return ret.invoke(input, config)
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/project-003-deep-research/notebooks/../src/deep_research_from_scratch/research_agent.py:44, in llm_call(state)
+     33 def llm_call(state: ResearcherState):
+     34     """Analyze current state and decide on next actions.
+     35 
+     36     The model analyzes the current conversation state and decides whether to:
+   (...)     40     Returns updated state with the model's response.
+     41     """
+     42     return {
+     43         "researcher_messages": [
+---> 44             model_with_tools.invoke(
+     45                 [SystemMessage(content=research_agent_prompt)] + state["researcher_messages"]
+     46             )
+     47         ]
+     48     }
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py:5881, in RunnableBindingBase.invoke(self, input, config, **kwargs)
+   5874 @override
+   5875 def invoke(
+   5876     self,
+   (...)   5879     **kwargs: Any | None,
+   5880 ) -> Output:
+-> 5881     return self.bound.invoke(
+   5882         input,
+   5883         self._merge_configs(config),
+   5884         **{**self.kwargs, **kwargs},
+   5885     )
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py:474, in BaseChatModel.invoke(self, input, config, stop, **kwargs)
+    460 @override
+    461 def invoke(
+    462     self,
+   (...)    467     **kwargs: Any,
+    468 ) -> AIMessage:
+    469     config = ensure_config(config)
+    470     return cast(
+    471         "AIMessage",
+    472         cast(
+    473             "ChatGeneration",
+--> 474             self.generate_prompt(
+    475                 [self._convert_input(input)],
+    476                 stop=stop,
+    477                 callbacks=config.get("callbacks"),
+    478                 tags=config.get("tags"),
+    479                 metadata=config.get("metadata"),
+    480                 run_name=config.get("run_name"),
+    481                 run_id=config.pop("run_id", None),
+    482                 **kwargs,
+    483             ).generations[0][0],
+    484         ).message,
+    485     )
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py:1823, in BaseChatModel.generate_prompt(self, prompts, stop, callbacks, **kwargs)
+   1814 @override
+   1815 def generate_prompt(
+   1816     self,
+   (...)   1820     **kwargs: Any,
+   1821 ) -> LLMResult:
+   1822     prompt_messages = [p.to_messages() for p in prompts]
+-> 1823     return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py:1630, in BaseChatModel.generate(self, messages, stop, callbacks, tags, metadata, run_name, run_id, **kwargs)
+   1627 for i, m in enumerate(input_messages):
+   1628     try:
+   1629         results.append(
+-> 1630             self._generate_with_cache(
+   1631                 m,
+   1632                 stop=stop,
+   1633                 run_manager=run_managers[i] if run_managers else None,
+   1634                 **kwargs,
+   1635             )
+   1636         )
+   1637     except BaseException as e:
+   1638         if run_managers:
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py:1970, in BaseChatModel._generate_with_cache(self, messages, stop, run_manager, **kwargs)
+   1968     result = generate_from_stream(iter(chunks))
+   1969 elif inspect.signature(self._generate).parameters.get("run_manager"):
+-> 1970     result = self._generate(
+   1971         messages, stop=stop, run_manager=run_manager, **kwargs
+   1972     )
+   1973 else:
+   1974     result = self._generate(messages, stop=stop, **kwargs)
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langchain_anthropic/chat_models.py:1701, in ChatAnthropic._generate(self, messages, stop, run_manager, **kwargs)
+   1699 payload = self._get_request_payload(messages, stop=stop, **kwargs)
+   1700 try:
+-> 1701     data = self._create(payload)
+   1702 except anthropic.BadRequestError as e:
+   1703     _handle_anthropic_bad_request(e)
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langchain_anthropic/chat_models.py:1366, in ChatAnthropic._create(self, payload)
+   1364 if "betas" in payload:
+   1365     return self._client.beta.messages.create(**payload)
+-> 1366 return self._client.messages.create(**payload)
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/anthropic/_utils/_utils.py:294, in required_args.<locals>.inner.<locals>.wrapper(*args, **kwargs)
+    292             msg = f"Missing required argument: {quote(missing[0])}"
+    293     raise TypeError(msg)
+--> 294 return func(*args, **kwargs)
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/anthropic/resources/messages/messages.py:1003, in Messages.create(self, max_tokens, messages, model, cache_control, container, inference_geo, metadata, output_config, service_tier, stop_sequences, stream, system, temperature, thinking, tool_choice, tools, top_k, top_p, extra_headers, extra_query, extra_body, timeout)
+    996 if model in MODELS_TO_WARN_WITH_THINKING_ENABLED and thinking and thinking["type"] == "enabled":
+    997     warnings.warn(
+    998         f"Using Claude with {model} and 'thinking.type=enabled' is deprecated. Use 'thinking.type=adaptive' instead which results in better model performance in our testing: https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking",
+    999         UserWarning,
+   1000         stacklevel=3,
+   1001     )
+-> 1003 return self._post(
+   1004     "/v1/messages",
+   1005     body=maybe_transform(
+   1006         {
+   1007             "max_tokens": max_tokens,
+   1008             "messages": messages,
+   1009             "model": model,
+   1010             "cache_control": cache_control,
+   1011             "container": container,
+   1012             "inference_geo": inference_geo,
+   1013             "metadata": metadata,
+   1014             "output_config": output_config,
+   1015             "service_tier": service_tier,
+   1016             "stop_sequences": stop_sequences,
+   1017             "stream": stream,
+   1018             "system": system,
+   1019             "temperature": temperature,
+   1020             "thinking": thinking,
+   1021             "tool_choice": tool_choice,
+   1022             "tools": tools,
+   1023             "top_k": top_k,
+   1024             "top_p": top_p,
+   1025         },
+   1026         message_create_params.MessageCreateParamsStreaming
+   1027         if stream
+   1028         else message_create_params.MessageCreateParamsNonStreaming,
+   1029     ),
+   1030     options=make_request_options(
+   1031         extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+   1032     ),
+   1033     cast_to=Message,
+   1034     stream=stream or False,
+   1035     stream_cls=Stream[RawMessageStreamEvent],
+   1036 )
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/anthropic/_base_client.py:1374, in SyncAPIClient.post(self, path, cast_to, body, content, options, files, stream, stream_cls)
+   1365     warnings.warn(
+   1366         "Passing raw bytes as `body` is deprecated and will be removed in a future version. "
+   1367         "Please pass raw bytes via the `content` parameter instead.",
+   1368         DeprecationWarning,
+   1369         stacklevel=2,
+   1370     )
+   1371 opts = FinalRequestOptions.construct(
+   1372     method="post", url=path, json_data=body, content=content, files=to_httpx_files(files), **options
+   1373 )
+-> 1374 return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/anthropic/_base_client.py:1147, in SyncAPIClient.request(self, cast_to, options, stream, stream_cls)
+   1144             err.response.read()
+   1146         log.debug("Re-raising status error")
+-> 1147         raise self._make_status_error_from_response(err.response) from None
+   1149     break
+   1151 assert response is not None, "could not resolve response (should never happen)"
+
+NotFoundError: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-20250514'}, 'request_id': 'req_011CbEwU2LChiQ7Mc9faF39C'}
+During task with name 'llm_call' and id 'df9ff77a-3d0d-3508-fe02-6c0b525b528a'

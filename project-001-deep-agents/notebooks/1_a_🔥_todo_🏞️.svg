@@ -1,0 +1,127 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+    <linearGradient id="rotGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2d1f1f"/>
+      <stop offset="100%" stop-color="#1a1010"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.45"/>
+    </filter>
+    <marker id="arrAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9a8d4"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="900" fill="#0a0a12"/>
+
+  <!-- Title -->
+  <text x="600" y="42" text-anchor="middle" font-size="24" font-weight="700" fill="#f1f5f9">📋 TODO 复述循环 — 治忘</text>
+  <text x="600" y="68" text-anchor="middle" font-size="13" fill="#94a3b8" font-style="italic">Lesson 1:write_todos / read_todos 让 agent 在长任务中保持主线</text>
+
+  <!-- Problem statement at top -->
+  <g transform="translate(80,90)">
+    <rect width="1040" height="80" rx="8" fill="url(#rotGrad)" stroke="#f87171" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="520" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#fde047">🌫️ 痛点:context rot</text>
+    <text x="520" y="56" text-anchor="middle" font-size="12" fill="#fca5a5">任务越长,messages 越多 → LLM 看不清原计划 → 走神、漏步、答非所问</text>
+    <text x="520" y="72" text-anchor="middle" font-size="11" fill="#fecaca" font-style="italic">来源:Manus 团队、Anthropic Sonnet 1M 上下文报告 ——「越长越糊」</text>
+  </g>
+
+  <!-- 4-step cycle in center -->
+  <!-- Cycle hub label -->
+  <text x="600" y="216" text-anchor="middle" font-size="14" font-weight="700" fill="#fbbf24">💊 解药:recitation(复述)循环</text>
+
+  <!-- Step 1: 规划 -->
+  <g transform="translate(80,250)">
+    <rect width="280" height="130" rx="10" fill="#1e293b" stroke="#60a5fa" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="140" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">① 🧠 Agent 规划</text>
+    <text x="140" y="58" text-anchor="middle" font-size="12" fill="#e2e8f0">收到长任务后,第一件事:</text>
+    <text x="140" y="78" text-anchor="middle" font-size="13" fill="#fbbf24" font-weight="700">write_todos([...])</text>
+    <text x="140" y="100" text-anchor="middle" font-size="11" fill="#cbd5e1" font-style="italic">把任务拆成有序 TODO 列表</text>
+    <text x="140" y="118" text-anchor="middle" font-size="11" fill="#cbd5e1" font-style="italic">每条带 status: pending/in_progress/completed</text>
+  </g>
+
+  <!-- arrow ① → ② -->
+  <line x1="360" y1="315" x2="450" y2="315" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arrAmber)"/>
+
+  <!-- Step 2: state.todos -->
+  <g transform="translate(450,250)">
+    <rect width="300" height="130" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="150" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#f9a8d4">② 📋 state.todos 落盘</text>
+    <text x="20" y="56" font-size="12" fill="#fde68a">[✓] 加载数据集</text>
+    <text x="20" y="76" font-size="12" fill="#fde68a">[⏳] 训练模型 ← in_progress</text>
+    <text x="20" y="96" font-size="12" fill="#fde68a">[  ] 评估指标</text>
+    <text x="20" y="116" font-size="12" fill="#fde68a">[  ] 写报告</text>
+  </g>
+
+  <!-- arrow ② → ③ -->
+  <line x1="750" y1="315" x2="840" y2="315" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arrAmber)"/>
+
+  <!-- Step 3: 干活 ramp up context -->
+  <g transform="translate(840,250)">
+    <rect width="280" height="130" rx="10" fill="url(#rotGrad)" stroke="#f87171" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="140" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#fde047">③ 🌫️ Agent 干活</text>
+    <text x="140" y="56" text-anchor="middle" font-size="12" fill="#fca5a5">messages 越积越长……</text>
+    <text x="140" y="76" text-anchor="middle" font-size="11" fill="#fca5a5" font-style="italic">[tool] search ... 3000 chars</text>
+    <text x="140" y="92" text-anchor="middle" font-size="11" fill="#fca5a5" font-style="italic">[AI] thinking ... 1500 chars</text>
+    <text x="140" y="108" text-anchor="middle" font-size="11" fill="#fca5a5" font-style="italic">[tool] more ... 5000 chars</text>
+    <text x="140" y="124" text-anchor="middle" font-size="12" font-weight="700" fill="#fde047">→ 注意力涣散</text>
+  </g>
+
+  <!-- arrow ③ → ④ (curved down) -->
+  <path d="M 980,380 C 980,440 600,440 600,500" stroke="#f87171" stroke-width="2.5" marker-end="url(#arrPink)" fill="none"/>
+
+  <!-- Step 4: read_todos -->
+  <g transform="translate(420,500)">
+    <rect width="360" height="120" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="180" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">④ 🔁 Agent 主动复述</text>
+    <text x="180" y="56" text-anchor="middle" font-size="13" fill="#a5f3fc" font-weight="700">read_todos()</text>
+    <text x="180" y="76" text-anchor="middle" font-size="11" fill="#a5f3fc" font-style="italic">把 TODO 列表当成一条 ToolMessage</text>
+    <text x="180" y="92" text-anchor="middle" font-size="11" fill="#a5f3fc" font-style="italic">注入回 context,提醒"现在该干啥"</text>
+    <text x="180" y="110" text-anchor="middle" font-size="11" fill="#67e8f9" font-style="italic">→ 注意力回到主线,继续做 in_progress 那条</text>
+  </g>
+
+  <!-- arrow ④ → ① (return to top — close the loop) -->
+  <path d="M 420,560 C 220,560 220,315 360,315" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#arrAmber)" stroke-dasharray="6,3" fill="none"/>
+  <text x="200" y="445" font-size="13" fill="#67e8f9" font-style="italic" font-weight="600">↺ 闭环</text>
+
+  <!-- 写完一条更新状态 (small note) -->
+  <g transform="translate(450,400)">
+    <rect width="300" height="60" rx="6" fill="#14141c" stroke="#475569" stroke-width="1"/>
+    <text x="150" y="22" text-anchor="middle" font-size="11" fill="#cbd5e1" font-style="italic">做完一条后再 write_todos(...)</text>
+    <text x="150" y="42" text-anchor="middle" font-size="11" fill="#cbd5e1" font-style="italic">把 status 改成 completed,清出脑容量</text>
+  </g>
+
+  <!-- Bottom: 类比 -->
+  <g transform="translate(80,660)">
+    <rect width="500" height="200" rx="10" fill="#14141c" stroke="#475569" stroke-width="1.5"/>
+    <text x="250" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#fbbf24">💡 类比:程序员的工作笔记</text>
+    <text x="20" y="58" font-size="12" fill="#e2e8f0">写 TODO ≈ <tspan font-weight="700" fill="#fbbf24">在桌上贴便利贴</tspan></text>
+    <text x="20" y="80" font-size="12" fill="#e2e8f0">读 TODO ≈ <tspan font-weight="700" fill="#22d3ee">写代码写一半,扭头看一眼便利贴</tspan></text>
+    <text x="20" y="102" font-size="12" fill="#e2e8f0">改 status ≈ <tspan font-weight="700" fill="#4ade80">划掉做完的那条</tspan></text>
+    <text x="20" y="138" font-size="12" fill="#cbd5e1" font-style="italic">核心:LLM 不会"自动记得"原计划——</text>
+    <text x="20" y="156" font-size="12" fill="#cbd5e1" font-style="italic">它每轮都从 messages 重读一遍。所以</text>
+    <text x="20" y="174" font-size="12" fill="#fbbf24" font-weight="700">把计划写进 messages = 让 LLM 永远看得见</text>
+  </g>
+
+  <!-- Bottom right: ✨ 一句话 + technical detail -->
+  <g transform="translate(610,660)">
+    <rect width="510" height="200" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2" filter="url(#shadow)"/>
+    <text x="255" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">✨ 一句话带走</text>
+    <text x="255" y="60" text-anchor="middle" font-size="13" fill="#bbf7d0">TODO 工具是 agent 的 <tspan font-weight="700" fill="#fbbf24">「自我提示工具」</tspan></text>
+    <text x="255" y="80" text-anchor="middle" font-size="13" fill="#bbf7d0">把规划反复写进 context,治"长任务忘事"。</text>
+    <text x="255" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#fbbf24">🔧 实现要点</text>
+    <text x="20" y="142" font-size="11" fill="#a7f3d0">• state 加字段 <tspan font-weight="700" fill="#fbbf24">todos: List[Todo]</tspan>(TypedDict 含 content+status)</text>
+    <text x="20" y="160" font-size="11" fill="#a7f3d0">• <tspan font-weight="700" fill="#fbbf24">write_todos</tspan> 返回 <tspan font-weight="700" fill="#fbbf24">Command(update={"todos":..., "messages":...})</tspan></text>
+    <text x="20" y="178" font-size="11" fill="#a7f3d0">• <tspan font-weight="700" fill="#fbbf24">read_todos</tspan> 把当前列表格式化成 ToolMessage 注入回 context</text>
+  </g>
+</svg>

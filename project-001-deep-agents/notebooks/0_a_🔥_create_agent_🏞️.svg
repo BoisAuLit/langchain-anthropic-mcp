@@ -1,0 +1,163 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.45"/>
+    </filter>
+    <marker id="arrAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="900" fill="#0a0a12"/>
+
+  <!-- Title -->
+  <text x="600" y="42" text-anchor="middle" font-size="24" font-weight="700" fill="#f1f5f9">🔁 ReAct Loop — Agent 的状态机</text>
+  <text x="600" y="68" text-anchor="middle" font-size="13" fill="#94a3b8" font-style="italic">Lesson 0:LLM ↔ ToolNode 循环,直到 stop_reason = end_turn</text>
+
+  <!-- ===== LEFT: graph ===== -->
+  <!-- User input -->
+  <g transform="translate(195,100)">
+    <rect width="280" height="55" rx="8" fill="url(#titleGrad)" filter="url(#shadow)"/>
+    <text x="140" y="34" text-anchor="middle" font-size="15" font-weight="600" fill="#f1f5f9">🧑 用户输入 → HumanMessage</text>
+  </g>
+  <line x1="335" y1="160" x2="335" y2="200" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arrAmber)"/>
+
+  <!-- LLM Node -->
+  <g transform="translate(165,210)">
+    <rect width="340" height="120" rx="10" fill="#1e293b" stroke="#60a5fa" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="170" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#fbbf24">🧠 LLM Node</text>
+    <text x="170" y="64" text-anchor="middle" font-size="13" fill="#e2e8f0">model.invoke(state["messages"])</text>
+    <text x="170" y="86" text-anchor="middle" font-size="12" fill="#cbd5e1">→ AIMessage(content, tool_calls)</text>
+    <text x="170" y="106" text-anchor="middle" font-size="11" fill="#94a3b8" font-style="italic">decide next action</text>
+  </g>
+
+  <!-- Conditional edge -->
+  <line x1="335" y1="335" x2="335" y2="365" stroke="#fbbf24" stroke-width="2"/>
+  <text x="335" y="358" text-anchor="middle" font-size="12" fill="#f9a8d4" font-style="italic">conditional edge: has tool_calls?</text>
+
+  <!-- Branches -->
+  <line x1="335" y1="375" x2="220" y2="430" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrAmber)"/>
+  <line x1="335" y1="375" x2="450" y2="430" stroke="#4ade80" stroke-width="2" marker-end="url(#arrGreen)"/>
+  <text x="250" y="408" font-size="13" font-weight="700" fill="#fbbf24">YES</text>
+  <text x="420" y="408" font-size="13" font-weight="700" fill="#4ade80">NO</text>
+
+  <!-- ToolNode -->
+  <g transform="translate(120,440)">
+    <rect width="220" height="110" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="110" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#f9a8d4">🔧 ToolNode</text>
+    <text x="110" y="62" text-anchor="middle" font-size="12" fill="#fde68a">execute tool_calls</text>
+    <text x="110" y="80" text-anchor="middle" font-size="12" fill="#fde68a">→ ToolMessage</text>
+    <text x="110" y="100" text-anchor="middle" font-size="11" fill="#fbbf24" font-style="italic">追加进 state</text>
+  </g>
+
+  <!-- END -->
+  <g transform="translate(360,440)">
+    <rect width="220" height="110" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="110" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#fbbf24">✅ END</text>
+    <text x="110" y="62" text-anchor="middle" font-size="12" fill="#bbf7d0">stop_reason = end_turn</text>
+    <text x="110" y="80" text-anchor="middle" font-size="12" fill="#bbf7d0">最终答案给用户</text>
+  </g>
+
+  <!-- Loop back arrow -->
+  <path d="M 120,495 C 40,495 40,270 165,270" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#arrCyan)" stroke-dasharray="6,3" fill="none"/>
+  <text x="50" y="395" font-size="13" fill="#67e8f9" font-style="italic" font-weight="600" transform="rotate(-90 50,395)">↺ loop back</text>
+
+  <!-- 三大组件 below the graph -->
+  <g transform="translate(80,580)">
+    <rect width="560" height="160" rx="8" fill="#14141c" stroke="#475569" stroke-width="1.5"/>
+    <text x="280" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">🧩 三大组件</text>
+    <g transform="translate(30,52)">
+      <circle cx="8" cy="8" r="6" fill="#60a5fa"/>
+      <text x="24" y="13" font-size="13" fill="#e2e8f0"><tspan font-weight="700" fill="#60a5fa">LLM</tspan> — 大模型,看 messages,决定下一步</text>
+      <circle cx="8" cy="36" r="6" fill="#fbbf24"/>
+      <text x="24" y="41" font-size="13" fill="#e2e8f0"><tspan font-weight="700" fill="#fbbf24">Tools</tspan> — 工具集合,实际执行动作(查询、计算、I/O)</text>
+      <circle cx="8" cy="64" r="6" fill="#22d3ee"/>
+      <text x="24" y="69" font-size="13" fill="#e2e8f0"><tspan font-weight="700" fill="#22d3ee">State</tspan> — 主要字段 messages: List[BaseMessage],记忆载体</text>
+      <text x="0" y="96" font-size="12" fill="#94a3b8" font-style="italic">create_agent(model, tools, state_schema) 把三者接成一个 graph</text>
+    </g>
+  </g>
+
+  <!-- ===== RIGHT: messages stack ===== -->
+  <g transform="translate(680,100)">
+    <rect width="480" height="640" rx="10" fill="#14141c" stroke="#475569" stroke-width="1.5"/>
+    <text x="240" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">📦 state["messages"] 累积过程</text>
+    <text x="240" y="52" text-anchor="middle" font-size="11" fill="#94a3b8" font-style="italic">每经过一次 LLM 或 ToolNode,就追加一条</text>
+
+    <!-- [0] HumanMessage -->
+    <g transform="translate(20,70)">
+      <rect width="440" height="58" rx="6" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+      <text x="14" y="22" font-size="12" font-weight="700" fill="#f1f5f9">[0] 🧑 HumanMessage</text>
+      <text x="14" y="44" font-size="11" fill="#cbd5e1" font-style="italic">"计算 6 × 7 等于多少?"</text>
+    </g>
+    <line x1="240" y1="132" x2="240" y2="148" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrAmber)"/>
+
+    <!-- [1] AIMessage(tool_calls) -->
+    <g transform="translate(20,150)">
+      <rect width="440" height="68" rx="6" fill="#1e293b" stroke="#60a5fa" stroke-width="1.5"/>
+      <text x="14" y="22" font-size="12" font-weight="700" fill="#fbbf24">[1] 🧠 AIMessage(tool_calls=[...])</text>
+      <text x="14" y="42" font-size="11" fill="#e2e8f0">stop_reason: <tspan font-weight="700" fill="#f9a8d4">tool_use</tspan></text>
+      <text x="14" y="58" font-size="11" fill="#cbd5e1" font-style="italic">tool_call: calculator(a=6, b=7)</text>
+    </g>
+    <line x1="240" y1="222" x2="240" y2="238" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrAmber)"/>
+
+    <!-- [2] ToolMessage -->
+    <g transform="translate(20,240)">
+      <rect width="440" height="58" rx="6" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="14" y="22" font-size="12" font-weight="700" fill="#f9a8d4">[2] 🔧 ToolMessage</text>
+      <text x="14" y="44" font-size="11" fill="#fde68a">content: "42"  (tool_call_id 匹配 [1])</text>
+    </g>
+    <line x1="240" y1="302" x2="240" y2="318" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrCyan)"/>
+    <text x="260" y="313" font-size="10" fill="#67e8f9" font-style="italic">loop back to LLM</text>
+
+    <!-- [3] AIMessage(end) -->
+    <g transform="translate(20,320)">
+      <rect width="440" height="68" rx="6" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="14" y="22" font-size="12" font-weight="700" fill="#fbbf24">[3] ✅ AIMessage(content, no tool_calls)</text>
+      <text x="14" y="42" font-size="11" fill="#bbf7d0">stop_reason: <tspan font-weight="700" fill="#86efac">end_turn</tspan></text>
+      <text x="14" y="58" font-size="11" fill="#bbf7d0" font-style="italic">"答案是 42"</text>
+    </g>
+
+    <!-- 关键洞察 -->
+    <g transform="translate(20,410)">
+      <rect width="440" height="100" rx="6" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="220" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#f9a8d4">💡 关键洞察</text>
+      <text x="20" y="50" font-size="12" fill="#fde68a">• <tspan font-weight="700">循环 = 加消息</tspan>:每轮都让 messages 列表变长</text>
+      <text x="20" y="70" font-size="12" fill="#fde68a">• <tspan font-weight="700">分支 = 看 tool_calls</tspan>:有 → ToolNode;没 → END</text>
+      <text x="20" y="90" font-size="12" fill="#fde68a">• <tspan font-weight="700">state 是唯一记忆</tspan>:LLM 每次都从头读 messages</text>
+    </g>
+
+    <!-- State 进阶 -->
+    <g transform="translate(20,525)">
+      <rect width="440" height="100" rx="6" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="220" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#fbbf24">🔓 让工具拿到 State</text>
+      <text x="20" y="48" font-size="11" fill="#a5f3fc">tool 函数签名加 <tspan font-weight="700" fill="#22d3ee">InjectedState</tspan> 即可读 state</text>
+      <text x="20" y="66" font-size="11" fill="#a5f3fc">用 <tspan font-weight="700" fill="#22d3ee">Command(update=...)</tspan> 同时更新多字段</text>
+      <text x="20" y="86" font-size="11" fill="#a5f3fc" font-style="italic">为 lessons 1-3 的 todos/files 工具铺垫</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="780" text-anchor="middle" font-size="13" fill="#94a3b8" font-style="italic">✨ ReAct = "Reasoning + Acting" — 思考一步、动手一步、看结果、再思考</text>
+  <text x="600" y="805" text-anchor="middle" font-size="12" fill="#64748b">这套循环是后面 lesson 1-4 一切工具(TODO / Files / Subagents)的基础</text>
+
+  <!-- Legend bar -->
+  <g transform="translate(80,830)">
+    <rect width="1040" height="50" rx="6" fill="#14141c" stroke="#475569" stroke-width="1"/>
+    <text x="20" y="30" font-size="12" fill="#cbd5e1">
+      <tspan font-weight="700" fill="#fbbf24">🟡 黄</tspan> = 主流(LLM→Tool)  ·
+      <tspan font-weight="700" fill="#22d3ee">🔵 青</tspan> = loop back  ·
+      <tspan font-weight="700" fill="#4ade80">🟢 绿</tspan> = end_turn  ·
+      <tspan font-weight="700" fill="#f9a8d4">🟣 粉</tspan> = 条件分支说明
+    </text>
+  </g>
+</svg>

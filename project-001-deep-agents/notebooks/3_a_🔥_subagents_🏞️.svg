@@ -1,0 +1,180 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+    <linearGradient id="parentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="childGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#15803d"/>
+      <stop offset="100%" stop-color="#0e7490"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.45"/>
+    </filter>
+    <marker id="arrAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f87171"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="900" fill="#0a0a12"/>
+
+  <!-- Title -->
+  <text x="600" y="42" text-anchor="middle" font-size="24" font-weight="700" fill="#f1f5f9">🧱 Context Isolation — 治乱</text>
+  <text x="600" y="68" text-anchor="middle" font-size="13" fill="#94a3b8" font-style="italic">Lesson 3:task 工具用一句 state["messages"] = [{description}] 隔断父子上下文</text>
+
+  <!-- Dividing wall (the "boundary") -->
+  <line x1="600" y1="100" x2="600" y2="780" stroke="#fbbf24" stroke-width="3" stroke-dasharray="10,6"/>
+  <g transform="translate(560,395)">
+    <rect width="80" height="50" rx="6" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+    <text x="40" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#fde047">边界</text>
+    <text x="40" y="40" text-anchor="middle" font-size="10" fill="#fde68a">boundary</text>
+  </g>
+
+  <!-- ===== LEFT: Parent context ===== -->
+  <g transform="translate(40,100)">
+    <rect width="500" height="60" rx="8" fill="url(#parentGrad)" stroke="#60a5fa" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="250" y="28" text-anchor="middle" font-size="17" font-weight="700" fill="#fbbf24">🎯 Main Agent context</text>
+    <text x="250" y="48" text-anchor="middle" font-size="11" fill="#cbd5e1" font-style="italic">所有对话历史 + tool 调用 + 反思</text>
+  </g>
+
+  <!-- Parent messages list -->
+  <g transform="translate(40,180)">
+    <rect width="500" height="40" rx="4" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#f1f5f9">[0] 🧑 HumanMessage</text>
+    <text x="14" y="32" font-size="10" fill="#cbd5e1">"研究 MCP 协议"</text>
+  </g>
+
+  <g transform="translate(40,225)">
+    <rect width="500" height="40" rx="4" fill="#1e293b" stroke="#60a5fa" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#fbbf24">[1] 🧠 AI: write_todos + ls</text>
+    <text x="14" y="32" font-size="10" fill="#cbd5e1" font-style="italic">规划阶段</text>
+  </g>
+
+  <g transform="translate(40,270)">
+    <rect width="500" height="40" rx="4" fill="#2a2418" stroke="#fbbf24" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#f9a8d4">[2-3] 🔧 ToolMessages</text>
+    <text x="14" y="32" font-size="10" fill="#fde68a">todos 更新成功 / ls 返回 []</text>
+  </g>
+
+  <g transform="translate(40,315)">
+    <rect width="500" height="60" rx="4" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#fde047">[4] 🚀 AI: task(...)  ← 派单</text>
+    <text x="14" y="32" font-size="10" fill="#fca5a5">tool_call: task(</text>
+    <text x="14" y="46" font-size="10" fill="#fca5a5">  subagent_type="research-agent",</text>
+    <text x="14" y="58" font-size="10" fill="#fde047">  description="Research MCP. Need..."</text>
+  </g>
+
+  <!-- arrow from task to subagent (crossing the boundary) -->
+  <path d="M 540,355 L 660,450" stroke="#f87171" stroke-width="2.5" marker-end="url(#arrRed)" stroke-dasharray="6,3" fill="none"/>
+  <text x="555" y="395" font-size="11" font-style="italic" fill="#fca5a5" font-weight="700">spawn (only description crosses)</text>
+
+  <g transform="translate(40,385)">
+    <rect width="500" height="50" rx="4" fill="#14141c" stroke="#475569" stroke-width="1"/>
+    <text x="14" y="18" font-size="10" font-style="italic" fill="#94a3b8">主 agent 在此暂停,等子 agent 完成</text>
+    <text x="14" y="36" font-size="10" font-style="italic" fill="#94a3b8">期间它的 messages 不会被子 agent 看到</text>
+  </g>
+
+  <!-- Receiving ToolMessage -->
+  <g transform="translate(40,545)">
+    <rect width="500" height="60" rx="4" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+    <text x="14" y="18" font-size="11" font-weight="700" fill="#86efac">[5] 🔧 ToolMessage(name="task")</text>
+    <text x="14" y="34" font-size="10" fill="#bbf7d0">content: "Based on my research, MCP is... [3000 字]"</text>
+    <text x="14" y="50" font-size="10" font-style="italic" fill="#bbf7d0">← 子 agent 的完整答复(只回传这一条)</text>
+  </g>
+
+  <g transform="translate(40,615)">
+    <rect width="500" height="40" rx="4" fill="#1e293b" stroke="#60a5fa" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#fbbf24">[6] 🧠 AI: 综述 + 收尾</text>
+    <text x="14" y="32" font-size="10" fill="#cbd5e1" font-style="italic">基于 ToolMessage 改写,给用户最终答案</text>
+  </g>
+
+  <!-- ===== RIGHT: Sub-agent context ===== -->
+  <g transform="translate(660,100)">
+    <rect width="500" height="60" rx="8" fill="url(#childGrad)" stroke="#4ade80" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="250" y="28" text-anchor="middle" font-size="17" font-weight="700" fill="#fde047">🧑‍🔬 Sub-agent context(隔离的)</text>
+    <text x="250" y="48" text-anchor="middle" font-size="11" fill="#bbf7d0" font-style="italic">只看 description,看不见父 messages</text>
+  </g>
+
+  <!-- The KEY line - state replacement -->
+  <g transform="translate(660,180)">
+    <rect width="500" height="60" rx="6" fill="#2a2418" stroke="#fbbf24" stroke-width="2.5"/>
+    <text x="250" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#f9a8d4">🔑 task 工具内部的核心一行</text>
+    <text x="14" y="44" font-size="11" font-family="monospace" fill="#fde047">state["messages"] = [{"role":"user", "content":description}]</text>
+  </g>
+
+  <!-- Sub messages list (clean slate) -->
+  <g transform="translate(660,260)">
+    <rect width="500" height="40" rx="4" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#f1f5f9">[0] 🧑 HumanMessage(content=description)</text>
+    <text x="14" y="32" font-size="10" fill="#cbd5e1">"Research MCP. Need..." (父 agent 写的)</text>
+  </g>
+
+  <g transform="translate(660,305)">
+    <rect width="500" height="40" rx="4" fill="#1e293b" stroke="#60a5fa" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#fbbf24">[1] 🧠 AI: tavily_search(...)</text>
+    <text x="14" y="32" font-size="10" fill="#cbd5e1">子 agent 自己的 ReAct 循环开始</text>
+  </g>
+
+  <g transform="translate(660,350)">
+    <rect width="500" height="40" rx="4" fill="#2a2418" stroke="#fbbf24" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#f9a8d4">[2] 🔧 ToolMessage: tavily 结果</text>
+    <text x="14" y="32" font-size="10" fill="#fde68a">仅在 sub-agent context 内</text>
+  </g>
+
+  <g transform="translate(660,395)">
+    <rect width="500" height="40" rx="4" fill="#1e293b" stroke="#60a5fa" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#fbbf24">[3] 🧠 AI: think_tool(reflection)</text>
+    <text x="14" y="32" font-size="10" fill="#cbd5e1" font-style="italic">复盘:研究够全了吗?</text>
+  </g>
+
+  <g transform="translate(660,440)">
+    <rect width="500" height="40" rx="4" fill="#1e293b" stroke="#60a5fa" stroke-width="1"/>
+    <text x="14" y="16" font-size="11" font-weight="700" fill="#fbbf24">[4] 🧠 AI: final answer (3000 字)</text>
+    <text x="14" y="32" font-size="10" fill="#cbd5e1" font-style="italic">stop_reason: end_turn</text>
+  </g>
+
+  <!-- arrow from sub-agent final answer to parent's ToolMessage -->
+  <path d="M 660,460 C 600,500 600,560 540,575" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrGreen)" stroke-dasharray="6,3" fill="none"/>
+  <text x="555" y="525" font-size="11" font-style="italic" fill="#86efac" font-weight="700">return (only summary)</text>
+
+  <!-- 什么被擦了 vs 保留 -->
+  <g transform="translate(660,500)">
+    <rect width="500" height="160" rx="8" fill="#14141c" stroke="#475569" stroke-width="1.5"/>
+    <text x="250" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#fbbf24">📊 隔离精准度</text>
+    <text x="20" y="56" font-size="12" fill="#e2e8f0">❌ <tspan font-weight="700" fill="#f87171">messages</tspan> 被整个替换 — 子看不见父对话</text>
+    <text x="20" y="80" font-size="12" fill="#e2e8f0">✅ <tspan font-weight="700" fill="#4ade80">files</tspan> 继承 — 子可读父写的文件</text>
+    <text x="20" y="104" font-size="12" fill="#e2e8f0">✅ <tspan font-weight="700" fill="#4ade80">todos</tspan> 继承 — 子可见任务清单</text>
+    <text x="20" y="138" font-size="11" fill="#94a3b8" font-style="italic">→ 只隔离"对话"不隔离"硬盘"</text>
+  </g>
+
+  <!-- ===== BOTTOM: 类比 + 一句话 ===== -->
+  <g transform="translate(40,690)">
+    <rect width="500" height="170" rx="10" fill="#14141c" stroke="#475569" stroke-width="1.5"/>
+    <text x="250" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#fbbf24">💡 类比:外包给设计师</text>
+    <text x="20" y="58" font-size="12" fill="#e2e8f0"><tspan font-weight="700" fill="#f87171">❌ 不隔离</tspan>:把跟客户 3 小时的微信聊天记录</text>
+    <text x="20" y="74" font-size="12" fill="#e2e8f0">                         全甩给设计师 → 设计师被干扰</text>
+    <text x="20" y="100" font-size="12" fill="#e2e8f0"><tspan font-weight="700" fill="#4ade80">✅ 隔离</tspan>:只发一份《需求说明书.pdf》</text>
+    <text x="20" y="116" font-size="12" fill="#e2e8f0">             设计师专注做事,清爽完成</text>
+    <text x="20" y="148" font-size="11" fill="#cbd5e1" font-style="italic">description = 需求说明书 · 父 agent 已替子翻译好任务</text>
+  </g>
+
+  <g transform="translate(660,690)">
+    <rect width="500" height="170" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2" filter="url(#shadow)"/>
+    <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">✨ 一句话带走</text>
+    <text x="250" y="60" text-anchor="middle" font-size="13" fill="#bbf7d0">subagent 给子 agent <tspan font-weight="700" fill="#fbbf24">一颗干净的「大脑」</tspan></text>
+    <text x="250" y="78" text-anchor="middle" font-size="13" fill="#bbf7d0">但保留它的「<tspan font-weight="700" fill="#fbbf24">硬盘</tspan>」(files / todos)</text>
+    <text x="250" y="112" text-anchor="middle" font-size="12" fill="#a7f3d0">3000 字研究结果 → 只回传 1 条 ToolMessage</text>
+    <text x="250" y="130" text-anchor="middle" font-size="12" fill="#a7f3d0">主 agent context 不被污染 = 治乱</text>
+    <text x="250" y="156" text-anchor="middle" font-size="11" fill="#86efac" font-style="italic">原理 = 一行代码:state["messages"] = [{description}]</text>
+  </g>
+</svg>
