@@ -1,0 +1,257 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2300" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#1a2438"/>
+      <stop offset="100%" stop-color="#3aa97a"/>
+    </linearGradient>
+    <style>
+      .h1 { font-size: 50px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 22px; fill: #d1f0e0; font-style: italic; }
+      .section { font-size: 32px; font-weight: 800; fill: #111; }
+      .code { font-family: 'Courier New', Courier, monospace; font-size: 16px; }
+      .cmt { fill: #8a8f99; }
+      .kw { fill: #c83bcb; font-weight: 700; }
+      .fn { fill: #2563eb; }
+      .str { fill: #c33232; }
+      .num { fill: #2aa35a; font-weight: 700; }
+      .var { fill: #1a2438; }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="1700" height="2300" fill="#ffffff"/>
+
+  <!-- ===== HEADER ===== -->
+  <rect x="0" y="0" width="1700" height="160" fill="url(#hdr)"/>
+  <!-- Stylized DB icon -->
+  <g transform="translate(1400,40)" fill="#ffffff" opacity="0.2">
+    <ellipse cx="40" cy="14" rx="40" ry="10"/>
+    <rect x="0" y="14" width="80" height="60" />
+    <ellipse cx="40" cy="74" rx="40" ry="10"/>
+    <ellipse cx="40" cy="14" rx="40" ry="10" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <ellipse cx="40" cy="44" rx="40" ry="10" fill="none" stroke="#ffffff" stroke-width="2"/>
+  </g>
+  <text x="60" y="78" class="h1">Vector Databases in Practice — Weaviate</text>
+  <text x="60" y="118" class="sub">From a raw idea to a working retriever in three steps and a handful of Python calls</text>
+
+  <!-- ===== SECTION 1: WHAT IS A VECTOR DB ===== -->
+  <text x="60" y="220" class="section">1. What is a vector database?</text>
+
+  <rect x="60" y="240" width="1080" height="280" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- 4 mini cards inside -->
+  <g transform="translate(80,260)">
+    <text x="0" y="30" font-size="22" font-weight="800" fill="#2c3a52">Built for vector search</text>
+    <text x="0" y="60" font-size="16" fill="#222">Stores high-dimensional vectors + does ANN search natively.</text>
+
+    <text x="0" y="110" font-size="22" font-weight="800" fill="#2c3a52">Beats relational DBs at this</text>
+    <text x="0" y="140" font-size="16" fill="#222">Postgres et al. can do it, but fall back to KNN-like scans.</text>
+
+    <text x="0" y="190" font-size="22" font-weight="800" fill="#2c3a52">Optimized for ANN</text>
+    <text x="0" y="220" font-size="16" fill="#222">Build HNSW indexes, distance kernels, hybrid query planner.</text>
+
+    <text x="540" y="30" font-size="22" font-weight="800" fill="#3aa97a">Weaviate</text>
+    <text x="540" y="60" font-size="16" fill="#222">Popular open-source vector DB used in this course. Native</text>
+    <text x="540" y="84" font-size="16" fill="#222">support for vector + BM25 + hybrid + metadata filters out of</text>
+    <text x="540" y="108" font-size="16" fill="#222">the box. Python client is what you'll see below.</text>
+
+    <text x="540" y="155" font-size="14" fill="#666" font-style="italic">Related tools (2026): Pinecone, Qdrant, Milvus,</text>
+    <text x="540" y="178" font-size="14" fill="#666" font-style="italic">Vespa, Turbopuffer, LanceDB, Chroma, pgvector,</text>
+    <text x="540" y="201" font-size="14" fill="#666" font-style="italic">MongoDB Atlas Vector Search.</text>
+  </g>
+
+  <!-- Right side: data flow icon -->
+  <rect x="1160" y="240" width="480" height="280" rx="16" fill="#2c3a52"/>
+  <text x="1400" y="290" text-anchor="middle" font-size="22" font-weight="800" fill="#ffd86b">Mental model</text>
+  <text x="1180" y="335" font-size="16" fill="#ffffff">A vector DB is a search engine that</text>
+  <text x="1180" y="361" font-size="16" fill="#ffffff">indexes <tspan font-weight="800">meaning</tspan> instead of just <tspan font-weight="800">words</tspan>.</text>
+  <text x="1180" y="400" font-size="16" fill="#ffffff">Underneath: HNSW graph + inverted</text>
+  <text x="1180" y="426" font-size="16" fill="#ffffff">index for BM25 + a filter engine for</text>
+  <text x="1180" y="452" font-size="16" fill="#ffffff">structured metadata, all queried in</text>
+  <text x="1180" y="478" font-size="16" fill="#ffffff">one round-trip.</text>
+
+  <!-- ===== SECTION 2: WORKFLOW ===== -->
+  <text x="60" y="580" class="section">2. The complete workflow — three steps</text>
+
+  <!-- Step 1 -->
+  <g transform="translate(120,620)">
+    <rect width="380" height="130" rx="18" fill="#ef5b6b"/>
+    <text x="190" y="60" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">1 &#8226; Configure</text>
+    <text x="190" y="92" text-anchor="middle" font-size="22" fill="#ffffff">database</text>
+  </g>
+
+  <line x1="510" y1="685" x2="600" y2="685" stroke="#1a2438" stroke-width="4" marker-end="url(#ar)"/>
+
+  <g transform="translate(610,620)">
+    <rect width="380" height="130" rx="18" fill="#ef5b6b"/>
+    <text x="190" y="60" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">2 &#8226; Load &amp; Index</text>
+    <text x="190" y="92" text-anchor="middle" font-size="22" fill="#ffffff">data</text>
+  </g>
+
+  <line x1="1000" y1="685" x2="1090" y2="685" stroke="#1a2438" stroke-width="4" marker-end="url(#ar)"/>
+
+  <g transform="translate(1100,620)">
+    <rect width="380" height="130" rx="18" fill="#ef5b6b"/>
+    <text x="190" y="60" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">3 &#8226; Perform</text>
+    <text x="190" y="92" text-anchor="middle" font-size="22" fill="#ffffff">searches</text>
+  </g>
+
+  <!-- ===== SECTION 3: ADDING DATA (BATCH IMPORT) ===== -->
+  <text x="60" y="820" class="section">3. Adding data — batch import with safety rails</text>
+
+  <rect x="60" y="840" width="1580" height="320" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Code -->
+  <g transform="translate(90,880)" class="code">
+    <text x="0" y="0"><tspan class="kw">with</tspan><tspan class="var"> collection.</tspan><tspan class="fn">batch</tspan><tspan class="var">.</tspan><tspan class="fn">fixed_size</tspan><tspan class="var">(batch_size=</tspan><tspan class="num">200</tspan><tspan class="var">) </tspan><tspan class="kw">as</tspan><tspan class="var"> batch:</tspan></text>
+    <text x="40" y="28"><tspan class="kw">for</tspan><tspan class="var"> data_row </tspan><tspan class="kw">in</tspan><tspan class="var"> data_rows:</tspan></text>
+    <text x="80" y="56"><tspan class="var">batch.</tspan><tspan class="fn">add_object</tspan><tspan class="var">(</tspan></text>
+    <text x="120" y="84"><tspan class="var">properties=data_row,</tspan></text>
+    <text x="80" y="112"><tspan class="var">)</tspan></text>
+    <text x="80" y="140"><tspan class="kw">if</tspan><tspan class="var"> batch.number_errors &gt; </tspan><tspan class="num">10</tspan><tspan class="var">:</tspan></text>
+    <text x="120" y="168"><tspan class="var">print(</tspan><tspan class="str">"Batch import stopped due to excessive errors."</tspan><tspan class="var">)</tspan></text>
+    <text x="120" y="196"><tspan class="kw">break</tspan></text>
+
+    <text x="0" y="240"><tspan class="var">failed_objects = collection.batch.failed_objects</tspan></text>
+    <text x="0" y="268"><tspan class="kw">if</tspan><tspan class="var"> failed_objects:</tspan></text>
+    <text x="40" y="296"><tspan class="var">print(</tspan><tspan class="str">f"Number of failed imports: {len(failed_objects)}"</tspan><tspan class="var">)</tspan></text>
+  </g>
+
+  <!-- Annotations on the right -->
+  <g transform="translate(1080,890)">
+    <rect width="300" height="50" rx="8" fill="#ef5b6b"/>
+    <text x="150" y="33" text-anchor="middle" font-size="17" fill="#ffffff">Batch adding data</text>
+  </g>
+  <line x1="1080" y1="915" x2="1010" y2="884" stroke="#1a2438" stroke-width="2" marker-end="url(#ar)"/>
+
+  <g transform="translate(1080,1010)">
+    <rect width="300" height="50" rx="8" fill="#ef5b6b"/>
+    <text x="150" y="33" text-anchor="middle" font-size="17" fill="#ffffff">Detecting errors</text>
+  </g>
+  <line x1="1080" y1="1036" x2="990" y2="1040" stroke="#1a2438" stroke-width="2" marker-end="url(#ar)"/>
+
+  <g transform="translate(1080,1110)">
+    <rect width="300" height="50" rx="8" fill="#ef5b6b"/>
+    <text x="150" y="33" text-anchor="middle" font-size="17" fill="#ffffff">Handling failures</text>
+  </g>
+  <line x1="1080" y1="1132" x2="950" y2="1115" stroke="#1a2438" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- ===== SECTION 4: FOUR SEARCH MODES ===== -->
+  <text x="60" y="1220" class="section">4. Four search modes — same shape, different superpowers</text>
+
+  <!-- Card 4a: Vector search -->
+  <g transform="translate(60,1250)">
+    <rect width="790" height="320" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">a) Vector search &#8226; <tspan class="code" font-size="18" fill="#3aa97a">near_text()</tspan></text>
+    <g transform="translate(20,60)" class="code" font-size="14">
+      <text x="0" y="20"><tspan class="var">articles = client.collections.</tspan><tspan class="fn">get</tspan><tspan class="var">(</tspan><tspan class="str">"Article"</tspan><tspan class="var">)</tspan></text>
+      <text x="0" y="44"><tspan class="var">response = articles.query.</tspan><tspan class="fn">near_text</tspan><tspan class="var">(</tspan></text>
+      <text x="30" y="68"><tspan class="var">query=</tspan><tspan class="str">"hotel capacity in downtown Vancouver"</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="92"><tspan class="var">limit=</tspan><tspan class="num">2</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="116"><tspan class="var">return_metadata=</tspan><tspan class="fn">MetadataQuery</tspan><tspan class="var">(distance=</tspan><tspan class="num">True</tspan><tspan class="var">),</tspan></text>
+      <text x="0" y="140"><tspan class="var">)</tspan></text>
+    </g>
+    <text x="20" y="240" font-size="14" fill="#222">
+      <tspan font-weight="800" fill="#ef5b6b">Semantic.</tspan>
+      <tspan> Embeds the query, finds closest doc vectors via HNSW.</tspan>
+    </text>
+    <text x="20" y="265" font-size="14" fill="#222">Returns distance so you know how confident the match is.</text>
+    <text x="20" y="295" font-size="13" fill="#666" font-style="italic">Best for: paraphrases, intent, multilingual, fuzzy questions.</text>
+  </g>
+
+  <!-- Card 4b: Keyword search -->
+  <g transform="translate(870,1250)">
+    <rect width="770" height="320" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">b) Keyword search &#8226; <tspan class="code" font-size="18" fill="#3aa97a">bm25()</tspan></text>
+    <g transform="translate(20,60)" class="code" font-size="14">
+      <text x="0" y="20"><tspan class="var">response = articles.query.</tspan><tspan class="fn">bm25</tspan><tspan class="var">(</tspan></text>
+      <text x="30" y="44"><tspan class="var">query=</tspan><tspan class="str">"Vancouver hotel capacity"</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="68"><tspan class="var">limit=</tspan><tspan class="num">3</tspan></text>
+      <text x="0" y="92"><tspan class="var">)</tspan></text>
+    </g>
+    <text x="20" y="240" font-size="14" fill="#222">
+      <tspan font-weight="800" fill="#ef5b6b">Lexical.</tspan>
+      <tspan> BM25 scoring on the inverted index. Exact-match power.</tspan>
+    </text>
+    <text x="20" y="265" font-size="14" fill="#222">No embeddings needed; very fast.</text>
+    <text x="20" y="295" font-size="13" fill="#666" font-style="italic">Best for: product names, codes, IDs, technical terms.</text>
+  </g>
+
+  <!-- Card 4c: Hybrid search -->
+  <g transform="translate(60,1590)">
+    <rect width="790" height="320" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">c) Hybrid search &#8226; <tspan class="code" font-size="18" fill="#3aa97a">hybrid(alpha=...)</tspan></text>
+    <g transform="translate(20,60)" class="code" font-size="14">
+      <text x="0" y="20"><tspan class="var">response = articles.query.</tspan><tspan class="fn">hybrid</tspan><tspan class="var">(</tspan></text>
+      <text x="30" y="44"><tspan class="var">query=</tspan><tspan class="str">"Vancouver hotel capacity"</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="68"><tspan class="var">alpha=</tspan><tspan class="num">0.25</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="92"><tspan class="var">limit=</tspan><tspan class="num">3</tspan><tspan class="var">,</tspan></text>
+      <text x="0" y="116"><tspan class="var">)</tspan></text>
+    </g>
+    <text x="20" y="200" font-size="14" fill="#222">
+      <tspan font-weight="800" fill="#ef5b6b">alpha</tspan><tspan> tunes the mix:</tspan>
+    </text>
+    <text x="20" y="225" font-size="14" fill="#222">&#8226; <tspan class="code" font-weight="800">alpha = 0</tspan> &#8594; pure keyword (BM25)</text>
+    <text x="20" y="250" font-size="14" fill="#222">&#8226; <tspan class="code" font-weight="800">alpha = 1</tspan> &#8594; pure vector</text>
+    <text x="20" y="275" font-size="14" fill="#222">&#8226; <tspan class="code" font-weight="800">alpha = 0.25</tspan> &#8594; 25% vector + 75% keyword</text>
+    <text x="20" y="305" font-size="13" fill="#666" font-style="italic">Note: Weaviate's alpha = "vector weight" (opposite convention to beta in lectures).</text>
+  </g>
+
+  <!-- Card 4d: Filtered hybrid -->
+  <g transform="translate(870,1590)">
+    <rect width="770" height="320" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">d) Filtered hybrid &#8226; <tspan class="code" font-size="18" fill="#3aa97a">+ filters=</tspan></text>
+    <g transform="translate(20,60)" class="code" font-size="14">
+      <text x="0" y="20"><tspan class="var">response = articles.query.</tspan><tspan class="fn">hybrid</tspan><tspan class="var">(</tspan></text>
+      <text x="30" y="44"><tspan class="var">query =</tspan><tspan class="str"> 'History of urban development in Vancouver'</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="68"><tspan class="var">filters = </tspan><tspan class="fn">Filter</tspan><tspan class="var">.</tspan><tspan class="fn">by_property</tspan><tspan class="var">(</tspan><tspan class="str">'title'</tspan><tspan class="var">).</tspan><tspan class="fn">contains_any</tspan><tspan class="var">([</tspan><tspan class="str">'Vancouver'</tspan><tspan class="var">]),</tspan></text>
+      <text x="30" y="92"><tspan class="var">alpha = </tspan><tspan class="num">0.3</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="116"><tspan class="var">limit = </tspan><tspan class="num">4</tspan></text>
+      <text x="0" y="140"><tspan class="var">)</tspan></text>
+    </g>
+    <text x="20" y="225" font-size="14" fill="#222">
+      <tspan font-weight="800" fill="#ef5b6b">Filter first, then rank.</tspan>
+      <tspan> Metadata clauses prune the candidate</tspan>
+    </text>
+    <text x="20" y="250" font-size="14" fill="#222">pool before BM25 + vector scoring runs.</text>
+    <text x="20" y="280" font-size="13" fill="#666" font-style="italic">Cheap, strict, and combines naturally with hybrid.</text>
+  </g>
+
+  <!-- ===== SECTION 5: KEY TAKEAWAYS + 2026 ===== -->
+  <text x="60" y="1990" class="section">5. Key takeaways &amp; 2026 production reality</text>
+
+  <g transform="translate(60,2010)">
+    <rect width="500" height="240" rx="16" fill="#ef5b6b"/>
+    <text x="30" y="50" font-size="22" font-weight="800" fill="#ffffff">A &#8226; Same client, four modes</text>
+    <text x="30" y="88" font-size="15" fill="#ffffff">near_text / bm25 / hybrid / hybrid+filter</text>
+    <text x="30" y="111" font-size="15" fill="#ffffff">all return the same response object.</text>
+    <text x="30" y="148" font-size="22" font-weight="800" fill="#ffffff">B &#8226; Three big knobs</text>
+    <text x="30" y="186" font-size="15" fill="#ffffff">alpha (mix), limit (top-k), filters</text>
+    <text x="30" y="209" font-size="15" fill="#ffffff">(metadata constraints).</text>
+  </g>
+
+  <g transform="translate(600,2010)">
+    <rect width="500" height="240" rx="16" fill="#1eb6c8"/>
+    <text x="30" y="50" font-size="22" font-weight="800" fill="#ffffff">C &#8226; Batch import matters</text>
+    <text x="30" y="88" font-size="15" fill="#ffffff">Use fixed_size batching, monitor</text>
+    <text x="30" y="111" font-size="15" fill="#ffffff">number_errors, capture failed_objects.</text>
+    <text x="30" y="148" font-size="22" font-weight="800" fill="#ffffff">D &#8226; Vector DBs are search engines</text>
+    <text x="30" y="186" font-size="15" fill="#ffffff">Not just storage &#8212; they bundle HNSW +</text>
+    <text x="30" y="209" font-size="15" fill="#ffffff">BM25 + filters in one query.</text>
+  </g>
+
+  <g transform="translate(1140,2010)">
+    <rect width="500" height="240" rx="16" fill="#1a2438"/>
+    <text x="30" y="48" font-size="22" font-weight="800" fill="#ffd86b">2026 &#8226; What's new</text>
+    <text x="30" y="80" font-size="14" fill="#ffffff">&#8226; <tspan font-weight="800">Auto-embedding modules</tspan> (Weaviate</text>
+    <text x="30" y="100" font-size="14" fill="#ffffff">text2vec-openai etc.) — no manual embed.</text>
+    <text x="30" y="124" font-size="14" fill="#ffffff">&#8226; <tspan font-weight="800">Generative search</tspan> = retrieve + answer</text>
+    <text x="30" y="144" font-size="14" fill="#ffffff">in one call (RAG built into the DB).</text>
+    <text x="30" y="168" font-size="14" fill="#ffffff">&#8226; <tspan font-weight="800">Serverless tiers</tspan>: Weaviate Cloud, Pinecone</text>
+    <text x="30" y="188" font-size="14" fill="#ffffff">Serverless, Turbopuffer — pay per query.</text>
+    <text x="30" y="212" font-size="14" fill="#ffffff">&#8226; <tspan font-weight="800">Multi-tenancy + RBAC</tspan> for SaaS RAG apps.</text>
+  </g>
+</svg>

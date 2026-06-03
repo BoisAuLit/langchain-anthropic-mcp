@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 750" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1400" height="750" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="70" font-size="50" font-weight="800" fill="#111">BM25 Tunable Parameters</text>
+
+  <!-- ============ LEFT CARD: k1 ============ -->
+  <rect x="40" y="120" width="640" height="580" rx="22" fill="#f1f3f5"/>
+
+  <!-- Heading: k1 - Term Frequency Saturation -->
+  <text x="80" y="195" font-size="32" font-weight="800" fill="#111">k</text>
+  <text x="100" y="208" font-size="20" font-weight="800" fill="#111">1</text>
+  <text x="115" y="195" font-size="32" font-weight="800" fill="#111"> -  Term Frequency Saturation</text>
+
+  <!-- Bullet 1: Controls -->
+  <circle cx="100" cy="260" r="6" fill="#111"/>
+  <text x="125" y="267" font-size="24" fill="#111">
+    <tspan font-weight="800">Controls:</tspan><tspan> How much term frequency</tspan>
+  </text>
+  <text x="125" y="300" font-size="24" fill="#111">influences the score.</text>
+
+  <!-- Bullet 2: Range -->
+  <circle cx="100" cy="365" r="6" fill="#111"/>
+  <text x="125" y="372" font-size="24" fill="#111">
+    <tspan font-weight="800">Range:</tspan><tspan> Typically between 1.2 and 2.0.</tspan>
+  </text>
+
+  <!-- Bullet 3: Effect -->
+  <circle cx="100" cy="445" r="6" fill="#111"/>
+  <text x="125" y="452" font-size="24" fill="#111">
+    <tspan font-weight="800">Effect:</tspan><tspan> Higher values increase the</tspan>
+  </text>
+  <text x="125" y="485" font-size="24" fill="#111">impact of term frequency; lower</text>
+  <text x="125" y="518" font-size="24" fill="#111">values reduce it.</text>
+
+  <!-- ============ RIGHT CARD: b ============ -->
+  <rect x="720" y="120" width="640" height="580" rx="22" fill="#f1f3f5"/>
+
+  <!-- Heading: b - Length Normalization -->
+  <text x="760" y="195" font-size="32" font-weight="800" fill="#111">b  -  Length Normalization</text>
+
+  <!-- Bullet 1: Controls -->
+  <circle cx="780" cy="260" r="6" fill="#111"/>
+  <text x="805" y="267" font-size="24" fill="#111">
+    <tspan font-weight="800">Controls:</tspan><tspan> The degree of</tspan>
+  </text>
+  <text x="805" y="300" font-size="24" fill="#111">normalization for document length.</text>
+
+  <!-- Bullet 2: Range -->
+  <circle cx="780" cy="365" r="6" fill="#111"/>
+  <text x="805" y="372" font-size="24" fill="#111">
+    <tspan font-weight="800">Range:</tspan><tspan> Between 0 (no</tspan>
+  </text>
+  <text x="805" y="405" font-size="24" fill="#111">normalization) and 1 (full</text>
+  <text x="805" y="438" font-size="24" fill="#111">normalization).</text>
+
+  <!-- Bullet 3: Effect -->
+  <circle cx="780" cy="500" r="6" fill="#111"/>
+  <text x="805" y="507" font-size="24" fill="#111">
+    <tspan font-weight="800">Effect</tspan><tspan>: Balances favoring shorter vs.</tspan>
+  </text>
+  <text x="805" y="540" font-size="24" fill="#111">longer documents.</text>
+</svg>

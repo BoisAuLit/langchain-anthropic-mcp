@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1400" height="1000" fill="#ffffff"/>
+
+  <!-- ===================== QUERY (top) ===================== -->
+  <g transform="translate(180,30)" font-family="'Courier New', Courier, monospace" font-size="34" fill="#111">
+    <!-- Opening quote -->
+    <text x="0" y="38">&#8220;</text>
+    <!-- Making (pink) -->
+    <rect x="22"  y="6"  width="148" height="46" fill="#f7b3b9"/>
+    <text x="36"  y="38">Making</text>
+    <!-- pizza (yellow) -->
+    <rect x="170" y="6"  width="112" height="46" fill="#f6dc6e"/>
+    <text x="184" y="38">pizza</text>
+    <!-- without (purple) -->
+    <rect x="282" y="6"  width="166" height="46" fill="#b9b1e0"/>
+    <text x="296" y="38">without</text>
+    <!-- a (white) -->
+    <rect x="448" y="6"  width="38"  height="46" fill="#ffffff"/>
+    <text x="458" y="38">a</text>
+    <!-- pizza (lavender) -->
+    <rect x="486" y="6"  width="112" height="46" fill="#c8b8d8"/>
+    <text x="500" y="38">pizza</text>
+    <!-- oven (blue) -->
+    <rect x="598" y="6"  width="118" height="46" fill="#8fc6e8"/>
+    <text x="612" y="38">oven</text>
+    <!-- Closing quote -->
+    <text x="720" y="38">&#8221;</text>
+  </g>
+
+  <!-- ===================== COLUMN HEADERS (Doc 1..5) ===================== -->
+  <g font-size="26" font-weight="700" fill="#111">
+    <text x="285" y="155" text-anchor="middle">Doc 1</text>
+    <text x="445" y="155" text-anchor="middle">Doc 2</text>
+    <text x="605" y="155" text-anchor="middle">Doc 3</text>
+    <text x="765" y="155" text-anchor="middle">Doc 4</text>
+    <text x="925" y="155" text-anchor="middle">Doc 5</text>
+  </g>
+
+  <!-- ===================== ROW LABELS (query tokens) ===================== -->
+  <g font-family="'Courier New', Courier, monospace" font-size="28" fill="#111">
+    <!-- making (pink) -->
+    <rect x="80" y="216" width="120" height="42" fill="#f7b3b9"/>
+    <text x="92" y="247">making</text>
+    <!-- pizza (yellow) -->
+    <rect x="80" y="356" width="100" height="42" fill="#f6dc6e"/>
+    <text x="92" y="387">pizza</text>
+    <!-- without (purple) -->
+    <rect x="80" y="496" width="140" height="42" fill="#b9b1e0"/>
+    <text x="92" y="527">without</text>
+    <!-- a (white) -->
+    <rect x="80" y="636" width="34"  height="42" fill="#ffffff"/>
+    <text x="92" y="667">a</text>
+    <!-- oven (blue) -->
+    <rect x="80" y="776" width="92"  height="42" fill="#8fc6e8"/>
+    <text x="92" y="807">oven</text>
+  </g>
+
+  <!-- ===================== MATRIX CELLS =====================
+       cell size: 120x100, gap so x centers at 285,445,605,765,925
+       row y centers: 240, 380, 520, 660, 800
+  -->
+
+  <!-- helper: filled cell macro repeated inline -->
+  <!-- Row 1: making -->
+  <g transform="translate(225,190)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(385,190)"><rect width="120" height="100" rx="14" fill="#e8ecf5"/></g>
+  <g transform="translate(545,190)"><rect width="120" height="100" rx="14" fill="#e8ecf5"/></g>
+  <g transform="translate(705,190)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(865,190)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+
+  <!-- Row 2: pizza -->
+  <g transform="translate(225,330)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(385,330)"><rect width="120" height="100" rx="14" fill="#e8ecf5"/></g>
+  <g transform="translate(545,330)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(705,330)"><rect width="120" height="100" rx="14" fill="#e8ecf5"/></g>
+  <g transform="translate(865,330)"><rect width="120" height="100" rx="14" fill="#e8ecf5"/></g>
+
+  <!-- Row 3: without -->
+  <g transform="translate(225,470)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(385,470)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(545,470)"><rect width="120" height="100" rx="14" fill="#e8ecf5"/></g>
+  <g transform="translate(705,470)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(865,470)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+
+  <!-- Row 4: a -->
+  <g transform="translate(225,610)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(385,610)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(545,610)"><rect width="120" height="100" rx="14" fill="#e8ecf5"/></g>
+  <g transform="translate(705,610)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(865,610)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+
+  <!-- Row 5: oven -->
+  <g transform="translate(225,750)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(385,750)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(545,750)"><rect width="120" height="100" rx="14" fill="#e8ecf5"/></g>
+  <g transform="translate(705,750)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+  <g transform="translate(865,750)"><rect width="120" height="100" rx="14" fill="#ef5b6b"/><text x="60" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">+1</text></g>
+
+  <!-- ===================== TOTALS ROW ===================== -->
+  <text x="120" y="895" font-size="22" font-weight="800" fill="#1a2438">Naive score</text>
+  <text x="120" y="918" font-size="16" fill="#555">(sum of +1s)</text>
+
+  <g font-size="32" font-weight="800" fill="#1a2438" text-anchor="middle">
+    <text x="285" y="905">5</text>
+    <text x="445" y="905">3</text>
+    <text x="605" y="905">1</text>
+    <text x="765" y="905">4</text>
+    <text x="925" y="905">4</text>
+  </g>
+
+  <!-- ===================== UNDERSTANDING PANEL (right) ===================== -->
+  <rect x="1020" y="150" width="360" height="780" rx="16" fill="#f6f7f9" stroke="#d6d9de" stroke-width="1.5"/>
+
+  <text x="1040" y="190" font-size="22" font-weight="800" fill="#1a2438">What this matrix shows</text>
+
+  <text x="1040" y="225" font-size="15" fill="#222">A <tspan font-weight="700">term-document matrix</tspan>: rows are</text>
+  <text x="1040" y="245" font-size="15" fill="#222">query tokens, columns are candidate docs.</text>
+  <text x="1040" y="265" font-size="15" fill="#222">A red cell means &#8220;this doc contains this</text>
+  <text x="1040" y="285" font-size="15" fill="#222">word.&#8221; This is how <tspan font-weight="700">keyword search</tspan></text>
+  <text x="1040" y="305" font-size="15" fill="#222">scores documents.</text>
+
+  <text x="1040" y="345" font-size="18" font-weight="800" fill="#ef5b6b">Ranking by raw count</text>
+  <text x="1040" y="372" font-size="15" fill="#222">Doc 1 &#8594; 5 (perfect overlap)</text>
+  <text x="1040" y="395" font-size="15" fill="#222">Doc 4, 5 &#8594; 4 (miss &#8220;pizza&#8221;)</text>
+  <text x="1040" y="418" font-size="15" fill="#222">Doc 2 &#8594; 3 (only stopwords + &#8220;oven&#8221;)</text>
+  <text x="1040" y="441" font-size="15" fill="#222">Doc 3 &#8594; 1 (just &#8220;pizza&#8221;)</text>
+
+  <text x="1040" y="485" font-size="18" font-weight="800" fill="#ef5b6b">Why naive +1 is misleading</text>
+  <text x="1040" y="512" font-size="15" fill="#222">&#8220;a&#8221; matches everywhere but carries</text>
+  <text x="1040" y="532" font-size="15" fill="#222">no meaning &#8212; it inflates Doc 2&#8217;s score.</text>
+  <text x="1040" y="552" font-size="15" fill="#222">Meanwhile Doc 3 has the rare, high-</text>
+  <text x="1040" y="572" font-size="15" fill="#222">signal word &#8220;pizza&#8221; but scores lowest.</text>
+
+  <text x="1040" y="615" font-size="18" font-weight="800" fill="#ef5b6b">What real systems do</text>
+  <text x="1040" y="642" font-size="15" fill="#222"><tspan font-weight="700">TF-IDF</tspan> down-weights common words</text>
+  <text x="1040" y="662" font-size="15" fill="#222">(IDF for &#8220;a&#8221; &#8594; ~0), up-weights rare ones.</text>
+  <text x="1040" y="688" font-size="15" fill="#222"><tspan font-weight="700">BM25</tspan> adds length normalization and a</text>
+  <text x="1040" y="708" font-size="15" fill="#222">saturation curve on term frequency.</text>
+  <text x="1040" y="734" font-size="15" fill="#222"><tspan font-weight="700">Stopword removal</tspan> drops &#8220;a&#8221;, &#8220;the&#8221;,</text>
+  <text x="1040" y="754" font-size="15" fill="#222">&#8220;without&#8221; before scoring even starts.</text>
+
+  <text x="1040" y="795" font-size="18" font-weight="800" fill="#ef5b6b">Takeaway</text>
+  <text x="1040" y="822" font-size="15" fill="#222">Under TF-IDF / BM25 the ranking flips:</text>
+  <text x="1040" y="842" font-size="15" fill="#222">Doc 3 (&#8220;pizza&#8221;) rises, Doc 2 falls. This is</text>
+  <text x="1040" y="862" font-size="15" fill="#222">also why semantic search helps &#8212; it sees</text>
+  <text x="1040" y="882" font-size="15" fill="#222">&#8220;making pizza without an oven&#8221; as one</text>
+  <text x="1040" y="902" font-size="15" fill="#222">intent, not five independent words.</text>
+</svg>

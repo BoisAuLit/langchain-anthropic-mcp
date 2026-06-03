@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 650" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1700" height="650" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="90" font-size="62" font-weight="800" fill="#111">Retrieval Quality Metrics</text>
+
+  <!-- Subtitle -->
+  <text x="40" y="210" font-size="42" fill="#111">Common ingredients to most retriever quality metrics:</text>
+
+  <!-- ===== Column 1: The Prompt ===== -->
+  <text x="290" y="380" text-anchor="middle" font-size="32" font-weight="800" fill="#111">The Prompt</text>
+  <text x="290" y="430" text-anchor="middle" font-size="28" fill="#111">The specific</text>
+  <text x="290" y="468" text-anchor="middle" font-size="28" fill="#111">prompt being</text>
+  <text x="290" y="506" text-anchor="middle" font-size="28" fill="#111">evaluated</text>
+
+  <!-- ===== Column 2: Ranked Results ===== -->
+  <text x="850" y="380" text-anchor="middle" font-size="32" font-weight="800" fill="#111">Ranked Results</text>
+  <text x="850" y="430" text-anchor="middle" font-size="28" fill="#111">Documents</text>
+  <text x="850" y="468" text-anchor="middle" font-size="28" fill="#111">returned in</text>
+  <text x="850" y="506" text-anchor="middle" font-size="28" fill="#111">ranked order</text>
+
+  <!-- ===== Column 3: Ground Truth ===== -->
+  <text x="1410" y="380" text-anchor="middle" font-size="32" font-weight="800" fill="#111">Ground Truth</text>
+  <text x="1410" y="430" text-anchor="middle" font-size="28" fill="#111">All documents</text>
+  <text x="1410" y="468" text-anchor="middle" font-size="28" fill="#111">labeled as</text>
+  <text x="1410" y="506" text-anchor="middle" font-size="28" fill="#111">relevant or</text>
+  <text x="1410" y="544" text-anchor="middle" font-size="28" fill="#111">irrelevant</text>
+</svg>

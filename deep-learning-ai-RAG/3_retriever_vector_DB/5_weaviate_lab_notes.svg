@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2700" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#1a2438"/>
+      <stop offset="100%" stop-color="#3aa97a"/>
+    </linearGradient>
+    <style>
+      .h1 { font-size: 46px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 20px; fill: #d1f0e0; font-style: italic; }
+      .section { font-size: 30px; font-weight: 800; fill: #111; }
+      .code { font-family: 'Courier New', Courier, monospace; }
+      .cmt { fill: #8a8f99; }
+      .kw { fill: #c83bcb; font-weight: 700; }
+      .fn { fill: #2563eb; }
+      .str { fill: #c33232; }
+      .num { fill: #2aa35a; font-weight: 700; }
+      .var { fill: #1a2438; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1700" height="2700" fill="#ffffff"/>
+
+  <!-- ===== HEADER ===== -->
+  <rect x="0" y="0" width="1700" height="150" fill="url(#hdr)"/>
+  <g transform="translate(1430,30)" fill="#ffffff" opacity="0.2">
+    <ellipse cx="40" cy="14" rx="40" ry="10"/>
+    <rect x="0" y="14" width="80" height="60" />
+    <ellipse cx="40" cy="74" rx="40" ry="10"/>
+    <ellipse cx="40" cy="14" rx="40" ry="10" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <ellipse cx="40" cy="44" rx="40" ry="10" fill="none" stroke="#ffffff" stroke-width="2"/>
+  </g>
+  <text x="50" y="70" class="h1">Weaviate API — Lab Cheatsheet</text>
+  <text x="50" y="108" class="sub">Connect → Configure → Insert → Query: every code pattern from C1M3 Ungraded Lab 1</text>
+
+  <!-- ===== SECTION 1: SETUP ===== -->
+  <text x="50" y="210" class="section">1. Setup — connect to embedded Weaviate</text>
+
+  <rect x="50" y="230" width="1600" height="290" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+  <g transform="translate(80,265)" class="code" font-size="15">
+    <text x="0" y="0"><tspan class="kw">from</tspan><tspan class="var"> weaviate.classes.config </tspan><tspan class="kw">import</tspan><tspan class="var"> Configure, Property, DataType</tspan></text>
+    <text x="0" y="22"><tspan class="kw">from</tspan><tspan class="var"> weaviate.classes.query </tspan><tspan class="kw">import</tspan><tspan class="var"> Filter, Rerank</tspan></text>
+    <text x="0" y="44"><tspan class="kw">from</tspan><tspan class="var"> weaviate.util </tspan><tspan class="kw">import</tspan><tspan class="var"> generate_uuid5</tspan></text>
+    <text x="0" y="66"><tspan class="kw">import</tspan><tspan class="var"> weaviate, joblib</tspan></text>
+
+    <text x="0" y="110"><tspan class="var">client = weaviate.</tspan><tspan class="fn">connect_to_embedded</tspan><tspan class="var">(</tspan></text>
+    <text x="30" y="132"><tspan class="var">persistence_data_path=</tspan><tspan class="str">"./.collections"</tspan><tspan class="var">,</tspan><tspan class="cmt">  # data persists across sessions</tspan></text>
+    <text x="30" y="154"><tspan class="var">environment_variables={</tspan></text>
+    <text x="60" y="176"><tspan class="str">"ENABLE_API_BASED_MODULES"</tspan><tspan class="var">: </tspan><tspan class="str">"true"</tspan><tspan class="var">,</tspan></text>
+    <text x="60" y="198"><tspan class="str">"ENABLE_MODULES"</tspan><tspan class="var">: </tspan><tspan class="str">'text2vec-transformers, reranker-transformers'</tspan><tspan class="var">,</tspan></text>
+    <text x="60" y="220"><tspan class="str">"TRANSFORMERS_INFERENCE_API"</tspan><tspan class="var">: </tspan><tspan class="str">"http://127.0.0.1:5000/"</tspan><tspan class="var">,</tspan></text>
+    <text x="60" y="242"><tspan class="str">"RERANKER_INFERENCE_API"</tspan><tspan class="var">:    </tspan><tspan class="str">"http://127.0.0.1:5000/"</tspan></text>
+    <text x="30" y="264"><tspan class="var">})</tspan><tspan class="cmt">                          # ... and remember to client.close() at the end</tspan></text>
+  </g>
+
+  <!-- ===== SECTION 2: COLLECTION + VECTORIZER ===== -->
+  <text x="50" y="580" class="section">2. Configure the database — collection + named vectorizer + properties</text>
+
+  <rect x="50" y="600" width="800" height="510" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+  <text x="80" y="635" font-size="18" font-weight="800" fill="#2c3a52">2a) Vectorizer config</text>
+  <g transform="translate(80,655)" class="code" font-size="14">
+    <text x="0" y="0"><tspan class="var">vectorizer_config = [Configure.NamedVectors.</tspan><tspan class="fn">text2vec_transformers</tspan><tspan class="var">(</tspan></text>
+    <text x="30" y="22"><tspan class="var">name=</tspan><tspan class="str">"vector"</tspan><tspan class="var">,</tspan><tspan class="cmt">                      # name to query vectors later</tspan></text>
+    <text x="30" y="44"><tspan class="var">source_properties=[</tspan><tspan class="str">'place'</tspan><tspan class="var">, </tspan><tspan class="str">'state'</tspan><tspan class="var">, </tspan><tspan class="str">'description'</tspan><tspan class="var">,</tspan></text>
+    <text x="180" y="62"><tspan class="str">'best_season_to_visit'</tspan><tspan class="var">, </tspan><tspan class="str">'attractions'</tspan><tspan class="var">, </tspan><tspan class="str">'budget'</tspan><tspan class="var">],</tspan></text>
+    <text x="30" y="84"><tspan class="var">vectorize_collection_name=</tspan><tspan class="num">False</tspan><tspan class="var">,</tspan></text>
+    <text x="30" y="106"><tspan class="var">inference_url=</tspan><tspan class="str">"http://127.0.0.1:5000"</tspan><tspan class="var">,</tspan></text>
+    <text x="0" y="128"><tspan class="var">)]</tspan></text>
+  </g>
+
+  <text x="80" y="820" font-size="18" font-weight="800" fill="#2c3a52">2b) Create the collection</text>
+  <g transform="translate(80,840)" class="code" font-size="14">
+    <text x="0" y="0"><tspan class="kw">if not</tspan><tspan class="var"> client.collections.</tspan><tspan class="fn">exists</tspan><tspan class="var">(</tspan><tspan class="str">'example_collection'</tspan><tspan class="var">):</tspan></text>
+    <text x="20" y="22"><tspan class="var">collection = client.collections.</tspan><tspan class="fn">create</tspan><tspan class="var">(</tspan></text>
+    <text x="50" y="44"><tspan class="var">name=</tspan><tspan class="str">'example_collection'</tspan><tspan class="var">,</tspan></text>
+    <text x="50" y="66"><tspan class="var">vectorizer_config=vectorizer_config,</tspan></text>
+    <text x="50" y="88"><tspan class="var">reranker_config=Configure.Reranker.</tspan><tspan class="fn">transformers</tspan><tspan class="var">(),</tspan></text>
+    <text x="50" y="110"><tspan class="var">properties=[</tspan></text>
+    <text x="80" y="132"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"place"</tspan><tspan class="var">,        vectorize_property_name=</tspan><tspan class="num">True</tspan><tspan class="var">, data_type=DataType.TEXT),</tspan></text>
+    <text x="80" y="154"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"description"</tspan><tspan class="var">,  vectorize_property_name=</tspan><tspan class="num">True</tspan><tspan class="var">, data_type=DataType.TEXT),</tspan></text>
+    <text x="80" y="176"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"budget"</tspan><tspan class="var">,       vectorize_property_name=</tspan><tspan class="num">True</tspan><tspan class="var">, data_type=DataType.TEXT),</tspan></text>
+    <text x="80" y="198"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"user_ratings"</tspan><tspan class="var">, data_type=DataType.NUMBER),</tspan></text>
+    <text x="80" y="220"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"last_updated"</tspan><tspan class="var">, data_type=DataType.DATE),</tspan></text>
+    <text x="50" y="242"><tspan class="var">])</tspan></text>
+  </g>
+
+  <!-- Side notes -->
+  <rect x="880" y="600" width="770" height="510" rx="14" fill="#2c3a52"/>
+  <text x="910" y="640" font-size="22" font-weight="800" fill="#ffd86b">Key concepts to remember</text>
+
+  <text x="910" y="680" font-size="16" fill="#ffffff"><tspan font-weight="800">Collection</tspan> = group of indexed objects (Weaviate's "table").</text>
+  <text x="910" y="715" font-size="16" fill="#ffffff"><tspan font-weight="800">NamedVectors</tspan> = one collection can hold multiple vectorizations.</text>
+  <text x="910" y="750" font-size="16" fill="#ffffff"><tspan font-weight="800">source_properties</tspan> = which fields get concatenated &amp; embedded.</text>
+  <text x="910" y="785" font-size="16" fill="#ffffff"><tspan font-weight="800">vectorize_property_name=True</tspan> &#8594; the property <tspan font-style="italic">name</tspan> is prefixed</text>
+  <text x="910" y="808" font-size="16" fill="#ffffff">before its value when embedding (helps disambiguate values</text>
+  <text x="910" y="831" font-size="16" fill="#ffffff">like "Moderate" by giving them the context "budget: Moderate").</text>
+
+  <text x="910" y="870" font-size="16" fill="#ffffff"><tspan font-weight="800">DataType</tspan> options used: <tspan class="code" fill="#ffd86b">TEXT, NUMBER, DATE</tspan>.</text>
+  <text x="910" y="905" font-size="16" fill="#ffffff">Not every property needs vectorization — numbers and dates</text>
+  <text x="910" y="928" font-size="16" fill="#ffffff">are typically left structured for <tspan font-style="italic">filtering</tspan>, not search.</text>
+
+  <text x="910" y="970" font-size="16" fill="#ffffff"><tspan font-weight="800">reranker_config</tspan> attaches a cross-encoder reranker module.</text>
+  <text x="910" y="1005" font-size="16" fill="#ffffff">Re-creating an existing collection <tspan class="code" fill="#ffd86b">raises an exception</tspan> — always</text>
+  <text x="910" y="1028" font-size="16" fill="#ffffff">guard with <tspan class="code" fill="#ffd86b">client.collections.exists(name)</tspan> first.</text>
+
+  <text x="910" y="1070" font-size="16" fill="#ffffff">List all collections: <tspan class="code" fill="#ffd86b">client.collections.list_all().keys()</tspan></text>
+
+  <!-- ===== SECTION 3: INSERT DATA ===== -->
+  <text x="50" y="1170" class="section">3. Insert data — batch + UUID for idempotency</text>
+
+  <rect x="50" y="1190" width="1600" height="270" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+  <g transform="translate(80,1225)" class="code" font-size="15">
+    <text x="0" y="0"><tspan class="kw">with</tspan><tspan class="var"> collection.batch.</tspan><tspan class="fn">fixed_size</tspan><tspan class="var">(batch_size=</tspan><tspan class="num">1</tspan><tspan class="var">, concurrent_requests=</tspan><tspan class="num">1</tspan><tspan class="var">) </tspan><tspan class="kw">as</tspan><tspan class="var"> batch:</tspan></text>
+    <text x="30" y="26"><tspan class="kw">for</tspan><tspan class="var"> document </tspan><tspan class="kw">in</tspan><tspan class="var"> tqdm(data):</tspan></text>
+    <text x="60" y="52"><tspan class="var">uuid = </tspan><tspan class="fn">generate_uuid5</tspan><tspan class="var">(document)</tspan><tspan class="cmt">           # deterministic ID &#8594; prevents duplicates</tspan></text>
+    <text x="60" y="78"><tspan class="var">batch.</tspan><tspan class="fn">add_object</tspan><tspan class="var">(properties=document, uuid=uuid)</tspan></text>
+
+    <text x="0" y="124"><tspan class="cmt"># What happens behind the scenes for every add_object():</tspan></text>
+    <text x="0" y="146"><tspan class="cmt">#   1. source_properties are concatenated and embedded via text2vec-transformers</tspan></text>
+    <text x="0" y="168"><tspan class="cmt">#   2. The vector is inserted into the HNSW graph (incremental index update)</tspan></text>
+    <text x="0" y="190"><tspan class="cmt">#   3. Inverted index + filter index updated for BM25 / metadata queries</tspan></text>
+
+    <text x="0" y="226"><tspan class="fn">len</tspan><tspan class="var">(collection)</tspan><tspan class="cmt">                                # &#8594; current object count</tspan></text>
+  </g>
+
+  <!-- ===== SECTION 4: FILTERS ===== -->
+  <text x="50" y="1520" class="section">4. Filters — strict, structured pre-filter</text>
+
+  <rect x="50" y="1540" width="1600" height="160" rx="14" fill="#fef3c7" stroke="#fbd24a"/>
+  <g transform="translate(80,1575)" class="code" font-size="15">
+    <text x="0" y="0"><tspan class="fn">Filter</tspan><tspan class="var">.</tspan><tspan class="fn">by_property</tspan><tspan class="var">(</tspan><tspan class="str">'user_ratings'</tspan><tspan class="var">).</tspan><tspan class="fn">greater_or_equal</tspan><tspan class="var">(</tspan><tspan class="num">3.5</tspan><tspan class="var">)</tspan><tspan class="cmt">         # numeric comparison</tspan></text>
+    <text x="0" y="28"><tspan class="fn">Filter</tspan><tspan class="var">.</tspan><tspan class="fn">by_property</tspan><tspan class="var">(</tspan><tspan class="str">'budget'</tspan><tspan class="var">).</tspan><tspan class="fn">equal</tspan><tspan class="var">(</tspan><tspan class="str">'Low'</tspan><tspan class="var">)</tspan><tspan class="cmt">                          # exact match</tspan></text>
+    <text x="0" y="56"><tspan class="fn">Filter</tspan><tspan class="var">.</tspan><tspan class="fn">by_property</tspan><tspan class="var">(</tspan><tspan class="str">'budget'</tspan><tspan class="var">).</tspan><tspan class="fn">contains_any</tspan><tspan class="var">([</tspan><tspan class="str">'Low'</tspan><tspan class="var">, </tspan><tspan class="str">'Moderate'</tspan><tspan class="var">])</tspan><tspan class="cmt">       # IN-style match</tspan></text>
+    <text x="0" y="100"><tspan class="cmt"># Pass via `filters=...` to any query. Filters run BEFORE scoring &#8594; cheap.</tspan></text>
+  </g>
+
+  <!-- ===== SECTION 5: FOUR QUERY MODES ===== -->
+  <text x="50" y="1760" class="section">5. Four ways to query the collection</text>
+
+  <!-- Mode a: near_text -->
+  <g transform="translate(50,1790)">
+    <rect width="790" height="280" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="20" font-weight="800" fill="#2c3a52">a) Semantic search — <tspan class="code" font-size="16" fill="#3aa97a">near_text()</tspan></text>
+    <g transform="translate(20,60)" class="code" font-size="13">
+      <text x="0" y="20"><tspan class="var">result = collection.query.</tspan><tspan class="fn">near_text</tspan><tspan class="var">(</tspan></text>
+      <text x="30" y="42"><tspan class="var">query=</tspan><tspan class="str">'I want suggestions to travel during Winter...'</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="64"><tspan class="var">filters=</tspan><tspan class="fn">Filter</tspan><tspan class="var">.</tspan><tspan class="fn">by_property</tspan><tspan class="var">(</tspan><tspan class="str">'budget'</tspan><tspan class="var">).</tspan><tspan class="fn">equal</tspan><tspan class="var">(</tspan><tspan class="str">'Low'</tspan><tspan class="var">),</tspan></text>
+      <text x="30" y="86"><tspan class="var">limit=</tspan><tspan class="num">4</tspan><tspan class="var">,</tspan></text>
+      <text x="0" y="108"><tspan class="var">)</tspan></text>
+      <text x="0" y="142"><tspan class="kw">for</tspan><tspan class="var"> obj </tspan><tspan class="kw">in</tspan><tspan class="var"> result.objects:</tspan></text>
+      <text x="30" y="164"><tspan class="fn">print</tspan><tspan class="var">(obj.properties)</tspan></text>
+    </g>
+    <text x="20" y="248" font-size="13" fill="#666" font-style="italic">Embeds your query &#8594; HNSW returns vectors closest by cosine.</text>
+    <text x="20" y="268" font-size="13" fill="#666" font-style="italic">Filters narrow the candidate set before the vector scan.</text>
+  </g>
+
+  <!-- Mode b: bm25 -->
+  <g transform="translate(860,1790)">
+    <rect width="790" height="280" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="20" font-weight="800" fill="#2c3a52">b) Keyword search — <tspan class="code" font-size="16" fill="#3aa97a">bm25()</tspan></text>
+    <g transform="translate(20,60)" class="code" font-size="13">
+      <text x="0" y="20"><tspan class="var">result = collection.query.</tspan><tspan class="fn">bm25</tspan><tspan class="var">(</tspan></text>
+      <text x="30" y="42"><tspan class="var">query=</tspan><tspan class="str">'Winter cheap places'</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="64"><tspan class="var">filters=</tspan><tspan class="fn">Filter</tspan><tspan class="var">.</tspan><tspan class="fn">by_property</tspan><tspan class="var">(</tspan><tspan class="str">'budget'</tspan><tspan class="var">)</tspan></text>
+      <text x="65" y="86"><tspan class="var">.</tspan><tspan class="fn">contains_any</tspan><tspan class="var">([</tspan><tspan class="str">'Low'</tspan><tspan class="var">,</tspan><tspan class="str">'Moderate'</tspan><tspan class="var">]),</tspan></text>
+      <text x="30" y="108"><tspan class="var">limit=</tspan><tspan class="num">4</tspan><tspan class="var">,</tspan></text>
+      <text x="0" y="130"><tspan class="var">)</tspan></text>
+    </g>
+    <text x="20" y="220" font-size="13" fill="#666" font-style="italic">Pure lexical scoring (BM25 on the inverted index).</text>
+    <text x="20" y="240" font-size="13" fill="#666" font-style="italic">No embedding step &#8594; very fast, but blind to synonyms.</text>
+    <text x="20" y="268" font-size="13" fill="#666" font-style="italic">Same args as near_text: query, filters, limit.</text>
+  </g>
+
+  <!-- Mode c: hybrid -->
+  <g transform="translate(50,2090)">
+    <rect width="790" height="280" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="20" font-weight="800" fill="#2c3a52">c) Hybrid (RRF) — <tspan class="code" font-size="16" fill="#3aa97a">hybrid(alpha=)</tspan></text>
+    <g transform="translate(20,60)" class="code" font-size="13">
+      <text x="0" y="20"><tspan class="var">result = collection.query.</tspan><tspan class="fn">hybrid</tspan><tspan class="var">(</tspan></text>
+      <text x="30" y="42"><tspan class="var">query=</tspan><tspan class="str">'Winter cheap places'</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="64"><tspan class="var">filters=</tspan><tspan class="fn">Filter</tspan><tspan class="var">.</tspan><tspan class="fn">by_property</tspan><tspan class="var">(</tspan><tspan class="str">'budget'</tspan><tspan class="var">)</tspan></text>
+      <text x="65" y="86"><tspan class="var">.</tspan><tspan class="fn">contains_any</tspan><tspan class="var">([</tspan><tspan class="str">'Low'</tspan><tspan class="var">,</tspan><tspan class="str">'Moderate'</tspan><tspan class="var">]),</tspan></text>
+      <text x="30" y="108"><tspan class="var">alpha=</tspan><tspan class="num">0.3</tspan><tspan class="var">,</tspan><tspan class="cmt">                           # 30% vector + 70% BM25</tspan></text>
+      <text x="30" y="130"><tspan class="var">limit=</tspan><tspan class="num">4</tspan><tspan class="var">,</tspan></text>
+      <text x="0" y="152"><tspan class="var">)</tspan></text>
+    </g>
+    <text x="20" y="216" font-size="13" fill="#666" font-style="italic">alpha = 0 &#8594; pure BM25  |  alpha = 1 &#8594; pure vector</text>
+    <text x="20" y="240" font-size="13" fill="#666" font-style="italic">Under the hood: runs both, merges with Reciprocal Rank Fusion.</text>
+    <text x="20" y="268" font-size="13" fill="#666" font-style="italic">Good default: alpha=0.5; tune per dataset.</text>
+  </g>
+
+  <!-- Mode d: rerank -->
+  <g transform="translate(860,2090)">
+    <rect width="790" height="280" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="20" font-weight="800" fill="#2c3a52">d) Reranking — <tspan class="code" font-size="16" fill="#3aa97a">rerank=Rerank(...)</tspan></text>
+    <g transform="translate(20,60)" class="code" font-size="13">
+      <text x="0" y="20"><tspan class="kw">from</tspan><tspan class="var"> weaviate.classes.query </tspan><tspan class="kw">import</tspan><tspan class="var"> Rerank</tspan></text>
+      <text x="0" y="44"><tspan class="var">response = collection.query.</tspan><tspan class="fn">near_text</tspan><tspan class="var">(</tspan></text>
+      <text x="30" y="66"><tspan class="var">query=</tspan><tspan class="str">'Winter cheap fun places'</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="88"><tspan class="var">limit=</tspan><tspan class="num">5</tspan><tspan class="var">,</tspan></text>
+      <text x="30" y="110"><tspan class="var">rerank=</tspan><tspan class="fn">Rerank</tspan><tspan class="var">(</tspan></text>
+      <text x="60" y="132"><tspan class="var">prop=</tspan><tspan class="str">"attractions"</tspan><tspan class="var">,</tspan><tspan class="cmt">              # field to rerank on</tspan></text>
+      <text x="60" y="154"><tspan class="var">query=</tspan><tspan class="str">"Fun places"</tspan><tspan class="cmt">                # optional override</tspan></text>
+      <text x="30" y="176"><tspan class="var">)</tspan></text>
+      <text x="0" y="198"><tspan class="var">)</tspan></text>
+    </g>
+    <text x="20" y="240" font-size="13" fill="#666" font-style="italic">Second-stage cross-encoder reorders the top-k from any search.</text>
+    <text x="20" y="265" font-size="13" fill="#666" font-style="italic">Works with near_text, bm25, hybrid — just add the rerank= arg.</text>
+  </g>
+
+  <!-- ===== SECTION 6: RESULT OBJECT + WRAP-UP ===== -->
+  <text x="50" y="2430" class="section">6. Result object &amp; closing the client</text>
+
+  <rect x="50" y="2450" width="800" height="220" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+  <g transform="translate(80,2485)" class="code" font-size="15">
+    <text x="0" y="0"><tspan class="var">result</tspan><tspan class="cmt">                              # QueryReturn object</tspan></text>
+    <text x="0" y="26"><tspan class="var">result.objects</tspan><tspan class="cmt">                      # list of returned items</tspan></text>
+    <text x="0" y="52"><tspan class="var">obj = result.objects[</tspan><tspan class="num">0</tspan><tspan class="var">]</tspan></text>
+    <text x="0" y="78"><tspan class="var">obj.properties</tspan><tspan class="cmt">                      # dict of property values</tspan></text>
+    <text x="0" y="118"><tspan class="cmt"># Always release resources at the end:</tspan></text>
+    <text x="0" y="144"><tspan class="var">client.</tspan><tspan class="fn">close</tspan><tspan class="var">()</tspan></text>
+  </g>
+
+  <!-- 2026 quick notes -->
+  <rect x="880" y="2450" width="770" height="220" rx="14" fill="#1a2438"/>
+  <text x="910" y="2490" font-size="20" font-weight="800" fill="#ffd86b">Things to remember for the assignment</text>
+  <text x="910" y="2522" font-size="14" fill="#ffffff">&#10003; Guard every <tspan class="code" fill="#ffd86b">collections.create()</tspan> with <tspan class="code" fill="#ffd86b">.exists()</tspan> first</text>
+  <text x="910" y="2546" font-size="14" fill="#ffffff">&#10003; Use <tspan class="code" fill="#ffd86b">generate_uuid5(doc)</tspan> for deterministic, dedupable IDs</text>
+  <text x="910" y="2570" font-size="14" fill="#ffffff">&#10003; Pick <tspan class="code" fill="#ffd86b">source_properties</tspan> carefully — only what's worth embedding</text>
+  <text x="910" y="2594" font-size="14" fill="#ffffff">&#10003; Numeric / date fields &#8594; keep them as <tspan class="code" fill="#ffd86b">NUMBER</tspan>/<tspan class="code" fill="#ffd86b">DATE</tspan> for filtering</text>
+  <text x="910" y="2618" font-size="14" fill="#ffffff">&#10003; Every query supports <tspan class="code" fill="#ffd86b">query, filters, limit</tspan> &#8212; same shape</text>
+  <text x="910" y="2642" font-size="14" fill="#ffffff">&#10003; Reranker is a drop-in <tspan class="code" fill="#ffd86b">rerank=</tspan> kwarg, works on all four modes</text>
+</svg>

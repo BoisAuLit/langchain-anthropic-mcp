@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1700" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="80" font-size="58" font-weight="800" fill="#111">Measuring Vector Distance</text>
+
+  <!-- Outer light gray panel -->
+  <rect x="40" y="140" width="1620" height="730" rx="20" fill="#eef0f2"/>
+
+  <!-- ===================== ROW 1: COSINE SIMILARITY ===================== -->
+  <!-- Tile with axes -->
+  <rect x="100" y="200" width="270" height="240" rx="16" fill="#ffffff"/>
+  <g transform="translate(140,230)">
+    <!-- axes -->
+    <line x1="20" y1="180" x2="20" y2="0" stroke="#1a2438" stroke-width="3"/>
+    <polygon points="20,0 14,12 26,12" fill="#1a2438"/>
+    <line x1="20" y1="180" x2="200" y2="180" stroke="#1a2438" stroke-width="3"/>
+    <polygon points="200,180 188,174 188,186" fill="#1a2438"/>
+    <!-- gray dots -->
+    <g fill="#d0d4da">
+      <circle cx="60"  cy="40"  r="4"/>
+      <circle cx="120" cy="70"  r="4"/>
+      <circle cx="160" cy="100" r="4"/>
+      <circle cx="100" cy="130" r="4"/>
+      <circle cx="60"  cy="100" r="4"/>
+      <circle cx="170" cy="60"  r="4"/>
+    </g>
+    <!-- dashed vector to teal dot -->
+    <line x1="20" y1="180" x2="170" y2="30" stroke="#1a2438" stroke-width="2.5" stroke-dasharray="6 5"/>
+    <!-- red dot at origin -->
+    <circle cx="30" cy="170" r="6" fill="#ef5b6b"/>
+    <!-- teal dot at end -->
+    <circle cx="170" cy="30" r="7" fill="#1eb6c8"/>
+    <!-- theta arc -->
+    <path d="M55 180 A 35 35 0 0 0 45 155" fill="none" stroke="#1a2438" stroke-width="2"/>
+    <text x="58" y="172" font-style="italic" font-size="18" fill="#1a2438">&#952;</text>
+  </g>
+  <text x="235" y="490" text-anchor="middle" font-size="28" font-weight="800" fill="#111">Cosine Similarity</text>
+
+  <!-- Navy pills row -->
+  <g>
+    <rect x="640"  y="220" width="180" height="70" rx="10" fill="#2c3a52"/>
+    <text x="730" y="268" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="32" fill="#ffffff">-1</text>
+
+    <rect x="970"  y="220" width="180" height="70" rx="10" fill="#2c3a52"/>
+    <text x="1060" y="268" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="32" fill="#ffffff">0</text>
+
+    <rect x="1300" y="220" width="180" height="70" rx="10" fill="#2c3a52"/>
+    <text x="1390" y="268" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="32" fill="#ffffff">1</text>
+  </g>
+
+  <!-- Captions row 1 -->
+  <text x="730"  y="335" text-anchor="middle" font-size="24" fill="#111">Opposite</text>
+  <text x="730"  y="368" text-anchor="middle" font-size="24" fill="#111">direction</text>
+
+  <text x="1060" y="350" text-anchor="middle" font-size="24" fill="#111">Perpendicular</text>
+
+  <text x="1390" y="335" text-anchor="middle" font-size="24" fill="#111">Same</text>
+  <text x="1390" y="368" text-anchor="middle" font-size="24" fill="#111">direction</text>
+
+  <!-- ===================== CENTER CORAL PILL ===================== -->
+  <rect x="540" y="440" width="1080" height="90" rx="14" fill="#ef5b6b"/>
+  <text x="1080" y="500" text-anchor="middle" font-size="34" fill="#ffffff">Higher values, closer vectors</text>
+
+  <!-- ===================== ROW 2: DOT PRODUCT ===================== -->
+  <!-- Tile with axes -->
+  <rect x="100" y="560" width="270" height="240" rx="16" fill="#ffffff"/>
+  <g transform="translate(140,590)">
+    <!-- axes -->
+    <line x1="20" y1="180" x2="20" y2="0" stroke="#1a2438" stroke-width="3"/>
+    <polygon points="20,0 14,12 26,12" fill="#1a2438"/>
+    <line x1="20" y1="180" x2="200" y2="180" stroke="#1a2438" stroke-width="3"/>
+    <polygon points="200,180 188,174 188,186" fill="#1a2438"/>
+    <!-- gray dots -->
+    <g fill="#d0d4da">
+      <circle cx="60"  cy="60"  r="4"/>
+      <circle cx="120" cy="80"  r="4"/>
+      <circle cx="160" cy="40"  r="4"/>
+      <circle cx="80"  cy="110" r="4"/>
+      <circle cx="170" cy="110" r="4"/>
+    </g>
+    <!-- red vector (steep) -->
+    <line x1="20" y1="180" x2="100" y2="40" stroke="#ef5b6b" stroke-width="4"/>
+    <circle cx="100" cy="40" r="8" fill="#ef5b6b"/>
+    <!-- teal vector (shallow) -->
+    <line x1="20" y1="180" x2="190" y2="140" stroke="#1eb6c8" stroke-width="4" stroke-dasharray="8 5"/>
+    <circle cx="190" cy="140" r="8" fill="#1eb6c8"/>
+    <!-- projection from red to teal (perpendicular dashed) -->
+    <line x1="100" y1="40" x2="142" y2="129" stroke="#ef5b6b" stroke-width="2" stroke-dasharray="4 4"/>
+  </g>
+  <text x="235" y="850" text-anchor="middle" font-size="28" font-weight="800" fill="#111">Dot product</text>
+
+  <!-- Navy pills row 2 -->
+  <g>
+    <rect x="640"  y="600" width="220" height="70" rx="10" fill="#2c3a52"/>
+    <text x="750" y="648" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="28" font-weight="800" fill="#ffffff">Negative</text>
+
+    <rect x="970"  y="600" width="180" height="70" rx="10" fill="#2c3a52"/>
+    <text x="1060" y="648" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="32" fill="#ffffff">0</text>
+
+    <rect x="1280" y="600" width="220" height="70" rx="10" fill="#2c3a52"/>
+    <text x="1390" y="648" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="28" font-weight="800" fill="#ffffff">Positive</text>
+  </g>
+
+  <!-- Captions row 2 -->
+  <text x="750"  y="715" text-anchor="middle" font-size="24" fill="#111">Opposite</text>
+  <text x="750"  y="748" text-anchor="middle" font-size="24" fill="#111">direction</text>
+
+  <text x="1060" y="730" text-anchor="middle" font-size="24" fill="#111">Perpendicular</text>
+
+  <text x="1390" y="715" text-anchor="middle" font-size="24" fill="#111">Same</text>
+  <text x="1390" y="748" text-anchor="middle" font-size="24" fill="#111">direction</text>
+</svg>

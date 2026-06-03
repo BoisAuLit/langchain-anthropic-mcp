@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 750" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1500" height="750" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="70" font-size="50" font-weight="800" fill="#111">Reciprocal rank</text>
+
+  <!-- ===================== LEFT PANEL ===================== -->
+  <rect x="40" y="110" width="620" height="370" rx="22" fill="#f1f3f5"/>
+
+  <text x="100" y="175" font-size="24" fill="#111">Measures the rank of the first</text>
+  <text x="100" y="208" font-size="24" fill="#111">relevant document in the</text>
+  <text x="100" y="241" font-size="24" fill="#111">returned list</text>
+
+  <!-- Coral formula box -->
+  <rect x="80" y="300" width="540" height="80" rx="12" fill="#ef5b6b"/>
+  <text x="350" y="350" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="26" fill="#ffffff">Reciprocal Rank = 1 / Rank</text>
+
+  <!-- ===================== RIGHT EXAMPLES ===================== -->
+  <text x="720" y="170" font-size="32" font-weight="800" fill="#111">First relevant at  rank 1</text>
+  <rect x="1280" y="135" width="160" height="60" rx="14" fill="#e8ecf0"/>
+  <text x="1360" y="178" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="28" fill="#111">1.0</text>
+
+  <text x="720" y="295" font-size="32" font-weight="800" fill="#111">First relevant at  rank 2</text>
+  <rect x="1280" y="260" width="160" height="60" rx="14" fill="#e8ecf0"/>
+  <text x="1360" y="303" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="28" fill="#111">0.5</text>
+
+  <text x="720" y="420" font-size="32" font-weight="800" fill="#111">First relevant at  rank 4</text>
+  <rect x="1280" y="385" width="160" height="60" rx="14" fill="#e8ecf0"/>
+  <text x="1360" y="428" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="28" fill="#111">0.25</text>
+
+  <!-- ===================== NAVY BARS ===================== -->
+  <rect x="40" y="540" width="1400" height="90" rx="14" fill="#2c3a52"/>
+  <text x="740" y="595" text-anchor="middle" font-size="26" font-weight="800" fill="#ffffff">The later the first relevant document appears, the worse the reciprocal rank</text>
+
+  <rect x="40" y="650" width="1400" height="90" rx="14" fill="#2c3a52"/>
+  <text x="740" y="705" text-anchor="middle" font-size="26" font-weight="800" fill="#ffffff">Mean Reciprocal Rank (MRR) averages over many prompt</text>
+</svg>

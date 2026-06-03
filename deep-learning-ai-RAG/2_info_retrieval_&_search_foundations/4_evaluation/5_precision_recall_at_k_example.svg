@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 850" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1500" height="850" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="80" font-size="50" font-weight="800" fill="#111">Example</text>
+
+  <!-- ===================== TABLE ===================== -->
+  <g transform="translate(140,140)">
+    <!-- header -->
+    <rect x="0"   y="0" width="140" height="50" fill="#2c3a52"/>
+    <rect x="140" y="0" width="280" height="50" fill="#2c3a52"/>
+    <text x="70"  y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Rank</text>
+    <text x="280" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Relevant</text>
+
+    <!-- Row 1 relevant -->
+    <rect x="0"   y="50" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="50" width="280" height="50" fill="#bfe0bf" stroke="#cdd1d8"/>
+    <text x="70"  y="84" text-anchor="middle" font-size="22" font-weight="800" fill="#111">1</text>
+    <text x="280" y="84" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="20" font-weight="700" fill="#111">relevant</text>
+
+    <!-- Row 2 - -->
+    <rect x="0"   y="100" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="100" width="280" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <text x="70"  y="134" text-anchor="middle" font-size="22" font-weight="800" fill="#111">2</text>
+    <text x="280" y="134" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="22" fill="#111">-</text>
+
+    <!-- Row 3 - -->
+    <rect x="0"   y="150" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="150" width="280" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <text x="70"  y="184" text-anchor="middle" font-size="22" font-weight="800" fill="#111">3</text>
+    <text x="280" y="184" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="22" fill="#111">-</text>
+
+    <!-- Row 4 relevant -->
+    <rect x="0"   y="200" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="200" width="280" height="50" fill="#bfe0bf" stroke="#cdd1d8"/>
+    <text x="70"  y="234" text-anchor="middle" font-size="22" font-weight="800" fill="#111">4</text>
+    <text x="280" y="234" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="20" font-weight="700" fill="#111">relevant</text>
+
+    <!-- Row 5 - -->
+    <rect x="0"   y="250" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="250" width="280" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <text x="70"  y="284" text-anchor="middle" font-size="22" font-weight="800" fill="#111">5</text>
+    <text x="280" y="284" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="22" fill="#111">-</text>
+
+    <!-- Row 6 relevant -->
+    <rect x="0"   y="300" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="300" width="280" height="50" fill="#bfe0bf" stroke="#cdd1d8"/>
+    <text x="70"  y="334" text-anchor="middle" font-size="22" font-weight="800" fill="#111">6</text>
+    <text x="280" y="334" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="20" font-weight="700" fill="#111">relevant</text>
+
+    <!-- Row 7 relevant -->
+    <rect x="0"   y="350" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="350" width="280" height="50" fill="#bfe0bf" stroke="#cdd1d8"/>
+    <text x="70"  y="384" text-anchor="middle" font-size="22" font-weight="800" fill="#111">7</text>
+    <text x="280" y="384" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="20" font-weight="700" fill="#111">relevant</text>
+
+    <!-- Row 8 - -->
+    <rect x="0"   y="400" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="400" width="280" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <text x="70"  y="434" text-anchor="middle" font-size="22" font-weight="800" fill="#111">8</text>
+    <text x="280" y="434" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="22" fill="#111">-</text>
+
+    <!-- Row 9 relevant -->
+    <rect x="0"   y="450" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="450" width="280" height="50" fill="#bfe0bf" stroke="#cdd1d8"/>
+    <text x="70"  y="484" text-anchor="middle" font-size="22" font-weight="800" fill="#111">9</text>
+    <text x="280" y="484" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="20" font-weight="700" fill="#111">relevant</text>
+
+    <!-- Row 10 relevant -->
+    <rect x="0"   y="500" width="140" height="50" fill="#ffffff" stroke="#cdd1d8"/>
+    <rect x="140" y="500" width="280" height="50" fill="#bfe0bf" stroke="#cdd1d8"/>
+    <text x="70"  y="534" text-anchor="middle" font-size="22" font-weight="800" fill="#111">10</text>
+    <text x="280" y="534" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="20" font-weight="700" fill="#111">relevant</text>
+  </g>
+
+  <!-- ===================== METRICS (right) ===================== -->
+  <!-- Precision @5 -->
+  <text x="800" y="180" font-size="36" font-weight="800" fill="#111">Precision @5</text>
+  <text x="800" y="218" font-size="22" fill="#222">2 out of 5</text>
+  <rect x="1110" y="150" width="180" height="80" rx="14" fill="#e8ecf0"/>
+  <text x="1200" y="200" text-anchor="middle" font-size="34" font-weight="800" fill="#111">40%</text>
+
+  <!-- Precision @10 -->
+  <text x="800" y="335" font-size="36" font-weight="800" fill="#111">Precision @10</text>
+  <text x="800" y="373" font-size="22" fill="#222">6 out of 10</text>
+  <rect x="1110" y="305" width="180" height="80" rx="14" fill="#e8ecf0"/>
+  <text x="1200" y="355" text-anchor="middle" font-size="34" font-weight="800" fill="#111">60%</text>
+
+  <!-- Recall @10 -->
+  <text x="800" y="490" font-size="36" font-weight="800" fill="#111">Recall@10</text>
+  <text x="800" y="528" font-size="22" fill="#222">6 out of 8 total</text>
+  <text x="800" y="558" font-size="22" fill="#222">relevant</text>
+  <rect x="1110" y="475" width="180" height="80" rx="14" fill="#e8ecf0"/>
+  <text x="1200" y="525" text-anchor="middle" font-size="34" font-weight="800" fill="#111">75%</text>
+
+  <!-- ===================== NAVY TAKEAWAY BOX ===================== -->
+  <rect x="800" y="620" width="600" height="200" rx="18" fill="#2c3a52"/>
+  <text x="1100" y="685" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">Top-5 or Top-1 is stricter</text>
+  <text x="1100" y="765" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">Top-5 to Top-15 often used</text>
+</svg>

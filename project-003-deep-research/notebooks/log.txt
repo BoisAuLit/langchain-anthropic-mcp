@@ -1,111 +1,121 @@
 ---------------------------------------------------------------------------
-NotFoundError                             Traceback (most recent call last)
-Cell In[14], line 17
-      5 # Example brief
-      6 research_brief = """I want to identify and evaluate the coffee shops in San Francisco that are considered the best based specifically  
-      7 on coffee quality. My research should focus on analyzing and comparing coffee shops within the San Francisco area, 
-      8 using coffee quality as the primary criterion. I am open regarding methods of assessing coffee quality (e.g.,      
-   (...)     14 the top coffee shops in San Francisco, emphasizing their coffee quality according to the latest available data as  
-     15 of July 2025."""
----> 17 result = researcher_agent.invoke(
-     18     {"researcher_messages": [HumanMessage(content=f"{research_brief}.")]}
-     19 )
-     20 format_messages(result["researcher_messages"])
+OverloadedError                           Traceback (most recent call last)
+Cell In[6], line 16
+      3 from langchain_core.messages import HumanMessage
+      5 research_brief = """I want to identify and evaluate the coffee shops in San Francisco that are considered the best based specifically  
+      6 on coffee quality. My research should focus on analyzing and comparing coffee shops within the San Francisco area, 
+      7 using coffee quality as the primary criterion. I am open regarding methods of assessing coffee quality (e.g.,      
+   (...)     13 the top coffee shops in San Francisco, emphasizing their coffee quality according to the latest available data as  
+     14 of July 2025."""
+---> 16 result = await agent_mcp.ainvoke(
+     17     {"researcher_messages": [HumanMessage(content=f"{research_brief}.")]}
+     18 )
+     19 format_messages(result["researcher_messages"])
 
-File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/main.py:3880, in Pregel.invoke(self, input, config, context, stream_mode, print_mode, output_keys, interrupt_before, interrupt_after, durability, control, version, **kwargs)
-   3877             chunks.append(chunk)
-   3878 else:
-   3879     # v1: collect interrupts from updates stream
--> 3880     for chunk in self.stream(
-   3881         input,
-   3882         config,
-   3883         context=context,
-   3884         stream_mode=(
-   3885             ["updates", "values"] if stream_mode == "values" else stream_mode
-   3886         ),
-   3887         print_mode=print_mode,
-   3888         output_keys=output_keys,
-   3889         interrupt_before=interrupt_before,
-   3890         interrupt_after=interrupt_after,
-   3891         durability=durability,
-   3892         control=control,
-   3893         **kwargs,
-   3894     ):
-   3895         if stream_mode == "values":
-   3896             if len(chunk) == 2:
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/main.py:4057, in Pregel.ainvoke(self, input, config, context, stream_mode, print_mode, output_keys, interrupt_before, interrupt_after, durability, control, version, **kwargs)
+   4054             chunks.append(chunk)
+   4055 else:
+   4056     # v1: collect interrupts from updates stream
+-> 4057     async for chunk in self.astream(
+   4058         input,
+   4059         config,
+   4060         context=context,
+   4061         stream_mode=(
+   4062             ["updates", "values"] if stream_mode == "values" else stream_mode
+   4063         ),
+   4064         print_mode=print_mode,
+   4065         output_keys=output_keys,
+   4066         interrupt_before=interrupt_before,
+   4067         interrupt_after=interrupt_after,
+   4068         durability=durability,
+   4069         control=control,
+   4070         **kwargs,
+   4071     ):
+   4072         if stream_mode == "values":
+   4073             if len(chunk) == 2:
 
-File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/main.py:2936, in Pregel.stream(self, input, config, context, stream_mode, print_mode, output_keys, interrupt_before, interrupt_after, durability, control, subgraphs, debug, version, **kwargs)
-   2934 for task in loop.match_cached_writes():
-   2935     loop.output_writes(task.id, task.writes, cached=True)
--> 2936 for _ in runner.tick(
-   2937     [t for t in loop.tasks.values() if not t.writes],
-   2938     timeout=self.step_timeout,
-   2939     get_waiter=get_waiter,
-   2940     schedule_task=loop.accept_push,
-   2941 ):
-   2942     # emit output
-   2943     yield from _output(
-   2944         stream_mode,
-   2945         print_mode,
-   (...)   2951         _state_mapper,
-   2952     )
-   2953 loop.after_tick()
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/main.py:3407, in Pregel.astream(self, input, config, context, stream_mode, print_mode, output_keys, interrupt_before, interrupt_after, durability, control, subgraphs, debug, version, **kwargs)
+   3405 for task in await loop.amatch_cached_writes():
+   3406     loop.output_writes(task.id, task.writes, cached=True)
+-> 3407 async for _ in runner.atick(
+   3408     [t for t in loop.tasks.values() if not t.writes],
+   3409     timeout=self.step_timeout,
+   3410     get_waiter=get_waiter,
+   3411     schedule_task=loop.aaccept_push,
+   3412 ):
+   3413     # emit output
+   3414     for o in _output(
+   3415         stream_mode,
+   3416         print_mode,
+   (...)   3422         _state_mapper,
+   3423     ):
+   3424         yield o
 
-File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/_runner.py:207, in PregelRunner.tick(self, tasks, reraise, timeout, retry_policy, get_waiter, schedule_task)
-    205 scheduled_error_handler = False
-    206 try:
---> 207     run_with_retry(
-    208         t,
-    209         retry_policy,
-    210         configurable={
-    211             CONFIG_KEY_CALL: partial(
-    212                 _call,
-    213                 weakref.ref(t),
-    214                 retry_policy=retry_policy,
-    215                 futures=weakref.ref(futures),
-    216                 schedule_task=schedule_task,
-    217                 submit=self.submit,
-    218             ),
-    219         },
-    220     )
-    221     self.commit(t, None)
-    222 except Exception as exc:
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/_runner.py:396, in PregelRunner.atick(self, tasks, reraise, timeout, retry_policy, get_waiter, schedule_task)
+    394 scheduled_error_handler = False
+    395 try:
+--> 396     await arun_with_retry(
+    397         t,
+    398         retry_policy,
+    399         stream=self.use_astream,
+    400         configurable={
+    401             CONFIG_KEY_CALL: partial(
+    402                 _acall,
+    403                 weakref.ref(t),
+    404                 stream=self.use_astream,
+    405                 retry_policy=retry_policy,
+    406                 futures=weakref.ref(futures),
+    407                 schedule_task=schedule_task,
+    408                 submit=self.submit,
+    409                 loop=loop,
+    410             ),
+    411         },
+    412     )
+    413     self.commit(t, None)
+    414 except Exception as exc:
 
-File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/_retry.py:585, in run_with_retry(task, retry_policy, configurable)
-    583     task.writes.clear()
-    584     # run the task
---> 585     return task.proc.invoke(task.input, config)
-    586 except ParentCommand as exc:
-    587     ns: str = config[CONF][CONFIG_KEY_CHECKPOINT_NS]
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/pregel/_retry.py:706, in arun_with_retry(task, retry_policy, stream, match_cached_writes, configurable)
+    704             pass
+    705         break
+--> 706     return await task.proc.ainvoke(task.input, config)
+    707 result = await _arun_with_timeout(
+    708     task, config, resolved_timeout, attempt_ctx, stream=stream
+    709 )
+    710 _finish_timed_attempt(config, attempt_ctx)
 
-File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py:684, in RunnableSeq.invoke(self, input, config, **kwargs)
-    682     # run in context
-    683     with set_config_context(config, run) as context:
---> 684         input = context.run(step.invoke, input, config, **kwargs)
-    685 else:
-    686     input = step.invoke(input, config)
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py:733, in RunnableSeq.ainvoke(self, input, config, **kwargs)
+    731     # run in context
+    732     with set_config_context(config, run) as context:
+--> 733         input = await asyncio.create_task(
+    734             step.ainvoke(input, config, **kwargs), context=context
+    735         )
+    736 else:
+    737     input = await step.ainvoke(input, config, **kwargs)
 
-File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py:426, in RunnableCallable.invoke(self, input, config, **kwargs)
-    424         run_manager.on_chain_end(ret)
-    425 else:
---> 426     ret = self.func(*args, **kwargs)
-    427 if self.recurse and isinstance(ret, Runnable):
-    428     return ret.invoke(input, config)
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py:501, in RunnableCallable.ainvoke(self, input, config, **kwargs)
+    499         await run_manager.on_chain_end(ret)
+    500 else:
+--> 501     ret = await self.afunc(*args, **kwargs)
+    502 if self.recurse and isinstance(ret, Runnable):
+    503     return await ret.ainvoke(input, config)
 
-File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/project-003-deep-research/notebooks/../src/deep_research_from_scratch/research_agent.py:44, in llm_call(state)
-     33 def llm_call(state: ResearcherState):
-     34     """Analyze current state and decide on next actions.
-     35 
-     36     The model analyzes the current conversation state and decides whether to:
-   (...)     40     Returns updated state with the model's response.
-     41     """
-     42     return {
-     43         "researcher_messages": [
----> 44             model_with_tools.invoke(
-     45                 [SystemMessage(content=research_agent_prompt)] + state["researcher_messages"]
-     46             )
-     47         ]
-     48     }
+File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/project-003-deep-research/notebooks/../src/deep_research_from_scratch/research_agent_mcp.py:99, in llm_call(state)
+     94 model_with_tools = model.bind_tools(tools)
+     96 # Process user input with system prompt
+     97 return {
+     98     "researcher_messages": [
+---> 99         model_with_tools.invoke(
+    100             [
+    101                 SystemMessage(
+    102                     content=research_agent_prompt_with_mcp.format(
+    103                         date=get_today_str()
+    104                     )
+    105                 )
+    106             ]
+    107             + state["researcher_messages"]
+    108         )
+    109     ]
+    110 }
 
 File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py:5881, in RunnableBindingBase.invoke(self, input, config, **kwargs)
    5874 @override
@@ -253,5 +263,5 @@ File ~/Desktop/tuto/tuto_langchain/official/langchain-langgraph-langsmith/.venv/
    1149     break
    1151 assert response is not None, "could not resolve response (should never happen)"
 
-NotFoundError: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-20250514'}, 'request_id': 'req_011CbEwU2LChiQ7Mc9faF39C'}
-During task with name 'llm_call' and id 'df9ff77a-3d0d-3508-fe02-6c0b525b528a'
+OverloadedError: Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}, 'request_id': 'req_011CbGz8RE9qDfTzyhAD48JV'}
+During task with name 'llm_call' and id '50dcc5f1-5023-f229-3ae5-097a8bb669c8'

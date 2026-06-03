@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="1900" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="80" font-size="58" font-weight="800" fill="#111">Semantic Search</text>
+
+  <!-- ============ DOCUMENTS PANEL ============ -->
+  <rect x="40" y="180" width="380" height="280" rx="22" fill="#f1f3f5"/>
+  <g fill="#2c3a52">
+    <!-- 6 doc tiles -->
+    <g transform="translate(80,210)">
+      <rect width="60" height="80" rx="6"/>
+      <line x1="10" y1="20" x2="50" y2="20" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="34" x2="50" y2="34" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="48" x2="42" y2="48" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <g transform="translate(180,210)">
+      <rect width="60" height="80" rx="6"/>
+      <line x1="10" y1="20" x2="50" y2="20" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="34" x2="50" y2="34" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="48" x2="42" y2="48" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <g transform="translate(280,210)">
+      <rect width="60" height="80" rx="6"/>
+      <line x1="10" y1="20" x2="50" y2="20" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="34" x2="50" y2="34" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="48" x2="42" y2="48" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <g transform="translate(80,330)">
+      <rect width="60" height="80" rx="6"/>
+      <line x1="10" y1="20" x2="50" y2="20" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="34" x2="50" y2="34" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="48" x2="42" y2="48" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <g transform="translate(180,330)">
+      <rect width="60" height="80" rx="6"/>
+      <line x1="10" y1="20" x2="50" y2="20" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="34" x2="50" y2="34" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="48" x2="42" y2="48" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <g transform="translate(280,330)">
+      <rect width="60" height="80" rx="6"/>
+      <line x1="10" y1="20" x2="50" y2="20" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="34" x2="50" y2="34" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="48" x2="42" y2="48" stroke="#ffffff" stroke-width="3"/>
+    </g>
+  </g>
+  <text x="230" y="510" text-anchor="middle" font-size="34" font-weight="800" fill="#111">Documents</text>
+
+  <!-- ============ PROMPT ICON ============ -->
+  <g transform="translate(140,580)">
+    <rect width="120" height="120" rx="20" fill="#2c3a52"/>
+    <path d="M20 28 H92 a6 6 0 0 1 6 6 V78 a6 6 0 0 1 -6 6 H54 l-14 18 v-18 h-20 a6 6 0 0 1 -6 -6 V34 a6 6 0 0 1 6 -6 z" fill="none" stroke="#ffffff" stroke-width="4"/>
+    <text x="34" y="74" fill="#ffffff" font-family="'Courier New', monospace" font-size="28" font-weight="700">&gt;_</text>
+  </g>
+  <text x="200" y="755" text-anchor="middle" font-size="34" font-weight="800" fill="#111">Prompt</text>
+
+  <!-- ============ CURVED ARROWS TO EMBEDDING MODEL ============ -->
+  <path d="M420 360 C 500 360, 540 430, 580 460" fill="none" stroke="#1a2438" stroke-width="4" marker-end="url(#ar)"/>
+  <path d="M270 640 C 380 600, 480 530, 580 510" fill="none" stroke="#1a2438" stroke-width="4" marker-end="url(#ar)"/>
+
+  <!-- ============ EMBEDDING MODEL ============ -->
+  <rect x="600" y="400" width="240" height="180" rx="18" fill="#ef5b6b"/>
+  <text x="720" y="475" text-anchor="middle" font-size="30" font-weight="800" fill="#ffffff">Embedding</text>
+  <text x="720" y="515" text-anchor="middle" font-size="30" font-weight="800" fill="#ffffff">Model</text>
+
+  <!-- ============ ARROW TO VECTOR SPACE ============ -->
+  <line x1="855" y1="490" x2="970" y2="490" stroke="#1a2438" stroke-width="4" marker-end="url(#ar)"/>
+
+  <!-- ============ VECTOR SPACE ============ -->
+  <g transform="translate(980,200)">
+    <!-- 3D axes -->
+    <line x1="280" y1="500" x2="280" y2="40"  stroke="#1a2438" stroke-width="4"/>
+    <polygon points="280,40 270,58 290,58" fill="#1a2438"/>
+    <line x1="280" y1="500" x2="60"  y2="430" stroke="#1a2438" stroke-width="4"/>
+    <polygon points="60,430 75,425 75,440" fill="#1a2438"/>
+    <line x1="280" y1="500" x2="540" y2="430" stroke="#1a2438" stroke-width="4"/>
+    <polygon points="540,430 525,425 525,440" fill="#1a2438"/>
+    <!-- floor diamond -->
+    <path d="M60 430 L280 500 L540 430 L280 360 Z" fill="none" stroke="#a0a8b5" stroke-width="2" stroke-dasharray="6 6"/>
+
+    <!-- gray scattered dots -->
+    <g fill="#d0d4da">
+      <circle cx="180" cy="150" r="6"/>
+      <circle cx="320" cy="170" r="6"/>
+      <circle cx="380" cy="220" r="6"/>
+      <circle cx="280" cy="240" r="6"/>
+      <circle cx="220" cy="280" r="6"/>
+      <circle cx="420" cy="290" r="6"/>
+      <circle cx="160" cy="320" r="6"/>
+      <circle cx="350" cy="340" r="6"/>
+      <circle cx="240" cy="380" r="6"/>
+      <circle cx="420" cy="380" r="6"/>
+      <circle cx="120" cy="380" r="6"/>
+      <circle cx="320" cy="420" r="6"/>
+    </g>
+
+    <!-- document tiles in space + dashed lines to prompt -->
+    <!-- doc top-left -->
+    <g transform="translate(140,80)">
+      <rect width="55" height="70" rx="5" fill="#2c3a52"/>
+      <line x1="10" y1="18" x2="46" y2="18" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="30" x2="46" y2="30" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="42" x2="38" y2="42" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <line x1="195" y1="150" x2="295" y2="450" stroke="#1a2438" stroke-width="2" stroke-dasharray="6 5"/>
+
+    <!-- doc middle-left -->
+    <g transform="translate(230,200)">
+      <rect width="55" height="70" rx="5" fill="#2c3a52"/>
+      <line x1="10" y1="18" x2="46" y2="18" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="30" x2="46" y2="30" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="42" x2="38" y2="42" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <line x1="270" y1="270" x2="295" y2="450" stroke="#1a2438" stroke-width="2" stroke-dasharray="6 5"/>
+
+    <!-- doc right -->
+    <g transform="translate(430,240)">
+      <rect width="55" height="70" rx="5" fill="#2c3a52"/>
+      <line x1="10" y1="18" x2="46" y2="18" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="30" x2="46" y2="30" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="42" x2="38" y2="42" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <line x1="455" y1="310" x2="320" y2="450" stroke="#1a2438" stroke-width="2" stroke-dasharray="6 5"/>
+
+    <!-- doc bottom-left -->
+    <g transform="translate(140,400)">
+      <rect width="55" height="70" rx="5" fill="#2c3a52"/>
+      <line x1="10" y1="18" x2="46" y2="18" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="30" x2="46" y2="30" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="42" x2="38" y2="42" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <line x1="195" y1="470" x2="290" y2="475" stroke="#1a2438" stroke-width="2" stroke-dasharray="6 5"/>
+
+    <!-- doc bottom-right -->
+    <g transform="translate(380,390)">
+      <rect width="55" height="70" rx="5" fill="#2c3a52"/>
+      <line x1="10" y1="18" x2="46" y2="18" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="30" x2="46" y2="30" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="42" x2="38" y2="42" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <line x1="380" y1="460" x2="325" y2="475" stroke="#1a2438" stroke-width="2" stroke-dasharray="6 5"/>
+
+    <!-- central prompt icon -->
+    <g transform="translate(265,440)">
+      <rect width="70" height="70" rx="12" fill="#2c3a52"/>
+      <path d="M12 16 H54 a4 4 0 0 1 4 4 V44 a4 4 0 0 1 -4 4 H32 l-10 12 v-12 h-10 a4 4 0 0 1 -4 -4 V20 a4 4 0 0 1 4 -4 z" fill="none" stroke="#ffffff" stroke-width="3"/>
+      <text x="22" y="44" fill="#ffffff" font-family="'Courier New', monospace" font-size="18" font-weight="700">&gt;_</text>
+    </g>
+  </g>
+
+  <text x="1280" y="780" text-anchor="middle" font-size="34" font-weight="800" fill="#111">Vector Space</text>
+
+  <!-- ============ ARROW TO RANK BOX ============ -->
+  <line x1="1540" y1="490" x2="1640" y2="490" stroke="#1a2438" stroke-width="4" marker-end="url(#ar)"/>
+
+  <!-- ============ PODIUM ICON ============ -->
+  <g transform="translate(1700,250)" fill="#2c3a52">
+    <!-- star -->
+    <path d="M65 0 L73 18 L92 20 L78 33 L82 52 L65 42 L48 52 L52 33 L38 20 L57 18 Z"/>
+    <!-- 3 docs on podium -->
+    <g transform="translate(30,70)">
+      <rect width="50" height="60" rx="4"/>
+      <line x1="10" y1="15" x2="40" y2="15" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="28" x2="40" y2="28" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="41" x2="34" y2="41" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <g transform="translate(82,55)">
+      <rect width="50" height="75" rx="4"/>
+      <line x1="10" y1="18" x2="40" y2="18" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="32" x2="40" y2="32" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="46" x2="34" y2="46" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <g transform="translate(134,80)">
+      <rect width="50" height="50" rx="4"/>
+      <line x1="10" y1="13" x2="40" y2="13" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="25" x2="40" y2="25" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="37" x2="34" y2="37" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <!-- podium platform bars -->
+    <rect x="22"  y="135" width="62" height="22"/>
+    <rect x="76"  y="125" width="62" height="32"/>
+    <rect x="130" y="142" width="62" height="15"/>
+  </g>
+
+  <!-- ============ RANK BOX ============ -->
+  <rect x="1650" y="460" width="240" height="220" rx="18" fill="#2c3a52"/>
+  <text x="1770" y="530" text-anchor="middle" font-size="22" fill="#ffffff">Rank by distance</text>
+  <text x="1770" y="565" text-anchor="middle" font-size="22" fill="#ffffff">and return the</text>
+  <text x="1770" y="600" text-anchor="middle" font-size="22" fill="#ffffff">closest documents</text>
+</svg>

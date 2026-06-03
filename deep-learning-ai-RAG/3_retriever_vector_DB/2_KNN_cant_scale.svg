@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 800" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1500" height="800" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="80" font-size="52" font-weight="800" fill="#111">Scaling Challenges</text>
+
+  <!-- ===================== LEFT: CHART PANEL ===================== -->
+  <rect x="40" y="130" width="700" height="620" rx="22" fill="#f1f3f5"/>
+
+  <!-- Y-axis (vertical) -->
+  <line x1="190" y1="180" x2="190" y2="640" stroke="#1a2438" stroke-width="3"/>
+  <polygon points="190,170 180,190 200,190" fill="#1a2438"/>
+
+  <!-- X-axis (horizontal) -->
+  <line x1="190" y1="640" x2="680" y2="640" stroke="#1a2438" stroke-width="3"/>
+  <polygon points="690,640 670,630 670,650" fill="#1a2438"/>
+
+  <!-- Y-axis label (rotated) -->
+  <text x="120" y="420" text-anchor="middle" font-size="28" fill="#111" transform="rotate(-90, 120, 420)">Calculation Time</text>
+
+  <!-- X-axis label -->
+  <text x="430" y="700" text-anchor="middle" font-size="28" fill="#111">Dataset Size</text>
+
+  <!-- Dashed diagonal line -->
+  <line x1="190" y1="630" x2="660" y2="220" stroke="#1a2438" stroke-width="3" stroke-dasharray="10 6"/>
+
+  <!-- Teal lower dot -->
+  <circle cx="305" cy="520" r="16" fill="#1eb6c8"/>
+
+  <!-- Red upper dot -->
+  <circle cx="580" cy="280" r="16" fill="#ef5b6b"/>
+
+  <!-- Linear Growth label -->
+  <rect x="300" y="200" width="180" height="60" rx="10" fill="#dde2f0"/>
+  <text x="390" y="225" text-anchor="middle" font-size="20" font-weight="800" fill="#111">Linear</text>
+  <text x="390" y="250" text-anchor="middle" font-size="20" font-weight="800" fill="#111">Growth</text>
+
+  <!-- ===================== RIGHT TOP: BLUE INFO PANEL ===================== -->
+  <rect x="790" y="130" width="670" height="280" rx="22" fill="#eaf0ff"/>
+
+  <!-- Bullet 1: teal -->
+  <circle cx="850" cy="200" r="16" fill="#1eb6c8"/>
+  <text x="890" y="195" font-size="26" fill="#111">1,000 docs = 1,000 distance</text>
+  <text x="890" y="230" font-size="26" fill="#111">calculations per search</text>
+
+  <!-- Bullet 2: red -->
+  <circle cx="850" cy="320" r="16" fill="#ef5b6b"/>
+  <text x="890" y="315" font-size="26" fill="#111">1B docs = 1B distance</text>
+  <text x="890" y="350" font-size="26" fill="#111">calculations every time</text>
+
+  <!-- ===================== RIGHT BOTTOM: NAVY CTA ===================== -->
+  <rect x="790" y="440" width="670" height="310" rx="22" fill="#2c3a52"/>
+
+  <text x="1125" y="555" text-anchor="middle" font-size="30" fill="#ffffff">If you want to build</text>
+  <text x="1125" y="610" text-anchor="middle" font-size="30" fill="#ffffff">high-performing retrievers,</text>
+  <text x="1125" y="665" text-anchor="middle" font-size="30" fill="#ffffff">you&#8217;ll need a better approach!</text>
+</svg>

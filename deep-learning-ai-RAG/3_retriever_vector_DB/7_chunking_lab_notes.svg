@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2700" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#2c3a52"/>
+      <stop offset="100%" stop-color="#ef5b6b"/>
+    </linearGradient>
+    <style>
+      .h1 { font-size: 46px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 20px; fill: #ffd3d7; font-style: italic; }
+      .section { font-size: 30px; font-weight: 800; fill: #111; }
+      .code { font-family: 'Courier New', Courier, monospace; }
+      .cmt { fill: #8a8f99; }
+      .kw { fill: #c83bcb; font-weight: 700; }
+      .fn { fill: #2563eb; }
+      .str { fill: #c33232; }
+      .num { fill: #2aa35a; font-weight: 700; }
+      .var { fill: #1a2438; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1700" height="2700" fill="#ffffff"/>
+
+  <!-- ===== HEADER ===== -->
+  <rect x="0" y="0" width="1700" height="150" fill="url(#hdr)"/>
+  <g transform="translate(1380,30)">
+    <rect x="0"  y="0"  width="90" height="22" rx="6" fill="#ffffff" opacity="0.25"/>
+    <rect x="40" y="30" width="90" height="22" rx="6" fill="#ffffff" opacity="0.4"/>
+    <rect x="80" y="60" width="90" height="22" rx="6" fill="#ffffff" opacity="0.55"/>
+    <rect x="120" y="90" width="90" height="22" rx="6" fill="#ffffff" opacity="0.7"/>
+  </g>
+  <text x="50" y="70" class="h1">Chunking Lab — Cheatsheet</text>
+  <text x="50" y="108" class="sub">From four chunkers to a chunking-strategy-aware RAG pipeline (C1M3 Ungraded Lab 2)</text>
+
+  <!-- ===== SECTION 1: FOUR CHUNKERS ===== -->
+  <text x="50" y="210" class="section">1. The four chunkers you need to know</text>
+
+  <!-- 1a Fixed-size -->
+  <g transform="translate(50,230)">
+    <rect width="780" height="320" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="35" font-size="20" font-weight="800" fill="#2c3a52">a) Fixed-size (word-based)</text>
+    <g transform="translate(20,55)" class="code" font-size="14">
+      <text x="0" y="0"><tspan class="kw">def</tspan><tspan class="fn"> get_chunks_fixed_size</tspan><tspan class="var">(text, chunk_size):</tspan></text>
+      <text x="20" y="24"><tspan class="var">words = text.</tspan><tspan class="fn">split</tspan><tspan class="var">()</tspan></text>
+      <text x="20" y="48"><tspan class="kw">return</tspan><tspan class="var"> [</tspan><tspan class="str">" "</tspan><tspan class="var">.</tspan><tspan class="fn">join</tspan><tspan class="var">(words[i:i+chunk_size])</tspan></text>
+      <text x="58" y="72"><tspan class="kw">for</tspan><tspan class="var"> i </tspan><tspan class="kw">in</tspan><tspan class="var"> </tspan><tspan class="fn">range</tspan><tspan class="var">(</tspan><tspan class="num">0</tspan><tspan class="var">, </tspan><tspan class="fn">len</tspan><tspan class="var">(words), chunk_size)]</tspan></text>
+    </g>
+    <text x="20" y="180" font-size="14" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Predictable count, dirt-simple</text>
+    <text x="20" y="206" font-size="14" fill="#222"><tspan font-weight="800" fill="#3d6db5">&#8722;</tspan> Splits mid-sentence, no context bridge</text>
+    <text x="20" y="245" font-size="14" fill="#666" font-style="italic">Note: this lab counts in <tspan font-weight="800">words</tspan>, not characters,</text>
+    <text x="20" y="265" font-size="14" fill="#666" font-style="italic">so chunk_size=100 means ~100 words per chunk.</text>
+    <text x="20" y="295" font-size="14" fill="#222">In the lab: <tspan class="code" font-weight="800">chunk_size = 25</tspan> and <tspan class="code" font-weight="800">100</tspan></text>
+  </g>
+
+  <!-- 1b Fixed-size + overlap -->
+  <g transform="translate(860,230)">
+    <rect width="790" height="320" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="35" font-size="20" font-weight="800" fill="#2c3a52">b) Fixed-size + overlap</text>
+    <g transform="translate(20,55)" class="code" font-size="14">
+      <text x="0" y="0"><tspan class="kw">def</tspan><tspan class="fn"> get_chunks_fixed_size_with_overlap</tspan><tspan class="var">(text,</tspan></text>
+      <text x="220" y="24"><tspan class="var">chunk_size, overlap_fraction):</tspan></text>
+      <text x="0" y="52"><tspan class="var">words = text.</tspan><tspan class="fn">split</tspan><tspan class="var">()</tspan></text>
+      <text x="0" y="76"><tspan class="var">overlap = </tspan><tspan class="fn">int</tspan><tspan class="var">(chunk_size * overlap_fraction)</tspan></text>
+      <text x="0" y="100"><tspan class="kw">for</tspan><tspan class="var"> i </tspan><tspan class="kw">in</tspan><tspan class="var"> </tspan><tspan class="fn">range</tspan><tspan class="var">(</tspan><tspan class="num">0</tspan><tspan class="var">, </tspan><tspan class="fn">len</tspan><tspan class="var">(words), chunk_size):</tspan></text>
+      <text x="20" y="124"><tspan class="var">chunk = words[</tspan><tspan class="fn">max</tspan><tspan class="var">(i - overlap, </tspan><tspan class="num">0</tspan><tspan class="var">) : i + chunk_size]</tspan></text>
+    </g>
+    <text x="20" y="220" font-size="14" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Words at boundaries appear in 2 chunks (recall&#8593;)</text>
+    <text x="20" y="246" font-size="14" fill="#222"><tspan font-weight="800" fill="#3d6db5">&#8722;</tspan> More storage, embedding cost rises</text>
+    <text x="20" y="295" font-size="14" fill="#222">In the lab: <tspan class="code" font-weight="800">overlap_fraction = 0.2</tspan> (20% overlap)</text>
+  </g>
+
+  <!-- 1c Paragraph split -->
+  <g transform="translate(50,570)">
+    <rect width="780" height="320" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="35" font-size="20" font-weight="800" fill="#2c3a52">c) Variable-size (marker split)</text>
+    <g transform="translate(20,55)" class="code" font-size="14">
+      <text x="0" y="0"><tspan class="cmt"># Split on paragraph breaks</tspan></text>
+      <text x="0" y="24"><tspan class="var">paragraphs = source_text.</tspan><tspan class="fn">split</tspan><tspan class="var">(</tspan><tspan class="str">"\n\n"</tspan><tspan class="var">)</tspan></text>
+      <text x="0" y="60"><tspan class="cmt"># Split on Asciidoc section markers</tspan></text>
+      <text x="0" y="84"><tspan class="var">sections = source_text.</tspan><tspan class="fn">split</tspan><tspan class="var">(</tspan><tspan class="str">"\n=="</tspan><tspan class="var">)</tspan></text>
+    </g>
+    <text x="20" y="190" font-size="14" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Respects document structure</text>
+    <text x="20" y="216" font-size="14" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Related ideas stay together</text>
+    <text x="20" y="242" font-size="14" fill="#222"><tspan font-weight="800" fill="#3d6db5">&#8722;</tspan> Headings often land as tiny standalone chunks</text>
+    <text x="20" y="268" font-size="14" fill="#222"><tspan font-weight="800" fill="#3d6db5">&#8722;</tspan> Chunk sizes vary wildly</text>
+    <text x="20" y="305" font-size="14" fill="#666" font-style="italic">Pick the marker that matches the format you have.</text>
+  </g>
+
+  <!-- 1d Mixed -->
+  <g transform="translate(860,570)">
+    <rect width="790" height="320" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="35" font-size="20" font-weight="800" fill="#2c3a52">d) Mixed — marker + min-length buffer</text>
+    <g transform="translate(20,55)" class="code" font-size="14">
+      <text x="0" y="0"><tspan class="kw">def</tspan><tspan class="fn"> mixed_chunking</tspan><tspan class="var">(source_text):</tspan></text>
+      <text x="20" y="24"><tspan class="var">chunks = source_text.</tspan><tspan class="fn">split</tspan><tspan class="var">(</tspan><tspan class="str">"\n=="</tspan><tspan class="var">)</tspan></text>
+      <text x="20" y="48"><tspan class="var">buffer, out, min_len = </tspan><tspan class="str">""</tspan><tspan class="var">, [], </tspan><tspan class="num">25</tspan></text>
+      <text x="20" y="76"><tspan class="kw">for</tspan><tspan class="var"> c </tspan><tspan class="kw">in</tspan><tspan class="var"> chunks:</tspan></text>
+      <text x="40" y="100"><tspan class="var">buffer += c</tspan></text>
+      <text x="40" y="124"><tspan class="kw">if</tspan><tspan class="var"> </tspan><tspan class="fn">len</tspan><tspan class="var">(buffer.</tspan><tspan class="fn">split</tspan><tspan class="var">()) &gt;= min_len:</tspan></text>
+      <text x="60" y="148"><tspan class="var">out.</tspan><tspan class="fn">append</tspan><tspan class="var">(buffer); buffer = </tspan><tspan class="str">""</tspan></text>
+    </g>
+    <text x="20" y="220" font-size="14" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> No tiny heading-only chunks</text>
+    <text x="20" y="246" font-size="14" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Keeps structure, enforces minimum size</text>
+    <text x="20" y="295" font-size="14" fill="#222">In the lab: <tspan class="code" font-weight="800">min_length = 25 words</tspan></text>
+  </g>
+
+  <!-- ===== SECTION 2: METADATA + STRATEGY TAGGING ===== -->
+  <text x="50" y="940" class="section">2. Wrap each chunk with metadata (and a strategy tag!)</text>
+
+  <rect x="50" y="960" width="1600" height="280" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+  <g transform="translate(80,995)" class="code" font-size="15">
+    <text x="0" y="0"><tspan class="kw">def</tspan><tspan class="fn"> build_chunk_objs</tspan><tspan class="var">(book_text_obj, chunks):</tspan></text>
+    <text x="20" y="24"><tspan class="kw">return</tspan><tspan class="var"> [{</tspan></text>
+    <text x="40" y="48"><tspan class="str">"chapter_title"</tspan><tspan class="var">: book_text_obj[</tspan><tspan class="str">"chapter_title"</tspan><tspan class="var">],</tspan></text>
+    <text x="40" y="72"><tspan class="str">"filename"</tspan><tspan class="var">: book_text_obj[</tspan><tspan class="str">"filename"</tspan><tspan class="var">],</tspan></text>
+    <text x="40" y="96"><tspan class="str">"chunk"</tspan><tspan class="var">: c,</tspan></text>
+    <text x="40" y="120"><tspan class="str">"chunk_index"</tspan><tspan class="var">: i,</tspan></text>
+    <text x="20" y="144"><tspan class="var">} </tspan><tspan class="kw">for</tspan><tspan class="var"> i, c </tspan><tspan class="kw">in</tspan><tspan class="var"> </tspan><tspan class="fn">enumerate</tspan><tspan class="var">(chunks)]</tspan></text>
+
+    <text x="0" y="200"><tspan class="cmt"># Later, before insert: tag each chunk with which strategy made it</tspan></text>
+    <text x="0" y="224"><tspan class="var">chunk_obj[</tspan><tspan class="str">"chunking_strategy"</tspan><tspan class="var">] = chunking_strategy  </tspan><tspan class="cmt"># key trick of the lab!</tspan></text>
+  </g>
+
+  <rect x="1180" y="990" width="450" height="230" rx="14" fill="#2c3a52"/>
+  <text x="1210" y="1025" font-size="18" font-weight="800" fill="#ffd86b">Why this matters</text>
+  <text x="1210" y="1055" font-size="14" fill="#ffffff">All four strategies coexist in</text>
+  <text x="1210" y="1077" font-size="14" fill="#ffffff">the <tspan class="code" font-weight="800">same</tspan> collection.</text>
+  <text x="1210" y="1110" font-size="14" fill="#ffffff">The <tspan class="code" font-weight="800">chunking_strategy</tspan> field lets</text>
+  <text x="1210" y="1132" font-size="14" fill="#ffffff">you filter by strategy at query</text>
+  <text x="1210" y="1154" font-size="14" fill="#ffffff">time &#8594; A/B compare side by side.</text>
+  <text x="1210" y="1190" font-size="14" fill="#ffffff">Use <tspan class="code" font-weight="800">Tokenization.FIELD</tspan> so the</text>
+  <text x="1210" y="1212" font-size="14" fill="#ffffff">whole strategy name is one token.</text>
+
+  <!-- ===== SECTION 3: WEAVIATE COLLECTION SETUP ===== -->
+  <text x="50" y="1290" class="section">3. Collection schema (note <tspan class="code" font-size="22" fill="#3aa97a">Tokenization.FIELD</tspan>)</text>
+
+  <rect x="50" y="1310" width="1600" height="290" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+  <g transform="translate(80,1345)" class="code" font-size="14">
+    <text x="0" y="0"><tspan class="var">collection = client.collections.</tspan><tspan class="fn">create</tspan><tspan class="var">(</tspan></text>
+    <text x="30" y="24"><tspan class="var">name=</tspan><tspan class="str">'chunking_example'</tspan><tspan class="var">,</tspan></text>
+    <text x="30" y="48"><tspan class="var">vectorizer_config=[Configure.NamedVectors.</tspan><tspan class="fn">text2vec_transformers</tspan><tspan class="var">(</tspan></text>
+    <text x="60" y="72"><tspan class="var">name=</tspan><tspan class="str">"vector"</tspan><tspan class="var">, vectorize_collection_name=</tspan><tspan class="num">False</tspan><tspan class="var">, inference_url=</tspan><tspan class="str">"http://127.0.0.1:5000"</tspan><tspan class="var">)],</tspan></text>
+    <text x="30" y="100"><tspan class="var">properties=[</tspan></text>
+    <text x="60" y="124"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"chunk"</tspan><tspan class="var">,             data_type=DataType.TEXT),</tspan></text>
+    <text x="60" y="148"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"chapter_title"</tspan><tspan class="var">,     data_type=DataType.TEXT),</tspan></text>
+    <text x="60" y="172"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"filename"</tspan><tspan class="var">,          data_type=DataType.TEXT),</tspan></text>
+    <text x="60" y="196"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"chunking_strategy"</tspan><tspan class="var">, data_type=DataType.TEXT,</tspan></text>
+    <text x="173" y="220"><tspan class="var">tokenization=Tokenization.FIELD),  </tspan><tspan class="cmt"># entire value = 1 token</tspan></text>
+    <text x="60" y="244"><tspan class="fn">Property</tspan><tspan class="var">(name=</tspan><tspan class="str">"chunk_index"</tspan><tspan class="var">,       data_type=DataType.INT),</tspan></text>
+    <text x="30" y="268"><tspan class="var">])</tspan></text>
+  </g>
+
+  <!-- ===== SECTION 4: COMPARE RESULTS PER QUERY ===== -->
+  <text x="50" y="1660" class="section">4. The big insight: query type decides the right chunk size</text>
+
+  <!-- 4a Broad query -->
+  <g transform="translate(50,1690)">
+    <rect width="790" height="320" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">Broad query</text>
+    <text x="20" y="68" class="code" font-size="16" fill="#c33232">"history of git"</text>
+
+    <text x="20" y="110" font-size="15" fill="#222"><tspan font-weight="800">Best:</tspan> longer paragraph chunks</text>
+    <text x="20" y="135" font-size="14" fill="#666">25-word chunks may match semantically but lack</text>
+    <text x="20" y="155" font-size="14" fill="#666">context to actually <tspan font-style="italic">educate</tspan> the reader.</text>
+
+    <text x="20" y="200" font-size="15" fill="#222"><tspan font-weight="800">Winner ranking:</tspan></text>
+    <text x="20" y="230" font-size="14" fill="#111">&#9679; <tspan class="code" font-weight="800">para_chunks_min_25</tspan> &#8594; best context</text>
+    <text x="20" y="255" font-size="14" fill="#111">&#9679; <tspan class="code">para_chunks</tspan> &#8594; good</text>
+    <text x="20" y="280" font-size="14" fill="#111">&#9679; <tspan class="code">fixed_size_100</tspan> &#8594; okay</text>
+    <text x="20" y="305" font-size="14" fill="#111">&#9679; <tspan class="code">fixed_size_25</tspan> &#8594; too fragmented</text>
+  </g>
+
+  <!-- 4b Specific query -->
+  <g transform="translate(860,1690)">
+    <rect width="790" height="320" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">Specific query</text>
+    <text x="20" y="68" class="code" font-size="16" fill="#c33232">"how to add the url of a remote repo"</text>
+
+    <text x="20" y="110" font-size="15" fill="#222"><tspan font-weight="800">Best:</tspan> small, targeted chunks</text>
+    <text x="20" y="135" font-size="14" fill="#666">Pinpoints the exact line:</text>
+    <text x="20" y="158" class="code" font-size="13" fill="#111">git remote add &lt;shortname&gt; &lt;url&gt;</text>
+
+    <text x="20" y="200" font-size="15" fill="#222"><tspan font-weight="800">Winner ranking:</tspan></text>
+    <text x="20" y="230" font-size="14" fill="#111">&#9679; <tspan class="code" font-weight="800">fixed_size_25</tspan> &#8594; pinpoint precision</text>
+    <text x="20" y="255" font-size="14" fill="#111">&#9679; <tspan class="code">para_chunks</tspan> &#8594; close but more noise</text>
+    <text x="20" y="280" font-size="14" fill="#111">&#9679; Larger chunks bury the answer in walls of</text>
+    <text x="20" y="300" font-size="14" fill="#111">&#8195; surrounding text &#8594; user cognitive load &#8593;</text>
+  </g>
+
+  <!-- ===== SECTION 5: RAG INTEGRATION ===== -->
+  <text x="50" y="2070" class="section">5. RAG integration — balance top_k against chunk size</text>
+
+  <rect x="50" y="2090" width="1600" height="290" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <g transform="translate(80,2125)" class="code" font-size="14">
+    <text x="0" y="0"><tspan class="var">PROMPT = </tspan><tspan class="str">"Using this information and only this information,"</tspan></text>
+    <text x="68" y="24"><tspan class="str">" please explain {search_string} in a few short points.\nContext: {context}"</tspan></text>
+
+    <text x="0" y="64"><tspan class="cmt"># Compensate for chunk size: many small chunks, few big chunks</tspan></text>
+    <text x="0" y="88"><tspan class="var">n_chunks_by_strat = {</tspan></text>
+    <text x="30" y="112"><tspan class="str">'fixed_size_25'</tspan><tspan class="var">:      </tspan><tspan class="num">8</tspan><tspan class="var">,    </tspan><tspan class="cmt"># grab MORE of the small ones</tspan></text>
+    <text x="30" y="136"><tspan class="str">'para_chunks'</tspan><tspan class="var">:        </tspan><tspan class="num">8</tspan><tspan class="var">,</tspan></text>
+    <text x="30" y="160"><tspan class="str">'fixed_size_100'</tspan><tspan class="var">:     </tspan><tspan class="num">2</tspan><tspan class="var">,    </tspan><tspan class="cmt"># grab FEWER of the big ones</tspan></text>
+    <text x="30" y="184"><tspan class="str">'para_chunks_min_25'</tspan><tspan class="var">: </tspan><tspan class="num">2</tspan><tspan class="var">,</tspan></text>
+    <text x="0" y="208"><tspan class="var">}</tspan></text>
+  </g>
+
+  <rect x="1180" y="2125" width="450" height="230" rx="14" fill="#1a2438"/>
+  <text x="1210" y="2160" font-size="18" font-weight="800" fill="#ffd86b">The actionable rule</text>
+  <text x="1210" y="2195" font-size="14" fill="#ffffff">Match <tspan class="code" font-weight="800">top_k &#215; chunk_size</tspan> to your</text>
+  <text x="1210" y="2217" font-size="14" fill="#ffffff">LLM's effective context budget.</text>
+  <text x="1210" y="2253" font-size="14" fill="#ffffff">Small chunks &#8594; raise limit (8&#8211;15)</text>
+  <text x="1210" y="2278" font-size="14" fill="#ffffff">Large chunks &#8594; lower limit (2&#8211;4)</text>
+  <text x="1210" y="2312" font-size="14" fill="#ffffff">Otherwise small-chunk strategies</text>
+  <text x="1210" y="2334" font-size="14" fill="#ffffff">look unfairly bad in the eval.</text>
+
+  <!-- ===== SECTION 6: KEY TAKEAWAYS + 2026 ===== -->
+  <text x="50" y="2440" class="section">6. Key takeaways &amp; 2026 toolbelt</text>
+
+  <rect x="50" y="2460" width="780" height="220" rx="14" fill="#ef5b6b"/>
+  <text x="80" y="2500" font-size="20" font-weight="800" fill="#ffffff">Must-remember for the assignment</text>
+  <text x="80" y="2535" font-size="15" fill="#ffffff">&#10003; Tag every chunk with <tspan class="code" font-weight="800">chunking_strategy</tspan></text>
+  <text x="80" y="2562" font-size="15" fill="#ffffff">&#10003; Use <tspan class="code" font-weight="800">Tokenization.FIELD</tspan> for filter-only fields</text>
+  <text x="80" y="2589" font-size="15" fill="#ffffff">&#10003; Inherit doc metadata + add <tspan class="code" font-weight="800">chunk_index</tspan></text>
+  <text x="80" y="2616" font-size="15" fill="#ffffff">&#10003; Filter at query time to A/B test strategies</text>
+  <text x="80" y="2643" font-size="15" fill="#ffffff">&#10003; Tune <tspan class="code" font-weight="800">limit</tspan> per strategy so context stays comparable</text>
+  <text x="80" y="2670" font-size="15" fill="#ffffff">&#10003; Broad query &#8594; bigger chunks &#9679; Specific query &#8594; smaller</text>
+
+  <rect x="860" y="2460" width="790" height="220" rx="14" fill="#1a2438"/>
+  <text x="890" y="2500" font-size="20" font-weight="800" fill="#ffd86b">2026 chunking toolbelt</text>
+  <text x="890" y="2532" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">LangChain</tspan> <tspan class="code">RecursiveCharacterTextSplitter</tspan> &#8226; layered fallback</text>
+  <text x="890" y="2558" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">LlamaIndex</tspan> <tspan class="code">SentenceSplitter / NodeParser</tspan></text>
+  <text x="890" y="2584" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Chonkie</tspan> &#8226; minimal, fast, token-aware chunkers</text>
+  <text x="890" y="2610" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Docling / Unstructured</tspan> &#8226; layout-aware for PDFs &amp; tables</text>
+  <text x="890" y="2636" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Contextual Retrieval</tspan> &#8226; prepend doc summary per chunk</text>
+  <text x="890" y="2662" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Semantic / Late chunking</tspan> &#8226; embedding-driven boundaries</text>
+</svg>

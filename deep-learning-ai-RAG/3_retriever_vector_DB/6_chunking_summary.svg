@@ -1,0 +1,309 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2400" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#2c3a52"/>
+      <stop offset="100%" stop-color="#ef5b6b"/>
+    </linearGradient>
+    <style>
+      .h1 { font-size: 52px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 22px; fill: #ffd3d7; font-style: italic; }
+      .section { font-size: 30px; font-weight: 800; fill: #111; }
+      .mono { font-family: 'Courier New', Courier, monospace; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1700" height="2400" fill="#ffffff"/>
+
+  <!-- ===== HEADER ===== -->
+  <rect x="0" y="0" width="1700" height="150" fill="url(#hdr)"/>
+  <!-- decorative chunks -->
+  <g transform="translate(1380,30)">
+    <rect x="0"  y="0"  width="90" height="22" rx="6" fill="#ffffff" opacity="0.25"/>
+    <rect x="40" y="30" width="90" height="22" rx="6" fill="#ffffff" opacity="0.35"/>
+    <rect x="80" y="60" width="90" height="22" rx="6" fill="#ffffff" opacity="0.5"/>
+    <rect x="120" y="90" width="90" height="22" rx="6" fill="#ffffff" opacity="0.65"/>
+  </g>
+  <text x="50" y="72" class="h1">Chunking — slicing docs the right way</text>
+  <text x="50" y="110" class="sub">Why we chunk, how to choose sizes, and the three strategies you'll actually use</text>
+
+  <!-- ===== SECTION 1: WHY CHUNK ===== -->
+  <text x="50" y="210" class="section">1. Why chunk? — three concrete reasons</text>
+
+  <rect x="50" y="230" width="510" height="200" rx="14" fill="#fef3c7" stroke="#fbd24a"/>
+  <g transform="translate(80,260)">
+    <circle cx="30" cy="30" r="30" fill="#ef5b6b"/>
+    <text x="30" y="40" text-anchor="middle" font-size="32" font-weight="800" fill="#ffffff">!</text>
+  </g>
+  <text x="170" y="290" font-size="24" font-weight="800" fill="#111">Token limits</text>
+  <text x="170" y="320" font-size="15" fill="#222">Embedding models cap input length</text>
+  <text x="170" y="343" font-size="15" fill="#222">(typically 512&#8211;8k tokens). Big docs</text>
+  <text x="170" y="366" font-size="15" fill="#222">simply won't fit in one embed call.</text>
+
+  <rect x="595" y="230" width="510" height="200" rx="14" fill="#fef3c7" stroke="#fbd24a"/>
+  <g transform="translate(625,260)">
+    <circle cx="30" cy="30" r="30" fill="#ef5b6b"/>
+    <path d="M20 20 l20 20 M40 20 l-20 20" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <circle cx="30" cy="30" r="14" fill="none" stroke="#ffffff" stroke-width="3"/>
+  </g>
+  <text x="715" y="290" font-size="24" font-weight="800" fill="#111">Improved relevancy</text>
+  <text x="715" y="320" font-size="15" fill="#222">Smaller chunks let one vector represent</text>
+  <text x="715" y="343" font-size="15" fill="#222">a tight idea instead of an averaged blur</text>
+  <text x="715" y="366" font-size="15" fill="#222">across hundreds of pages.</text>
+
+  <rect x="1140" y="230" width="510" height="200" rx="14" fill="#fef3c7" stroke="#fbd24a"/>
+  <g transform="translate(1170,260)">
+    <circle cx="30" cy="30" r="30" fill="#ef5b6b"/>
+    <rect x="14" y="18" width="32" height="24" rx="2" fill="#ffffff"/>
+    <text x="30" y="36" text-anchor="middle" font-size="14" font-weight="800" fill="#ef5b6b">LLM</text>
+  </g>
+  <text x="1260" y="290" font-size="24" font-weight="800" fill="#111">Clean LLM context</text>
+  <text x="1260" y="320" font-size="15" fill="#222">Only the most relevant slices reach the</text>
+  <text x="1260" y="343" font-size="15" fill="#222">LLM, preserving its window for thinking</text>
+  <text x="1260" y="366" font-size="15" fill="#222">instead of wading through irrelevant text.</text>
+
+  <!-- ===== SECTION 2: THE PROBLEM ===== -->
+  <text x="50" y="490" class="section">2. What happens without chunking</text>
+
+  <rect x="50" y="510" width="1600" height="180" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- book icon -->
+  <g transform="translate(120,550)" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round">
+    <path d="M0 10 L60 0 L60 80 L0 90 Z"/>
+    <path d="M120 10 L60 0 L60 80 L120 90 Z"/>
+    <line x1="10" y1="25" x2="50" y2="20"/>
+    <line x1="10" y1="40" x2="50" y2="35"/>
+    <line x1="10" y1="55" x2="50" y2="50"/>
+    <line x1="70" y1="20" x2="110" y2="25"/>
+    <line x1="70" y1="35" x2="110" y2="40"/>
+    <line x1="70" y1="50" x2="110" y2="55"/>
+  </g>
+  <text x="180" y="660" text-anchor="middle" font-size="16" font-weight="800" fill="#111">Entire book</text>
+
+  <line x1="290" y1="600" x2="370" y2="600" stroke="#111" stroke-width="3" marker-end="url(#ar)"/>
+
+  <rect x="380" y="540" width="340" height="120" rx="14" fill="#ffffff" stroke="#a0a8b5" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="550" y="580" text-anchor="middle" font-family="'Courier New', monospace" font-size="20" fill="#111">[0.1, 0.4, 0.3, 0.2, 0.9]</text>
+  <text x="550" y="615" text-anchor="middle" font-size="14" fill="#666">one vector for the whole book</text>
+  <text x="550" y="640" text-anchor="middle" font-size="13" fill="#888" font-style="italic">meaning is averaged across all chapters</text>
+
+  <text x="770" y="550" font-size="16" font-weight="800" fill="#ef5b6b">The downsides</text>
+  <text x="770" y="580" font-size="15" fill="#222">&#9679; Single vector blurs many topics together</text>
+  <text x="770" y="608" font-size="15" fill="#222">&#9679; Specific chapters / pages aren't distinguishable</text>
+  <text x="770" y="636" font-size="15" fill="#222">&#9679; Retrieving "the right book" still floods the LLM context</text>
+  <text x="770" y="664" font-size="15" fill="#222">&#9679; Search relevance collapses — everything looks similar</text>
+
+  <!-- ===== SECTION 3: CHUNK SIZE GOLDILOCKS ===== -->
+  <text x="50" y="750" class="section">3. Balancing chunk size — Goldilocks rule</text>
+
+  <g transform="translate(50,770)">
+    <rect width="510" height="240" rx="16" fill="#2c3a52"/>
+    <text x="255" y="50" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Too Large</text>
+    <!-- book stack -->
+    <g transform="translate(220,75)" fill="#ffffff">
+      <rect x="0"  y="0" width="14" height="50" rx="2"/>
+      <rect x="18" y="-5" width="14" height="55" rx="2"/>
+      <rect x="36" y="5" width="14" height="45" rx="2"/>
+      <rect x="54" y="0" width="14" height="50" rx="2"/>
+    </g>
+    <text x="255" y="160" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">Chapter level</text>
+    <text x="35" y="195" font-size="15" fill="#ffffff">&#8226; Too many topics in one vector</text>
+    <text x="35" y="220" font-size="15" fill="#ffffff">&#8226; Fills LLM context window fast</text>
+  </g>
+
+  <g transform="translate(595,770)">
+    <rect width="510" height="240" rx="16" fill="#2c3a52"/>
+    <text x="255" y="50" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Too Small</text>
+    <text x="255" y="125" text-anchor="middle" font-size="60" font-weight="800" fill="#ffffff">A a</text>
+    <text x="255" y="160" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">Word level</text>
+    <text x="35" y="195" font-size="15" fill="#ffffff">&#8226; Loses surrounding context</text>
+    <text x="35" y="220" font-size="15" fill="#ffffff">&#8226; Reduces search relevance</text>
+  </g>
+
+  <g transform="translate(1140,770)">
+    <rect width="510" height="240" rx="16" fill="#2c3a52"/>
+    <text x="255" y="50" text-anchor="middle" font-size="22" font-weight="800" fill="#ffd86b">Just Right</text>
+    <!-- text-like lines -->
+    <g transform="translate(170,80)" stroke="#ffffff" stroke-width="6" stroke-linecap="round">
+      <line x1="0" y1="0" x2="180" y2="0"/>
+      <line x1="0" y1="14" x2="150" y2="14"/>
+      <line x1="0" y1="28" x2="170" y2="28"/>
+      <line x1="0" y1="42" x2="140" y2="42"/>
+    </g>
+    <text x="255" y="160" text-anchor="middle" font-size="18" font-weight="800" fill="#ffd86b">Page / Paragraph</text>
+    <text x="35" y="195" font-size="15" fill="#ffffff">&#8226; Captures one idea per vector</text>
+    <text x="35" y="220" font-size="15" fill="#ffffff">&#8226; Fits LLM context comfortably</text>
+  </g>
+
+  <!-- ===== SECTION 4: THREE STRATEGIES ===== -->
+  <text x="50" y="1080" class="section">4. Three chunking strategies</text>
+
+  <!-- 4a: Fixed -->
+  <g transform="translate(50,1110)">
+    <rect width="510" height="380" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">a) Fixed-size</text>
+    <text x="20" y="68" font-size="15" fill="#222">Split every N characters. E.g. 250 chars / chunk.</text>
+
+    <g transform="translate(20,90)" class="mono" font-size="13">
+      <rect x="0"   y="0" width="150" height="36" rx="6" fill="#ef5b6b"/>
+      <text x="75" y="15" text-anchor="middle" fill="#ffffff" font-weight="800">Chunk 1</text>
+      <text x="75" y="30" text-anchor="middle" fill="#ffffff">1&#8211;250</text>
+
+      <rect x="160" y="0" width="150" height="36" rx="6" fill="#ef5b6b"/>
+      <text x="235" y="15" text-anchor="middle" fill="#ffffff" font-weight="800">Chunk 2</text>
+      <text x="235" y="30" text-anchor="middle" fill="#ffffff">251&#8211;500</text>
+
+      <rect x="320" y="0" width="150" height="36" rx="6" fill="#ef5b6b"/>
+      <text x="395" y="15" text-anchor="middle" fill="#ffffff" font-weight="800">Chunk 3</text>
+      <text x="395" y="30" text-anchor="middle" fill="#ffffff">501&#8211;750</text>
+    </g>
+
+    <text x="20" y="200" font-size="15" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Trivial to implement, predictable size</text>
+    <text x="20" y="228" font-size="15" fill="#222"><tspan font-weight="800" fill="#3d6db5">&#8722;</tspan> Cuts off words, splits ideas mid-sentence</text>
+
+    <text x="20" y="280" font-size="16" font-weight="800" fill="#2c3a52">Code (one-liner)</text>
+    <text x="20" y="312" class="mono" font-size="14" fill="#111">[text[i:i+250] for i in range(0,len(text),250)]</text>
+    <text x="20" y="350" font-size="13" fill="#666" font-style="italic">Good default for fast prototyping, never for prod alone.</text>
+  </g>
+
+  <!-- 4b: Fixed + overlap -->
+  <g transform="translate(595,1110)">
+    <rect width="510" height="380" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">b) Fixed-size + overlap</text>
+    <text x="20" y="68" font-size="15" fill="#222">Each chunk shares a tail with the next. E.g. 10% overlap.</text>
+
+    <!-- visualisation -->
+    <g transform="translate(20,90)">
+      <rect x="0"   y="0"  width="240" height="36" rx="6" fill="#ef5b6b"/>
+      <text x="120" y="15" text-anchor="middle" class="mono" font-size="13" fill="#ffffff" font-weight="800">Chunk 1</text>
+      <text x="120" y="30" text-anchor="middle" class="mono" font-size="13" fill="#ffffff">1&#8211;250</text>
+
+      <rect x="216" y="44" width="240" height="36" rx="6" fill="#ef5b6b"/>
+      <text x="336" y="59" text-anchor="middle" class="mono" font-size="13" fill="#ffffff" font-weight="800">Chunk 2</text>
+      <text x="336" y="74" text-anchor="middle" class="mono" font-size="13" fill="#ffffff">226&#8211;475</text>
+
+      <!-- overlap marker -->
+      <rect x="216" y="0" width="24" height="36" rx="4" fill="none" stroke="#1a2438" stroke-width="2" stroke-dasharray="3 3"/>
+      <text x="228" y="22" text-anchor="middle" class="mono" font-size="11" font-weight="800" fill="#111">25</text>
+
+      <rect x="432" y="88" width="60"  height="36" rx="6" fill="#fcc6cc"/>
+      <text x="462" y="110" text-anchor="middle" class="mono" font-size="11" fill="#111">...</text>
+    </g>
+
+    <text x="20" y="252" font-size="15" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Words near boundaries appear in 2 chunks &#8594; recall&#8593;</text>
+    <text x="20" y="280" font-size="15" fill="#222"><tspan font-weight="800" fill="#3d6db5">&#8722;</tspan> More vectors stored (redundancy &#8594; storage cost)</text>
+
+    <text x="20" y="318" font-size="16" font-weight="800" fill="#2c3a52">Rule of thumb</text>
+    <text x="20" y="348" class="mono" font-size="14" fill="#111">chunk = 500 chars, overlap = 50&#8211;100 chars</text>
+    <text x="20" y="370" font-size="13" fill="#666" font-style="italic">10&#8211;20% overlap balances recall vs storage well.</text>
+  </g>
+
+  <!-- 4c: Recursive char split -->
+  <g transform="translate(1140,1110)">
+    <rect width="510" height="380" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">c) Recursive char split</text>
+    <text x="20" y="68" font-size="15" fill="#222">Split on structure markers (newlines, sentences, ...).</text>
+    <text x="20" y="90" font-size="15" fill="#222">Variable size, but respects boundaries.</text>
+
+    <g transform="translate(20,110)" class="mono" font-size="12">
+      <rect x="0"   y="0"  width="470" height="24" rx="4" fill="#a99bd6"/>
+      <text x="10" y="16" fill="#111">Taylor Swift is performing... part of her Eras Tour.</text>
+
+      <rect x="0"  y="34" width="470" height="24" rx="4" fill="#1eb6c8"/>
+      <text x="10" y="50" fill="#111">Thousands of fans are traveling... hotel demand spike.</text>
+
+      <rect x="0"  y="68" width="470" height="24" rx="4" fill="#ef5b6b"/>
+      <text x="10" y="84" fill="#ffffff">Local hotels are fully booked... prices doubled.</text>
+    </g>
+
+    <text x="20" y="240" font-size="15" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Keeps related ideas together</text>
+    <text x="20" y="268" font-size="15" fill="#222"><tspan font-weight="800" fill="#ef5b6b">+</tspan> Accounts for document structure</text>
+    <text x="20" y="296" font-size="15" fill="#222"><tspan font-weight="800" fill="#3d6db5">&#8722;</tspan> Chunk sizes vary wildly (very long or very short)</text>
+
+    <text x="20" y="332" font-size="13" fill="#666" font-style="italic">Recursive: tries paragraphs first, then sentences,</text>
+    <text x="20" y="352" font-size="13" fill="#666" font-style="italic">then words &#8594; until each chunk fits the size limit.</text>
+  </g>
+
+  <!-- ===== SECTION 5: DIFFERENT DOCS, DIFFERENT SPLITS ===== -->
+  <text x="50" y="1560" class="section">5. Different document types &#8594; different split characters</text>
+
+  <rect x="50" y="1580" width="1600" height="220" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- text -->
+  <g transform="translate(80,1620)">
+    <text x="0" y="0" font-size="18" font-weight="800" fill="#2c3a52">Plain text</text>
+    <text x="0" y="30" font-size="15" fill="#222">Split on <tspan class="mono" font-weight="800">\n\n</tspan> (paragraph)</text>
+    <text x="0" y="55" font-size="15" fill="#222">then <tspan class="mono" font-weight="800">\n</tspan>, then sentence.</text>
+  </g>
+
+  <!-- HTML -->
+  <g transform="translate(450,1620)">
+    <text x="0" y="0" font-size="18" font-weight="800" fill="#2c3a52">HTML / Markdown</text>
+    <text x="0" y="30" font-size="15" fill="#222">Split on headers (<tspan class="mono" font-weight="800">h1, h2, p</tspan>),</text>
+    <text x="0" y="55" font-size="15" fill="#222">preserve hierarchy in metadata.</text>
+  </g>
+
+  <!-- Python -->
+  <g transform="translate(870,1620)">
+    <text x="0" y="0" font-size="18" font-weight="800" fill="#2c3a52">Code (Python / JS)</text>
+    <text x="0" y="30" font-size="15" fill="#222">Split on function / class</text>
+    <text x="0" y="55" font-size="15" fill="#222">definitions, never mid-statement.</text>
+  </g>
+
+  <!-- PDF -->
+  <g transform="translate(1280,1620)">
+    <text x="0" y="0" font-size="18" font-weight="800" fill="#2c3a52">PDF / scanned docs</text>
+    <text x="0" y="30" font-size="15" fill="#222">Split by page or section after</text>
+    <text x="0" y="55" font-size="15" fill="#222">layout-aware OCR (Docling).</text>
+  </g>
+
+  <text x="80" y="1740" font-size="16" fill="#222">
+    <tspan font-weight="800" fill="#ef5b6b">Rule:</tspan>
+    <tspan> the right splitter knows your format. Wrong splitter = chunks that break mid-tag, mid-function, or mid-table &#8594; useless retrieval.</tspan>
+  </text>
+  <text x="80" y="1768" font-size="13" fill="#666" font-style="italic">Don't reach for a generic text splitter when your data is HTML, code, or structured tables.</text>
+
+  <!-- ===== SECTION 6: IMPLEMENTATION + METADATA ===== -->
+  <text x="50" y="1850" class="section">6. Implementation notes</text>
+
+  <g transform="translate(50,1870)">
+    <rect width="780" height="220" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="45" font-size="20" font-weight="800" fill="#2c3a52">DIY vs. libraries</text>
+    <text x="20" y="78" font-size="15" fill="#222">Fixed-size + overlap fits in 5 lines of Python.</text>
+    <text x="20" y="106" font-size="15" fill="#222">For real systems, reach for battle-tested libs:</text>
+    <text x="20" y="138" class="mono" font-size="14" fill="#111">LangChain RecursiveCharacterTextSplitter</text>
+    <text x="20" y="162" class="mono" font-size="14" fill="#111">LlamaIndex SentenceSplitter / NodeParser</text>
+    <text x="20" y="186" class="mono" font-size="14" fill="#111">Chonkie, Docling, Unstructured.io (2026 favorites)</text>
+  </g>
+
+  <g transform="translate(860,1870)">
+    <rect width="790" height="220" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="45" font-size="20" font-weight="800" fill="#2c3a52">Metadata preservation</text>
+    <text x="20" y="78" font-size="15" fill="#222">Every chunk should carry its parent's metadata,</text>
+    <text x="20" y="106" font-size="15" fill="#222">plus extra location info:</text>
+    <text x="40" y="135" font-size="14" class="mono" fill="#111">{ doc_id, title, author, date,</text>
+    <text x="40" y="157" font-size="14" class="mono" fill="#111">  chunk_index, char_start, char_end,</text>
+    <text x="40" y="179" font-size="14" class="mono" fill="#111">  section_heading }</text>
+    <text x="20" y="205" font-size="13" fill="#666" font-style="italic">Lets you cite, deduplicate, and rebuild context.</text>
+  </g>
+
+  <!-- ===== SECTION 7: STARTING POINT + 2026 ===== -->
+  <text x="50" y="2150" class="section">7. Good default &amp; what's new in 2026</text>
+
+  <rect x="50" y="2170" width="780" height="200" rx="16" fill="#ef5b6b"/>
+  <text x="80" y="2210" font-size="22" font-weight="800" fill="#ffffff">Practical starting recipe</text>
+  <text x="80" y="2248" font-size="16" fill="#ffffff">&#10003; <tspan font-weight="800">~500 characters</tspan> per chunk</text>
+  <text x="80" y="2280" font-size="16" fill="#ffffff">&#10003; <tspan font-weight="800">50&#8211;100 character</tspan> overlap (~10&#8211;20%)</text>
+  <text x="80" y="2312" font-size="16" fill="#ffffff">&#10003; Recursive split on <tspan class="mono">\n\n &#8594; \n &#8594; sentence &#8594; word</tspan></text>
+  <text x="80" y="2344" font-size="16" fill="#ffffff">&#10003; Inherit doc metadata + add chunk index</text>
+
+  <rect x="860" y="2170" width="790" height="200" rx="16" fill="#1a2438"/>
+  <text x="890" y="2210" font-size="22" font-weight="800" fill="#ffd86b">2026 advances worth knowing</text>
+  <text x="890" y="2244" font-size="15" fill="#ffffff">&#9679; <tspan font-weight="800">Semantic chunking</tspan> — find natural breakpoints with embeddings</text>
+  <text x="890" y="2272" font-size="15" fill="#ffffff">&#9679; <tspan font-weight="800">Contextual Retrieval</tspan> (Anthropic) — prepend doc context per chunk</text>
+  <text x="890" y="2300" font-size="15" fill="#ffffff">&#9679; <tspan font-weight="800">Late chunking</tspan> (Jina) — embed full doc first, chunk the vectors</text>
+  <text x="890" y="2328" font-size="15" fill="#ffffff">&#9679; <tspan font-weight="800">Layout-aware splitters</tspan> (Docling, Unstructured) — preserve tables</text>
+  <text x="890" y="2356" font-size="15" fill="#ffffff">&#9679; <tspan font-weight="800">Hierarchical chunks</tspan> — store parent &amp; child, retrieve at multi-grain</text>
+</svg>

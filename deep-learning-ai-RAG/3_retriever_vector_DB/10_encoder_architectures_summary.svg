@@ -1,0 +1,405 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2500" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#1a2438"/>
+      <stop offset="100%" stop-color="#ef5b6b"/>
+    </linearGradient>
+    <style>
+      .h1 { font-size: 46px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 20px; fill: #ffd3d7; font-style: italic; }
+      .section { font-size: 30px; font-weight: 800; fill: #111; }
+      .mono { font-family: 'Courier New', Courier, monospace; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1700" height="2500" fill="#ffffff"/>
+
+  <!-- ===== HEADER ===== -->
+  <rect x="0" y="0" width="1700" height="150" fill="url(#hdr)"/>
+  <text x="50" y="70" class="h1">Bi-Encoder &#8226; Cross-Encoder &#8226; ColBERT</text>
+  <text x="50" y="108" class="sub">Three architectures for matching prompts to documents — the speed/quality/storage triangle</text>
+
+  <!-- ===== SECTION 1: BIG PICTURE COMPARISON TABLE ===== -->
+  <text x="50" y="210" class="section">1. The big picture — pick your trade-off</text>
+
+  <rect x="50" y="230" width="1600" height="280" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Header row -->
+  <g transform="translate(80,260)" font-size="16" font-weight="800" fill="#111">
+    <text x="0" y="20"></text>
+    <text x="280" y="20" text-anchor="middle" fill="#ef5b6b">Bi-Encoder</text>
+    <text x="280" y="42" text-anchor="middle" font-size="12" font-weight="400" fill="#666" font-style="italic">the default</text>
+    <text x="700" y="20" text-anchor="middle" fill="#5b3a8c">Cross-Encoder</text>
+    <text x="700" y="42" text-anchor="middle" font-size="12" font-weight="400" fill="#666" font-style="italic">the gold standard</text>
+    <text x="1120" y="20" text-anchor="middle" fill="#3aa97a">ColBERT</text>
+    <text x="1120" y="42" text-anchor="middle" font-size="12" font-weight="400" fill="#666" font-style="italic">the compromise</text>
+  </g>
+
+  <!-- divider -->
+  <line x1="80" y1="320" x2="1620" y2="320" stroke="#d6d9de" stroke-width="1.5"/>
+
+  <!-- Quality row -->
+  <text x="100" y="350" font-size="15" font-weight="800" fill="#111">Quality</text>
+  <g transform="translate(280,348)" text-anchor="middle">
+    <text x="80" y="0" font-size="22">&#9733;&#9733;&#9734;</text>
+    <text x="80" y="20" font-size="12" fill="#666">good</text>
+  </g>
+  <g transform="translate(700,348)" text-anchor="middle">
+    <text x="80" y="0" font-size="22">&#9733;&#9733;&#9733;</text>
+    <text x="80" y="20" font-size="12" fill="#666">best</text>
+  </g>
+  <g transform="translate(1120,348)" text-anchor="middle">
+    <text x="80" y="0" font-size="22">&#9733;&#9733;&#9734;</text>
+    <text x="80" y="20" font-size="12" fill="#666">near-best</text>
+  </g>
+
+  <!-- Speed row -->
+  <text x="100" y="400" font-size="15" font-weight="800" fill="#111">Speed</text>
+  <g transform="translate(280,398)" text-anchor="middle">
+    <text x="80" y="0" font-size="22">&#9889;&#9889;&#9889;</text>
+    <text x="80" y="20" font-size="12" fill="#666">fast</text>
+  </g>
+  <g transform="translate(700,398)" text-anchor="middle">
+    <text x="80" y="0" font-size="22">&#128012;</text>
+    <text x="80" y="20" font-size="12" fill="#666">very slow</text>
+  </g>
+  <g transform="translate(1120,398)" text-anchor="middle">
+    <text x="80" y="0" font-size="22">&#9889;&#9889;</text>
+    <text x="80" y="20" font-size="12" fill="#666">decent</text>
+  </g>
+
+  <!-- Storage row -->
+  <text x="100" y="450" font-size="15" font-weight="800" fill="#111">Storage</text>
+  <g transform="translate(280,448)" text-anchor="middle">
+    <text x="80" y="0" font-size="14" fill="#222">1 vector / document</text>
+    <text x="80" y="20" font-size="12" fill="#666">minimal</text>
+  </g>
+  <g transform="translate(700,448)" text-anchor="middle">
+    <text x="80" y="0" font-size="14" fill="#222">none cached</text>
+    <text x="80" y="20" font-size="12" fill="#666">minimal (but recompute every query)</text>
+  </g>
+  <g transform="translate(1120,448)" text-anchor="middle">
+    <text x="80" y="0" font-size="14" fill="#222">1 vector / TOKEN</text>
+    <text x="80" y="20" font-size="12" fill="#666">significant</text>
+  </g>
+
+  <!-- Best use row -->
+  <line x1="80" y1="480" x2="1620" y2="480" stroke="#d6d9de" stroke-width="1.5"/>
+  <text x="100" y="498" font-size="13" font-weight="800" fill="#111">Best for</text>
+  <text x="280" y="500" text-anchor="middle" font-size="13" fill="#222">default semantic search</text>
+  <text x="700" y="500" text-anchor="middle" font-size="13" fill="#222">reranking top candidates</text>
+  <text x="1120" y="500" text-anchor="middle" font-size="13" fill="#222">production retrieval at scale</text>
+
+  <!-- ===== SECTION 2: BI-ENCODER ===== -->
+  <text x="50" y="560" class="section">2. Bi-Encoder &#8226; embed separately, compare vectors</text>
+
+  <rect x="50" y="580" width="1600" height="340" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Left: bullets -->
+  <text x="80" y="620" font-size="18" font-weight="800" fill="#2c3a52">How it works</text>
+
+  <text x="80" y="660" font-size="16" font-weight="800" fill="#111">1. Separate vectors</text>
+  <text x="80" y="685" font-size="14" fill="#222">Prompt and documents are embedded</text>
+  <text x="80" y="706" font-size="14" fill="#222">by the SAME embedding model but independently.</text>
+
+  <text x="80" y="745" font-size="16" font-weight="800" fill="#111">2. Vectors pre-computed</text>
+  <text x="80" y="770" font-size="14" fill="#222">All document vectors are computed offline.</text>
+  <text x="80" y="791" font-size="14" fill="#222">Only the prompt is embedded at query time.</text>
+
+  <text x="80" y="830" font-size="16" font-weight="800" fill="#111">3. ANN search</text>
+  <text x="80" y="855" font-size="14" fill="#222">The vector DB uses ANN (HNSW) to find</text>
+  <text x="80" y="876" font-size="14" fill="#222">docs whose vectors are closest to the prompt.</text>
+
+  <!-- Right: diagram -->
+  <g transform="translate(880,615)">
+    <!-- Prompt icon -->
+    <rect x="100" y="0" width="80" height="80" rx="14" fill="#2c3a52"/>
+    <path d="M116 22 H164 a4 4 0 0 1 4 4 V52 a4 4 0 0 1 -4 4 H140 l-8 12 v-12 h-16 a4 4 0 0 1 -4 -4 V26 a4 4 0 0 1 4 -4 z" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <text x="122" y="48" fill="#ffffff" class="mono" font-size="18" font-weight="800">&gt;_</text>
+    <text x="140" y="100" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Prompt</text>
+
+    <!-- Documents icon -->
+    <g transform="translate(440,0)" fill="#2c3a52">
+      <rect x="20" y="20" width="60" height="60" rx="6"/>
+      <rect x="0"  y="0"  width="60" height="60" rx="6"/>
+      <line x1="10" y1="15" x2="50" y2="15" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="30" x2="50" y2="30" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="45" x2="40" y2="45" stroke="#ffffff" stroke-width="3"/>
+    </g>
+    <text x="480" y="100" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Documents</text>
+
+    <!-- Arrows to embedding model -->
+    <line x1="140" y1="115" x2="140" y2="140" stroke="#111" stroke-width="2.5" marker-end="url(#ar)"/>
+    <line x1="480" y1="115" x2="480" y2="140" stroke="#111" stroke-width="2.5" marker-end="url(#ar)"/>
+
+    <!-- Embedding Model bar -->
+    <rect x="60" y="150" width="560" height="50" rx="10" fill="#ef5b6b"/>
+    <text x="340" y="182" text-anchor="middle" font-size="20" font-weight="800" fill="#ffffff">Same Embedding Model</text>
+
+    <!-- Arrows down -->
+    <line x1="140" y1="205" x2="140" y2="225" stroke="#111" stroke-width="2.5" marker-end="url(#ar)"/>
+    <line x1="480" y1="205" x2="480" y2="225" stroke="#111" stroke-width="2.5" marker-end="url(#ar)"/>
+
+    <!-- vectors -->
+    <text x="140" y="252" text-anchor="middle" class="mono" font-size="14" fill="#111">[0,5,0,4,0,0,3,2]</text>
+    <text x="480" y="252" text-anchor="middle" class="mono" font-size="14" fill="#111">[1,6,3,1,2,8,4,5]</text>
+
+    <!-- Bi-encoder box -->
+    <line x1="140" y1="265" x2="280" y2="280" stroke="#111" stroke-width="2"/>
+    <line x1="480" y1="265" x2="340" y2="280" stroke="#111" stroke-width="2"/>
+    <rect x="100" y="280" width="420" height="40" rx="8" fill="#ef5b6b"/>
+    <text x="310" y="306" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">ANN search compares the vectors</text>
+  </g>
+
+  <!-- ===== SECTION 3: CROSS-ENCODER ===== -->
+  <text x="50" y="980" class="section">3. Cross-Encoder &#8226; concat first, score the pair</text>
+
+  <rect x="50" y="1000" width="1600" height="430" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Left: how it works -->
+  <text x="80" y="1040" font-size="18" font-weight="800" fill="#2c3a52">How it works</text>
+
+  <text x="80" y="1080" font-size="16" font-weight="800" fill="#111">1. Concatenate</text>
+  <text x="80" y="1102" font-size="14" fill="#222">Prompt + document are joined into ONE input.</text>
+
+  <text x="80" y="1140" font-size="16" font-weight="800" fill="#111">2. Joint encoding</text>
+  <text x="80" y="1162" font-size="14" fill="#222">The model attends across both halves at once,</text>
+  <text x="80" y="1182" font-size="14" fill="#222">producing deep contextual interactions.</text>
+
+  <text x="80" y="1220" font-size="16" font-weight="800" fill="#111">3. Relevance score</text>
+  <text x="80" y="1242" font-size="14" fill="#222">Direct output: a single number from 0 to 1.</text>
+
+  <!-- Critical insight -->
+  <g transform="translate(80,1280)">
+    <rect width="540" height="120" rx="10" fill="#2c3a52"/>
+    <text x="20" y="30" font-size="16" font-weight="800" fill="#ffd86b">The crippling cost</text>
+    <text x="20" y="58" font-size="14" fill="#ffffff">Must run for EVERY (prompt, document) pair at</text>
+    <text x="20" y="78" font-size="14" fill="#ffffff">query time. No pre-computation possible.</text>
+    <text x="20" y="105" font-size="14" fill="#ffffff">&#8594; great for reranking ~50 candidates, never for first-pass.</text>
+  </g>
+
+  <!-- Right: scoring example -->
+  <text x="780" y="1040" font-size="18" font-weight="800" fill="#2c3a52">Example: "Great places to eat in New York"</text>
+
+  <g transform="translate(780,1060)">
+    <!-- Doc 1 -->
+    <rect x="0" y="0" width="540" height="80" rx="10" fill="#eaf0ff" stroke="#cbd6e9" stroke-dasharray="4 3"/>
+    <text x="14" y="22" class="mono" font-size="12" fill="#1a2438">Top 10 restaurants in Manhattan: dining</text>
+    <text x="14" y="42" class="mono" font-size="12" fill="#1a2438">in Times Square to gems in East Village...</text>
+    <line x1="540" y1="40" x2="600" y2="40" stroke="#111" stroke-width="2" marker-end="url(#ar)"/>
+    <rect x="608" y="20" width="100" height="40" rx="8" fill="#ef5b6b"/>
+    <text x="658" y="46" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">70%</text>
+
+    <!-- Doc 2 -->
+    <rect x="0" y="100" width="540" height="80" rx="10" fill="#eaf0ff" stroke="#cbd6e9" stroke-dasharray="4 3"/>
+    <text x="14" y="122" class="mono" font-size="12" fill="#1a2438">New York's subway system includes 472</text>
+    <text x="14" y="142" class="mono" font-size="12" fill="#1a2438">stations, one of the oldest in the world...</text>
+    <line x1="540" y1="140" x2="600" y2="140" stroke="#111" stroke-width="2" marker-end="url(#ar)"/>
+    <rect x="608" y="120" width="100" height="40" rx="8" fill="#fcc6cc"/>
+    <text x="658" y="146" text-anchor="middle" font-size="18" font-weight="800" fill="#111">12%</text>
+
+    <!-- Doc 3 -->
+    <rect x="0" y="200" width="540" height="80" rx="10" fill="#eaf0ff" stroke="#cbd6e9" stroke-dasharray="4 3"/>
+    <text x="14" y="222" class="mono" font-size="12" fill="#1a2438">Brooklyn's food scene: diverse cuisines,</text>
+    <text x="14" y="242" class="mono" font-size="12" fill="#1a2438">pizza in DUMBO, dim sum in Sunset Park...</text>
+    <line x1="540" y1="240" x2="600" y2="240" stroke="#111" stroke-width="2" marker-end="url(#ar)"/>
+    <rect x="608" y="220" width="100" height="40" rx="8" fill="#ef5b6b"/>
+    <text x="658" y="246" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">85%</text>
+
+    <text x="380" y="320" text-anchor="middle" font-size="13" fill="#666" font-style="italic">Notice: doc 3 (Brooklyn) outranks doc 1 (Manhattan) &#8212; a bi-encoder wouldn't catch this nuance.</text>
+  </g>
+
+  <!-- ===== SECTION 4: ColBERT ===== -->
+  <text x="50" y="1490" class="section">4. ColBERT &#8226; one vector per token + MaxSim scoring</text>
+
+  <rect x="50" y="1510" width="1600" height="540" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Left bullets -->
+  <text x="80" y="1550" font-size="18" font-weight="800" fill="#2c3a52">The compromise (Contextualized Late Interaction Over BERT)</text>
+
+  <text x="80" y="1592" font-size="16" font-weight="800" fill="#111">1. Pre-compute like bi-encoder</text>
+  <text x="80" y="1614" font-size="14" fill="#222">Document vectors are built offline. Fast at query time.</text>
+
+  <text x="80" y="1650" font-size="16" font-weight="800" fill="#111">2. One vector PER TOKEN (not per doc)</text>
+  <text x="80" y="1672" font-size="14" fill="#222">Every token gets its own embedding &#8594; preserves fine-grained meaning.</text>
+
+  <text x="80" y="1708" font-size="16" font-weight="800" fill="#111">3. MaxSim scoring</text>
+  <text x="80" y="1730" font-size="14" fill="#222">For each prompt token, find its <tspan font-weight="800">best-matching</tspan> doc token,</text>
+  <text x="80" y="1750" font-size="14" fill="#222">then sum those maxima &#8594; document's overall score.</text>
+
+  <!-- MaxSim matrix visualization -->
+  <text x="80" y="1800" font-size="16" font-weight="800" fill="#2c3a52">MaxSim example</text>
+  <text x="80" y="1822" font-size="13" fill="#666" font-style="italic">Prompt: "Great places to eat in New York"  vs.  Doc: "The cuisine of New York City comprises many..."</text>
+
+  <!-- The matrix -->
+  <g transform="translate(80,1840)" class="mono">
+    <!-- header row (doc tokens) -->
+    <g font-size="11" fill="#111">
+      <rect x="80"  y="0" width="60" height="22" fill="#ffe1ad"/><text x="110" y="15" text-anchor="middle">The</text>
+      <rect x="140" y="0" width="60" height="22" fill="#a99bd6"/><text x="170" y="15" text-anchor="middle">cuisine</text>
+      <rect x="200" y="0" width="60" height="22" fill="#bfe0bf"/><text x="230" y="15" text-anchor="middle">of</text>
+      <rect x="260" y="0" width="60" height="22" fill="#fcc6cc"/><text x="290" y="15" text-anchor="middle">New</text>
+      <rect x="320" y="0" width="60" height="22" fill="#ffd86b"/><text x="350" y="15" text-anchor="middle">York</text>
+      <rect x="380" y="0" width="60" height="22" fill="#a99bd6"/><text x="410" y="15" text-anchor="middle">City</text>
+      <rect x="440" y="0" width="80" height="22" fill="#a99bd6"/><text x="480" y="15" text-anchor="middle">comprises</text>
+      <rect x="520" y="0" width="60" height="22" fill="#ffe1ad"/><text x="550" y="15" text-anchor="middle">many</text>
+      <text x="600" y="15" text-anchor="middle">. . .</text>
+    </g>
+
+    <!-- rows: prompt tokens with their best column highlighted in green -->
+    <!-- Row Great: max 0.3 at "many" -->
+    <g font-size="11">
+      <rect x="0" y="22" width="80" height="22" fill="#fcc6cc"/><text x="10" y="37" fill="#111">Great</text>
+      <text x="110" y="37" text-anchor="middle" fill="#888">0.1</text>
+      <text x="170" y="37" text-anchor="middle" fill="#888">0.0</text>
+      <text x="230" y="37" text-anchor="middle" fill="#888">0.0</text>
+      <text x="290" y="37" text-anchor="middle" fill="#888">0.0</text>
+      <text x="350" y="37" text-anchor="middle" fill="#888">0.1</text>
+      <text x="410" y="37" text-anchor="middle" fill="#888">0.1</text>
+      <text x="480" y="37" text-anchor="middle" fill="#888">0.0</text>
+      <rect x="520" y="22" width="60" height="22" fill="#bfe0bf"/>
+      <text x="550" y="37" text-anchor="middle" fill="#111" font-weight="800">0.3</text>
+    </g>
+
+    <!-- Row places: max 0.3 at City -->
+    <g font-size="11">
+      <rect x="0" y="44" width="80" height="22" fill="#bbe2ff"/><text x="10" y="59" fill="#111">places</text>
+      <text x="110" y="59" text-anchor="middle" fill="#888">0.0</text>
+      <text x="170" y="59" text-anchor="middle" fill="#888">0.2</text>
+      <text x="230" y="59" text-anchor="middle" fill="#888">0.0</text>
+      <text x="290" y="59" text-anchor="middle" fill="#888">0.2</text>
+      <text x="350" y="59" text-anchor="middle" fill="#888">0.2</text>
+      <rect x="380" y="44" width="60" height="22" fill="#bfe0bf"/>
+      <text x="410" y="59" text-anchor="middle" fill="#111" font-weight="800">0.3</text>
+      <text x="480" y="59" text-anchor="middle" fill="#888">0.1</text>
+      <text x="550" y="59" text-anchor="middle" fill="#888">0.0</text>
+    </g>
+
+    <!-- Row to: max 0.2 at comprises -->
+    <g font-size="11">
+      <rect x="0" y="66" width="80" height="22" fill="#ffd86b"/><text x="10" y="81" fill="#111">to</text>
+      <text x="110" y="81" text-anchor="middle" fill="#888">-0.1</text>
+      <text x="170" y="81" text-anchor="middle" fill="#888">-0.5</text>
+      <text x="230" y="81" text-anchor="middle" fill="#888">0.1</text>
+      <text x="290" y="81" text-anchor="middle" fill="#888">-0.3</text>
+      <text x="350" y="81" text-anchor="middle" fill="#888">0.1</text>
+      <text x="410" y="81" text-anchor="middle" fill="#888">-0.2</text>
+      <rect x="440" y="66" width="80" height="22" fill="#bfe0bf"/>
+      <text x="480" y="81" text-anchor="middle" fill="#111" font-weight="800">0.2</text>
+      <text x="550" y="81" text-anchor="middle" fill="#888">0.1</text>
+    </g>
+
+    <!-- Row eat: max 0.7 at cuisine -->
+    <g font-size="11">
+      <rect x="0" y="88" width="80" height="22" fill="#a99bd6"/><text x="10" y="103" fill="#111">eat</text>
+      <text x="110" y="103" text-anchor="middle" fill="#888">0.0</text>
+      <rect x="140" y="88" width="60" height="22" fill="#bfe0bf"/>
+      <text x="170" y="103" text-anchor="middle" fill="#111" font-weight="800">0.7</text>
+      <text x="230" y="103" text-anchor="middle" fill="#888">-0.2</text>
+      <text x="290" y="103" text-anchor="middle" fill="#888">-0.1</text>
+      <text x="350" y="103" text-anchor="middle" fill="#888">-0.2</text>
+      <text x="410" y="103" text-anchor="middle" fill="#888">0.1</text>
+      <text x="480" y="103" text-anchor="middle" fill="#888">-0.9</text>
+      <text x="550" y="103" text-anchor="middle" fill="#888">-0.3</text>
+    </g>
+
+    <!-- Row in: max 0.3 at of -->
+    <g font-size="11">
+      <rect x="0" y="110" width="80" height="22" fill="#bfe0bf"/><text x="10" y="125" fill="#111">in</text>
+      <text x="110" y="125" text-anchor="middle" fill="#888">0.0</text>
+      <text x="170" y="125" text-anchor="middle" fill="#888">-0.2</text>
+      <rect x="200" y="110" width="60" height="22" fill="#bfe0bf"/>
+      <text x="230" y="125" text-anchor="middle" fill="#111" font-weight="800">0.3</text>
+      <text x="290" y="125" text-anchor="middle" fill="#888">-0.2</text>
+      <text x="350" y="125" text-anchor="middle" fill="#888">0.3</text>
+      <text x="410" y="125" text-anchor="middle" fill="#888">-0.2</text>
+      <text x="480" y="125" text-anchor="middle" fill="#888">0.2</text>
+      <text x="550" y="125" text-anchor="middle" fill="#888">0.2</text>
+    </g>
+
+    <!-- Row New: max 0.9 at New -->
+    <g font-size="11">
+      <rect x="0" y="132" width="80" height="22" fill="#ffe1ad"/><text x="10" y="147" fill="#111">New</text>
+      <text x="110" y="147" text-anchor="middle" fill="#888">0.2</text>
+      <text x="170" y="147" text-anchor="middle" fill="#888">0.2</text>
+      <text x="230" y="147" text-anchor="middle" fill="#888">0.2</text>
+      <rect x="260" y="132" width="60" height="22" fill="#bfe0bf"/>
+      <text x="290" y="147" text-anchor="middle" fill="#111" font-weight="800">0.9</text>
+      <text x="350" y="147" text-anchor="middle" fill="#888">0.8</text>
+      <text x="410" y="147" text-anchor="middle" fill="#888">0.7</text>
+      <text x="480" y="147" text-anchor="middle" fill="#888">0.2</text>
+      <text x="550" y="147" text-anchor="middle" fill="#888">-0.3</text>
+    </g>
+
+    <!-- Row York: max 0.9 at York -->
+    <g font-size="11">
+      <rect x="0" y="154" width="80" height="22" fill="#fcc6cc"/><text x="10" y="169" fill="#111">York</text>
+      <text x="110" y="169" text-anchor="middle" fill="#888">0.1</text>
+      <text x="170" y="169" text-anchor="middle" fill="#888">0.2</text>
+      <text x="230" y="169" text-anchor="middle" fill="#888">0.1</text>
+      <text x="290" y="169" text-anchor="middle" fill="#888">0.8</text>
+      <rect x="320" y="154" width="60" height="22" fill="#bfe0bf"/>
+      <text x="350" y="169" text-anchor="middle" fill="#111" font-weight="800">0.9</text>
+      <text x="410" y="169" text-anchor="middle" fill="#888">0.8</text>
+      <text x="480" y="169" text-anchor="middle" fill="#888">0.2</text>
+      <text x="550" y="169" text-anchor="middle" fill="#888">-0.1</text>
+    </g>
+  </g>
+
+  <!-- Sum -->
+  <text x="80" y="2030" font-size="14" class="mono" fill="#111">0.3 + 0.3 + 0.2 + 0.7 + 0.3 + 0.9 + 0.9</text>
+  <text x="430" y="2030" font-size="20" font-weight="800" fill="#3aa97a">= 3.6 (MaxSim)</text>
+
+  <!-- Right side: pros/cons + insight -->
+  <g transform="translate(880,1840)">
+    <rect width="370" height="100" rx="10" fill="#ef5b6b"/>
+    <text x="20" y="30" font-size="16" font-weight="800" fill="#ffffff">Pros</text>
+    <text x="20" y="56" font-size="13" fill="#ffffff">&#9679; Scalable like bi-encoder (pre-computed)</text>
+    <text x="20" y="78" font-size="13" fill="#ffffff">&#9679; Captures rich token-level interactions</text>
+    <text x="20" y="95" font-size="13" fill="#ffffff">&#9679; Real-time / near-real-time speed</text>
+  </g>
+
+  <g transform="translate(1270,1840)">
+    <rect width="370" height="100" rx="10" fill="#1eb6c8"/>
+    <text x="20" y="30" font-size="16" font-weight="800" fill="#ffffff">Cons</text>
+    <text x="20" y="56" font-size="13" fill="#ffffff">&#9679; Storage explodes: one vector per</text>
+    <text x="20" y="75" font-size="13" fill="#ffffff">&#9679; TOKEN, not per document</text>
+    <text x="20" y="95" font-size="13" fill="#ffffff">&#9679; Index size 10&#8211;100&#215; larger than bi-encoder</text>
+  </g>
+
+  <g transform="translate(880,1960)">
+    <rect width="760" height="90" rx="10" fill="#2c3a52"/>
+    <text x="20" y="30" font-size="16" font-weight="800" fill="#ffd86b">Why MaxSim works</text>
+    <text x="20" y="56" font-size="13" fill="#ffffff">Each prompt token "shops around" for its best doc-token match.</text>
+    <text x="20" y="78" font-size="13" fill="#ffffff">"eat" finds "cuisine" (0.7), "New York" finds "New York" (0.9 + 0.9) &#8212; concept-level matching beats average pooling.</text>
+  </g>
+
+  <!-- ===== SECTION 5: KEY TAKEAWAYS ===== -->
+  <text x="50" y="2110" class="section">5. Key takeaways &amp; what to use in 2026</text>
+
+  <rect x="50" y="2130" width="1600" height="160" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+  <text x="80" y="2168" font-size="16" fill="#222">
+    <tspan font-weight="800" fill="#ef5b6b">Bi-encoder</tspan>
+    <tspan> = default for first-pass semantic search. Cheap, fast, good enough for most queries.</tspan>
+  </text>
+  <text x="80" y="2200" font-size="16" fill="#222">
+    <tspan font-weight="800" fill="#5b3a8c">Cross-encoder</tspan>
+    <tspan> = highest quality, but only viable as a reranker over the top 20&#8211;100 candidates.</tspan>
+  </text>
+  <text x="80" y="2232" font-size="16" fill="#222">
+    <tspan font-weight="800" fill="#3aa97a">ColBERT</tspan>
+    <tspan> = nearly cross-encoder quality at bi-encoder-ish speed. Costs storage. Increasingly native in vector DBs.</tspan>
+  </text>
+  <text x="80" y="2266" font-size="14" fill="#666" font-style="italic">In practice: production stacks use bi-encoder for recall + cross-encoder / ColBERT for the precision pass.</text>
+
+  <!-- ===== SECTION 6: 2026 ===== -->
+  <rect x="50" y="2310" width="1600" height="170" rx="14" fill="#1a2438"/>
+  <text x="80" y="2348" font-size="22" font-weight="800" fill="#ffd86b">2026 production stack &#8226; the two-stage retrieval pattern</text>
+  <text x="80" y="2380" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Stage 1 (recall):</tspan> bi-encoder + ANN (HNSW) pulls top-100 candidates fast. Modern embedders: text-embedding-3-large, Voyage-3, Cohere v3.</text>
+  <text x="80" y="2404" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Stage 2 (precision):</tspan> cross-encoder rerank narrows to top-5. Production rerankers: <tspan font-weight="800">Cohere Rerank 3, Voyage rerank-2, BGE / Jina rerankers, Mixedbread</tspan>.</text>
+  <text x="80" y="2428" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">ColBERT family:</tspan> ColBERTv2 + PLAID for efficient inference; <tspan font-weight="800">ColPali</tspan> brings late-interaction to vision-language. Native support in Vespa, Weaviate, Qdrant.</text>
+  <text x="80" y="2452" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Rule of thumb:</tspan> always start with bi-encoder + reranker. Reach for ColBERT only when you've tuned that and need more.</text>
+</svg>

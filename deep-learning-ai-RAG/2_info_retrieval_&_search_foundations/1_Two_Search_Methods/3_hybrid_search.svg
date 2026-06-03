@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 850" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="1300" height="850" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="80" font-size="52" font-weight="800" fill="#111">Hybrid Search</text>
+
+  <!-- ===================== ROW 1: KEYWORD SEARCH ===================== -->
+  <g transform="translate(60,160)">
+    <rect width="110" height="110" rx="20" fill="#ef5b6b"/>
+    <g transform="translate(20,18)">
+      <path d="M0 0 H38 L52 14 V72 a4 4 0 0 1 -4 4 H4 a4 4 0 0 1 -4 -4 V4 a4 4 0 0 1 4 -4 z" fill="#ffffff"/>
+      <path d="M38 0 V14 H52 Z" fill="#fcd2d6"/>
+      <line x1="6" y1="24" x2="42" y2="24" stroke="#ef5b6b" stroke-width="2"/>
+      <line x1="6" y1="34" x2="42" y2="34" stroke="#ef5b6b" stroke-width="2"/>
+      <line x1="6" y1="44" x2="42" y2="44" stroke="#ef5b6b" stroke-width="2"/>
+      <line x1="6" y1="54" x2="30" y2="54" stroke="#ef5b6b" stroke-width="2"/>
+      <circle cx="36" cy="62" r="7" fill="#ffffff" stroke="#ef5b6b" stroke-width="2"/>
+      <line x1="41" y1="67" x2="48" y2="74" stroke="#ef5b6b" stroke-width="2.5"/>
+      <g transform="translate(58,6)">
+        <rect x="0" y="0" width="10" height="10" rx="2" fill="#ffffff"/>
+        <path d="M2 5 L4 7 L8 3" stroke="#ef5b6b" stroke-width="2" fill="none"/>
+        <line x1="14" y1="5" x2="28" y2="5" stroke="#ffffff" stroke-width="2"/>
+        <rect x="0" y="16" width="10" height="10" rx="2" fill="#ffffff"/>
+        <path d="M2 21 L4 23 L8 19" stroke="#ef5b6b" stroke-width="2" fill="none"/>
+        <line x1="14" y1="21" x2="28" y2="21" stroke="#ffffff" stroke-width="2"/>
+        <rect x="0" y="32" width="10" height="10" rx="2" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+        <line x1="14" y1="37" x2="28" y2="37" stroke="#ffffff" stroke-width="2"/>
+        <rect x="0" y="48" width="10" height="10" rx="2" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+        <line x1="14" y1="53" x2="28" y2="53" stroke="#ffffff" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+  <text x="200" y="195" font-size="28" font-weight="800" fill="#111">Keyword Search</text>
+  <text x="200" y="232" font-size="22" fill="#222">Ensures sensitivity to exact words</text>
+  <text x="200" y="262" font-size="22" fill="#222">the user included in the prompt</text>
+
+  <!-- ===================== ROW 2: SEMANTIC SEARCH ===================== -->
+  <g transform="translate(60,320)">
+    <rect width="110" height="110" rx="20" fill="#ef5b6b"/>
+    <g transform="translate(18,18)" fill="none" stroke="#ffffff" stroke-width="2">
+      <polygon points="20,8 60,8 72,22 32,22"/>
+      <polygon points="20,8 20,58 32,70 32,22"/>
+      <polygon points="32,22 72,22 72,72 32,72"/>
+      <g marker-end="url(#arw)">
+        <line x1="20" y1="58" x2="60" y2="16"/>
+        <line x1="20" y1="58" x2="66" y2="42"/>
+        <line x1="20" y1="58" x2="42" y2="68"/>
+      </g>
+      <circle cx="62" cy="26" r="9" fill="#ef5b6b" stroke="#ffffff" stroke-width="2"/>
+      <line x1="70" y1="34" x2="80" y2="44" stroke="#ffffff" stroke-width="2.5"/>
+    </g>
+  </g>
+  <text x="200" y="355" font-size="28" font-weight="800" fill="#111">Semantic Search</text>
+  <text x="200" y="392" font-size="22" fill="#222">Finds documents with similar meaning,</text>
+  <text x="200" y="422" font-size="22" fill="#222">even without matching words</text>
+
+  <!-- ===================== ROW 3: METADATA FILTERING ===================== -->
+  <g transform="translate(60,480)">
+    <rect width="110" height="110" rx="20" fill="#ef5b6b"/>
+    <path d="M22 30 H88 L62 64 V86 L48 86 V64 Z" fill="#ffffff"/>
+  </g>
+  <text x="200" y="515" font-size="28" font-weight="800" fill="#111">Metadata Filtering</text>
+  <text x="200" y="552" font-size="22" fill="#222">Excludes documents based on</text>
+  <text x="200" y="582" font-size="22" fill="#222">rigid criteria</text>
+
+  <!-- ===================== RIGHT PANEL: BALANCE ===================== -->
+  <rect x="780" y="150" width="480" height="490" rx="20" fill="#eef0f2"/>
+
+  <!-- Justice scales icon -->
+  <g transform="translate(940,210)" fill="#1a2438" stroke="#1a2438">
+    <!-- top knob -->
+    <circle cx="80" cy="0" r="10"/>
+    <!-- vertical post -->
+    <rect x="76" y="8" width="8" height="180"/>
+    <!-- horizontal beam -->
+    <rect x="10" y="40" width="140" height="8"/>
+    <!-- left pan triangle -->
+    <path d="M10 60 L35 60 L22 110 Z" fill="none" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M10 60 L35 60 L22 110 Z"/>
+    <line x1="6" y1="60" x2="40" y2="60" stroke-width="6"/>
+    <line x1="8" y1="110" x2="38" y2="110" stroke-width="6"/>
+    <!-- right pan triangle -->
+    <path d="M125 60 L150 60 L138 110 Z" fill="none" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M125 60 L150 60 L138 110 Z"/>
+    <line x1="120" y1="60" x2="156" y2="60" stroke-width="6"/>
+    <line x1="124" y1="110" x2="154" y2="110" stroke-width="6"/>
+    <!-- pan strings -->
+    <line x1="22" y1="44" x2="22" y2="60" stroke-width="3"/>
+    <line x1="138" y1="44" x2="138" y2="60" stroke-width="3"/>
+    <!-- base -->
+    <rect x="40" y="185" width="80" height="8"/>
+    <rect x="50" y="180" width="60" height="6"/>
+  </g>
+
+  <text x="1020" y="500" text-anchor="middle" font-size="24" fill="#222">High-performing retrievers</text>
+  <text x="1020" y="535" text-anchor="middle" font-size="24" fill="#222">balance all three techniques</text>
+  <text x="1020" y="570" text-anchor="middle" font-size="24" fill="#222">based on project needs.</text>
+
+  <!-- ===================== UNDERSTANDING PANEL (bottom) ===================== -->
+  <rect x="40" y="680" width="1220" height="150" rx="16" fill="#f6f7f9" stroke="#d6d9de" stroke-width="1.5"/>
+
+  <text x="60" y="715" font-size="20" font-weight="800" fill="#1a2438">Why hybrid wins in practice</text>
+
+  <text x="60" y="745" font-size="15" fill="#222">
+    <tspan font-weight="700" fill="#ef5b6b">Complementary failure modes.</tspan>
+    <tspan> Keyword nails exact terms (names, IDs, codes) but misses paraphrases. Semantic catches meaning but can drift on rare jargon.</tspan>
+  </text>
+  <text x="60" y="770" font-size="15" fill="#222">
+    <tspan font-weight="700" fill="#ef5b6b">Metadata is the cheap pre-filter.</tspan>
+    <tspan> Date, language, ACL, tags &#8212; applied first to shrink the candidate set before expensive vector math runs.</tspan>
+  </text>
+  <text x="60" y="795" font-size="15" fill="#222">
+    <tspan font-weight="700" fill="#ef5b6b">Fusion &amp; reranking.</tspan>
+    <tspan> Results from keyword + semantic are merged via Reciprocal Rank Fusion (or a learned reranker like a cross-encoder) to produce the final top-k.</tspan>
+  </text>
+  <text x="60" y="820" font-size="15" fill="#222">
+    <tspan font-weight="700" fill="#ef5b6b">The &#8220;balance&#8221; is a tuning knob.</tspan>
+    <tspan> Weights shift per use case: code search leans keyword-heavy; customer support leans semantic-heavy.</tspan>
+  </text>
+</svg>

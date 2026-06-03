@@ -1,0 +1,322 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2700" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#5b3a8c"/>
+      <stop offset="100%" stop-color="#ef5b6b"/>
+    </linearGradient>
+    <style>
+      .h1 { font-size: 48px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 20px; fill: #f0d8ff; font-style: italic; }
+      .section { font-size: 30px; font-weight: 800; fill: #111; }
+      .mono { font-family: 'Courier New', Courier, monospace; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1700" height="2700" fill="#ffffff"/>
+
+  <!-- ===== HEADER ===== -->
+  <rect x="0" y="0" width="1700" height="150" fill="url(#hdr)"/>
+  <g transform="translate(1400,30)" opacity="0.25">
+    <rect x="0"  y="0"  width="100" height="22" rx="6" fill="#fcd2d6"/>
+    <rect x="40" y="30" width="100" height="22" rx="6" fill="#bbe2ff"/>
+    <rect x="80" y="60" width="100" height="22" rx="6" fill="#bfe0bf"/>
+    <rect x="120" y="90" width="100" height="22" rx="6" fill="#ffd86b"/>
+  </g>
+  <text x="50" y="70" class="h1">Advanced Chunking — beyond fixed sizes</text>
+  <text x="50" y="108" class="sub">Semantic, language-based, and context-aware chunking — when, why, and how</text>
+
+  <!-- ===== SECTION 1: THE PROBLEM ===== -->
+  <text x="50" y="210" class="section">1. Why fixed-size still falls short</text>
+
+  <rect x="50" y="230" width="1600" height="200" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Quote -->
+  <text x="80" y="270" font-size="22" font-weight="800" fill="#111">"That night she dreamed, as she did often, that</text>
+  <text x="80" y="298" font-size="22" font-weight="800" fill="#111">she was finally an Olympic champion"</text>
+
+  <!-- Highlighted split visualization -->
+  <g transform="translate(80,320)" class="mono" font-size="16">
+    <rect x="0" y="0" width="540" height="28" rx="4" fill="#ffe1ad"/>
+    <text x="10" y="20" fill="#111">That night she dreamed, as she did often, that</text>
+    <rect x="280" y="32" width="350" height="28" rx="4" fill="#bfe0bf"/>
+    <text x="290" y="52" fill="#111">she was finally an Olympic champion</text>
+  </g>
+
+  <text x="850" y="300" font-size="16" fill="#222">
+    <tspan font-weight="800" fill="#ef5b6b">The split happens inside a single thought.</tspan>
+  </text>
+  <text x="850" y="328" font-size="16" fill="#222">"that" belongs with what follows, but ends up in</text>
+  <text x="850" y="350" font-size="16" fill="#222">the previous chunk &#8212; the next chunk loses</text>
+  <text x="850" y="372" font-size="16" fill="#222">grammatical and semantic continuity.</text>
+  <text x="850" y="408" font-size="14" fill="#666" font-style="italic">Overlap helps, but a smarter splitter wouldn't break here at all.</text>
+
+  <!-- ===== SECTION 2: SEMANTIC CHUNKING ===== -->
+  <text x="50" y="470" class="section">2. Semantic chunking — split where meaning shifts</text>
+
+  <!-- Algorithm steps -->
+  <g transform="translate(50,490)">
+    <rect width="780" height="380" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">The 4-step algorithm</text>
+
+    <circle cx="50" cy="90" r="20" fill="#ef5b6b"/>
+    <text x="50" y="98" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">1</text>
+    <text x="90" y="86" font-size="18" font-weight="800" fill="#111">Move through document</text>
+    <text x="90" y="110" font-size="14" fill="#555">Process the document sentence by sentence</text>
+
+    <circle cx="50" cy="160" r="20" fill="#ef5b6b"/>
+    <text x="50" y="168" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">2</text>
+    <text x="90" y="156" font-size="18" font-weight="800" fill="#111">Vectorize &amp; compare</text>
+    <text x="90" y="180" font-size="14" fill="#555">Embed current chunk &amp; next sentence,</text>
+    <text x="90" y="200" font-size="14" fill="#555">compute their cosine distance</text>
+
+    <circle cx="50" cy="245" r="20" fill="#ef5b6b"/>
+    <text x="50" y="253" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">3</text>
+    <text x="90" y="241" font-size="18" font-weight="800" fill="#111">Check threshold</text>
+    <text x="90" y="265" font-size="14" fill="#555">If distance &lt; threshold &#8594; topics are still</text>
+    <text x="90" y="285" font-size="14" fill="#555">related &#8594; append sentence to current chunk</text>
+
+    <circle cx="50" cy="330" r="20" fill="#ef5b6b"/>
+    <text x="50" y="338" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">4</text>
+    <text x="90" y="326" font-size="18" font-weight="800" fill="#111">Split when different</text>
+    <text x="90" y="350" font-size="14" fill="#555">If distance crosses threshold &#8594; topic</text>
+    <text x="90" y="370" font-size="14" fill="#555">shifted &#8594; close chunk, start a new one</text>
+  </g>
+
+  <!-- Cosine threshold visualization -->
+  <g transform="translate(860,490)">
+    <rect width="790" height="380" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="20" y="40" font-size="22" font-weight="800" fill="#2c3a52">Visual intuition</text>
+    <text x="20" y="68" font-size="14" fill="#666" font-style="italic">Greg Kamradt's "5 Levels of Text Splitting"</text>
+
+    <!-- mini chart -->
+    <g transform="translate(40,90)">
+      <!-- axes -->
+      <line x1="0" y1="240" x2="700" y2="240" stroke="#1a2438" stroke-width="2"/>
+      <line x1="0" y1="20"  x2="0"   y2="240" stroke="#1a2438" stroke-width="2"/>
+      <text x="-30" y="135" font-size="11" fill="#111" transform="rotate(-90, -30, 135)">Cosine distance</text>
+      <text x="350" y="265" text-anchor="middle" font-size="11" fill="#111">Sentence position</text>
+
+      <!-- background chunk bands -->
+      <rect x="0"   y="20" width="55"  height="220" fill="#bbe2ff" opacity="0.35"/>
+      <rect x="55"  y="20" width="55"  height="220" fill="#dde2f0" opacity="0.5"/>
+      <rect x="110" y="20" width="65"  height="220" fill="#fcd2d6" opacity="0.5"/>
+      <rect x="175" y="20" width="60"  height="220" fill="#ffe1ad" opacity="0.5"/>
+      <rect x="235" y="20" width="55"  height="220" fill="#bfe0bf" opacity="0.5"/>
+      <rect x="290" y="20" width="50"  height="220" fill="#a99bd6" opacity="0.4"/>
+      <rect x="340" y="20" width="60"  height="220" fill="#fcc6cc" opacity="0.45"/>
+      <rect x="400" y="20" width="55"  height="220" fill="#dde2f0" opacity="0.5"/>
+      <rect x="455" y="20" width="65"  height="220" fill="#bfe0bf" opacity="0.4"/>
+      <rect x="520" y="20" width="55"  height="220" fill="#fcd2d6" opacity="0.4"/>
+      <rect x="575" y="20" width="60"  height="220" fill="#bbe2ff" opacity="0.4"/>
+      <rect x="635" y="20" width="65"  height="220" fill="#a99bd6" opacity="0.4"/>
+
+      <!-- jagged distance line -->
+      <polyline points="0,180 20,150 40,160 60,110 80,170 100,140 120,90 140,170 160,160 180,80 200,150 220,140 240,170 260,100 280,170 300,60 320,150 340,140 360,110 380,170 400,90 420,170 440,160 460,80 480,170 500,150 520,100 540,170 560,140 580,90 600,160 620,170 640,140 660,80 680,160 700,150" fill="none" stroke="#2c8a85" stroke-width="2"/>
+
+      <!-- threshold dashed line -->
+      <line x1="0" y1="120" x2="700" y2="120" stroke="#ef5b6b" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="715" y="120" font-size="11" fill="#ef5b6b" font-weight="800">threshold</text>
+      <text x="715" y="135" font-size="11" fill="#ef5b6b">&gt; 0.122</text>
+    </g>
+
+    <text x="20" y="360" font-size="13" fill="#555">When the cosine spike crosses the red line, a chunk boundary is drawn.</text>
+  </g>
+
+  <!-- ===== Section 3: SEMANTIC PROS / CONS ===== -->
+  <text x="50" y="910" class="section">3. Semantic chunking — trade-offs</text>
+
+  <g transform="translate(50,930)">
+    <rect width="780" height="190" rx="14" fill="#ef5b6b"/>
+    <text x="30" y="45" font-size="22" font-weight="800" fill="#ffffff">Pros</text>
+    <text x="30" y="80" font-size="15" fill="#ffffff">&#9679; Follows the author's train of thought</text>
+    <text x="30" y="108" font-size="15" fill="#ffffff">&#9679; Smarter boundaries &#8212; no mid-sentence cuts</text>
+    <text x="30" y="136" font-size="15" fill="#ffffff">&#9679; Higher recall AND precision (one idea per vector)</text>
+    <text x="30" y="166" font-size="13" fill="#ffeaec" font-style="italic">In benchmarks: often 5&#8211;15% retrieval lift over fixed-size</text>
+  </g>
+
+  <g transform="translate(860,930)">
+    <rect width="790" height="190" rx="14" fill="#1eb6c8"/>
+    <text x="30" y="45" font-size="22" font-weight="800" fill="#ffffff">Cons</text>
+    <text x="30" y="80" font-size="15" fill="#ffffff">&#9679; Embedding for every sentence at index time &#8594; slow</text>
+    <text x="30" y="108" font-size="15" fill="#ffffff">&#9679; Repeated cosine calculations across the doc</text>
+    <text x="30" y="136" font-size="15" fill="#ffffff">&#9679; Threshold tuning is dataset-dependent</text>
+    <text x="30" y="166" font-size="13" fill="#d6f4f9" font-style="italic">Pre-processing cost is one-time, but the bill adds up at scale</text>
+  </g>
+
+  <!-- ===== Section 4: LANGUAGE-BASED CHUNKING ===== -->
+  <text x="50" y="1180" class="section">4. Language-based chunking — let an LLM cut the text</text>
+
+  <rect x="50" y="1200" width="1600" height="280" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Document icon -->
+  <g transform="translate(120,1260)">
+    <rect width="100" height="120" rx="10" fill="#1a2438"/>
+    <line x1="20" y1="30" x2="80" y2="30" stroke="#ffffff" stroke-width="4"/>
+    <line x1="20" y1="55" x2="80" y2="55" stroke="#ffffff" stroke-width="4"/>
+    <line x1="20" y1="80" x2="65" y2="80" stroke="#ffffff" stroke-width="4"/>
+  </g>
+  <text x="170" y="1410" text-anchor="middle" font-size="18" font-weight="800" fill="#111">Document</text>
+
+  <line x1="240" y1="1320" x2="340" y2="1320" stroke="#111" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- LLM box -->
+  <g transform="translate(350,1255)">
+    <rect width="130" height="130" rx="20" fill="#ef5b6b"/>
+    <g transform="translate(25,25)" fill="#ffffff">
+      <circle cx="14" cy="14" r="5"/>
+      <circle cx="14" cy="42" r="5"/>
+      <circle cx="14" cy="70" r="5"/>
+      <circle cx="42" cy="28" r="5"/>
+      <circle cx="42" cy="56" r="5"/>
+      <circle cx="70" cy="14" r="5"/>
+      <circle cx="70" cy="42" r="5"/>
+      <circle cx="70" cy="70" r="5"/>
+      <g stroke="#ffffff" stroke-width="1.5" fill="none">
+        <line x1="14" y1="14" x2="42" y2="28"/>
+        <line x1="14" y1="42" x2="42" y2="28"/>
+        <line x1="14" y1="42" x2="42" y2="56"/>
+        <line x1="14" y1="70" x2="42" y2="56"/>
+        <line x1="42" y1="28" x2="70" y2="14"/>
+        <line x1="42" y1="28" x2="70" y2="42"/>
+        <line x1="42" y1="56" x2="70" y2="42"/>
+        <line x1="42" y1="56" x2="70" y2="70"/>
+      </g>
+    </g>
+  </g>
+  <text x="415" y="1410" text-anchor="middle" font-size="18" font-weight="800" fill="#111">LLM</text>
+
+  <line x1="500" y1="1320" x2="600" y2="1320" stroke="#111" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- Chunks -->
+  <g transform="translate(610,1255)">
+    <rect width="430" height="130" rx="14" fill="none" stroke="#a0a8b5" stroke-width="2" stroke-dasharray="6 6"/>
+    <g transform="translate(20,20)">
+      <rect width="120" height="80" rx="8" fill="#ffffff" stroke="#d6d9de"/>
+      <text x="60" y="36" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Chunk 1</text>
+      <text x="60" y="62" text-anchor="middle" class="mono" font-size="12" fill="#666">Concept A</text>
+    </g>
+    <g transform="translate(150,20)">
+      <rect width="120" height="80" rx="8" fill="#ffffff" stroke="#d6d9de"/>
+      <text x="60" y="36" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Chunk 2</text>
+      <text x="60" y="62" text-anchor="middle" class="mono" font-size="12" fill="#666">Concept B</text>
+    </g>
+    <g transform="translate(280,20)">
+      <rect width="120" height="80" rx="8" fill="#ffffff" stroke="#d6d9de"/>
+      <text x="60" y="36" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Chunk 3</text>
+      <text x="60" y="62" text-anchor="middle" class="mono" font-size="12" fill="#666">Concept C</text>
+    </g>
+  </g>
+
+  <!-- bullets -->
+  <text x="1080" y="1255" font-size="15" fill="#222">&#9679; Prompt the LLM to split the document.</text>
+  <text x="1080" y="1283" font-size="15" fill="#222">&#9679; Give it rules: <tspan font-style="italic">keep concepts together,</tspan></text>
+  <text x="1080" y="1303" font-size="15" fill="#222"><tspan>&#8195;</tspan><tspan font-style="italic">break when new topic begins, etc.</tspan></text>
+  <text x="1080" y="1335" font-size="15" fill="#222">&#9679; Performs very well; with small models</text>
+  <text x="1080" y="1355" font-size="15" fill="#222"><tspan>&#8195;</tspan>(Haiku, GPT-4o-mini), economically viable.</text>
+  <text x="1080" y="1390" font-size="13" fill="#666" font-style="italic">Highest quality, highest pre-processing cost.</text>
+
+  <!-- ===== Section 5: CONTEXT-AWARE CHUNKING ===== -->
+  <text x="50" y="1540" class="section">5. Context-aware chunking — the "first improvement" to try</text>
+
+  <rect x="50" y="1560" width="1600" height="500" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Example: book about app launch -->
+  <text x="80" y="1600" font-size="20" font-weight="800" fill="#2c3a52">The idea</text>
+  <text x="80" y="1628" font-size="15" fill="#222">Before storing each chunk, run an LLM to attach <tspan font-weight="800">extra context</tspan> describing where this chunk sits in the doc.</text>
+  <text x="80" y="1652" font-size="15" fill="#222">Each chunk becomes more self-contained &#8594; retrieval finds it even when the query words don't match the chunk itself.</text>
+
+  <!-- Worked example -->
+  <text x="80" y="1700" font-size="18" font-weight="800" fill="#2c3a52">Worked example: a blog post about an app launch</text>
+
+  <!-- title chunk -->
+  <rect x="80"  y="1720" width="500" height="40" rx="6" fill="#ffe1ad"/>
+  <text x="95"  y="1745" class="mono" font-size="13" fill="#111">"Reflections on Launching Our First App"</text>
+  <text x="600" y="1745" class="mono" font-size="13" fill="#5b3a8c">context: app launch title.</text>
+
+  <!-- chunk 2 -->
+  <rect x="80"  y="1775" width="500" height="40" rx="6" fill="#fcd2d6"/>
+  <text x="95"  y="1800" class="mono" font-size="13" fill="#111">After six months of development, we launched...</text>
+  <text x="600" y="1800" class="mono" font-size="13" fill="#5b3a8c">context: launch announcement.</text>
+
+  <!-- chunk 3 -->
+  <rect x="80"  y="1830" width="500" height="40" rx="6" fill="#bbe2ff"/>
+  <text x="95"  y="1855" class="mono" font-size="13" fill="#111">The biggest lessons were around user feedback...</text>
+  <text x="600" y="1855" class="mono" font-size="13" fill="#5b3a8c">context: summary of key development lessons.</text>
+
+  <!-- chunk 4 -->
+  <rect x="80"  y="1885" width="500" height="40" rx="6" fill="#bfe0bf"/>
+  <text x="95"  y="1910" class="mono" font-size="13" fill="#111">Thanks to Daniel, Sarah, Mike...</text>
+  <text x="600" y="1910" class="mono" font-size="13" fill="#5b3a8c">context: list of supporters and contributors.</text>
+
+  <text x="80" y="1965" font-size="14" fill="#666" font-style="italic">Now a query for "who helped build the app?" matches the fourth chunk via its <tspan font-weight="800">context</tspan>, even though the chunk just</text>
+  <text x="80" y="1988" font-size="14" fill="#666" font-style="italic">contains names. Without context, that retrieval would have failed.</text>
+
+  <!-- Right column: pros/cons -->
+  <g transform="translate(1100,1600)">
+    <rect width="530" height="190" rx="14" fill="#2c3a52"/>
+    <text x="25" y="40" font-size="18" font-weight="800" fill="#ffd86b">Trade-offs</text>
+    <text x="25" y="78" font-size="14" fill="#ffffff"><tspan font-weight="800">Costly pre-processing:</tspan> LLM adds</text>
+    <text x="25" y="100" font-size="14" fill="#ffffff">context chunk by chunk (one LLM call each).</text>
+    <text x="25" y="140" font-size="14" fill="#ffffff"><tspan font-weight="800">Benefit:</tspan> better search relevance, with</text>
+    <text x="25" y="162" font-size="14" fill="#ffffff"><tspan font-weight="800">no impact on query speed</tspan> &#8212; it's all baked</text>
+    <text x="25" y="180" font-size="14" fill="#ffffff">in at index time.</text>
+  </g>
+
+  <g transform="translate(1100,1810)">
+    <rect width="530" height="240" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+    <text x="25" y="38" font-size="18" font-weight="800" fill="#5b3a8c">Helps BOTH stages of RAG</text>
+    <text x="25" y="68" font-size="14" fill="#222"><tspan font-weight="800">1) Retrieval &#8593;</tspan> &#8212; query matches</text>
+    <text x="25" y="88" font-size="14" fill="#222">context labels, not just chunk words.</text>
+    <text x="25" y="118" font-size="14" fill="#222"><tspan font-weight="800">2) Generation &#8593;</tspan> &#8212; LLM sees richer,</text>
+    <text x="25" y="138" font-size="14" fill="#222">self-explaining context windows.</text>
+    <text x="25" y="172" font-size="13" fill="#666" font-style="italic">Anthropic's <tspan font-weight="800">"Contextual Retrieval"</tspan> paper</text>
+    <text x="25" y="190" font-size="13" fill="#666" font-style="italic">measured ~50% reduction in retrieval failures</text>
+    <text x="25" y="208" font-size="13" fill="#666" font-style="italic">just from doing this on top of existing chunkers.</text>
+  </g>
+
+  <!-- ===== SECTION 6: CHOOSING ===== -->
+  <text x="50" y="2120" class="section">6. Choosing an approach — a decision tree</text>
+
+  <rect x="50" y="2140" width="1600" height="300" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- 3 tiers -->
+  <g transform="translate(80,2180)">
+    <rect width="480" height="220" rx="14" fill="#1eb6c8"/>
+    <text x="240" y="40" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Tier 1 &#8226; Defaults</text>
+    <text x="25" y="80" font-size="15" fill="#ffffff">Fixed width + Recursive char splitting</text>
+    <text x="25" y="115" font-size="14" fill="#d6f4f9">&#9679; Fast, cheap, predictable</text>
+    <text x="25" y="138" font-size="14" fill="#d6f4f9">&#9679; Works for 80% of use cases</text>
+    <text x="25" y="178" font-size="13" fill="#ffffff" font-style="italic">Start here. Always.</text>
+  </g>
+
+  <g transform="translate(610,2180)">
+    <rect width="480" height="220" rx="14" fill="#f5a623"/>
+    <text x="240" y="40" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Tier 2 &#8226; Smart splits</text>
+    <text x="25" y="80" font-size="15" fill="#ffffff">Semantic + LLM chunking</text>
+    <text x="25" y="115" font-size="14" fill="#ffeed5">&#9679; Higher quality boundaries</text>
+    <text x="25" y="138" font-size="14" fill="#ffeed5">&#9679; More complex, more compute</text>
+    <text x="25" y="178" font-size="13" fill="#ffffff" font-style="italic">Try if Tier 1 underperforms.</text>
+  </g>
+
+  <g transform="translate(1140,2180)">
+    <rect width="480" height="220" rx="14" fill="#5b3a8c"/>
+    <text x="240" y="40" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Tier 3 &#8226; Add-on</text>
+    <text x="25" y="80" font-size="15" fill="#ffffff">Context-aware chunking</text>
+    <text x="25" y="115" font-size="14" fill="#e8d5ff">&#9679; Layers on top of ANY chunker</text>
+    <text x="25" y="138" font-size="14" fill="#e8d5ff">&#9679; Best "first improvement" to test</text>
+    <text x="25" y="178" font-size="13" fill="#ffffff" font-style="italic">Often the highest ROI upgrade.</text>
+  </g>
+
+  <!-- ===== SECTION 7: 2026 ===== -->
+  <text x="50" y="2500" class="section">7. 2026 state of the art &amp; toolbelt</text>
+
+  <rect x="50" y="2520" width="1600" height="160" rx="14" fill="#1a2438"/>
+  <text x="80" y="2558" font-size="20" font-weight="800" fill="#ffd86b">What's actually shipping in production</text>
+  <text x="80" y="2590" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Anthropic Contextual Retrieval</tspan> &#8212; the canonical implementation of context-aware chunking (prompt caching makes it cheap)</text>
+  <text x="80" y="2614" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">LangChain SemanticChunker</tspan> &#8226; <tspan font-weight="800">LlamaIndex SemanticSplitterNodeParser</tspan> &#8212; off-the-shelf semantic chunking</text>
+  <text x="80" y="2638" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Late chunking</tspan> (Jina) &#8212; embed the whole doc with long-context model, then pool per chunk &#8594; preserves global context for free</text>
+  <text x="80" y="2662" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Agentic chunking</tspan> (Kamradt's "Level 5") &#8212; an LLM iteratively groups propositions into "themed buckets"</text>
+</svg>

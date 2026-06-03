@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 750" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1400" height="750" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="70" font-size="50" font-weight="800" fill="#111">Precision and Recall</text>
+
+  <!-- Outer light-gray panel -->
+  <rect x="40" y="120" width="1320" height="600" rx="22" fill="#f1f3f5"/>
+
+  <!-- ===== PRECISION ===== -->
+  <text x="80" y="200" font-size="34" font-weight="800" fill="#111">Precision</text>
+  <text x="80" y="245" font-size="24" fill="#222">Measures how many of</text>
+  <text x="80" y="278" font-size="24" fill="#222">the returned documents</text>
+  <text x="80" y="311" font-size="24" fill="#222">are relevant</text>
+
+  <!-- Navy formula box -->
+  <rect x="550" y="190" width="770" height="140" rx="14" fill="#2c3a52"/>
+  <text x="935" y="278" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="34" fill="#ffffff">Relevant Retrieved / Total Retrieved</text>
+
+  <!-- Dashed divider -->
+  <line x1="80" y1="400" x2="1320" y2="400" stroke="#b9b1e0" stroke-width="2" stroke-dasharray="8 8"/>
+
+  <!-- ===== RECALL ===== -->
+  <text x="80" y="475" font-size="34" font-weight="800" fill="#111">Recall</text>
+  <text x="80" y="520" font-size="24" fill="#222">Measures how many of the</text>
+  <text x="80" y="553" font-size="24" fill="#222">relevant documents are</text>
+  <text x="80" y="586" font-size="24" fill="#222">returned</text>
+
+  <!-- Navy formula box -->
+  <rect x="550" y="465" width="770" height="140" rx="14" fill="#2c3a52"/>
+  <text x="935" y="553" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="34" fill="#ffffff">Relevant Retrieved / Total Relevant</text>
+</svg>

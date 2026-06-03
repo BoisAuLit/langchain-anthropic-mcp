@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 950" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="1500" height="950" fill="#ffffff"/>
+  <text x="40" y="80" font-size="52" font-weight="800" fill="#111" style="white-space: pre;">Two Search Approaches</text>
+  <g transform="translate(290,250)">
+    <rect width="180" height="180" rx="28" fill="#ef5b6b"/>
+    <g transform="translate(34,30)">
+      <path d="M0 0 H50 L66 16 V108 a6 6 0 0 1 -6 6 H0 a6 6 0 0 1 -6 -6 V6 a6 6 0 0 1 6 -6 z" fill="#ffffff"/>
+      <path d="M50 0 V16 H66 Z" fill="#fcd2d6"/>
+      <line x1="6" y1="28" x2="52" y2="28" stroke="#ef5b6b" stroke-width="2.5"/>
+      <line x1="6" y1="40" x2="52" y2="40" stroke="#ef5b6b" stroke-width="2.5"/>
+      <line x1="6" y1="52" x2="52" y2="52" stroke="#ef5b6b" stroke-width="2.5"/>
+      <line x1="6" y1="64" x2="40" y2="64" stroke="#ef5b6b" stroke-width="2.5"/>
+      <circle cx="50" cy="92" r="11" fill="#ffffff" stroke="#ef5b6b" stroke-width="3"/>
+      <line x1="58" y1="100" x2="68" y2="110" stroke="#ef5b6b" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(108,40)">
+      <rect x="0" y="0" width="14" height="14" rx="3" fill="#ffffff"/>
+      <path d="M3 7 L6 10 L11 4" fill="none" stroke="#ef5b6b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="22" y1="7" x2="48" y2="7" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      <rect x="0" y="26" width="14" height="14" rx="3" fill="#ffffff"/>
+      <path d="M3 33 L6 36 L11 30" fill="none" stroke="#ef5b6b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="22" y1="33" x2="48" y2="33" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      <rect x="0" y="52" width="14" height="14" rx="3" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+      <line x1="22" y1="59" x2="48" y2="59" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      <rect x="0" y="78" width="14" height="14" rx="3" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+      <line x1="22" y1="85" x2="48" y2="85" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+  <text x="380" y="490" text-anchor="middle" font-size="40" font-weight="800" fill="#111" style="white-space: pre;">Keyword Search</text>
+  <text x="380" y="555" text-anchor="middle" font-size="24" fill="#222" style="white-space: pre;">Looks for documents</text>
+  <text x="380" y="588" text-anchor="middle" font-size="24" fill="#222" style="white-space: pre;">
+    <tspan>containing the </tspan><tspan font-weight="700">exact words</tspan>
+  </text>
+  <text x="380" y="621" text-anchor="middle" font-size="24" fill="#222" style="white-space: pre;">found in the prompt.</text>
+  <g transform="translate(1030,250)">
+    <rect width="180" height="180" rx="28" fill="#ef5b6b"/>
+    <g transform="translate(28,30)" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round">
+      <polygon points="35,10 95,10 110,30 50,30"/>
+      <polygon points="35,10 35,80 50,100 50,30"/>
+      <polygon points="50,30 110,30 110,100 50,100"/>
+      <g marker-end="url(#sa)">
+        <line x1="35" y1="80" x2="95" y2="20"/>
+        <line x1="35" y1="80" x2="100" y2="55"/>
+        <line x1="35" y1="80" x2="65" y2="95"/>
+      </g>
+      <circle cx="100" cy="35" r="14" fill="#ef5b6b" stroke="#ffffff" stroke-width="2.5"/>
+      <line x1="110" y1="45" x2="122" y2="57" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+  <text x="1120" y="490" text-anchor="middle" font-size="40" font-weight="800" fill="#111" style="white-space: pre;">Semantic Search</text>
+  <text x="1120" y="555" text-anchor="middle" font-size="24" fill="#222" style="white-space: pre;">Looks for documents with</text>
+  <text x="1120" y="588" text-anchor="middle" font-size="24" fill="#222" style="white-space: pre;">
+    <tspan font-weight="700">similar meaning</tspan><tspan> to the</tspan>
+  </text>
+  <text x="1120" y="621" text-anchor="middle" font-size="24" fill="#222" style="white-space: pre;">prompt.</text>
+  <defs>
+    <marker id="sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/>
+    </marker>
+  </defs>
+  <rect x="40" y="690" width="1420" height="230" rx="16" fill="#f6f7f9" stroke="#d6d9de" stroke-width="1.5"/>
+  <text x="60" y="730" font-size="22" font-weight="800" fill="#1a2438" style="white-space: pre;">How they actually work</text>
+  <g transform="translate(60,750)">
+    <text x="0" y="22" font-size="18" font-weight="700" fill="#ef5b6b" style="white-space: pre;">Keyword Search</text>
+    <text x="0" y="52" font-size="15" fill="#222" style="white-space: pre;">
+      <tspan font-weight="700">Lexical match.</tspan><tspan> Indexes tokens; scores docs by term overlap</tspan>
+    </text>
+    <text x="0" y="74" font-size="15" fill="#222" style="white-space: pre;">(BM25 / TF-IDF). Fast and exact, but blind to synonyms.</text>
+    <text x="0" y="102" font-size="15" fill="#222" style="white-space: pre;">
+      <tspan font-weight="700">Misses:</tspan><tspan> “car” won’t match “automobile”.</tspan>
+    </text>
+    <text x="0" y="130" font-size="15" fill="#222" style="white-space: pre;">
+      <tspan font-weight="700">Good for:</tspan><tspan> exact names, IDs, code, error strings, legal text.</tspan>
+    </text>
+  </g>
+  <g transform="translate(770,750)">
+    <text x="0" y="22" font-size="18" font-weight="700" fill="#ef5b6b" style="white-space: pre;">Semantic Search</text>
+    <text x="0" y="52" font-size="15" fill="#222" style="white-space: pre;">
+      <tspan font-weight="700">Vector match.</tspan><tspan> Embeds query &amp; docs into a shared space;</tspan>
+    </text>
+    <text x="0" y="74" font-size="15" fill="#222" style="white-space: pre;">scores by cosine similarity. Captures meaning, not surface form.</text>
+    <text x="0" y="102" font-size="15" fill="#222" style="white-space: pre;">
+      <tspan font-weight="700">Catches:</tspan><tspan> “how to fix a flat” → doc about “tire repair”.</tspan>
+    </text>
+    <text x="0" y="130" font-size="15" fill="#222" style="white-space: pre;">
+      <tspan font-weight="700">Good for:</tspan><tspan> paraphrases, intent, multilingual, fuzzy questions.</tspan>
+    </text>
+  </g>
+  <text x="60" y="900" font-size="15" fill="#1a2438" style="white-space: pre;">
+    <tspan font-weight="800">In practice (hybrid search):</tspan>
+    <tspan> production RAG systems combine both — BM25 catches exact terms, embeddings catch meaning, results are re-ranked together.</tspan>
+  </text>
+  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" transform="matrix(1, 0, 0, 1, -195.800232, -199.537918)"><tspan x="771.804" y="371.406">Most modern retrievers use </tspan><tspan x="771.804" dy="1em">​</tspan><tspan>the following 2 appraoches</tspan></text>
+</svg>

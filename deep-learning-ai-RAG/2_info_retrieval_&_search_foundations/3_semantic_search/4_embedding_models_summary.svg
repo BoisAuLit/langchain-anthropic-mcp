@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <marker id="ar-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ef5b6b"/>
+    </marker>
+    <marker id="ar-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1eb6c8"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#2c3a52"/>
+      <stop offset="100%" stop-color="#3d527a"/>
+    </linearGradient>
+    <style>
+      .h1 { font-size: 54px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 22px; fill: #cfd6e2; font-style: italic; }
+      .section { font-size: 32px; font-weight: 800; fill: #111; }
+      .body { font-size: 18px; fill: #222; }
+      .label-bold { font-weight: 700; }
+      .pill-text { font-size: 18px; fill: #ffffff; font-weight: 700; }
+      .tag { font-size: 14px; fill: #ffffff; font-weight: 800; font-family: 'Courier New', monospace; }
+    </style>
+  </defs>
+
+  <!-- ===== Background ===== -->
+  <rect x="0" y="0" width="1700" height="1900" fill="#ffffff"/>
+
+  <!-- ===== HEADER BANNER ===== -->
+  <rect x="0" y="0" width="1700" height="160" fill="url(#headerGrad)"/>
+  <!-- decorative dots -->
+  <g fill="#ffffff" opacity="0.15">
+    <circle cx="1450" cy="40" r="6"/>
+    <circle cx="1500" cy="80" r="4"/>
+    <circle cx="1560" cy="50" r="8"/>
+    <circle cx="1600" cy="100" r="5"/>
+    <circle cx="1650" cy="60" r="7"/>
+    <circle cx="1420" cy="110" r="4"/>
+  </g>
+  <text x="60" y="80" class="h1">Embedding Models &amp; Semantic Search</text>
+  <text x="60" y="120" class="sub">How a computer learns to "understand" the meaning of text</text>
+  <!-- compass icon -->
+  <g transform="translate(1300,40)">
+    <circle cx="40" cy="40" r="38" fill="none" stroke="#ffffff" stroke-width="3"/>
+    <polygon points="40,10 48,40 40,70 32,40" fill="#ef5b6b"/>
+    <polygon points="40,10 48,40 40,40" fill="#ffffff" opacity="0.7"/>
+    <circle cx="40" cy="40" r="4" fill="#ffffff"/>
+  </g>
+
+  <!-- ===== SECTION 1: THE GOAL ===== -->
+  <text x="60" y="220" class="section">1. The Goal</text>
+  <rect x="60" y="240" width="1580" height="170" rx="16" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <text x="90" y="285" class="body">
+    <tspan class="label-bold" font-size="22">Similar text &#8594; close vectors. Dissimilar text &#8594; distant vectors.</tspan>
+  </text>
+  <text x="90" y="320" class="body">An embedding model maps every word, sentence, or document to a vector in a high-dimensional space, so</text>
+  <text x="90" y="345" class="body">that <tspan font-style="italic">meaning</tspan> becomes <tspan font-style="italic">geometry</tspan> &#8212; you can measure semantic similarity with cosine or dot product.</text>
+
+  <!-- mini scatter visualization on the right -->
+  <g transform="translate(1280,255)">
+    <rect width="340" height="140" rx="10" fill="#ffffff" stroke="#d6d9de"/>
+    <line x1="170" y1="20" x2="170" y2="120" stroke="#1a2438" stroke-width="1.5"/>
+    <line x1="20" y1="70" x2="320" y2="70" stroke="#1a2438" stroke-width="1.5"/>
+    <!-- positive cluster -->
+    <circle cx="80"  cy="40" r="9" fill="#ef5b6b"/>
+    <circle cx="95"  cy="55" r="9" fill="#ef5b6b"/>
+    <circle cx="65"  cy="55" r="9" fill="#ef5b6b"/>
+    <!-- negative cluster -->
+    <circle cx="270" cy="105" r="9" fill="#1eb6c8"/>
+    <circle cx="285" cy="90"  r="9" fill="#1eb6c8"/>
+    <!-- gray noise -->
+    <circle cx="200" cy="40"  r="4" fill="#cfd5dc"/>
+    <circle cx="230" cy="60"  r="4" fill="#cfd5dc"/>
+    <circle cx="120" cy="100" r="4" fill="#cfd5dc"/>
+    <text x="170" y="135" text-anchor="middle" font-size="12" fill="#666">vector space</text>
+  </g>
+
+  <!-- ===== SECTION 2: POSITIVE vs NEGATIVE PAIRS ===== -->
+  <text x="60" y="470" class="section">2. Training Data: Positive &amp; Negative Pairs</text>
+
+  <!-- Positive pair card -->
+  <rect x="60" y="495" width="780" height="180" rx="16" fill="#fcd2d6"/>
+  <text x="100" y="535" font-size="22" font-weight="800" fill="#a02b3a">POSITIVE PAIR &#8226; pull together</text>
+  <g transform="translate(140,570)">
+    <circle cx="0" cy="40" r="32" fill="#2c3a52"/>
+    <text x="0" y="95" text-anchor="middle" font-size="16" fill="#111">"Good Morning"</text>
+    <!-- pull arrows -->
+    <line x1="60" y1="40" x2="120" y2="40" stroke="#ef5b6b" stroke-width="4" marker-end="url(#ar-red)"/>
+    <line x1="280" y1="40" x2="220" y2="40" stroke="#ef5b6b" stroke-width="4" marker-end="url(#ar-red)"/>
+    <circle cx="340" cy="40" r="32" fill="#2c3a52"/>
+    <text x="340" y="95" text-anchor="middle" font-size="16" fill="#111">"Hello"</text>
+  </g>
+
+  <!-- Negative pair card -->
+  <rect x="860" y="495" width="780" height="180" rx="16" fill="#dde2f0"/>
+  <text x="900" y="535" font-size="22" font-weight="800" fill="#3d527a">NEGATIVE PAIR &#8226; push apart</text>
+  <g transform="translate(940,570)">
+    <circle cx="0" cy="40" r="32" fill="#2c3a52"/>
+    <text x="0" y="95" text-anchor="middle" font-size="16" fill="#111">"Good Morning"</text>
+    <line x1="40" y1="40" x2="-20" y2="40" stroke="#3d6db5" stroke-width="4" marker-end="url(#ar)"/>
+    <line x1="340" y1="40" x2="420" y2="40" stroke="#3d6db5" stroke-width="4" marker-end="url(#ar)"/>
+    <circle cx="460" cy="40" r="32" fill="#2c3a52"/>
+    <text x="460" y="95" text-anchor="middle" font-size="14" fill="#111">"That's a noisy trombone"</text>
+  </g>
+
+  <text x="60" y="710" class="body" font-style="italic">Real training sets contain <tspan font-weight="800">millions</tspan> of such pairs &#8212; every word appears in many examples, capturing complex relationships.</text>
+
+  <!-- ===== SECTION 3: CONTRASTIVE TRAINING LOOP ===== -->
+  <text x="60" y="780" class="section">3. Contrastive Training: Embed &#8594; Score &#8594; Update &#8594; Repeat</text>
+
+  <!-- Stage 1: Random init -->
+  <g transform="translate(60,810)">
+    <rect width="500" height="280" rx="16" fill="#f1f3f5"/>
+    <text x="250" y="35" text-anchor="middle" font-size="22" font-weight="800" fill="#111">Step 1 &#8226; Random Init</text>
+    <rect x="40" y="60" width="420" height="200" rx="10" fill="#ffffff" stroke="#d6d9de"/>
+    <line x1="250" y1="80" x2="250" y2="240" stroke="#1a2438" stroke-width="2"/>
+    <line x1="60" y1="160" x2="440" y2="160" stroke="#1a2438" stroke-width="2"/>
+    <!-- random scatter -->
+    <circle cx="120" cy="100" r="10" fill="#ef5b6b"/>
+    <circle cx="380" cy="130" r="10" fill="#ef5b6b"/>
+    <circle cx="180" cy="220" r="10" fill="#1eb6c8"/>
+    <circle cx="340" cy="200" r="10" fill="#2c3a52"/>
+    <circle cx="100" cy="200" r="10" fill="#2c3a52"/>
+    <text x="250" y="270" text-anchor="middle" font-size="14" fill="#666" font-style="italic">vectors = gibberish</text>
+  </g>
+
+  <!-- arrow -->
+  <path d="M580 950 L630 950" stroke="#1a2438" stroke-width="4" marker-end="url(#ar)"/>
+
+  <!-- Stage 2: Training (pushing & pulling) -->
+  <g transform="translate(640,810)">
+    <rect width="500" height="280" rx="16" fill="#f1f3f5"/>
+    <text x="250" y="35" text-anchor="middle" font-size="22" font-weight="800" fill="#111">Step 2 &#8226; Push &amp; Pull</text>
+    <rect x="40" y="60" width="420" height="200" rx="10" fill="#ffffff" stroke="#d6d9de"/>
+    <line x1="250" y1="80" x2="250" y2="240" stroke="#1a2438" stroke-width="2"/>
+    <line x1="60" y1="160" x2="440" y2="160" stroke="#1a2438" stroke-width="2"/>
+    <!-- pull pos closer -->
+    <circle cx="180" cy="120" r="10" fill="#ef5b6b"/>
+    <circle cx="220" cy="135" r="10" fill="#ef5b6b"/>
+    <line x1="200" y1="115" x2="215" y2="130" stroke="#ef5b6b" stroke-width="3" stroke-dasharray="4 3" marker-end="url(#ar-red)"/>
+    <!-- push neg further -->
+    <circle cx="340" cy="200" r="10" fill="#2c3a52"/>
+    <circle cx="100" cy="220" r="10" fill="#2c3a52"/>
+    <line x1="280" y1="180" x2="330" y2="195" stroke="#3d6db5" stroke-width="3" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+    <line x1="160" y1="200" x2="110" y2="218" stroke="#3d6db5" stroke-width="3" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+    <text x="250" y="270" text-anchor="middle" font-size="14" fill="#666" font-style="italic">update params, iterate</text>
+  </g>
+
+  <!-- arrow -->
+  <path d="M1160 950 L1210 950" stroke="#1a2438" stroke-width="4" marker-end="url(#ar)"/>
+
+  <!-- Stage 3: After training -->
+  <g transform="translate(1220,810)">
+    <rect width="420" height="280" rx="16" fill="#f1f3f5"/>
+    <text x="210" y="35" text-anchor="middle" font-size="22" font-weight="800" fill="#111">Step 3 &#8226; Trained</text>
+    <rect x="40" y="60" width="340" height="200" rx="10" fill="#ffffff" stroke="#d6d9de"/>
+    <line x1="210" y1="80" x2="210" y2="240" stroke="#1a2438" stroke-width="2"/>
+    <line x1="60" y1="160" x2="360" y2="160" stroke="#1a2438" stroke-width="2"/>
+    <!-- tight positive cluster -->
+    <circle cx="120" cy="110" r="10" fill="#ef5b6b"/>
+    <circle cx="135" cy="125" r="10" fill="#ef5b6b"/>
+    <circle cx="105" cy="125" r="10" fill="#ef5b6b"/>
+    <!-- distant negatives -->
+    <circle cx="320" cy="220" r="10" fill="#2c3a52"/>
+    <circle cx="340" cy="200" r="10" fill="#2c3a52"/>
+    <text x="210" y="270" text-anchor="middle" font-size="14" fill="#666" font-style="italic">meaningful clusters</text>
+  </g>
+
+  <!-- Loop arrow underneath -->
+  <path d="M850 1100 C 850 1140, 350 1140, 350 1110" fill="none" stroke="#ef5b6b" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#ar-red)"/>
+  <text x="600" y="1158" text-anchor="middle" font-size="16" fill="#ef5b6b" font-weight="700" font-style="italic">repeat millions of times</text>
+
+  <!-- ===== SECTION 4: WHY HIGH DIMENSIONS ===== -->
+  <text x="60" y="1230" class="section">4. Why hundreds–thousands of dimensions?</text>
+  <rect x="60" y="1250" width="1580" height="130" rx="16" fill="#fef3c7" stroke="#fbd24a"/>
+  <text x="90" y="1290" class="body">Every vector is pushed and pulled by <tspan font-weight="800">many</tspan> other vectors at once. In 2D this would tangle &#8212; high-dimensional</text>
+  <text x="90" y="1318" class="body">space gives the optimizer enough &#8220;room&#8221; to satisfy all the constraints. Each dimension ends up encoding some</text>
+  <text x="90" y="1346" class="body">latent feature (sentiment, topic, formality, syntax&#8230;). Typical sizes today: <tspan font-family="'Courier New', monospace" font-weight="800">384, 768, 1024, 1536, 3072</tspan>.</text>
+
+  <!-- ===== SECTION 5: KEY TAKEAWAYS ===== -->
+  <text x="60" y="1430" class="section">5. Key Takeaways</text>
+
+  <g transform="translate(60,1450)">
+    <rect width="500" height="180" rx="16" fill="#ef5b6b"/>
+    <text x="30" y="50" font-size="22" font-weight="800" fill="#ffffff">A</text>
+    <text x="80" y="50" font-size="20" font-weight="800" fill="#ffffff">Vectors are abstract</text>
+    <text x="30" y="90" font-size="16" fill="#ffffff">Individual numbers are not interpretable.</text>
+    <text x="30" y="115" font-size="16" fill="#ffffff">Train twice &#8594; same clusters form, but</text>
+    <text x="30" y="140" font-size="16" fill="#ffffff">at different locations in space.</text>
+  </g>
+
+  <g transform="translate(600,1450)">
+    <rect width="500" height="180" rx="16" fill="#1eb6c8"/>
+    <text x="30" y="50" font-size="22" font-weight="800" fill="#ffffff">B</text>
+    <text x="80" y="50" font-size="20" font-weight="800" fill="#ffffff">Meaning = geometry</text>
+    <text x="30" y="90" font-size="16" fill="#ffffff">After training, locations in space encode</text>
+    <text x="30" y="115" font-size="16" fill="#ffffff">meaning because clusters of similar</text>
+    <text x="30" y="140" font-size="16" fill="#ffffff">concepts have formed there.</text>
+  </g>
+
+  <g transform="translate(1140,1450)">
+    <rect width="500" height="180" rx="16" fill="#2c3a52"/>
+    <text x="30" y="50" font-size="22" font-weight="800" fill="#ffffff">C</text>
+    <text x="80" y="50" font-size="20" font-weight="800" fill="#ffffff">Never mix models</text>
+    <text x="30" y="90" font-size="16" fill="#ffffff">Different models = different spaces.</text>
+    <text x="30" y="115" font-size="16" fill="#ffffff">Comparing vectors across models yields</text>
+    <text x="30" y="140" font-size="16" fill="#ffffff">nonsense. Re-embed if you switch.</text>
+  </g>
+
+  <!-- ===== SECTION 6: 2026 STATE OF THE ART ===== -->
+  <text x="60" y="1700" class="section">6. State of the Art — May 2026</text>
+
+  <rect x="60" y="1720" width="1580" height="150" rx="16" fill="#1a2438"/>
+
+  <!-- Sparkle badge -->
+  <g transform="translate(90,1750)">
+    <circle cx="20" cy="20" r="20" fill="#ef5b6b"/>
+    <text x="20" y="27" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">2026</text>
+  </g>
+
+  <text x="160" y="1758" font-size="18" fill="#ffffff">
+    <tspan font-weight="800" fill="#ffd86b">Matryoshka embeddings</tspan>
+    <tspan> &#8212; one model produces nested dims (e.g. 3072 &#8594; 768 &#8594; 256), trade quality for speed at query time.</tspan>
+  </text>
+  <text x="160" y="1786" font-size="18" fill="#ffffff">
+    <tspan font-weight="800" fill="#ffd86b">Long-context embeddings</tspan>
+    <tspan> &#8212; 8k&#8211;32k+ token inputs are standard; chunking is becoming optional for many doc lengths.</tspan>
+  </text>
+  <text x="160" y="1814" font-size="18" fill="#ffffff">
+    <tspan font-weight="800" fill="#ffd86b">Multimodal by default</tspan>
+    <tspan> &#8212; same space for text, images, audio, code; one query can retrieve across all of them.</tspan>
+  </text>
+  <text x="160" y="1842" font-size="18" fill="#ffffff">
+    <tspan font-weight="800" fill="#ffd86b">Leaders to know</tspan>
+    <tspan> &#8212; OpenAI text-embedding-3, Voyage-3, Cohere embed v3+, BGE-M3, Nomic-Embed, Jina-v3.</tspan>
+  </text>
+</svg>

@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1080" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/>
+    </marker>
+    <style>
+      .label { font-size: 24px; font-weight: 800; fill: #111; }
+      .doc-row { font-family: 'Courier New', Courier, monospace; font-size: 18px; fill: #111; }
+      .doc-row-strike { font-family: 'Courier New', Courier, monospace; font-size: 18px; fill: #888; text-decoration: line-through; }
+      .info-text { font-size: 22px; fill: #ffffff; }
+      .stroke { fill: none; stroke: #1a2438; stroke-width: 3; }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="1700" height="1080" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="80" font-size="56" font-weight="800" fill="#111">Search Techniques</text>
+
+  <!-- ============ KNOWLEDGE BASE ============ -->
+  <g transform="translate(50,400)">
+    <rect width="130" height="130" rx="22" fill="#ef5b6b"/>
+    <!-- back cylinder -->
+    <g transform="translate(24,28)">
+      <ellipse cx="22" cy="6" rx="22" ry="6" fill="#ffffff"/>
+      <rect x="0" y="6" width="44" height="26" fill="#ffffff"/>
+      <ellipse cx="22" cy="32" rx="22" ry="6" fill="#ffffff"/>
+      <ellipse cx="22" cy="6" rx="22" ry="6" fill="none" stroke="#ef5b6b" stroke-width="1.5"/>
+      <ellipse cx="22" cy="19" rx="22" ry="6" fill="none" stroke="#ef5b6b" stroke-width="1.5"/>
+    </g>
+    <!-- front cylinder -->
+    <g transform="translate(58,52)">
+      <ellipse cx="22" cy="6" rx="22" ry="6" fill="#ffffff"/>
+      <rect x="0" y="6" width="44" height="34" fill="#ffffff"/>
+      <ellipse cx="22" cy="40" rx="22" ry="6" fill="#ffffff"/>
+      <ellipse cx="22" cy="6" rx="22" ry="6" fill="none" stroke="#ef5b6b" stroke-width="1.5"/>
+      <ellipse cx="22" cy="19" rx="22" ry="6" fill="none" stroke="#ef5b6b" stroke-width="1.5"/>
+      <ellipse cx="22" cy="32" rx="22" ry="6" fill="none" stroke="#ef5b6b" stroke-width="1.5"/>
+    </g>
+  </g>
+  <text x="55" y="565" class="label">Knowledge</text>
+  <text x="80" y="595" class="label">Base</text>
+
+  <!-- KB -> Keyword (curve up) -->
+  <path d="M180 440 C 240 400, 280 320, 320 280" class="stroke" marker-end="url(#ar)"/>
+  <!-- KB -> Semantic (curve down) -->
+  <path d="M180 490 C 240 530, 280 620, 320 660" class="stroke" marker-end="url(#ar)"/>
+
+  <!-- ============ KEYWORD SEARCH ICON (top) ============ -->
+  <g transform="translate(310,200)">
+    <rect width="130" height="130" rx="22" fill="#ef5b6b"/>
+    <g transform="translate(22,22)">
+      <path d="M0 0 H38 L52 14 V80 a4 4 0 0 1 -4 4 H4 a4 4 0 0 1 -4 -4 V4 a4 4 0 0 1 4 -4 z" fill="#ffffff"/>
+      <path d="M38 0 V14 H52 Z" fill="#fcd2d6"/>
+      <line x1="6" y1="24" x2="42" y2="24" stroke="#ef5b6b" stroke-width="2"/>
+      <line x1="6" y1="34" x2="42" y2="34" stroke="#ef5b6b" stroke-width="2"/>
+      <line x1="6" y1="44" x2="42" y2="44" stroke="#ef5b6b" stroke-width="2"/>
+      <line x1="6" y1="54" x2="32" y2="54" stroke="#ef5b6b" stroke-width="2"/>
+      <circle cx="38" cy="68" r="8" fill="#ffffff" stroke="#ef5b6b" stroke-width="2"/>
+      <line x1="44" y1="74" x2="52" y2="82" stroke="#ef5b6b" stroke-width="3"/>
+      <!-- checklist -->
+      <g transform="translate(60,8)">
+        <rect x="0" y="0" width="10" height="10" rx="2" fill="#ffffff"/>
+        <path d="M2 5 L4 7 L8 3" stroke="#ef5b6b" stroke-width="2" fill="none"/>
+        <line x1="14" y1="5" x2="30" y2="5" stroke="#ffffff" stroke-width="2"/>
+        <rect x="0" y="16" width="10" height="10" rx="2" fill="#ffffff"/>
+        <path d="M2 21 L4 23 L8 19" stroke="#ef5b6b" stroke-width="2" fill="none"/>
+        <line x1="14" y1="21" x2="30" y2="21" stroke="#ffffff" stroke-width="2"/>
+        <rect x="0" y="32" width="10" height="10" rx="2" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+        <line x1="14" y1="37" x2="30" y2="37" stroke="#ffffff" stroke-width="2"/>
+        <rect x="0" y="48" width="10" height="10" rx="2" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+        <line x1="14" y1="53" x2="30" y2="53" stroke="#ffffff" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+  <text x="318" y="368" class="label">Keyword</text>
+  <text x="338" y="398" class="label">Search</text>
+
+  <!-- Keyword icon -> doc list -->
+  <line x1="440" y1="265" x2="540" y2="265" class="stroke" marker-end="url(#ar)"/>
+
+  <!-- ============ KEYWORD RESULT LIST ============ -->
+  <g transform="translate(550,205)">
+    <rect width="240" height="160" rx="6" fill="#fde2e4"/>
+    <rect x="0" y="0" width="240" height="28" fill="#ffffff"/>
+    <rect x="0" y="28" width="240" height="28" fill="#eef0f2"/>
+    <rect x="0" y="56" width="240" height="28" fill="#ffffff"/>
+    <rect x="0" y="84" width="240" height="28" fill="#eef0f2"/>
+    <text x="14" y="20" class="doc-row">1. Document A</text>
+    <text x="14" y="48" class="doc-row">2. Document B</text>
+    <text x="14" y="76" class="doc-row">3. Document C</text>
+    <text x="14" y="104" class="doc-row">4. Document D</text>
+    <text x="100" y="140" class="doc-row">...</text>
+  </g>
+
+  <!-- doc list -> metadata filter (top) -->
+  <line x1="790" y1="285" x2="890" y2="285" class="stroke" marker-end="url(#ar)"/>
+
+  <!-- ============ METADATA FILTER ICON (top) ============ -->
+  <g transform="translate(900,220)">
+    <rect width="130" height="130" rx="22" fill="#ef5b6b"/>
+    <path d="M26 36 H104 L74 76 V102 L56 102 V76 Z" fill="#ffffff"/>
+  </g>
+  <text x="908" y="388" class="label">Metadata</text>
+  <text x="932" y="418" class="label">Filter</text>
+
+  <!-- metadata filter -> filtered list (top) -->
+  <line x1="1030" y1="285" x2="1130" y2="285" class="stroke" marker-end="url(#ar)"/>
+
+  <!-- ============ FILTERED LIST (top) ============ -->
+  <g transform="translate(1140,205)">
+    <rect width="240" height="160" rx="6" fill="#fde2e4"/>
+    <rect x="0" y="0" width="240" height="28" fill="#ffffff"/>
+    <rect x="0" y="28" width="240" height="28" fill="#eef0f2"/>
+    <rect x="0" y="56" width="240" height="28" fill="#ffffff"/>
+    <rect x="0" y="84" width="240" height="28" fill="#eef0f2"/>
+    <text x="14" y="20" class="doc-row">1. Document A</text>
+    <text x="14" y="48" class="doc-row">2. Document B</text>
+    <text x="14" y="76" class="doc-row-strike">3. Document C</text>
+    <text x="14" y="104" class="doc-row-strike">4. Document D</text>
+    <text x="100" y="140" class="doc-row">...</text>
+  </g>
+
+  <!-- ============ SEMANTIC SEARCH ICON (bottom) ============ -->
+  <g transform="translate(310,610)">
+    <rect width="130" height="130" rx="22" fill="#ef5b6b"/>
+    <g transform="translate(22,24)" fill="none" stroke="#ffffff" stroke-width="2">
+      <polygon points="25,8 70,8 82,22 38,22"/>
+      <polygon points="25,8 25,60 38,72 38,22"/>
+      <polygon points="38,22 82,22 82,72 38,72"/>
+      <g marker-end="url(#arw)">
+        <line x1="25" y1="60" x2="70" y2="16"/>
+        <line x1="25" y1="60" x2="75" y2="42"/>
+        <line x1="25" y1="60" x2="48" y2="70"/>
+      </g>
+      <circle cx="72" cy="26" r="10" fill="#ef5b6b" stroke="#ffffff" stroke-width="2"/>
+      <line x1="80" y1="34" x2="90" y2="44" stroke="#ffffff" stroke-width="2.5"/>
+    </g>
+  </g>
+  <text x="320" y="778" class="label">Semantic</text>
+  <text x="338" y="808" class="label">Search</text>
+
+  <!-- Semantic icon -> doc list (bottom) -->
+  <line x1="440" y1="675" x2="540" y2="675" class="stroke" marker-end="url(#ar)"/>
+
+  <!-- ============ SEMANTIC RESULT LIST ============ -->
+  <g transform="translate(550,615)">
+    <rect width="240" height="160" rx="6" fill="#fde2e4"/>
+    <rect x="0" y="0" width="240" height="28" fill="#ffffff"/>
+    <rect x="0" y="28" width="240" height="28" fill="#eef0f2"/>
+    <rect x="0" y="56" width="240" height="28" fill="#ffffff"/>
+    <rect x="0" y="84" width="240" height="28" fill="#eef0f2"/>
+    <text x="14" y="20" class="doc-row">1. Document C</text>
+    <text x="14" y="48" class="doc-row">2. Document B</text>
+    <text x="14" y="76" class="doc-row">3. Document X</text>
+    <text x="14" y="104" class="doc-row">4. Document Y</text>
+    <text x="100" y="140" class="doc-row">...</text>
+  </g>
+
+  <!-- doc list -> metadata filter (bottom) -->
+  <line x1="790" y1="695" x2="890" y2="695" class="stroke" marker-end="url(#ar)"/>
+
+  <!-- ============ METADATA FILTER ICON (bottom) ============ -->
+  <g transform="translate(900,630)">
+    <rect width="130" height="130" rx="22" fill="#ef5b6b"/>
+    <path d="M26 36 H104 L74 76 V102 L56 102 V76 Z" fill="#ffffff"/>
+  </g>
+  <text x="908" y="798" class="label">Metadata</text>
+  <text x="932" y="828" class="label">Filter</text>
+
+  <!-- metadata filter -> filtered list (bottom) -->
+  <line x1="1030" y1="695" x2="1130" y2="695" class="stroke" marker-end="url(#ar)"/>
+
+  <!-- ============ FILTERED LIST (bottom) ============ -->
+  <g transform="translate(1140,615)">
+    <rect width="240" height="160" rx="6" fill="#fde2e4"/>
+    <rect x="0" y="0" width="240" height="28" fill="#ffffff"/>
+    <rect x="0" y="28" width="240" height="28" fill="#eef0f2"/>
+    <rect x="0" y="56" width="240" height="28" fill="#ffffff"/>
+    <rect x="0" y="84" width="240" height="28" fill="#eef0f2"/>
+    <text x="14" y="20" class="doc-row-strike">1. Document C</text>
+    <text x="14" y="48" class="doc-row">2. Document B</text>
+    <text x="14" y="76" class="doc-row">3. Document X</text>
+    <text x="14" y="104" class="doc-row">4. Document Y</text>
+    <text x="100" y="140" class="doc-row">...</text>
+  </g>
+
+  <!-- ============ NAVY INFO BOXES ============ -->
+  <g transform="translate(540,420)">
+    <rect width="270" height="100" rx="14" fill="#2c3a52"/>
+    <text x="135" y="46" text-anchor="middle" class="info-text">Each search returns</text>
+    <text x="135" y="78" text-anchor="middle" class="info-text">20 - 50 documents</text>
+  </g>
+
+  <g transform="translate(1080,420)">
+    <rect width="320" height="100" rx="14" fill="#2c3a52"/>
+    <text x="160" y="46" text-anchor="middle" class="info-text">Each list filtered on</text>
+    <text x="160" y="78" text-anchor="middle" class="info-text">document metadata</text>
+  </g>
+
+  <!-- ============ MERGE ARROWS TO FINAL ============ -->
+  <path d="M1380 250 C 1450 260, 1480 350, 1500 410" class="stroke" marker-end="url(#ar)"/>
+  <path d="M1380 720 C 1450 700, 1480 630, 1500 590" class="stroke" marker-end="url(#ar)"/>
+
+  <!-- ============ FINAL MERGED LIST ============ -->
+  <g transform="translate(1500,400)">
+    <rect x="0"  y="0"   width="180" height="50" rx="6" fill="#ef5b6b"/>
+    <text x="14" y="32" font-size="20" fill="#ffffff">1. Document A</text>
+    <rect x="0"  y="60"  width="180" height="50" rx="6" fill="#f47f8a"/>
+    <text x="14" y="92" font-size="20" fill="#ffffff">2. Document B</text>
+    <rect x="0"  y="120" width="180" height="50" rx="6" fill="#fcc6cc"/>
+    <text x="14" y="152" font-size="20" fill="#ffffff">3. Document X</text>
+    <rect x="0"  y="180" width="180" height="50" rx="6" fill="#fcd8dd"/>
+    <text x="14" y="212" font-size="20" fill="#ffffff">4. Document Y</text>
+  </g>
+
+  <!-- ============ UNDERSTANDING PANEL (bottom) ============ -->
+  <rect x="40" y="880" width="1620" height="180" rx="16" fill="#f6f7f9" stroke="#d6d9de" stroke-width="1.5"/>
+
+  <text x="60" y="920" font-size="22" font-weight="800" fill="#1a2438">What's happening here (hybrid retrieval pipeline)</text>
+
+  <g transform="translate(60,940)">
+    <text x="0" y="20" font-size="16" fill="#222">
+      <tspan font-weight="700" fill="#ef5b6b">1. Parallel recall.</tspan>
+      <tspan> The same knowledge base is queried two ways at once: keyword (BM25 / lexical) and semantic (vector similarity). Each returns 20-50 candidates.</tspan>
+    </text>
+    <text x="0" y="48" font-size="16" fill="#222">
+      <tspan font-weight="700" fill="#ef5b6b">2. Metadata filtering.</tspan>
+      <tspan> Each list is pruned by structured fields (date, author, language, access permissions, tags) before any merging happens &#8212; cheaper than re-ranking everything.</tspan>
+    </text>
+    <text x="0" y="76" font-size="16" fill="#222">
+      <tspan font-weight="700" fill="#ef5b6b">3. Fusion.</tspan>
+      <tspan> Surviving results are merged and deduplicated (Reciprocal Rank Fusion is common). Notice Document B appears in both branches &#8594; it ranks higher in the final list.</tspan>
+    </text>
+    <text x="0" y="104" font-size="16" fill="#222">
+      <tspan font-weight="700" fill="#ef5b6b">4. Final shortlist.</tspan>
+      <tspan> The top-k (here 4) goes to the LLM as context. Color intensity on the right hints at fusion score &#8212; A &amp; B are strong matches, X &amp; Y are weaker recall-only hits.</tspan>
+    </text>
+  </g>
+</svg>

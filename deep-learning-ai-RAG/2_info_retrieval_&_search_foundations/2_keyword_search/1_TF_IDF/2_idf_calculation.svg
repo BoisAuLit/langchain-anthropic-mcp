@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <style>
+      .step-title { font-size: 30px; font-weight: 800; fill: #111; }
+      .caption { font-size: 22px; fill: #333; }
+      .formula { font-size: 28px; fill: #111; }
+      .formula b { font-weight: 800; }
+      .label-bold { font-size: 22px; font-weight: 800; fill: #111; }
+      .pill-text-mono { font-family: 'Courier New', Courier, monospace; font-size: 22px; fill: #111; }
+      .divider { stroke: #d0d4da; stroke-width: 2; stroke-dasharray: 6 6; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1400" height="1100" fill="#ffffff"/>
+  <circle cx="50" cy="50" r="28" fill="#ef5b6b"/>
+  <text x="50" y="60" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff" style="white-space: pre;">1</text>
+  <text x="105" y="60" class="step-title" style="white-space: pre;">Count Documents</text>
+  <g transform="translate(140,100)">
+    <g fill="none" stroke="#111" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M40 0 L0 80 L80 80 Z"/>
+      <circle cx="35" cy="50" r="4" fill="#111"/>
+      <circle cx="50" cy="60" r="4" fill="#111"/>
+      <circle cx="25" cy="68" r="4" fill="#111"/>
+      <circle cx="55" cy="38" r="3" fill="#111"/>
+      <circle cx="60" cy="72" r="3" fill="#111"/>
+    </g>
+    <text x="40" y="108" text-anchor="middle" class="label-bold" style="white-space: pre;">Pizza</text>
+  </g>
+  <text x="260" y="135" class="caption" style="white-space: pre;">Appears in 5 out of 100 documents</text>
+  <g transform="translate(260,170)">
+    <text x="0" y="22" class="formula" style="white-space: pre;"><tspan font-weight="800">DF</tspan> = 5/100</text>
+    <rect x="180" y="0" width="160" height="32" rx="6" fill="#e8ecf0"/>
+    <text x="260" y="22" text-anchor="middle" class="pill-text-mono" style="white-space: pre;">0.05</text>
+  </g>
+  <g transform="translate(780,100)">
+    <g fill="none" stroke="#111" stroke-width="3" stroke-linecap="round">
+      <line x1="10" y1="0" x2="70" y2="0"/>
+      <line x1="10" y1="0" x2="10" y2="10"/>
+      <line x1="70" y1="0" x2="70" y2="10"/>
+      <line x1="40" y1="0" x2="40" y2="74"/>
+      <line x1="20" y1="80" x2="60" y2="80"/>
+    </g>
+    <text x="40" y="108" text-anchor="middle" class="label-bold" style="white-space: pre;">The</text>
+  </g>
+  <text x="880" y="135" class="caption" style="white-space: pre;">Appears in all 100 documents</text>
+  <g transform="translate(880,170)">
+    <text x="0" y="22" class="formula" style="white-space: pre;"><tspan font-weight="800">DF</tspan> = 100/100</text>
+    <rect x="220" y="0" width="160" height="32" rx="6" fill="#9bd0e0"/>
+    <text x="300" y="22" text-anchor="middle" class="pill-text-mono" style="white-space: pre;">1.0</text>
+  </g>
+  <line x1="40" y1="280" x2="1360" y2="280" class="divider"/>
+  <circle cx="50" cy="340" r="28" fill="#ef5b6b"/>
+  <text x="50" y="350" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff" style="white-space: pre;">2</text>
+  <text x="105" y="350" class="step-title" style="white-space: pre;">Flip to reward rare words</text>
+  <g transform="translate(140,400)">
+    <g fill="none" stroke="#111" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M40 0 L0 80 L80 80 Z"/>
+      <circle cx="35" cy="50" r="4" fill="#111"/>
+      <circle cx="50" cy="60" r="4" fill="#111"/>
+      <circle cx="25" cy="68" r="4" fill="#111"/>
+      <circle cx="55" cy="38" r="3" fill="#111"/>
+      <circle cx="60" cy="72" r="3" fill="#111"/>
+    </g>
+    <text x="40" y="108" text-anchor="middle" class="label-bold" style="white-space: pre;">Pizza</text>
+  </g>
+  <text x="260" y="435" class="caption" style="white-space: pre;">High Score</text>
+  <g transform="translate(260,470)">
+    <text x="0" y="22" class="formula" style="white-space: pre;"><tspan font-weight="800">IDF</tspan> = 1/0.05</text>
+    <rect x="200" y="0" width="160" height="32" rx="6" fill="#9bd0e0"/>
+    <text x="280" y="22" text-anchor="middle" class="pill-text-mono" style="white-space: pre;">20</text>
+  </g>
+  <g transform="translate(780,400)">
+    <g fill="none" stroke="#111" stroke-width="3" stroke-linecap="round">
+      <line x1="10" y1="0" x2="70" y2="0"/>
+      <line x1="10" y1="0" x2="10" y2="10"/>
+      <line x1="70" y1="0" x2="70" y2="10"/>
+      <line x1="40" y1="0" x2="40" y2="74"/>
+      <line x1="20" y1="80" x2="60" y2="80"/>
+    </g>
+    <text x="40" y="108" text-anchor="middle" class="label-bold" style="white-space: pre;">The</text>
+  </g>
+  <text x="880" y="435" class="caption" style="white-space: pre;">Low Score</text>
+  <g transform="translate(880,470)">
+    <text x="0" y="22" class="formula" style="white-space: pre;"><tspan font-weight="800">DF</tspan> = 1/1.0</text>
+    <rect x="180" y="0" width="160" height="32" rx="6" fill="#e8ecf0"/>
+    <text x="260" y="22" text-anchor="middle" class="pill-text-mono" style="white-space: pre;">1.0</text>
+  </g>
+  <line x1="40" y1="580" x2="1360" y2="580" class="divider"/>
+  <circle cx="50" cy="640" r="28" fill="#ef5b6b"/>
+  <text x="50" y="650" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff" style="white-space: pre;">3</text>
+  <text x="105" y="650" class="step-title" style="white-space: pre;">Apply log</text>
+  <g transform="translate(140,700)">
+    <g fill="none" stroke="#111" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M40 0 L0 80 L80 80 Z"/>
+      <circle cx="35" cy="50" r="4" fill="#111"/>
+      <circle cx="50" cy="60" r="4" fill="#111"/>
+      <circle cx="25" cy="68" r="4" fill="#111"/>
+      <circle cx="55" cy="38" r="3" fill="#111"/>
+      <circle cx="60" cy="72" r="3" fill="#111"/>
+    </g>
+    <text x="40" y="108" text-anchor="middle" class="label-bold" style="white-space: pre;">Pizza</text>
+  </g>
+  <text x="260" y="735" class="caption" style="white-space: pre;">Still higher</text>
+  <g transform="translate(260,770)">
+    <text x="0" y="22" class="formula" style="white-space: pre;"><tspan font-weight="800">log</tspan>( 1/20 )</text>
+    <rect x="200" y="0" width="160" height="32" rx="6" fill="#9bd0e0" stroke="#1a2438" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="280" y="22" text-anchor="middle" class="pill-text-mono" style="white-space: pre;">1.30</text>
+  </g>
+  <g transform="translate(780,700)">
+    <g fill="none" stroke="#111" stroke-width="3" stroke-linecap="round">
+      <line x1="10" y1="0" x2="70" y2="0"/>
+      <line x1="10" y1="0" x2="10" y2="10"/>
+      <line x1="70" y1="0" x2="70" y2="10"/>
+      <line x1="40" y1="0" x2="40" y2="74"/>
+      <line x1="20" y1="80" x2="60" y2="80"/>
+    </g>
+    <text x="40" y="108" text-anchor="middle" class="label-bold" style="white-space: pre;">The</text>
+  </g>
+  <text x="880" y="735" class="caption" style="white-space: pre;">Too common, no weight</text>
+  <g transform="translate(880,770)">
+    <text x="0" y="22" class="formula" style="white-space: pre;"><tspan font-weight="800">log</tspan>( 1 )</text>
+    <rect x="160" y="0" width="160" height="32" rx="6" fill="#e8ecf0" stroke="#1a2438" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="240" y="22" text-anchor="middle" class="pill-text-mono" style="white-space: pre;">0</text>
+  </g>
+  <line x1="40" y1="880" x2="1360" y2="880" class="divider"/>
+  <rect x="40" y="910" width="1320" height="170" rx="16" fill="#f6f7f9" stroke="#d6d9de" stroke-width="1.5"/>
+  <text x="60" y="945" font-size="22" font-weight="800" fill="#1a2438" style="white-space: pre;">What IDF actually does</text>
+  <text x="60" y="975" font-size="15" fill="#222" style="white-space: pre;">
+    <tspan font-weight="700" fill="#ef5b6b">The full formula:</tspan>
+    <tspan> IDF(t) = log( N / DF(t) ) — where N is total docs and DF(t) is how many contain term t. Rare words score high, common words score ~0.</tspan>
+  </text>
+  <text x="60" y="1000" font-size="15" fill="#222" style="white-space: pre;">
+    <tspan font-weight="700" fill="#ef5b6b">Why log?</tspan>
+    <tspan> Without it, “extremely rare” vs “rare” would be wildly different (1/0.001 = 1000 vs 1/0.05 = 20). Log compresses the curve so scores stay sane.</tspan>
+  </text>
+  <text x="60" y="1025" font-size="15" fill="#222" style="white-space: pre;">
+    <tspan font-weight="700" fill="#ef5b6b">TF-IDF score:</tspan>
+    <tspan> TF(t, d) × IDF(t). A doc gets credit for using term t often (TF), but only if t is rare overall (IDF). This is why “the” * anything = 0.</tspan>
+  </text>
+  <text x="60" y="1050" font-size="15" fill="#222" style="white-space: pre;">
+    <tspan font-weight="700" fill="#ef5b6b">BM25 builds on this:</tspan>
+    <tspan> same IDF idea, but adds saturation (10 occurrences isn’t 10× better than 1) and length normalization (short docs don’t get unfairly penalized).</tspan>
+  </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" x="524.621" y="41.661">TF-IDF ---&gt; Term Frequency–Inverse Document Frequency</text>
+</svg>

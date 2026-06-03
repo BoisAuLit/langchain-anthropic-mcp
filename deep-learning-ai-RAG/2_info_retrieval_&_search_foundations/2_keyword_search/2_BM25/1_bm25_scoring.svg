@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 500" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1400" height="500" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="80" font-size="58" font-weight="800" fill="#111">BM25 Scoring</text>
+
+  <!-- Description -->
+  <text x="40" y="170" font-size="26" fill="#222">BM25 (Best Matching 25) was named as the 25th variant in a series of scoring</text>
+  <text x="40" y="205" font-size="26" fill="#222">functions proposed by its creators.</text>
+
+  <!-- Formula box -->
+  <rect x="40" y="245" width="1320" height="210" rx="14" fill="#2c3a52"/>
+
+  <!-- Formula contents -->
+  <g font-family="'Times New Roman', Times, serif" fill="#ffffff" font-style="italic">
+    <!-- IDF * -->
+    <text x="110" y="370" font-size="44">IDF</text>
+    <text x="210" y="370" font-size="44">&#8727;</text>
+
+    <!-- Numerator: TF * (k1 + 1) -->
+    <text x="660" y="328" text-anchor="middle" font-size="40">TF &#8727; (k</text>
+    <text x="703" y="338" text-anchor="middle" font-size="22">1</text>
+    <text x="757" y="328" text-anchor="middle" font-size="40">+ 1)</text>
+
+    <!-- Fraction bar -->
+    <line x1="260" y1="345" x2="1060" y2="345" stroke="#ffffff" stroke-width="3"/>
+
+    <!-- Denominator: TF + k1 * (1 - b + b * (doc len / avg doc len)) -->
+    <text x="280" y="395" font-size="40">TF + k</text>
+    <text x="382" y="406" font-size="22">1</text>
+    <text x="400" y="395" font-size="40">&#8727; (1 &#8722; b + b &#8727; (</text>
+
+    <!-- inner fraction: document length / average document length -->
+    <g font-style="normal">
+      <text x="810" y="383" text-anchor="middle" font-size="22">document length</text>
+      <line x1="722" y1="392" x2="898" y2="392" stroke="#ffffff" stroke-width="2"/>
+      <text x="810" y="412" text-anchor="middle" font-size="22">average document length</text>
+    </g>
+
+    <text x="910" y="395" font-size="40">))</text>
+  </g>
+</svg>

@@ -213,3 +213,4 @@ __marimo__/
 # uv lock files
 uv.lock
 *.pdf
+*.joblib

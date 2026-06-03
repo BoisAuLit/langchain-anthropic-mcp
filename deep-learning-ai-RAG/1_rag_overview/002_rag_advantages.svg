@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 750" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="900" height="750" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="90" font-size="64" font-weight="800" fill="#111">Advantages of RAG</text>
+
+  <!-- Item 1 -->
+  <text x="60" y="200" font-size="26" font-weight="700" fill="#111">Injects missing knowledge</text>
+  <text x="80" y="235" font-size="24" fill="#333">Adds info not in the training data (e.g. policies, updates)</text>
+
+  <!-- Item 2 -->
+  <text x="60" y="305" font-size="26" font-weight="700" fill="#111">Reduces hallucinations</text>
+  <text x="80" y="340" font-size="24" fill="#333">Grounds answers with relevant context</text>
+
+  <!-- Item 3 -->
+  <text x="60" y="410" font-size="26" font-weight="700" fill="#111">Keeps models up to date</text>
+  <text x="80" y="445" font-size="24" fill="#333">Reflects new info by updating the knowledge base</text>
+
+  <!-- Item 4 -->
+  <text x="60" y="515" font-size="26" font-weight="700" fill="#111">Enables source citation</text>
+  <text x="80" y="550" font-size="24" fill="#333">Includes sources for verifiable answers</text>
+
+  <!-- Item 5 -->
+  <text x="60" y="640" font-size="26" font-weight="700" fill="#111">Focuses model on generation</text>
+  <text x="80" y="675" font-size="24" fill="#333">Retriever finds facts, LLM writes responses</text>
+</svg>

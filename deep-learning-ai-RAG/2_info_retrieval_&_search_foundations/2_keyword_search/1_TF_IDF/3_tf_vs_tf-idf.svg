@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 720" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <style>
+      .row-label { font-size: 24px; font-weight: 700; fill: #111; }
+      .col-label { font-size: 20px; font-weight: 700; fill: #333; }
+      .cell-tf { font-size: 22px; font-weight: 800; fill: #ffffff; }
+      .cell-tfidf { font-size: 20px; font-weight: 800; fill: #ffffff; }
+      .title { font-size: 42px; font-weight: 800; fill: #111; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1400" height="720" fill="#ffffff"/>
+  <text x="335" y="80" text-anchor="middle" class="title" style="white-space: pre;">TF</text>
+  <text x="1075" y="80" text-anchor="middle" class="title" style="white-space: pre;">TF-IDF</text>
+  <g class="col-label" text-anchor="middle">
+    <text x="195" y="155" style="white-space: pre;">Doc 1</text>
+    <text x="290" y="155" style="white-space: pre;">Doc 2</text>
+    <text x="385" y="155" style="white-space: pre;">Doc 3</text>
+    <text x="480" y="155" style="white-space: pre;">Doc 4</text>
+    <text x="575" y="155" style="white-space: pre;">Doc 5</text>
+  </g>
+  <g class="row-label">
+    <text x="40" y="225" style="white-space: pre;">making</text>
+    <text x="40" y="315" style="white-space: pre;">pizza</text>
+    <text x="40" y="405" style="white-space: pre;">without</text>
+    <text x="40" y="495" style="white-space: pre;">a</text>
+    <text x="40" y="585" style="white-space: pre;">oven</text>
+  </g>
+  <g transform="translate(150,180)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(245,180)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(340,180)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(435,180)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(530,180)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(150,270)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(245,270)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(340,270)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(435,270)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(530,270)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(150,360)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(245,360)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(340,360)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(435,360)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(530,360)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(150,450)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(245,450)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(340,450)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(435,450)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(530,450)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(150,540)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(245,540)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(340,540)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(435,540)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <g transform="translate(530,540)">
+    <rect width="90" height="70" rx="10" fill="#7d8898"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tf" style="white-space: pre;">1</text>
+  </g>
+  <line x1="660" y1="385" x2="770" y2="385" stroke="#1a2438" stroke-width="3" marker-end="url(#ar)"/>
+  <g class="col-label" text-anchor="middle">
+    <text x="935" y="155" style="white-space: pre;">Doc 1</text>
+    <text x="1030" y="155" style="white-space: pre;">Doc 2</text>
+    <text x="1125" y="155" style="white-space: pre;">Doc 3</text>
+    <text x="1220" y="155" style="white-space: pre;">Doc 4</text>
+    <text x="1315" y="155" style="white-space: pre;">Doc 5</text>
+  </g>
+  <g class="row-label">
+    <text x="800" y="225" style="white-space: pre;">making</text>
+    <text x="800" y="315" style="white-space: pre;">pizza</text>
+    <text x="800" y="405" style="white-space: pre;">without</text>
+    <text x="800" y="495" style="white-space: pre;">a</text>
+    <text x="800" y="585" style="white-space: pre;">oven</text>
+  </g>
+  <g transform="translate(890,180)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.4</text>
+  </g>
+  <g transform="translate(985,180)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(1080,180)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(1175,180)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.4</text>
+  </g>
+  <g transform="translate(1270,180)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.4</text>
+  </g>
+  <g transform="translate(890,270)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.7</text>
+  </g>
+  <g transform="translate(985,270)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(1080,270)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.7</text>
+  </g>
+  <g transform="translate(1175,270)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(1270,270)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(890,360)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.2</text>
+  </g>
+  <g transform="translate(985,360)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.2</text>
+  </g>
+  <g transform="translate(1080,360)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(1175,360)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.2</text>
+  </g>
+  <g transform="translate(1270,360)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.2</text>
+  </g>
+  <g transform="translate(890,450)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.1</text>
+  </g>
+  <g transform="translate(985,450)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.1</text>
+  </g>
+  <g transform="translate(1080,450)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(1175,450)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.1</text>
+  </g>
+  <g transform="translate(1270,450)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.1</text>
+  </g>
+  <g transform="translate(890,540)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.2</text>
+  </g>
+  <g transform="translate(985,540)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.2</text>
+  </g>
+  <g transform="translate(1080,540)">
+    <rect width="90" height="70" rx="10" fill="#e8ecf5"/>
+  </g>
+  <g transform="translate(1175,540)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.2</text>
+  </g>
+  <g transform="translate(1270,540)">
+    <rect width="90" height="70" rx="10" fill="#ef5b6b"/>
+    <text x="45" y="44" text-anchor="middle" class="cell-tfidf" style="white-space: pre;">0.2</text>
+  </g>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" x="785.193" y="111.177">Term Frequency – Inverse Document Frequency</text>
+</svg>

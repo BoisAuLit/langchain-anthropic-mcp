@@ -19,12 +19,24 @@ import os
 from typing_extensions import Literal
 
 from langchain.chat_models import init_chat_model
-from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage, filter_messages
+from langchain_core.messages import (
+    SystemMessage,
+    HumanMessage,
+    ToolMessage,
+    filter_messages,
+)
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.graph import StateGraph, START, END
 
-from deep_research_from_scratch.prompts import research_agent_prompt_with_mcp, compress_research_system_prompt, compress_research_human_message
-from deep_research_from_scratch.state_research import ResearcherState, ResearcherOutputState
+from deep_research_from_scratch.prompts import (
+    research_agent_prompt_with_mcp,
+    compress_research_system_prompt,
+    compress_research_human_message,
+)
+from deep_research_from_scratch.state_research import (
+    ResearcherState,
+    ResearcherOutputState,
+)
 from deep_research_from_scratch.utils import get_today_str, think_tool, get_current_dir
 
 # ===== CONFIGURATION =====
@@ -36,14 +48,15 @@ mcp_config = {
         "args": [
             "-y",  # Auto-install if needed
             "@modelcontextprotocol/server-filesystem",
-            str(get_current_dir() / "files")  # Path to research documents
+            str(get_current_dir() / "files"),  # Path to research documents
         ],
-        "transport": "stdio"  # Communication via stdin/stdout
+        "transport": "stdio",  # Communication via stdin/stdout
     }
 }
 
 # Global client variable - will be initialized lazily
 _client = None
+
 
 def get_mcp_client():
     """Get or initialize MCP client lazily to avoid issues with LangGraph Platform."""
@@ -52,11 +65,13 @@ def get_mcp_client():
         _client = MultiServerMCPClient(mcp_config)
     return _client
 
+
 # Initialize models
 compress_model = init_chat_model(model="openai:gpt-4.1", max_tokens=32000)
-model = init_chat_model(model="anthropic:claude-sonnet-4-20250514")
+model = init_chat_model(model="anthropic:claude-sonnet-4-6")
 
 # ===== AGENT NODES =====
+
 
 async def llm_call(state: ResearcherState):
     """Analyze current state and decide on tool usage with MCP integration.
@@ -82,10 +97,18 @@ async def llm_call(state: ResearcherState):
     return {
         "researcher_messages": [
             model_with_tools.invoke(
-                [SystemMessage(content=research_agent_prompt_with_mcp.format(date=get_today_str()))] + state["researcher_messages"]
+                [
+                    SystemMessage(
+                        content=research_agent_prompt_with_mcp.format(
+                            date=get_today_str()
+                        )
+                    )
+                ]
+                + state["researcher_messages"]
             )
         ]
     }
+
 
 async def tool_node(state: ResearcherState):
     """Execute tool calls using MCP tools.
@@ -136,6 +159,7 @@ async def tool_node(state: ResearcherState):
 
     return {"researcher_messages": messages}
 
+
 def compress_research(state: ResearcherState) -> dict:
     """Compress research findings into a concise summary.
 
@@ -147,26 +171,34 @@ def compress_research(state: ResearcherState) -> dict:
     """
 
     system_message = compress_research_system_prompt.format(date=get_today_str())
-    messages = [SystemMessage(content=system_message)] + state.get("researcher_messages", []) + [HumanMessage(content=compress_research_human_message)]
+    messages = (
+        [SystemMessage(content=system_message)]
+        + state.get("researcher_messages", [])
+        + [HumanMessage(content=compress_research_human_message)]
+    )
 
     response = compress_model.invoke(messages)
 
     # Extract raw notes from tool and AI messages
     raw_notes = [
-        str(m.content) for m in filter_messages(
-            state["researcher_messages"], 
-            include_types=["tool", "ai"]
+        str(m.content)
+        for m in filter_messages(
+            state["researcher_messages"], include_types=["tool", "ai"]
         )
     ]
 
     return {
         "compressed_research": str(response.content),
-        "raw_notes": ["\n".join(raw_notes)]
+        "raw_notes": ["\n".join(raw_notes)],
     }
+
 
 # ===== ROUTING LOGIC =====
 
-def should_continue(state: ResearcherState) -> Literal["tool_node", "compress_research"]:
+
+def should_continue(
+    state: ResearcherState,
+) -> Literal["tool_node", "compress_research"]:
     """Determine whether to continue with tool execution or compress research.
 
     Determines whether to continue with tool execution or compress research
@@ -180,6 +212,7 @@ def should_continue(state: ResearcherState) -> Literal["tool_node", "compress_re
         return "tool_node"
     # Otherwise, compress research findings
     return "compress_research"
+
 
 # ===== GRAPH CONSTRUCTION =====
 
@@ -197,7 +230,7 @@ agent_builder_mcp.add_conditional_edges(
     "llm_call",
     should_continue,
     {
-        "tool_node": "tool_node",        # Continue to tool execution
+        "tool_node": "tool_node",  # Continue to tool execution
         "compress_research": "compress_research",  # Compress research findings
     },
 )

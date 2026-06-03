@@ -1,0 +1,381 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2700" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a2438"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#1a2438"/>
+      <stop offset="100%" stop-color="#5b3a8c"/>
+    </linearGradient>
+    <style>
+      .h1 { font-size: 46px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 20px; fill: #d8c8f0; font-style: italic; }
+      .section { font-size: 30px; font-weight: 800; fill: #111; }
+      .mono { font-family: 'Courier New', Courier, monospace; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1700" height="2700" fill="#ffffff"/>
+
+  <!-- ===== HEADER ===== -->
+  <rect x="0" y="0" width="1700" height="150" fill="url(#hdr)"/>
+  <!-- decorative -->
+  <g transform="translate(1380,30)" opacity="0.25">
+    <rect x="0" y="20" width="80" height="32" rx="6" fill="#ffffff"/>
+    <text x="40" y="42" text-anchor="middle" font-size="14" fill="#1a2438" font-family="'Courier New', monospace">&gt;_</text>
+    <line x1="80" y1="36" x2="120" y2="36" stroke="#ffffff" stroke-width="2"/>
+    <polygon points="120,36 110,30 110,42" fill="#ffffff"/>
+    <rect x="130" y="20" width="80" height="32" rx="6" fill="#ffd86b"/>
+    <text x="170" y="42" text-anchor="middle" font-size="12" fill="#1a2438" font-weight="800">refined</text>
+  </g>
+  <text x="50" y="70" class="h1">Query Preprocessing — making the prompt better</text>
+  <text x="50" y="108" class="sub">Three techniques that fix the prompt BEFORE it hits the retriever</text>
+
+  <!-- ===== OVERVIEW ===== -->
+  <text x="50" y="210" class="section">1. The big idea — user prompts are messy</text>
+
+  <rect x="50" y="230" width="1600" height="170" rx="14" fill="#fef3c7" stroke="#fbd24a"/>
+  <text x="80" y="270" font-size="18" fill="#222">
+    <tspan font-weight="800">Most retrieval failures aren't the retriever's fault.</tspan>
+    <tspan> They're the prompt's fault.</tspan>
+  </text>
+  <text x="80" y="298" font-size="16" fill="#222">Real user prompts are wordy, vague, full of irrelevant context, or use different vocabulary than the documents they're trying to find.</text>
+  <text x="80" y="326" font-size="16" fill="#222">Query preprocessing means transforming the raw prompt into something the retriever can match more reliably.</text>
+  <text x="80" y="362" font-size="16" fill="#222">
+    <tspan font-weight="800" fill="#ef5b6b">Three big techniques:</tspan>
+    <tspan> </tspan>
+    <tspan font-weight="800" fill="#5b3a8c">HyDE</tspan>
+    <tspan>  &#8226;  </tspan>
+    <tspan font-weight="800" fill="#5b3a8c">Named Entity Recognition</tspan>
+    <tspan>  &#8226;  </tspan>
+    <tspan font-weight="800" fill="#5b3a8c">Query Rewriting</tspan>
+  </text>
+
+  <!-- ===== SECTION 2: HyDE ===== -->
+  <text x="50" y="450" class="section">2. HyDE — Hypothetical Document Embeddings</text>
+
+  <rect x="50" y="470" width="1600" height="430" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <text x="80" y="510" font-size="20" font-weight="800" fill="#2c3a52">The flip</text>
+  <text x="80" y="538" font-size="15" fill="#222">
+    <tspan font-weight="800" fill="#ef5b6b">Normal retrieval:</tspan>
+    <tspan> match the user's PROMPT against documents (a question vs answers — different shapes).</tspan>
+  </text>
+  <text x="80" y="565" font-size="15" fill="#222">
+    <tspan font-weight="800" fill="#ef5b6b">HyDE retrieval:</tspan>
+    <tspan> have an LLM write a fake "perfect answer" first, then match DOCUMENT vs DOCUMENT.</tspan>
+  </text>
+
+  <!-- HyDE pipeline diagram -->
+  <!-- Original prompt -->
+  <g transform="translate(80,610)">
+    <rect width="240" height="180" rx="10" fill="#eaf0ff" stroke="#cbd6e9"/>
+    <rect x="0" y="0" width="240" height="32" rx="10" fill="#2c3a52"/>
+    <text x="120" y="22" text-anchor="middle" font-size="14" font-weight="800" fill="#ffffff">Original Prompt</text>
+    <text x="120" y="62" text-anchor="middle" font-size="13" fill="#222" font-style="italic">"my left shoulder</text>
+    <text x="120" y="82" text-anchor="middle" font-size="13" fill="#222" font-style="italic">hurts and I have</text>
+    <text x="120" y="102" text-anchor="middle" font-size="13" fill="#222" font-style="italic">numbness in my</text>
+    <text x="120" y="122" text-anchor="middle" font-size="13" fill="#222" font-style="italic">thumb and index</text>
+    <text x="120" y="142" text-anchor="middle" font-size="13" fill="#222" font-style="italic">finger, what</text>
+    <text x="120" y="162" text-anchor="middle" font-size="13" fill="#222" font-style="italic">should I do?"</text>
+  </g>
+
+  <path d="M320 700 Q 380 700 420 700" fill="none" stroke="#1a2438" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- LLM box -->
+  <g transform="translate(430,610)">
+    <rect width="160" height="100" rx="14" fill="#2c3a52"/>
+    <g transform="translate(50,15)" fill="#ffffff">
+      <circle cx="10" cy="10" r="4"/>
+      <circle cx="30" cy="20" r="4"/>
+      <circle cx="50" cy="10" r="4"/>
+      <circle cx="10" cy="35" r="4"/>
+      <circle cx="50" cy="35" r="4"/>
+      <circle cx="10" cy="60" r="4"/>
+      <circle cx="30" cy="50" r="4"/>
+      <circle cx="50" cy="60" r="4"/>
+      <g stroke="#ffffff" stroke-width="1.2">
+        <line x1="10" y1="10" x2="30" y2="20"/>
+        <line x1="50" y1="10" x2="30" y2="20"/>
+        <line x1="10" y1="35" x2="30" y2="20"/>
+        <line x1="10" y1="35" x2="30" y2="50"/>
+        <line x1="50" y1="35" x2="30" y2="20"/>
+        <line x1="50" y1="35" x2="30" y2="50"/>
+        <line x1="10" y1="60" x2="30" y2="50"/>
+        <line x1="50" y1="60" x2="30" y2="50"/>
+      </g>
+    </g>
+  </g>
+  <text x="510" y="735" text-anchor="middle" font-size="14" fill="#111">LLM writes a</text>
+  <text x="510" y="753" text-anchor="middle" font-size="14" fill="#111">hypothetical doc</text>
+  <text x="510" y="771" text-anchor="middle" font-size="14" fill="#111">answering the prompt</text>
+
+  <path d="M590 660 Q 660 660 700 660" fill="none" stroke="#1a2438" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- Hypothetical doc -->
+  <g transform="translate(710,610)">
+    <rect width="180" height="100" rx="10" fill="#ffffff" stroke="#1a2438" stroke-width="2"/>
+    <line x1="20" y1="25" x2="160" y2="25" stroke="#1a2438" stroke-width="2"/>
+    <line x1="20" y1="45" x2="160" y2="45" stroke="#1a2438" stroke-width="2"/>
+    <line x1="20" y1="65" x2="160" y2="65" stroke="#1a2438" stroke-width="2"/>
+    <line x1="20" y1="85" x2="120" y2="85" stroke="#1a2438" stroke-width="2"/>
+    <polygon points="150,5 156,18 170,18 159,28 162,42 150,34 138,42 141,28 130,18 144,18" fill="#ffd86b" stroke="#1a2438"/>
+  </g>
+  <text x="800" y="735" text-anchor="middle" font-size="14" fill="#111">Hypothetical</text>
+  <text x="800" y="753" text-anchor="middle" font-size="14" fill="#111">document</text>
+
+  <path d="M800 715 L 800 770" fill="none" stroke="#1a2438" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- Embedding model -->
+  <g transform="translate(710,775)">
+    <rect width="180" height="80" rx="10" fill="#2c3a52"/>
+    <text x="90" y="35" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">Embedding</text>
+    <text x="90" y="58" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">Model</text>
+  </g>
+
+  <path d="M890 815 Q 950 815 990 815" fill="none" stroke="#1a2438" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- Vector -->
+  <g transform="translate(1000,775)">
+    <rect width="350" height="80" rx="10" fill="#dde2f0" stroke="#a99bd6"/>
+    <text x="175" y="46" text-anchor="middle" class="mono" font-size="22" fill="#111">[0, 5, 0, 4, 0, 0, 3, 2]</text>
+  </g>
+  <text x="1175" y="720" text-anchor="middle" font-size="14" fill="#222">Vector of hypothetical</text>
+  <text x="1175" y="738" text-anchor="middle" font-size="14" fill="#222">doc is used to search</text>
+
+  <!-- Right side notes -->
+  <text x="1400" y="510" font-size="16" font-weight="800" fill="#5b3a8c">Why it helps</text>
+  <text x="1400" y="538" font-size="13" fill="#222">Questions and answers live in</text>
+  <text x="1400" y="556" font-size="13" fill="#222">different regions of embedding</text>
+  <text x="1400" y="574" font-size="13" fill="#222">space. HyDE pulls the query into</text>
+  <text x="1400" y="592" font-size="13" fill="#222">the answer region first.</text>
+
+  <text x="1400" y="630" font-size="16" font-weight="800" fill="#5b3a8c">Cost</text>
+  <text x="1400" y="658" font-size="13" fill="#222">+1 LLM call per query &#8594; adds</text>
+  <text x="1400" y="676" font-size="13" fill="#222">latency &amp; cost. Pays off on</text>
+  <text x="1400" y="694" font-size="13" fill="#222">poorly-worded questions.</text>
+
+  <!-- ===== SECTION 3: NER ===== -->
+  <text x="50" y="950" class="section">3. Named Entity Recognition (NER) — turn words into structured filters</text>
+
+  <rect x="50" y="970" width="1600" height="420" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <text x="80" y="1010" font-size="16" fill="#222">Find specific kinds of things in the prompt (people, places, dates, books, organizations...) and use them as <tspan font-weight="800">strict filters</tspan>.</text>
+
+  <!-- prompt + entities -->
+  <g transform="translate(80,1040)">
+    <rect width="700" height="120" rx="10" fill="#eaf0ff" stroke="#cbd6e9"/>
+    <rect x="0" y="0" width="700" height="32" rx="10" fill="#2c3a52"/>
+    <text x="20" y="22" font-size="14" font-weight="800" fill="#ffffff">Original Prompt</text>
+    <text x="20" y="60" font-size="14" fill="#222" font-style="italic">"I read The Great Gatsby by F. Scott Fitzgerald last summer while</text>
+    <text x="20" y="82" font-size="14" fill="#222" font-style="italic">visiting New York. Are there any similar books set in the 1920s</text>
+    <text x="20" y="104" font-size="14" fill="#222" font-style="italic">that I might enjoy?"</text>
+  </g>
+
+  <g transform="translate(820,1040)">
+    <rect width="320" height="120" rx="10" fill="#eaf0ff" stroke="#cbd6e9"/>
+    <rect x="0" y="0" width="320" height="32" rx="10" fill="#2c3a52"/>
+    <text x="20" y="22" font-size="14" font-weight="800" fill="#ffffff">Entity types to extract</text>
+    <text x="20" y="60" font-size="14" fill="#222">Person, books,</text>
+    <text x="20" y="82" font-size="14" fill="#222">location, dates,</text>
+    <text x="20" y="104" font-size="14" fill="#222">actors, characters</text>
+  </g>
+
+  <!-- arrow down -->
+  <line x1="430" y1="1170" x2="430" y2="1210" stroke="#1a2438" stroke-width="3" marker-end="url(#ar)"/>
+  <line x1="980" y1="1170" x2="980" y2="1210" stroke="#1a2438" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- NER engine -->
+  <rect x="80" y="1220" width="1240" height="56" rx="10" fill="#ef5b6b"/>
+  <text x="700" y="1256" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">NER engine (e.g. GLiNER, spaCy, or LLM-based extractor)</text>
+
+  <line x1="700" y1="1280" x2="700" y2="1310" stroke="#1a2438" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- labeled prompt -->
+  <text x="80" y="1340" font-size="16" font-weight="800" fill="#111">Labeled prompt</text>
+  <g transform="translate(80,1350)">
+    <rect width="1240" height="50" rx="6" fill="#f1f3f5"/>
+    <text x="14" y="32" font-size="14" fill="#111">"I read </text>
+    <rect x="60" y="14" width="120" height="24" rx="3" fill="#fcd2d6"/>
+    <text x="66" y="32" font-size="14" fill="#111">The Great Gatsby</text>
+    <rect x="184" y="14" width="44" height="24" rx="3" fill="#ef5b6b"/>
+    <text x="192" y="31" class="mono" font-size="11" fill="#ffffff" font-weight="800">BOOK</text>
+    <text x="234" y="32" font-size="14" fill="#111">by </text>
+    <rect x="260" y="14" width="136" height="24" rx="3" fill="#a99bd6"/>
+    <text x="266" y="32" font-size="14" fill="#111">F. Scott Fitzgerald</text>
+    <rect x="400" y="14" width="56" height="24" rx="3" fill="#5b3a8c"/>
+    <text x="408" y="31" class="mono" font-size="11" fill="#ffffff" font-weight="800">PERSON</text>
+    <text x="460" y="32" font-size="14" fill="#111">last summer while visiting </text>
+    <rect x="670" y="14" width="76" height="24" rx="3" fill="#ffe1ad"/>
+    <text x="676" y="32" font-size="14" fill="#111">New York.</text>
+    <rect x="750" y="14" width="74" height="24" rx="3" fill="#f5a623"/>
+    <text x="758" y="31" class="mono" font-size="11" fill="#ffffff" font-weight="800">LOCATION</text>
+    <text x="828" y="32" font-size="14" fill="#111">... books set in the </text>
+    <rect x="970" y="14" width="48" height="24" rx="3" fill="#bfe0bf"/>
+    <text x="976" y="32" font-size="14" fill="#111">1920s</text>
+    <rect x="1022" y="14" width="44" height="24" rx="3" fill="#3aa97a"/>
+    <text x="1030" y="31" class="mono" font-size="11" fill="#ffffff" font-weight="800">DATE</text>
+    <text x="1070" y="32" font-size="14" fill="#111">?"</text>
+  </g>
+
+  <!-- ===== SECTION 4: QUERY REWRITING ===== -->
+  <text x="50" y="1440" class="section">4. Query Rewriting — let an LLM clean the prompt first</text>
+
+  <rect x="50" y="1460" width="1600" height="540" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <!-- Pipeline -->
+  <g transform="translate(80,1500)">
+    <rect width="80" height="80" rx="14" fill="#2c3a52"/>
+    <path d="M16 22 H64 a4 4 0 0 1 4 4 V52 a4 4 0 0 1 -4 4 H40 l-8 12 v-12 h-16 a4 4 0 0 1 -4 -4 V26 a4 4 0 0 1 4 -4 z" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <text x="22" y="48" fill="#ffffff" class="mono" font-size="18" font-weight="800">&gt;_</text>
+  </g>
+  <text x="120" y="1610" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Messy</text>
+  <text x="120" y="1628" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Prompt</text>
+
+  <line x1="170" y1="1540" x2="220" y2="1540" stroke="#111" stroke-width="3" marker-end="url(#ar)"/>
+
+  <g transform="translate(230,1500)">
+    <rect width="80" height="80" rx="14" fill="#2c3a52"/>
+    <g transform="translate(15,15)" fill="#ffffff">
+      <circle cx="8" cy="8" r="3.5"/>
+      <circle cx="8" cy="25" r="3.5"/>
+      <circle cx="8" cy="42" r="3.5"/>
+      <circle cx="25" cy="16" r="3.5"/>
+      <circle cx="25" cy="33" r="3.5"/>
+      <circle cx="42" cy="8" r="3.5"/>
+      <circle cx="42" cy="25" r="3.5"/>
+      <circle cx="42" cy="42" r="3.5"/>
+      <g stroke="#ffffff" stroke-width="1">
+        <line x1="8" y1="8" x2="25" y2="16"/>
+        <line x1="8" y1="25" x2="25" y2="16"/>
+        <line x1="8" y1="25" x2="25" y2="33"/>
+        <line x1="8" y1="42" x2="25" y2="33"/>
+        <line x1="25" y1="16" x2="42" y2="8"/>
+        <line x1="25" y1="16" x2="42" y2="25"/>
+        <line x1="25" y1="33" x2="42" y2="25"/>
+        <line x1="25" y1="33" x2="42" y2="42"/>
+      </g>
+    </g>
+  </g>
+  <text x="270" y="1610" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Query</text>
+  <text x="270" y="1628" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Rewriter</text>
+
+  <line x1="320" y1="1540" x2="370" y2="1540" stroke="#111" stroke-width="3" marker-end="url(#ar)"/>
+
+  <g transform="translate(380,1500)">
+    <rect width="80" height="80" rx="14" fill="#2c3a52"/>
+    <path d="M16 22 H64 a4 4 0 0 1 4 4 V52 a4 4 0 0 1 -4 4 H40 l-8 12 v-12 h-16 a4 4 0 0 1 -4 -4 V26 a4 4 0 0 1 4 -4 z" fill="none" stroke="#ffd86b" stroke-width="2.5"/>
+    <text x="22" y="48" fill="#ffd86b" class="mono" font-size="16" font-weight="800">&gt;_+</text>
+  </g>
+  <text x="420" y="1610" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Optimized</text>
+  <text x="420" y="1628" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Prompt</text>
+
+  <line x1="420" y1="1590" x2="420" y2="1660" stroke="#111" stroke-width="3" marker-end="url(#ar)"/>
+
+  <g transform="translate(380,1670)">
+    <rect width="80" height="80" rx="14" fill="#ef5b6b"/>
+    <path d="M16 24 H64 L44 46 V62 L34 62 V46 Z" fill="#ffffff"/>
+    <circle cx="52" cy="60" r="9" fill="#ef5b6b" stroke="#ffffff" stroke-width="2"/>
+    <line x1="58" y1="66" x2="68" y2="76" stroke="#ffffff" stroke-width="3"/>
+  </g>
+  <text x="420" y="1780" text-anchor="middle" font-size="14" font-weight="800" fill="#111">Retriever</text>
+
+  <!-- Example: messy vs optimized -->
+  <g transform="translate(540,1490)">
+    <rect width="560" height="160" rx="10" fill="#eaf0ff" stroke="#cbd6e9"/>
+    <text x="20" y="30" font-size="14" font-weight="800" fill="#2c3a52">Messy prompt</text>
+    <text x="20" y="58" font-size="13" fill="#222" font-style="italic">"I was out walking my dog, a beautiful black lab named</text>
+    <text x="20" y="78" font-size="13" fill="#222" font-style="italic">Poppy, when she raced away from me and yanked on her</text>
+    <text x="20" y="98" font-size="13" fill="#222" font-style="italic">leash. Three days later my shoulder is still numb and my</text>
+    <text x="20" y="118" font-size="13" fill="#222" font-style="italic">fingers are all pins and needles. What's going on?"</text>
+    <text x="20" y="148" font-size="12" fill="#888" font-style="italic">irrelevant context: dog's name, color, the walk itself...</text>
+  </g>
+
+  <g transform="translate(540,1670)">
+    <rect width="560" height="160" rx="10" fill="#fff8e1" stroke="#fbd24a"/>
+    <text x="20" y="30" font-size="14" font-weight="800" fill="#5b3a8c">Optimized prompt</text>
+    <text x="20" y="58" class="mono" font-size="13" fill="#111">Experienced a sudden, forceful pull</text>
+    <text x="20" y="78" class="mono" font-size="13" fill="#111">on the shoulder, resulting in persistent</text>
+    <text x="20" y="98" class="mono" font-size="13" fill="#111">shoulder and finger numbness for 3 days.</text>
+    <text x="20" y="118" class="mono" font-size="13" fill="#111">What are the potential causes such as</text>
+    <text x="20" y="138" class="mono" font-size="13" fill="#111">neuropathy or nerve impingement?</text>
+  </g>
+
+  <!-- Prompt template box -->
+  <g transform="translate(1120,1490)">
+    <rect width="510" height="490" rx="14" fill="#2c3a52"/>
+    <text x="25" y="40" font-size="18" font-weight="800" fill="#ffd86b">The rewriter prompt template</text>
+
+    <text x="25" y="80" class="mono" font-size="13" fill="#ffffff">The following prompt was submitted</text>
+    <text x="25" y="100" class="mono" font-size="13" fill="#ffffff">by a user to query a database of</text>
+    <text x="25" y="120" class="mono" font-size="13" fill="#ffffff">medical documents linking symptoms</text>
+    <text x="25" y="140" class="mono" font-size="13" fill="#ffffff">to diagnoses. Rewrite it to optimize</text>
+    <text x="25" y="160" class="mono" font-size="13" fill="#ffffff">it for searching the database by:</text>
+
+    <text x="25" y="200" class="mono" font-size="13" fill="#ffd86b">- Clarify ambiguous phrases</text>
+    <text x="25" y="222" class="mono" font-size="13" fill="#ffd86b">- Use medical terminology</text>
+    <text x="25" y="244" class="mono" font-size="13" fill="#ffd86b">- Add synonyms that increase odds</text>
+    <text x="25" y="266" class="mono" font-size="13" fill="#ffd86b">  of finding matching documents</text>
+    <text x="25" y="288" class="mono" font-size="13" fill="#ffd86b">- Remove distracting information</text>
+
+    <text x="25" y="328" class="mono" font-size="13" fill="#d8c8f0">{user_prompt}</text>
+
+    <text x="25" y="378" font-size="14" fill="#ffffff">
+      <tspan font-weight="800">Key idea:</tspan>
+      <tspan> the template is</tspan>
+    </text>
+    <text x="25" y="400" font-size="14" fill="#ffffff">domain-specific. Iterate on it.</text>
+    <text x="25" y="438" font-size="14" fill="#ffffff">Benefits typically justify the cost:</text>
+    <text x="25" y="460" font-size="14" fill="#ffffff">one extra LLM call &#8594; far fewer</text>
+    <text x="25" y="478" font-size="14" fill="#ffffff">retrieval misses downstream.</text>
+  </g>
+
+  <!-- ===== SECTION 5: WHICH TO USE WHEN ===== -->
+  <text x="50" y="2050" class="section">5. Which to use when — a quick decision table</text>
+
+  <rect x="50" y="2070" width="1600" height="280" rx="14" fill="#f6f7f9" stroke="#d6d9de"/>
+
+  <g transform="translate(80,2110)">
+    <rect width="490" height="210" rx="14" fill="#5b3a8c"/>
+    <text x="245" y="40" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">HyDE</text>
+    <text x="25" y="80" font-size="14" fill="#ffffff"><tspan font-weight="800">Use when:</tspan> queries are short</text>
+    <text x="25" y="100" font-size="14" fill="#ffffff">questions; docs are long-form answers.</text>
+    <text x="25" y="130" font-size="14" fill="#ffffff"><tspan font-weight="800">Skip when:</tspan> queries and docs already</text>
+    <text x="25" y="150" font-size="14" fill="#ffffff">share format (e.g., both are questions).</text>
+    <text x="25" y="186" font-size="13" fill="#e8d5ff" font-style="italic">Diminishing returns with strong embedders.</text>
+  </g>
+
+  <g transform="translate(595,2110)">
+    <rect width="510" height="210" rx="14" fill="#ef5b6b"/>
+    <text x="255" y="40" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">NER</text>
+    <text x="25" y="80" font-size="14" fill="#ffffff"><tspan font-weight="800">Use when:</tspan> docs have metadata fields</text>
+    <text x="25" y="100" font-size="14" fill="#ffffff">that match common entity types.</text>
+    <text x="25" y="130" font-size="14" fill="#ffffff"><tspan font-weight="800">Skip when:</tspan> docs are unstructured prose</text>
+    <text x="25" y="150" font-size="14" fill="#ffffff">without filterable fields.</text>
+    <text x="25" y="186" font-size="13" fill="#ffeaec" font-style="italic">Pairs naturally with metadata filtering.</text>
+  </g>
+
+  <g transform="translate(1130,2110)">
+    <rect width="490" height="210" rx="14" fill="#1eb6c8"/>
+    <text x="245" y="40" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Query Rewriting</text>
+    <text x="25" y="80" font-size="14" fill="#ffffff"><tspan font-weight="800">Use when:</tspan> users write conversationally</text>
+    <text x="25" y="100" font-size="14" fill="#ffffff">or include lots of noise.</text>
+    <text x="25" y="130" font-size="14" fill="#ffffff"><tspan font-weight="800">Almost always worth it:</tspan> small cost,</text>
+    <text x="25" y="150" font-size="14" fill="#ffffff">big quality bump.</text>
+    <text x="25" y="186" font-size="13" fill="#d6f4f9" font-style="italic">The "always start here" upgrade.</text>
+  </g>
+
+  <!-- ===== SECTION 6: 2026 ===== -->
+  <text x="50" y="2400" class="section">6. 2026 reality &#8226; what's evolved, what's standard</text>
+
+  <rect x="50" y="2420" width="1600" height="240" rx="14" fill="#1a2438"/>
+
+  <text x="80" y="2462" font-size="20" font-weight="800" fill="#ffd86b">What's happened to these three techniques</text>
+  <text x="80" y="2496" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">HyDE</tspan> &#8226; less critical now &#8212; modern embedders (Voyage-3, text-embedding-3-large, Cohere v3+) handle question/answer asymmetry better.</text>
+  <text x="80" y="2520" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">NER</tspan> &#8226; the standalone library approach (GLiNER, spaCy) is often replaced by a single Haiku/GPT-4o-mini call returning structured JSON.</text>
+  <text x="80" y="2544" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Query rewriting</tspan> &#8226; now baked into agentic search (Claude tool-use, Deep Research, Perplexity). Multi-query expansion is standard.</text>
+
+  <text x="80" y="2588" font-size="20" font-weight="800" fill="#ffd86b">Modern additions to the toolbelt</text>
+  <text x="80" y="2618" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Step-back prompting</tspan> &#8226; generate an abstract version of the query for broader recall (Google Research)</text>
+  <text x="80" y="2642" font-size="14" fill="#ffffff">&#9679; <tspan font-weight="800">Query decomposition</tspan> &#8226; break complex multi-part queries into sub-queries, retrieve each, merge results (LangChain, LlamaIndex)</text>
+</svg>

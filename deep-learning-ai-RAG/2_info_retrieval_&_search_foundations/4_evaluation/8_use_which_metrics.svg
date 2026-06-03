@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 750" font-family="'Helvetica Neue', Arial, sans-serif">
+  <!-- White background -->
+  <rect x="0" y="0" width="1500" height="750" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="80" font-size="52" font-weight="800" fill="#111">How to use retriever metrics</text>
+
+  <!-- ===================== LEFT COLUMN ===================== -->
+  <!-- Recall or recall@K -->
+  <text x="40" y="200" font-size="38" font-weight="800" fill="#111">Recall or recall@K</text>
+  <text x="40" y="248" font-size="24" fill="#222">Most cited metric, captures fundamental</text>
+  <text x="40" y="280" font-size="24" fill="#222">goal of finding relevant documents</text>
+
+  <!-- Precision & MAP -->
+  <text x="40" y="380" font-size="38" font-weight="800" fill="#111">Precision &amp; MAP</text>
+  <text x="40" y="428" font-size="24" fill="#222">Asses irrelevant documents and ranking</text>
+  <text x="40" y="460" font-size="24" fill="#222">effectiveness</text>
+
+  <!-- Mean Reciprocal Rank -->
+  <text x="40" y="560" font-size="38" font-weight="800" fill="#111">Mean Reciprocal Rank</text>
+  <text x="40" y="608" font-size="24" fill="#222">How well model performs at the very top of</text>
+  <text x="40" y="640" font-size="24" fill="#222">ranking</text>
+
+  <!-- ===================== RIGHT COLUMN ===================== -->
+  <!-- Metrics help -->
+  <text x="780" y="200" font-size="38" font-weight="800" fill="#111">Metrics help:</text>
+
+  <circle cx="820" cy="260" r="6" fill="#111"/>
+  <text x="845" y="268" font-size="26" fill="#222">Evaluate retriever performance</text>
+
+  <circle cx="820" cy="325" r="6" fill="#111"/>
+  <text x="845" y="333" font-size="26" fill="#222">Check if adjustments improve results</text>
+
+  <!-- Navy callout box -->
+  <rect x="760" y="420" width="700" height="240" rx="22" fill="#2c3a52"/>
+  <text x="1110" y="488" text-anchor="middle" font-size="30" font-weight="800" fill="#ffffff">All metrics depend on having</text>
+  <text x="1110" y="540" text-anchor="middle" font-size="30" font-weight="800" fill="#ffffff">ground truth relevant</text>
+  <text x="1110" y="592" text-anchor="middle" font-size="30" font-weight="800" fill="#ffffff">documents</text>
+</svg>
