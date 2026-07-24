@@ -1,0 +1,109 @@
+<svg width="900" height="1240" viewBox="0 0 900 1240" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .body { font-size: 15px; fill: #333; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .big { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 18px; font-weight: 700; }
+    .axis { stroke: #90CAF9; stroke-width: 1.5; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .cT { fill: #00897B; } .cV { fill: #1565C0; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+  <defs>
+    <marker id="aK" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#37474F"/></marker>
+    <marker id="aGr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2E7D32"/></marker>
+    <marker id="aBl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1565C0"/></marker>
+    <marker id="aR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#C62828"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1240" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">🏹 Lab 总结：<tspan class="cV">向量运算</tspan> 与 <tspan class="cG">向量化提速</tspan></text>
+  <text x="40" y="82" class="subtitle">C1W3 Lab：数乘、加法、模长、点积的三种写法，以及本 Lab 的灵魂 —— 百万维速度实验。<tspan class="cG" font-weight="700">绿色底 = 代码</tspan></text>
+  <line x1="40" y1="100" x2="860" y2="100" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① scalar mult & sum -->
+  <text x="40" y="138" class="sec">① ✖️➕ 向量的两个基本操作：<tspan class="cT">数乘</tspan> 与 <tspan class="cR">加法</tspan></text>
+
+  <!-- D1: scalar multiplication, v=(1,3), scale 18 -->
+  <line x1="60" y1="320" x2="250" y2="320" class="axis"/>
+  <line x1="155" y1="205" x2="155" y2="440" class="axis"/>
+  <line x1="155" y1="320" x2="191" y2="212" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#aGr)"/>
+  <text x="196" y="218" class="tiny" font-weight="700" fill="#2E7D32">2v</text>
+  <line x1="155" y1="320" x2="173" y2="266" stroke="#37474F" stroke-width="2.8" marker-end="url(#aK)"/>
+  <text x="178" y="280" class="tiny" font-weight="700" fill="#37474F">v=(1,3)</text>
+  <line x1="155" y1="320" x2="119" y2="428" stroke="#1565C0" stroke-width="2.5" marker-end="url(#aBl)"/>
+  <text x="92" y="438" class="tiny" font-weight="700" fill="#1565C0">−2v</text>
+  <text x="155" y="464" class="tiny" text-anchor="middle" font-weight="700"><tspan class="cG">2v 拉长</tspan>，<tspan class="cV">−2v 掉头</tspan></text>
+
+  <!-- D2: sum, v=(1,3), w=(4,-1), scale 22 -->
+  <line x1="300" y1="330" x2="545" y2="330" class="axis"/>
+  <line x1="400" y1="238" x2="400" y2="408" class="axis"/>
+  <line x1="400" y1="330" x2="422" y2="264" stroke="#37474F" stroke-width="2.5" marker-end="url(#aK)"/>
+  <text x="398" y="256" class="tiny" font-weight="700" fill="#37474F">v</text>
+  <line x1="400" y1="330" x2="488" y2="352" stroke="#37474F" stroke-width="2.5" marker-end="url(#aK)"/>
+  <text x="488" y="370" class="tiny" font-weight="700" fill="#37474F">w</text>
+  <line x1="422" y1="264" x2="510" y2="286" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line x1="488" y1="352" x2="510" y2="286" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line x1="400" y1="330" x2="510" y2="286" stroke="#C62828" stroke-width="2.8" marker-end="url(#aR)"/>
+  <text x="516" y="282" class="tiny" font-weight="700" fill="#C62828">v+w</text>
+  <text x="425" y="464" class="tiny" text-anchor="middle" font-weight="700">加法 = <tspan class="cR">平行四边形的对角线</tspan></text>
+
+  <!-- right text -->
+  <text x="590" y="230" class="small" font-weight="700" fill="#37474F">🏹 向量 = <tspan class="cV">模长</tspan> + <tspan class="cP">方向</tspan>，</text>
+  <text x="590" y="252" class="small">与画在哪无关，习惯从原点画。</text>
+  <text x="590" y="288" class="small" font-weight="700" fill="#00897B">✖️ 数乘 k·v：每个分量乘 k。</text>
+  <text x="590" y="310" class="small"><tspan class="cG" font-weight="700">k&gt;0 同向拉长</tspan>；<tspan class="cV" font-weight="700">k&lt;0 掉头</tspan>；</text>
+  <text x="590" y="332" class="small"><tspan fill="#888" font-weight="700">k=0 缩成零向量</tspan>。</text>
+  <text x="590" y="368" class="small" font-weight="700" fill="#C62828">➕ 加法 v+w：对应分量相加。</text>
+  <text x="590" y="390" class="small">例：(1,3)+(4,−1) = <tspan class="cO" font-weight="700">(5,2)</tspan>。</text>
+  <rect x="580" y="406" width="270" height="28" rx="6" class="chip"/>
+  <text x="592" y="425" class="code">2*v　v+w　np.add(v,w)</text>
+
+  <!-- ② norm -->
+  <text x="40" y="514" class="sec">② 📏 模长 norm：这支箭<tspan class="cV">有多长</tspan></text>
+  <rect x="50" y="526" width="660" height="28" rx="6" class="chip"/>
+  <text x="62" y="545" class="code">np.linalg.norm(v)  →  <tspan class="cO" font-weight="700">3.1623</tspan>      <tspan fill="#7B1FA2"># v=(1,3)：√(1²+3²) = √10</tspan></text>
+  <text x="40" y="578" class="small">norm（<tspan class="cV" font-weight="700">模长/范数</tspan>）就是箭头的长度 —— 即上节课的 √⟨v,v⟩，<tspan class="cP" font-weight="700">勾股定理的代码版</tspan>。非负，零向量长度为 0。</text>
+
+  <!-- ③ dot product 3 ways + speed -->
+  <text x="40" y="630" class="sec">③ ⚡ 点积的三种写法 + <tspan class="cR">百万维速度实验</tspan>（本 Lab 的灵魂）</text>
+  <rect x="50" y="642" width="790" height="28" rx="6" class="chip"/>
+  <text x="62" y="661" class="code">x·y = x₁y₁ + x₂y₂ + … + xₙyₙ    <tspan fill="#7B1FA2"># 例：(1,−2,−5)·(4,3,−1) = 4−6+5 = </tspan><tspan class="cO" font-weight="700">3</tspan></text>
+
+  <rect x="50" y="680" width="680" height="28" rx="6" class="chip"/>
+  <text x="62" y="699" class="code">写法① 手写 for 循环逐个乘加          <tspan class="cR" font-weight="700">🐢 慢：纯 Python 一个一个算</tspan></text>
+  <rect x="50" y="714" width="680" height="28" rx="6" class="chip"/>
+  <text x="62" y="733" class="code">写法② np.dot(x, y)                  <tspan class="cG" font-weight="700">🚀 向量化，list 也能凑合用</tspan></text>
+  <rect x="50" y="748" width="680" height="28" rx="6" class="chip"/>
+  <text x="62" y="767" class="code">写法③ x @ y                         <tspan class="cG" font-weight="700">🚀 向量化</tspan><tspan class="cR" font-weight="700">，但 @ 只认 NumPy 数组！</tspan></text>
+  <text x="40" y="800" class="small" font-weight="700" fill="#C62828">⚠️ Python list 用 @ 直接报 TypeError —— 养成习惯：向量一律先 np.array() 再运算。</text>
+
+  <text x="40" y="836" class="small" font-weight="700">⏱️ 实验：<tspan class="cV">一百万维</tspan>向量做一次点积（数值因机器而异，<tspan class="cP">量级才是重点</tspan>）：</text>
+  <rect x="60" y="850" width="520" height="22" rx="4" fill="#FFCDD2" stroke="#C62828" stroke-width="1"/>
+  <text x="590" y="866" class="small" font-weight="700" fill="#C62828">for 循环 ≈ 几百 ms 🐢</text>
+  <rect x="60" y="880" width="10" height="22" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1"/>
+  <text x="80" y="896" class="small" font-weight="700" fill="#2E7D32">np.dot / @ ≈ 1 ms 🚀 快上百倍</text>
+  <text x="40" y="928" class="small">为什么：<tspan class="cG" font-weight="700">向量化</tspan>把运算交给底层 C 与并行指令、一次算一批；<tspan class="cR" font-weight="700">循环</tspan>则由 Python 逐个处理。</text>
+  <text x="40" y="954" class="small" font-weight="700" fill="#1565C0">ML 的向量动辄上千维、训练以小时计 —— 向量化不是优化技巧，是生存技能。这也是你以后写 Q @ K.T 的原因。</text>
+
+  <!-- ④ geometric + orthogonal -->
+  <text x="40" y="1006" class="sec">④ 📐 几何定义回访 + <tspan class="cT">正交自检</tspan>（上节课的代码验证）</text>
+  <text x="60" y="1036" class="big"><tspan class="cT">x·y</tspan> = <tspan class="cV">|x|</tspan>·<tspan class="cV">|y|</tspan>·<tspan class="cP">cos(θ)</tspan></text>
+  <text x="40" y="1064" class="small">垂直（θ=90°）时 <tspan class="cP" font-weight="700">cos = 0</tspan> → <tspan font-weight="700">任何两个正交向量的点积必为 0</tspan>。代码自检：</text>
+  <rect x="50" y="1076" width="720" height="28" rx="6" class="chip"/>
+  <text x="62" y="1095" class="code">i=(1,0,0), j=(0,1,0)：np.dot(i, j) = <tspan class="cO" font-weight="700">0</tspan>  <tspan fill="#7B1FA2"># ✅ 坐标轴方向，天生互相垂直</tspan></text>
+
+  <!-- ⑤ cosine similarity -->
+  <text x="40" y="1146" class="sec">⑤ 🧲 应用：余弦相似度 —— NLP 把<tspan class="cP">"语义"</tspan>变成<tspan class="cV">"方向"</tspan></text>
+  <text x="60" y="1176" class="big"><tspan class="cP">cos(θ)</tspan> = <tspan class="cT">x·y</tspan> ÷ ( <tspan class="cV">|x|·|y|</tspan> )</text>
+  <text x="40" y="1202" class="small">把词变成向量后：<tspan class="cG" font-weight="700">同向 = 1（最像）</tspan> → <tspan class="cT" font-weight="700">垂直 = 0（不相干）</tspan> → <tspan class="cR" font-weight="700">反向 = −1（相反）</tspan>。除以模长积是为了</text>
+  <text x="40" y="1224" class="small">去掉"长度"的干扰、只留方向 —— <tspan class="cV" font-weight="700">语义搜索、推荐系统、attention 打分</tspan>全是它的变奏。</text>
+
+  <line x1="40" y1="1238" x2="860" y2="1238" stroke="#ffffff" stroke-width="0"/>
+</svg>

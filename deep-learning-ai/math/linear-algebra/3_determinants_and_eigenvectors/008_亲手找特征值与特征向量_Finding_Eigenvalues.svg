@@ -1,0 +1,198 @@
+<svg width="900" height="2040" viewBox="0 0 900 2040" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 28px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .gl { stroke: #aab4d4; stroke-width: 1; }
+    .mz { fill: #E3F2FD; stroke: #aab4d4; stroke-width: 1.2; }
+    .vz { fill: #FFE0B2; stroke: #FB8C00; stroke-width: 1.2; }
+    .en { font-style: italic; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="2040" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="48" class="title">025 · 亲手找特征值与特征向量 🔍 <tspan font-size="19" fill="#666" class="en">Finding Eigenvalues</tspan></text>
+  <text x="40" y="80" class="subtitle">一句话本质：求特征值 = 解<tspan class="cV" font-weight="700">特征多项式 det(A − λI) = 0</tspan>；求特征向量 = 将每个 λ 回代</text>
+  <text x="40" y="104" class="subtitle"><tspan class="cV" font-weight="700">A·v = λ·v</tspan> 解齐次方程组。det = 0 的依据：方程组需有无穷多解，故 A − λI 必须奇异。</text>
+  <line x1="40" y1="122" x2="860" y2="122" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① roadmap -->
+  <text x="40" y="158" class="sec">① 🗺️ 两步走：上节课 λ 是给定的，本课构造求解流程</text>
+  <rect x="50" y="174" width="790" height="32" rx="8" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="62" y="196" class="small" font-weight="700">第一步 🕵️ 求特征值 λ：解 <tspan class="cV">det(A − λI) = 0</tspan>　➡️　第二步 🧭 求特征向量 v：将 λ 回代 <tspan class="cV">A·v = λ·v</tspan></text>
+
+  <!-- ② why det = 0 -->
+  <text x="40" y="244" class="sec">② 🪜 为何是 det = 0？（全课核心推理，四步）</text>
+  <text x="40" y="274" class="small">🪜<tspan font-weight="700">①</tspan> 设 λ 为特征值，则等式 A·(x,y) = λ·(x,y) 并非只对单点成立，而是对该方向上</text>
+  <text x="40" y="296" class="small">　 <tspan class="cO" font-weight="700">一整条直线的无穷多个点</tspan>同时成立（课件：A 与纯拉伸矩阵在对角线方向作用一致）。</text>
+  <text x="40" y="322" class="small">🪜<tspan font-weight="700">②</tspan> 改写右端：λ·(x,y) = (λI)·(x,y)，其中 <tspan class="cP" font-weight="700">λI</tspan> 为 λ 乘单位矩阵（identity matrix）。</text>
+  <text x="40" y="348" class="small">🪜<tspan font-weight="700">③</tspan> 移项合并：<tspan class="cV" font-weight="700">(A − λI)·(x,y) = (0, 0)</tspan> —— 一个齐次方程组（homogeneous system）。</text>
+  <text x="40" y="374" class="small">🪜<tspan font-weight="700">④</tspan> 它须有<tspan class="cO" font-weight="700">无穷多解</tspan> ⇔ A − λI <tspan class="cR" font-weight="700">奇异 singular</tspan> ⇔ <tspan class="cV" font-weight="700">det(A − λI) = 0</tspan> ❗</text>
+  <text x="40" y="400" class="small">此方程称为<tspan class="cT" font-weight="700">特征多项式（characteristic polynomial）</tspan>。以 2×2 为例：</text>
+
+  <!-- det 2x2 grid -->
+  <text x="60" y="460" class="small" font-weight="700">det</text>
+  <rect x="100" y="424" width="116" height="60" class="mz"/>
+  <line x1="158" y1="424" x2="158" y2="484" class="gl"/>
+  <line x1="100" y1="454" x2="216" y2="454" class="gl"/>
+  <text x="129" y="444" class="cell" text-anchor="middle">2−λ</text><text x="187" y="444" class="cell" text-anchor="middle">1</text>
+  <text x="129" y="474" class="cell" text-anchor="middle">0</text><text x="187" y="474" class="cell" text-anchor="middle">3−λ</text>
+  <text x="236" y="460" class="code">= (2−λ)(3−λ) − 1·0 = 0</text>
+
+  <rect x="50" y="504" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="523" class="code">乘积为 0 → 2−λ = 0 或 3−λ = 0 → <tspan class="cO" font-weight="700">λ = 2 或 λ = 3</tspan> 🎉</text>
+
+  <!-- ③ eigenvectors 2x2 -->
+  <text x="40" y="586" class="sec">③ 🧭 求特征向量：将每个 λ 回代，解方程组（2×2）</text>
+
+  <text x="60" y="626" class="small" font-weight="700" fill="#00897B">λ = 2：</text>
+  <text x="130" y="618" class="code">2x + y = 2x</text>
+  <text x="130" y="642" class="code">0x + 3y = 2y</text>
+  <text x="300" y="618" class="small">⟹ 两式均给出 y = 0，x 任取</text>
+  <text x="300" y="642" class="small">取代表（representative）：</text>
+  <rect x="560" y="606" width="40" height="60" class="vz"/>
+  <line x1="560" y1="636" x2="600" y2="636" class="gl"/>
+  <text x="580" y="626" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="580" y="656" class="cell" text-anchor="middle" font-weight="700">0</text>
+  <text x="620" y="640" class="small" fill="#2E7D32" font-weight="700">✅</text>
+
+  <text x="60" y="710" class="small" font-weight="700" fill="#00897B">λ = 3：</text>
+  <text x="130" y="702" class="code">2x + y = 3x</text>
+  <text x="130" y="726" class="code">0x + 3y = 3y</text>
+  <text x="300" y="702" class="small">⟹ 第一式给出 y = x；第二式恒成立</text>
+  <text x="300" y="726" class="small">取 x = y = 1：</text>
+  <rect x="560" y="690" width="40" height="60" class="vz"/>
+  <line x1="560" y1="720" x2="600" y2="720" class="gl"/>
+  <text x="580" y="710" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="580" y="740" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="620" y="724" class="small" fill="#2E7D32" font-weight="700">✅</text>
+
+  <text x="40" y="782" class="small">📌 解集是一条过原点的直线（除去零向量）——无穷多个解、互为倍数；任取一个非零代表即可。</text>
+  <text x="40" y="806" class="small">　 这正是第②节"无穷多解"条件的具体体现。</text>
+
+  <!-- ④ 3x3 -->
+  <text x="40" y="862" class="sec">④ 🧗 3×3 实战：同一流程，多项式升为三次</text>
+
+  <text x="60" y="938" class="small" font-weight="700">A =</text>
+  <rect x="110" y="884" width="132" height="90" class="mz"/>
+  <line x1="154" y1="884" x2="154" y2="974" class="gl"/>
+  <line x1="198" y1="884" x2="198" y2="974" class="gl"/>
+  <line x1="110" y1="914" x2="242" y2="914" class="gl"/>
+  <line x1="110" y1="944" x2="242" y2="944" class="gl"/>
+  <text x="132" y="904" class="cell" text-anchor="middle">2</text><text x="176" y="904" class="cell" text-anchor="middle">1</text><text x="220" y="904" class="cell" text-anchor="middle">−1</text>
+  <text x="132" y="934" class="cell" text-anchor="middle">1</text><text x="176" y="934" class="cell" text-anchor="middle">0</text><text x="220" y="934" class="cell" text-anchor="middle">−3</text>
+  <text x="132" y="964" class="cell" text-anchor="middle">−1</text><text x="176" y="964" class="cell" text-anchor="middle">−3</text><text x="220" y="964" class="cell" text-anchor="middle">0</text>
+
+  <text x="300" y="938" class="small" font-weight="700">det</text>
+  <rect x="340" y="884" width="174" height="90" class="mz"/>
+  <line x1="398" y1="884" x2="398" y2="974" class="gl"/>
+  <line x1="456" y1="884" x2="456" y2="974" class="gl"/>
+  <line x1="340" y1="914" x2="514" y2="914" class="gl"/>
+  <line x1="340" y1="944" x2="514" y2="944" class="gl"/>
+  <text x="369" y="904" class="cell" text-anchor="middle">2−λ</text><text x="427" y="904" class="cell" text-anchor="middle">1</text><text x="485" y="904" class="cell" text-anchor="middle">−1</text>
+  <text x="369" y="934" class="cell" text-anchor="middle">1</text><text x="427" y="934" class="cell" text-anchor="middle">−λ</text><text x="485" y="934" class="cell" text-anchor="middle">−3</text>
+  <text x="369" y="964" class="cell" text-anchor="middle">−1</text><text x="427" y="964" class="cell" text-anchor="middle">−3</text><text x="485" y="964" class="cell" text-anchor="middle">−λ</text>
+  <text x="530" y="938" class="code" font-weight="700">= 0</text>
+
+  <rect x="50" y="996" width="730" height="28" rx="6" class="chip"/>
+  <text x="62" y="1015" class="code">(2−λ)λ² +3 +3 −9(2−λ) +λ +λ = <tspan class="cO" font-weight="700">−λ³ + 2λ² + 11λ − 12 = 0</tspan></text>
+  <rect x="50" y="1032" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="1051" class="code">因式分解：−(λ+3)(λ−1)(λ−4) = 0　→　<tspan class="cO" font-weight="700">λ = −3, 1, 4</tspan> 🎉</text>
+
+  <text x="40" y="1090" class="small">以 <tspan class="cT" font-weight="700">λ = 4</tspan> 为例：将 A·v = 4·v 移项为 (A − 4I)·v = 0，得三行方程，随后消元：</text>
+  <text x="80" y="1118" class="code">R₁:　−2x₁ + x₂ − x₃ = 0</text>
+  <text x="80" y="1142" class="code">R₂:　x₁ − 4x₂ − 3x₃ = 0</text>
+  <text x="80" y="1166" class="code">R₃:　−x₁ − 3x₂ − 4x₃ = 0</text>
+  <text x="420" y="1118" class="code">R₂ + R₃：−7x₂ − 7x₃ = 0 → <tspan class="cO" font-weight="700">x₂ = −x₃</tspan></text>
+  <text x="420" y="1150" class="code">3R₁ + R₃：−7x₁ − 7x₃ = 0 → <tspan class="cO" font-weight="700">x₁ = −x₃</tspan></text>
+
+  <text x="40" y="1206" class="small">解族：x₁ = k，x₂ = k，x₃ = −k（无穷多解；k=1、k=2 均成立）→ 取代表：</text>
+  <rect x="580" y="1182" width="44" height="90" class="vz"/>
+  <line x1="580" y1="1212" x2="624" y2="1212" class="gl"/>
+  <line x1="580" y1="1242" x2="624" y2="1242" class="gl"/>
+  <text x="602" y="1202" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="602" y="1232" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="602" y="1262" class="cell" text-anchor="middle" font-weight="700">−1</text>
+  <text x="644" y="1232" class="small" fill="#2E7D32" font-weight="700">✅</text>
+
+  <text x="40" y="1310" class="small" font-weight="700">三对结果汇总（已逐对验算 ✅）：</text>
+  <text x="122" y="1336" class="small" font-weight="700" fill="#00897B">λ₁ = 4</text>
+  <rect x="110" y="1346" width="44" height="90" class="vz"/>
+  <line x1="110" y1="1376" x2="154" y2="1376" class="gl"/>
+  <line x1="110" y1="1406" x2="154" y2="1406" class="gl"/>
+  <text x="132" y="1366" class="cell" text-anchor="middle">1</text>
+  <text x="132" y="1396" class="cell" text-anchor="middle">1</text>
+  <text x="132" y="1426" class="cell" text-anchor="middle">−1</text>
+  <text x="322" y="1336" class="small" font-weight="700" fill="#00897B">λ₂ = 1</text>
+  <rect x="310" y="1346" width="44" height="90" class="vz"/>
+  <line x1="310" y1="1376" x2="354" y2="1376" class="gl"/>
+  <line x1="310" y1="1406" x2="354" y2="1406" class="gl"/>
+  <text x="332" y="1366" class="cell" text-anchor="middle">2</text>
+  <text x="332" y="1396" class="cell" text-anchor="middle">−1</text>
+  <text x="332" y="1426" class="cell" text-anchor="middle">1</text>
+  <text x="522" y="1336" class="small" font-weight="700" fill="#00897B">λ₃ = −3</text>
+  <rect x="510" y="1346" width="44" height="90" class="vz"/>
+  <line x1="510" y1="1376" x2="554" y2="1376" class="gl"/>
+  <line x1="510" y1="1406" x2="554" y2="1406" class="gl"/>
+  <text x="532" y="1366" class="cell" text-anchor="middle">0</text>
+  <text x="532" y="1396" class="cell" text-anchor="middle">1</text>
+  <text x="532" y="1426" class="cell" text-anchor="middle">1</text>
+
+  <text x="40" y="1470" class="tiny" fill="#C62828">⚠️ 课件末页将 λ=1 与 λ=−3 的特征向量配对印反。验算：A·(0,1,1) = (0,−3,−3) = −3·(0,1,1)，</text>
+  <text x="40" y="1488" class="tiny" fill="#C62828">　 故 (0,1,1) 属于 λ=−3；A·(2,−1,1) = (2,−1,1) = 1·(2,−1,1)，属于 λ=1。上表为校正后的正确配对。</text>
+
+  <!-- ⑤ quiz -->
+  <text x="40" y="1540" class="sec">⑤ 🧩 课内 Quiz</text>
+  <text x="60" y="1606" class="small" font-weight="700">det</text>
+  <rect x="100" y="1570" width="116" height="60" class="mz"/>
+  <line x1="158" y1="1570" x2="158" y2="1630" class="gl"/>
+  <line x1="100" y1="1600" x2="216" y2="1600" class="gl"/>
+  <text x="129" y="1590" class="cell" text-anchor="middle">9−λ</text><text x="187" y="1590" class="cell" text-anchor="middle">4</text>
+  <text x="129" y="1620" class="cell" text-anchor="middle">4</text><text x="187" y="1620" class="cell" text-anchor="middle">3−λ</text>
+  <text x="236" y="1606" class="code">= (9−λ)(3−λ) − 4·4 = λ² − 12λ + 11 = 0</text>
+
+  <rect x="50" y="1650" width="540" height="28" rx="6" class="chip"/>
+  <text x="62" y="1669" class="code">(λ − 11)(λ − 1) = 0　→　<tspan class="cO" font-weight="700">λ = 11, 1</tspan></text>
+
+  <text x="60" y="1716" class="small">特征向量：</text>
+  <text x="192" y="1716" class="small" font-weight="700" fill="#00897B">λ = 11</text>
+  <rect x="180" y="1726" width="44" height="60" class="vz"/>
+  <line x1="180" y1="1756" x2="224" y2="1756" class="gl"/>
+  <text x="202" y="1746" class="cell" text-anchor="middle">2</text>
+  <text x="202" y="1776" class="cell" text-anchor="middle">1</text>
+  <text x="332" y="1716" class="small" font-weight="700" fill="#00897B">λ = 1</text>
+  <rect x="320" y="1726" width="44" height="60" class="vz"/>
+  <line x1="320" y1="1756" x2="364" y2="1756" class="gl"/>
+  <text x="342" y="1746" class="cell" text-anchor="middle">−1</text>
+  <text x="342" y="1776" class="cell" text-anchor="middle">2</text>
+  <text x="420" y="1750" class="code" font-size="13"><tspan fill="#7B1FA2"># 验算：A·(2,1) = (22,11) = 11·(2,1) ✅</tspan></text>
+
+  <!-- ⑥ dimensions -->
+  <text x="40" y="1838" class="sec">⑥ 📏 维度提醒 <tspan class="en">Note on dimensions</tspan>：特征值 ➡️ 行列式 ➡️ 方阵专属</text>
+  <rect x="100" y="1856" width="80" height="60" class="mz"/>
+  <line x1="140" y1="1856" x2="140" y2="1916" class="gl"/>
+  <line x1="100" y1="1886" x2="180" y2="1886" class="gl"/>
+  <text x="120" y="1876" class="cell" text-anchor="middle">9</text><text x="160" y="1876" class="cell" text-anchor="middle">4</text>
+  <text x="120" y="1906" class="cell" text-anchor="middle">4</text><text x="160" y="1906" class="cell" text-anchor="middle">3</text>
+  <text x="140" y="1936" class="small" text-anchor="middle" font-weight="700" fill="#2E7D32">✅ 方阵，有特征值</text>
+
+  <rect x="380" y="1856" width="132" height="60" class="mz"/>
+  <line x1="424" y1="1856" x2="424" y2="1916" class="gl"/>
+  <line x1="468" y1="1856" x2="468" y2="1916" class="gl"/>
+  <line x1="380" y1="1886" x2="512" y2="1886" class="gl"/>
+  <text x="402" y="1876" class="cell" text-anchor="middle">9</text><text x="446" y="1876" class="cell" text-anchor="middle">4</text><text x="490" y="1876" class="cell" text-anchor="middle">5</text>
+  <text x="402" y="1906" class="cell" text-anchor="middle">4</text><text x="446" y="1906" class="cell" text-anchor="middle">3</text><text x="490" y="1906" class="cell" text-anchor="middle">−2</text>
+  <text x="446" y="1936" class="small" text-anchor="middle" font-weight="700" fill="#C62828">❌ 矩形，无 det，无特征值</text>
+
+  <line x1="40" y1="1962" x2="860" y2="1962" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1986" class="tiny" fill="#888" font-size="12">速记：求 λ → det(A−λI)=0（特征多项式）；求 v → 回代 Av=λv，解集为过原点直线，取非零代表；</text>
+  <text x="40" y="2006" class="tiny" fill="#888" font-size="12">det=0 的依据 = 需无穷多解 = A−λI 奇异；特征值依赖行列式，故为方阵专属。</text>
+</svg>

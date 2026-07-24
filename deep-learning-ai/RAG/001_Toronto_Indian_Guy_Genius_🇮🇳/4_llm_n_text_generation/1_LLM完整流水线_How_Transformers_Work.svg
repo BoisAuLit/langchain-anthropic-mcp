@@ -1,0 +1,191 @@
+<svg width="900" height="2560" viewBox="0 0 900 2560" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 13px; fill: #1B5E20; }
+    .vec { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 13px; fill: #37474F; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .en { font-style: italic; }
+    /* color classes defined LAST so they win over typography classes */
+    .w { fill: #ffffff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#546E7A" stroke-width="1.6" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="2560" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">LLM 完整流水线 🚀 <tspan font-size="17" fill="#666" class="en">How a Transformer Actually Works</tspan></text>
+  <text x="40" y="78" class="subtitle">一句话本质：一句话 → 切成 token → 变成（语义 + 位置）向量 → 经"注意力 + 前馈"反复精炼 N 层 →</text>
+  <text x="40" y="102" class="subtitle">对词表算概率 → 抽下一个 token → 整套从头重跑，直到结束。<tspan class="cR" font-weight="700">这就是你目标论文的工程全貌。</tspan></text>
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① timeline -->
+  <text x="40" y="156" class="sec">① 🕰️ 源起 <tspan class="en">Origins of the Transformer</tspan></text>
+  <line x1="70" y1="216" x2="840" y2="216" stroke="#37474F" stroke-width="2.5" marker-end="url(#ar)"/>
+  <circle cx="150" cy="216" r="8" fill="#37474F"/>
+  <circle cx="360" cy="216" r="9" fill="#EF5350"/>
+  <circle cx="570" cy="216" r="8" fill="#37474F"/>
+  <circle cx="770" cy="216" r="8" fill="#37474F"/>
+  <text x="150" y="244" class="small" text-anchor="middle" font-weight="700">2015</text>
+  <text x="150" y="264" class="tiny" text-anchor="middle">注意力机制 Attention</text>
+  <text x="360" y="244" class="small cR" text-anchor="middle" font-weight="700">2017</text>
+  <text x="360" y="264" class="tiny cR" text-anchor="middle">Transformer 架构</text>
+  <text x="360" y="282" class="tiny cR" text-anchor="middle">《Attention is All You Need》</text>
+  <text x="360" y="300" class="tiny cGray" text-anchor="middle">Vaswani et al., Google Brain</text>
+  <text x="570" y="244" class="small" text-anchor="middle" font-weight="700">2018</text>
+  <text x="570" y="264" class="tiny" text-anchor="middle">预训练语言模型</text>
+  <text x="770" y="244" class="small" text-anchor="middle" font-weight="700">2022</text>
+  <text x="770" y="264" class="tiny" text-anchor="middle">LLM 走向大众（ChatGPT）</text>
+
+  <!-- ② encoder/decoder -->
+  <text x="40" y="346" class="sec">② 🏗️ 编码器 vs 解码器 <tspan class="en">Encoder vs Decoder</tspan></text>
+  <rect x="40" y="364" width="400" height="120" rx="12" fill="#F1F8E9" stroke="#AED581" stroke-width="1.5"/>
+  <text x="60" y="392" class="small cG" font-weight="700">编码器 Encoder（读懂）</text>
+  <text x="60" y="418" class="small">· 处理原始文本（如一段德语）</text>
+  <text x="60" y="442" class="small">· 形成对文本含义的深度理解</text>
+  <text x="60" y="470" class="tiny cGray">用于"嵌入模型 embedding models"，产出丰富语义表示</text>
+  <rect x="460" y="364" width="400" height="120" rx="12" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="480" y="392" class="small cV" font-weight="700">解码器 Decoder（生成）</text>
+  <text x="480" y="418" class="small">· 利用编码器的深度理解</text>
+  <text x="480" y="442" class="small">· 用目标语言生成新文本（如英译）</text>
+  <text x="480" y="470" class="tiny cV" font-weight="700">⭐ 多数 LLM 只含解码器 —— 它们只关心"生成文本"</text>
+
+  <!-- ③ pipeline overview -->
+  <text x="40" y="530" class="sec">③ 🔁 一层 Transformer 的内部循环（流水线骨架）</text>
+  <rect x="50" y="552" width="150" height="44" rx="8" fill="#37474F"/>
+  <text x="125" y="579" class="small w" text-anchor="middle" font-weight="700">输入向量</text>
+  <line x1="204" y1="574" x2="238" y2="574" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="242" y="552" width="150" height="44" rx="8" fill="#37474F"/>
+  <text x="317" y="579" class="small w" text-anchor="middle" font-weight="700">注意力 Attention</text>
+  <line x1="396" y1="574" x2="430" y2="574" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="434" y="552" width="150" height="44" rx="8" fill="#37474F"/>
+  <text x="509" y="579" class="small w" text-anchor="middle" font-weight="700">前馈 Feed Forward</text>
+  <line x1="588" y1="574" x2="622" y2="574" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="626" y="552" width="170" height="44" rx="8" fill="#fff" stroke="#37474F" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="711" y="579" class="small cV" text-anchor="middle" font-weight="700">更新后的向量</text>
+  <path d="M711 596 V612 H125 V600" fill="none" stroke="#546E7A" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+  <text x="430" y="630" class="tiny cGray" text-anchor="middle">↻ 输出喂回输入，重复 8 ~ 64 层 repeated multiple times</text>
+
+  <!-- ④ tokenization -->
+  <text x="40" y="650" class="sec">④ ✂️ 第 1 步：分词 <tspan class="en">Tokenization</tspan></text>
+  <text x="40" y="678" class="small">把句子切成<tspan class="cV" font-weight="700">词元（token）</tspan>—— 模型能处理的最小单位。例句：</text>
+  <g font-size="18" font-family="Helvetica">
+  <rect x="50" y="694" width="48" height="34" fill="#F6D5D5"/><text x="74" y="717" text-anchor="middle">the</text>
+  <rect x="98" y="694" width="84" height="34" fill="#FBD9A8"/><text x="140" y="717" text-anchor="middle">brown</text>
+  <rect x="182" y="694" width="56" height="34" fill="#C9D4F0"/><text x="210" y="717" text-anchor="middle">dog</text>
+  <rect x="238" y="694" width="50" height="34" fill="#C8E6C9"/><text x="263" y="717" text-anchor="middle">sat</text>
+  <rect x="288" y="694" width="62" height="34" fill="#7FA8B0"/><text x="319" y="717" text-anchor="middle" fill="#ffffff">next</text>
+  <rect x="350" y="694" width="40" height="34" fill="#DCE3F5"/><text x="370" y="717" text-anchor="middle">to</text>
+  <rect x="390" y="694" width="48" height="34" fill="#F4A0A0"/><text x="414" y="717" text-anchor="middle">the</text>
+  <rect x="438" y="694" width="50" height="34" fill="#FBF0DA"/><text x="463" y="717" text-anchor="middle">red</text>
+  <rect x="488" y="694" width="52" height="34" fill="#E0E0E0"/><text x="514" y="717" text-anchor="middle">fox</text>
+  </g>
+
+  <!-- ⑤ embeddings -->
+  <text x="40" y="780" class="sec">⑤ 🔢 第 2 步：嵌入 <tspan class="en">Embeddings</tspan> = 语义向量 ＋ 位置向量</text>
+  <text x="40" y="808" class="small">每个 token 变成两组数字向量，一起送进网络处理：</text>
+  <rect x="60" y="826" width="360" height="56" rx="8" fill="#FBE9E7" stroke="#FFAB91" stroke-width="1.2"/>
+  <text x="240" y="848" class="small" text-anchor="middle" font-weight="700" fill="#D84315">稠密语义向量 Dense Semantic Vector</text>
+  <text x="240" y="870" class="vec" text-anchor="middle">dog → [0.65, 0.40, 0.87, 0.22, 0.41]</text>
+  <rect x="460" y="826" width="360" height="56" rx="8" fill="#E1F5FE" stroke="#81D4FA" stroke-width="1.2"/>
+  <text x="640" y="848" class="small" text-anchor="middle" font-weight="700" fill="#0277BD">位置向量 Position Vector</text>
+  <text x="640" y="870" class="vec" text-anchor="middle">dog → [0.72, 0.34, 0.80, 0.29, 0.36]</text>
+  <text x="40" y="910" class="small"><tspan class="cO" font-weight="700">语义向量</tspan>= 对词义的"第一次猜测 first guess"；<tspan class="cV" font-weight="700">位置向量</tspan>= 它在句中第几位。两者并行输入。</text>
+
+  <!-- ⑥ attention -->
+  <text x="40" y="956" class="sec">⑥ 👀 第 3 步：注意力 <tspan class="en">Attention</tspan> —— "谁最该影响我的含义"</text>
+  <text x="40" y="984" class="small">每个 token 都能<tspan font-weight="700">看到其他所有 token 的「含义」与「位置」</tspan>，并决定各自的影响权重。</text>
+  <rect x="50" y="1000" width="780" height="50" rx="8" fill="#37474F"/>
+  <text x="440" y="1022" class="small w" text-anchor="middle" font-weight="700">Attention 的本质：「在我所有的邻居里，谁对我的含义影响最大？」</text>
+  <text x="440" y="1042" class="tiny wg" text-anchor="middle">— 这正是你早先学的 Q·K 打分 + softmax 加权 Value —</text>
+
+  <text x="40" y="1084" class="small">课件示例：当 "dog" 在分配注意力时 ——</text>
+  <rect x="60" y="1100" width="300" height="34" rx="6" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="72" y="1122" class="small cG" font-weight="700">70% → "brown"</text>
+  <rect x="370" y="1100" width="220" height="34" rx="6" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="382" y="1122" class="small" font-weight="700" fill="#F57F17">20% → "sat"</text>
+  <rect x="600" y="1100" width="230" height="34" rx="6" fill="#F5F5F5" stroke="#bbb" stroke-width="1.2"/>
+  <text x="612" y="1122" class="small cGray" font-weight="700">10% → 其余所有 token</text>
+
+  <!-- ⑦ multi-head -->
+  <text x="40" y="1180" class="sec">⑦ 🧠 多头注意力 <tspan class="en">Multi-Head Attention</tspan>：很多人同时看，各看一面</text>
+  <text x="40" y="1208" class="small">注意力不是只算一遍，而是分成多个<tspan class="cP" font-weight="700">头（head）</tspan>并行。每个头自学一种"抽象关系"，并非人类规定的规则。</text>
+  <rect x="40" y="1226" width="400" height="56" rx="10" fill="#F1F8E9" stroke="#AED581" stroke-width="1.2"/>
+  <text x="60" y="1250" class="small cG" font-weight="700">Head 1：物体关系 Object Relations</text>
+  <text x="60" y="1272" class="tiny">关注 "fox" 与 "brown"（谁是棕色的）</text>
+  <rect x="460" y="1226" width="400" height="56" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="480" y="1250" class="small cV" font-weight="700">Head 2：空间关系 Spatial Relations</text>
+  <text x="480" y="1272" class="tiny">关注 "fox" 与 "sat / next"（谁挨着谁）</text>
+  <text x="40" y="1312" class="small cV" font-weight="700">小模型约 8 ~ 16 个头；大模型可能 100＋ 个头（呼应你学过的 W_Q/W_K/W_V 各头独立）。</text>
+
+  <!-- ⑧ feed forward -->
+  <text x="40" y="1358" class="sec">⑧ 🧱 第 4 步：前馈 <tspan class="en">Feed Forward</tspan> —— 注入"世界知识"</text>
+  <text x="40" y="1386" class="small">注意力让 token 互相看完后，前馈层调用<tspan class="cP" font-weight="700">模型存储的世界知识</tspan>，进一步加深理解：</text>
+  <rect x="50" y="1402" width="790" height="34" rx="6" class="chip"/>
+  <text x="62" y="1424" class="code">First Guess："dog" 是一种动物 → 向量 [0.65, 0.40, 0.87, 0.22, 0.41]</text>
+  <rect x="50" y="1444" width="790" height="34" rx="6" class="chip"/>
+  <text x="62" y="1466" class="code">Second Guess："dog" 是一只挨着红狐坐着的棕色动物 → [0.38, 0.19, 0.26, 0.41, 0.22]</text>
+
+  <!-- ⑨ iterative refinement -->
+  <text x="40" y="1512" class="sec">⑨ ♻️ 迭代精炼 <tspan class="en">Iterative Refinement</tspan>：一层不够，叠 8~64 层</text>
+  <text x="40" y="1540" class="small">"注意力 → 前馈"是<tspan font-weight="700">一层</tspan>；输出的"更新向量"喂回下一层，反复精炼，越来越懂这个词：</text>
+  <text x="60" y="1572" class="small" font-weight="700">First Guess</text>
+  <text x="220" y="1572" class="vec">[0.65, 0.40, 0.87, 0.22, 0.41]</text>
+  <text x="500" y="1572" class="tiny cGray">第一次"注意力 + 前馈"</text>
+  <text x="60" y="1600" class="small" font-weight="700">Second Guess</text>
+  <text x="220" y="1600" class="vec">[0.38, 0.19, 0.26, 0.41, 0.22]</text>
+  <text x="500" y="1600" class="tiny cGray">把 'dog' 理解为句子主语</text>
+  <text x="60" y="1628" class="small" font-weight="700">Third Guess</text>
+  <text x="220" y="1628" class="vec" font-weight="700">[0.38, 0.22, 0.26, 0.41, 0.22]</text>
+  <text x="500" y="1628" class="tiny cGray">关联到 'brown' 与 'sat'</text>
+  <text x="60" y="1654" class="tiny cGray">⋮　模型通常需要 8 到 64 层</text>
+  <rect x="210" y="1670" width="260" height="28" rx="6" fill="#FBE9E7" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="60" y="1690" class="small cR" font-weight="700">Nth Guess</text>
+  <text x="340" y="1690" class="vec" text-anchor="middle" font-weight="700">[0.38, 0.22, 0.26, 0.58, 0.12]</text>
+  <text x="500" y="1690" class="small cR" font-weight="700">最终精炼表示 Final representation</text>
+
+  <!-- ⑩ next token -->
+  <text x="40" y="1736" class="sec">⑩ 🎯 第 5 步：预测下一个 token <tspan class="en">Next-Token Prediction</tspan></text>
+  <text x="40" y="1764" class="small">拿最终向量 [0.38, 0.22, 0.26, 0.58, 0.12]，对<tspan class="cV" font-weight="700">整个词表</tspan>算每个词接下来出现的概率：</text>
+  <rect x="80" y="1806" width="40" height="80" fill="#A5D6A7"/><text x="100" y="1798" class="tiny cG" text-anchor="middle" font-weight="700">32%</text><text x="100" y="1902" class="tiny" text-anchor="middle">and</text>
+  <rect x="140" y="1823" width="40" height="63" fill="#E0E0E0"/><text x="160" y="1815" class="tiny" text-anchor="middle">25%</text><text x="160" y="1902" class="tiny" text-anchor="middle">in</text>
+  <rect x="200" y="1841" width="40" height="45" fill="#E0E0E0"/><text x="220" y="1833" class="tiny" text-anchor="middle">18%</text><text x="220" y="1902" class="tiny" text-anchor="middle">on</text>
+  <rect x="260" y="1856" width="40" height="30" fill="#E0E0E0"/><text x="280" y="1848" class="tiny" text-anchor="middle">12%</text><text x="280" y="1902" class="tiny" text-anchor="middle">that</text>
+  <rect x="320" y="1864" width="40" height="22" fill="#E0E0E0"/><text x="340" y="1856" class="tiny" text-anchor="middle">9%</text><text x="340" y="1902" class="tiny" text-anchor="middle">with</text>
+  <text x="420" y="1878" class="small cGray">· · ·　其余数千个 token 概率极低（forest 0.1%，banana 0.009%）</text>
+  <rect x="80" y="1922" width="520" height="30" rx="6" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.2"/>
+  <text x="92" y="1942" class="small cG" font-weight="700">挑出最高概率 → "and" → 拼回句子："…red fox and"</text>
+
+  <!-- ⑪ generation loop -->
+  <text x="40" y="1998" class="sec">⑪ 🔂 生成循环 <tspan class="en">The Generation Loop</tspan></text>
+  <text x="40" y="2026" class="small">· 为了生成<tspan font-weight="700">下一个</tspan> token，模型把<tspan class="cR" font-weight="700">整套流程从头再跑一遍</tspan>（④→⑩，自回归 autoregressive）。</text>
+  <text x="40" y="2052" class="small">· 循环持续，直到撞上「token 上限」或「结束符 EOS / end-of-completion」。</text>
+  <text x="40" y="2078" class="small">· 输出 token 经<tspan class="cV" font-weight="700">反分词（de-tokenize）</tspan>还原成文字，作为最终回复返回给用户。</text>
+  <rect x="50" y="2096" width="790" height="30" rx="6" fill="#37474F"/>
+  <text x="62" y="2116" class="small w">结果："the brown dog sat next to the red fox and waggled its tail" 🐕</text>
+
+  <!-- ⑫ conclusion -->
+  <text x="40" y="2172" class="sec">⑫ 🧾 结论 <tspan class="en">Conclusion</tspan>（课件三点，含 RAG 视角）</text>
+  <text x="40" y="2200" class="small"><tspan class="cG" font-weight="700">为何 RAG 有效：</tspan>LLM 能深度理解塞进 prompt 的信息 —— 靠①注意力处理 ②前馈层里的世界知识。</text>
+  <text x="40" y="2226" class="small"><tspan class="cO" font-weight="700">固有随机性仍在：</tspan>模型可能随机忽略注入的信息 → 需控制随机性、确认回答确实"扎根"于检索到的资料。</text>
+  <text x="40" y="2252" class="small"><tspan class="cR" font-weight="700">计算开销巨大：</tspan>生成<tspan font-weight="700">单个</tspan> token 都要海量运算；开销随 prompt/输出长度增长；</text>
+  <text x="40" y="2278" class="small">　每个 token 都要"审视其他所有 token"（这就是注意力的 <tspan class="cR" font-weight="700">O(n²)</tspan> 平方级成本）—— RAG 系统的成本大头就是跑 Transformer。</text>
+
+  <!-- ⑬ latest intel 2026 -->
+  <text x="40" y="2336" class="sec">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="2364" class="small">这节课说"注意力是 O(n²)、上下文越长越贵" —— 2026 年业界正是围绕这两点猛攻：</text>
+  <text x="40" y="2390" class="small">· <tspan class="cV" font-weight="700">超长上下文：</tspan>Llama 4 达 <tspan class="cO" font-weight="700">1000 万 token</tspan> 上下文；Magic LTM-2 号称 <tspan class="cO" font-weight="700">1 亿 token</tspan>、效率较传统注意力提升约 1000×。</text>
+  <text x="40" y="2416" class="small">· <tspan class="cV" font-weight="700">稀疏 / 高效注意力：</tspan>MoBA 等"块注意力"用 MoE 思想让模型自主决定"只关注哪些块"，绕开全量 O(n²)。</text>
+  <text x="40" y="2442" class="small">· <tspan class="cV" font-weight="700">混合专家 MoE：</tspan>Qwen3-235B（2350 亿参数、每 token 仅激活 220 亿、128 个专家选 8）、Llama 4 等</text>
+  <text x="40" y="2468" class="small">　均用 MoE —— 把"前馈层"拆成很多专家、每次只点亮少数，正是对本课⑧前馈开销的工程化回应。</text>
+  <text x="40" y="2494" class="small">· <tspan class="cV" font-weight="700">主流上下文：</tspan>Claude 4 Sonnet 标准 20 万 token、Beta 可达 100 万（2026 年 1 月对 tier 4+ 开放）。</text>
+  <text x="40" y="2522" class="small cV" font-weight="700">一句话：本课讲的"原始 Transformer"是地基；2026 的前沿全在想方设法削减注意力与前馈的成本，而非推翻它。</text>
+</svg>

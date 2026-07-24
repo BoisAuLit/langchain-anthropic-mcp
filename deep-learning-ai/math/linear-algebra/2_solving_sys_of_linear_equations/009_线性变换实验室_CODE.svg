@@ -1,0 +1,121 @@
+<svg width="900" height="1670" viewBox="0 0 900 1670" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .axis { stroke: #90CAF9; stroke-width: 1.5; }
+    .gridline { stroke: #aab4d4; stroke-width: 1; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="1670" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">016 · 线性变换实验室 Linear Transformations</text>
+  <text x="40" y="82" class="subtitle">一句话本质：变换是"向量进、向量出"的函数；只要满足两条线性铁律，</text>
+  <text x="40" y="106" class="subtitle">它就必然能写成矩阵乘法 —— 而求这个矩阵只需看 e₁、e₂ 落在哪。</text>
+  <line x1="40" y1="124" x2="860" y2="124" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① transformation -->
+  <text x="40" y="162" class="sec">① 📦 变换与记号：T(v) = w</text>
+  <text x="40" y="192" class="small"><tspan class="cV" font-weight="700">变换（transformation）</tspan>：吃一个向量、吐一个向量的函数。T: ℝ² → ℝ³ 表示"吃 2 维、吐 3 维"。</text>
+  <text x="40" y="218" class="small">T(v) = w 读作"v 经过 T 变成 w"；w 叫 v 的<tspan class="cP" font-weight="700">像（image）</tspan>。</text>
+  <rect x="50" y="234" width="560" height="28" rx="6" class="chip"/>
+  <text x="62" y="253" class="code">例：T(v₁, v₂) = (3v₁, 0, −2v₂)；T(3, 5) = <tspan class="cO" font-weight="700">(9, 0, −10)</tspan></text>
+
+  <!-- ② linearity -->
+  <text x="40" y="306" class="sec">② ⚖️ "线性"的两条铁律</text>
+  <rect x="50" y="322" width="640" height="28" rx="6" class="chip"/>
+  <text x="62" y="341" class="code">铁律① T(k·v) = k·T(v)　　　<tspan fill="#7B1FA2"># 先缩放再变换 = 先变换再缩放</tspan></text>
+  <rect x="50" y="358" width="640" height="28" rx="6" class="chip"/>
+  <text x="62" y="377" class="code">铁律② T(u+v) = T(u)+T(v)　<tspan fill="#7B1FA2"># 先相加再变换 = 先变换再相加</tspan></text>
+  <text x="40" y="412" class="small">满足这两条才配叫"线性"。Lab 用 k=7、具体的 u 和 v 代入验证：等式两边逐分量完全相同。</text>
+
+  <!-- ③ matrix -->
+  <text x="40" y="464" class="sec">③ 🔁 定理：线性变换 ⇔ 矩阵乘法（一一对应）</text>
+  <text x="40" y="494" class="small">解谜：哪个矩阵 A 能让 A·v = (3v₁, 0, −2v₂)？用"列 = 基向量的像"秒解：</text>
+
+  <!-- matrix A 3x2 -->
+  <rect x="60" y="514" width="72" height="108" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="96" y1="514" x2="96" y2="622" class="gridline"/>
+  <line x1="60" y1="550" x2="132" y2="550" class="gridline"/>
+  <line x1="60" y1="586" x2="132" y2="586" class="gridline"/>
+  <text x="78" y="538" class="cell" text-anchor="middle" font-weight="700" fill="#00897B">3</text><text x="114" y="538" class="cell" text-anchor="middle" font-weight="700" fill="#8E24AA">0</text>
+  <text x="78" y="574" class="cell" text-anchor="middle" font-weight="700" fill="#00897B">0</text><text x="114" y="574" class="cell" text-anchor="middle" font-weight="700" fill="#8E24AA">0</text>
+  <text x="78" y="610" class="cell" text-anchor="middle" font-weight="700" fill="#00897B">0</text><text x="114" y="610" class="cell" text-anchor="middle" font-weight="700" fill="#8E24AA">-2</text>
+  <text x="96" y="644" class="tiny" text-anchor="middle">A（3×2 矩形矩阵）</text>
+
+  <text x="180" y="538" class="small"><tspan class="cT" font-weight="700">e₁=(1,0)</tspan> → T(1,0) = (3, 0, 0) → 填进<tspan class="cT" font-weight="700">第 1 列</tspan></text>
+  <text x="180" y="566" class="small"><tspan class="cP" font-weight="700">e₂=(0,1)</tspan> → T(0,1) = (0, 0, −2) → 填进<tspan class="cP" font-weight="700">第 2 列</tspan></text>
+  <text x="180" y="598" class="small" font-weight="700" fill="#1565C0">每个线性变换都能写成矩阵乘法，反之亦然。</text>
+  <text x="180" y="624" class="small">注意 A 是 3×2 的<tspan font-weight="700">矩形矩阵</tspan>：升维（2维→3维）必须靠非方阵 ——</text>
+  <text x="180" y="648" class="small">矩形矩阵的用武之地（还记得吗：它们没有行列式，但有秩）。</text>
+
+  <!-- ④ standard transformations -->
+  <text x="40" y="704" class="sec">④ 🧰 平面标准变换：看 e₁、e₂ 去哪，矩阵立等可取</text>
+
+  <!-- D1: horizontal scaling -->
+  <line x1="60" y1="826" x2="250" y2="826" class="axis"/>
+  <line x1="130" y1="746" x2="130" y2="856" class="axis"/>
+  <rect x="130" y="790" width="72" height="36" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2"/>
+  <rect x="130" y="790" width="36" height="36" fill="#B2DFDB" stroke="#00897B" stroke-width="2"/>
+  <text x="155" y="880" class="tiny" text-anchor="middle" font-weight="700">水平拉伸×2：青→橙</text>
+  <text x="155" y="900" class="cell" text-anchor="middle" font-size="13">[[2,0],[0,1]]</text>
+
+  <!-- D2: reflection -->
+  <line x1="330" y1="826" x2="520" y2="826" class="axis"/>
+  <line x1="430" y1="746" x2="430" y2="856" class="axis"/>
+  <rect x="430" y="790" width="36" height="36" fill="#B2DFDB" stroke="#00897B" stroke-width="2"/>
+  <rect x="394" y="790" width="36" height="36" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2"/>
+  <text x="430" y="880" class="tiny" text-anchor="middle" font-weight="700">y 轴镜像：青→橙</text>
+  <text x="430" y="900" class="cell" text-anchor="middle" font-size="13">[[-1,0],[0,1]]</text>
+
+  <text x="570" y="770" class="small">套路（万能三步）：</text>
+  <text x="570" y="796" class="small">1. 把 e₁、e₂ 喂给变换；</text>
+  <text x="570" y="822" class="small">2. 记录两个落点；</text>
+  <text x="570" y="848" class="small">3. 落点竖着填进两列。</text>
+  <text x="570" y="880" class="small" font-weight="700" fill="#1565C0">原理：A·[e₁ e₂] = A·I = A</text>
+
+  <!-- ⑤ graphics -->
+  <text x="40" y="952" class="sec">⑤ 🎨 应用：计算机图形学 —— 顺序很重要！</text>
+  <text x="40" y="982" class="small">图形 = 顶点坐标的集合；缩放、旋转、<tspan class="cV" font-weight="700">错切（shear，把矩形推成平行四边形）</tspan>全是矩阵乘法。</text>
+  <text x="40" y="1008" class="small">GPU 就是为海量矩阵乘法而生的专用硬件 —— 渲染和深度学习共用同一种引擎。</text>
+  <rect x="50" y="1024" width="560" height="28" rx="6" class="chip"/>
+  <text x="62" y="1043" class="code">M_旋转90° = [[0,1],[-1,0]]　M_错切 = [[1,0.5],[0,1]]</text>
+  <rect x="50" y="1060" width="720" height="28" rx="6" class="chip"/>
+  <text x="62" y="1079" class="code">M_旋转 @ M_错切 = [[0,1],[-1,-0.5]]　≠　M_错切 @ M_旋转 = [[-0.5,1],[-1,0]]</text>
+  <text x="40" y="1114" class="small" font-weight="700" fill="#C62828">Lab 里的叶子图：先旋转再错切 vs 先错切再旋转，得到两张不同的图 —— AB ≠ BA 的视觉证据。</text>
+
+  <!-- 💡 insights -->
+  <text x="40" y="1166" class="sec">💡 补充洞察（课程没明说）</text>
+  <text x="40" y="1196" class="small">💡 镜像矩阵的 det = (−1)(1) − 0 = <tspan class="cO" font-weight="700">−1</tspan>：面积大小不变、但负号 = "翻面" —— det 课负数之谜揭晓。</text>
+  <text x="40" y="1226" class="small">💡 串联变换 B(Av) = (BA)v：结合律允许把一长串变换<tspan font-weight="700">预先合成一个矩阵</tspan>再一次乘完 ——</text>
+  <text x="40" y="1248" class="small">　这是图形渲染与深度学习共同的提速秘诀。</text>
+
+  <!-- ⚠️ pitfalls -->
+  <text x="40" y="1294" class="sec">⚠️ 易错点</text>
+  <text x="40" y="1324" class="small" fill="#C62828">· 组合顺序从右往左读：R@S@v 是"先 S 后 R"——靠近 v 的先动手。</text>
+  <text x="40" y="1350" class="small" fill="#C62828">· "线性"不含平移：T(v) = v + c 违反铁律（T(0) ≠ 0），它叫仿射变换（affine）。</text>
+
+  <!-- 🔗 connection -->
+  <text x="40" y="1396" class="sec">🔗 承上启下</text>
+  <text x="40" y="1424" class="small">· "列 = 基向量的像"从口诀升格为<tspan font-weight="700">求矩阵的万能工具</tspan>；下一份作业用它造出旋转矩阵。</text>
+  <text x="40" y="1448" class="small" font-weight="700" fill="#1565C0">· 神经网络每层 W·x 就是这样的变换；017 号作业直接把变换和神经网络拼在一起。</text>
+
+  <line x1="40" y1="1466" x2="860" y2="1466" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1484" class="tiny" fill="#888" font-size="12">速记：线性 = 两条铁律；线性变换 ⇔ 矩阵；求矩阵 = 看 e₁、e₂ 落点填列；串联 = 矩阵相乘，从右往左作用，顺序不可换。</text>
+
+  <!-- 🧪 quiz -->
+  <text x="40" y="1514" class="sec" font-size="17">🧪 自测（先答后看最底部灰字）</text>
+  <text x="40" y="1540" class="small">Q1 概念：y 轴镜像对应的矩阵是？</text>
+  <text x="40" y="1566" class="small">Q2 计算：[[2,0],[0,1]] 作用在向量 (3,5) 上，结果是？</text>
+  <text x="40" y="1592" class="small">Q3 为什么：ℝ²→ℝ³ 的变换矩阵为什么是 3×2，而不是 2×3？</text>
+  <text x="40" y="1622" class="tiny" fill="#aaa" font-size="11">A1：[[-1,0],[0,1]]。　A2：(6, 5)，只有横坐标翻倍。</text>
+  <text x="40" y="1640" class="tiny" fill="#aaa" font-size="11">A3：输出 3 维 = 3 行；输入 2 维 = 2 列 ——"行管输出、列管输入"。</text>
+</svg>

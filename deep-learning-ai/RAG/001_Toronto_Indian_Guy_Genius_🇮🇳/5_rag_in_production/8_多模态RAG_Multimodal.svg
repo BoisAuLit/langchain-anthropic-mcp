@@ -1,0 +1,136 @@
+<svg width="1100" height="1720" viewBox="0 0 1100 1720" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #555; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .ctitle { font-size: 15px; font-weight: 700; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #263238; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #8E24AA; } .cGray { fill: #888; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#37474F" stroke-width="1.8" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="1720" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">多模态 RAG 🖼️ <tspan font-size="17" fill="#666" class="en">Multimodal RAG</tspan></text>
+  <text x="40" y="76" class="subtitle">一句话本质：让知识库不止装文本，还能装<tspan class="cR" font-weight="700">图片 / PDF / 幻灯片</tspan>（甚至音视频），并能检索、回答。</text>
+  <text x="40" y="100" class="subtitle">两件法宝：<tspan class="cV" font-weight="700">① 多模态嵌入模型</tspan>（把不同格式塞进同一向量空间）+ <tspan class="cV" font-weight="700">② 语言视觉模型</tspan>（让 LLM 能"看图"）。</text>
+  <line x1="40" y1="118" x2="1060" y2="118" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① what -->
+  <text x="40" y="152" class="sec">① 🧩 什么是多模态 RAG</text>
+  <text x="40" y="180" class="small">最常见组合 = <tspan font-weight="700">文本 + 图像</tspan>（音频 / 视频也行）。典型形态：<tspan font-weight="700">输入</tspan>可文可图、<tspan font-weight="700">知识库</tspan>存文+图、<tspan font-weight="700">输出</tspan>文本。</text>
+  <rect x="40" y="196" width="1020" height="40" rx="9" fill="#37474F"/>
+  <text x="60" y="221" class="small w"><tspan class="wg" font-weight="700">硬性要求：</tspan><tspan class="w" font-weight="700">检索器（retriever）和 LLM 都要升级成"多模态"能力</tspan> —— 下面分别看这两处怎么改。</text>
+
+  <!-- ② multimodal embedding -->
+  <text x="40" y="272" class="sec">② 🎯 改造一：多模态嵌入模型（把多种格式嵌进同一个向量空间）</text>
+  <text x="40" y="300" class="small">原理和文本嵌入<tspan font-weight="700">一模一样 —— 意思越近，向量越近</tspan>；只是现在它能跨"模态"地做这件事：</text>
+
+  <rect x="40" y="316" width="500" height="92" rx="10" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="60" y="340" class="ctitle cR">🐶 "Dogs" 区（都聚在一起）</text>
+  <text x="60" y="364" class="small">· 文本 "dog"　· 文本 "puppy"　· 🖼️ 一张狗的图</text>
+  <text x="60" y="388" class="tiny cGray">三者意思相近 → 向量空间里彼此靠近（无论文/图）。</text>
+
+  <rect x="560" y="316" width="500" height="92" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="580" y="340" class="ctitle cG">🌳 "Trees" 区（聚在另一处）</text>
+  <text x="580" y="364" class="small">· 文本 "tree"　· 🖼️ 一张树的图</text>
+  <text x="580" y="388" class="tiny cGray">同样彼此靠近，但落在<tspan font-weight="700">和 Dogs 不同</tspan>的区域。</text>
+
+  <!-- ③ multimodal retrieval -->
+  <text x="40" y="444" class="sec">③ 🔎 多模态向量检索（流程和你熟的完全一样）</text>
+  <rect x="40" y="462" width="170" height="44" rx="8" fill="#EF5350"/>
+  <text x="125" y="489" class="small w" text-anchor="middle">库里图+文</text>
+  <line x1="210" y1="484" x2="246" y2="484" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="250" y="462" width="210" height="44" rx="8" fill="#EF5350"/>
+  <text x="355" y="489" class="small w" text-anchor="middle">嵌入到同一向量空间</text>
+  <line x1="460" y1="484" x2="496" y2="484" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="500" y="462" width="250" height="44" rx="8" fill="#EF5350"/>
+  <text x="625" y="489" class="small w" text-anchor="middle">prompt 用同一模型嵌入</text>
+  <line x1="750" y1="484" x2="786" y2="484" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="790" y="462" width="270" height="44" rx="8" fill="#37474F"/>
+  <text x="925" y="489" class="small w" text-anchor="middle">照常取最近 → 拼进增强 prompt</text>
+  <text x="40" y="534" class="tiny cGray">→ 取回的图或文档，和纯文本 RAG 一样塞进"增强 prompt"，发给语言视觉模型生成回答。</text>
+
+  <!-- ④ language vision model — centerpiece -->
+  <text x="40" y="574" class="sec">④ ⭐ 改造二：语言视觉模型 LVM —— LLM 是怎么"看懂"图的（本节高光）</text>
+  <rect x="40" y="592" width="125" height="42" rx="8" fill="#ECEFF1" stroke="#B0BEC5"/>
+  <text x="102" y="618" class="small" text-anchor="middle">图像 + 文本</text>
+  <line x1="165" y1="613" x2="201" y2="613" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <!-- patch grid -->
+  <g>
+    <rect x="208" y="595" width="9" height="9" rx="1.5" fill="#8E24AA"/><rect x="219" y="595" width="9" height="9" rx="1.5" fill="#8E24AA"/><rect x="230" y="595" width="9" height="9" rx="1.5" fill="#8E24AA"/><rect x="241" y="595" width="9" height="9" rx="1.5" fill="#8E24AA"/>
+    <rect x="208" y="606" width="9" height="9" rx="1.5" fill="#AB47BC"/><rect x="219" y="606" width="9" height="9" rx="1.5" fill="#AB47BC"/><rect x="230" y="606" width="9" height="9" rx="1.5" fill="#AB47BC"/><rect x="241" y="606" width="9" height="9" rx="1.5" fill="#AB47BC"/>
+    <rect x="208" y="617" width="9" height="9" rx="1.5" fill="#8E24AA"/><rect x="219" y="617" width="9" height="9" rx="1.5" fill="#8E24AA"/><rect x="230" y="617" width="9" height="9" rx="1.5" fill="#8E24AA"/><rect x="241" y="617" width="9" height="9" rx="1.5" fill="#8E24AA"/>
+  </g>
+  <text x="225" y="648" class="tiny" text-anchor="middle">切成 patch</text>
+  <line x1="258" y1="613" x2="294" y2="613" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="298" y="592" width="250" height="42" rx="8" fill="#EDE7F6" stroke="#B39DDB"/>
+  <text x="423" y="610" class="small" text-anchor="middle" font-weight="700">每个 patch = 1 个 token</text>
+  <text x="423" y="627" class="tiny" text-anchor="middle">接到文字 token 后面（典型 100~1000 个）</text>
+  <line x1="548" y1="613" x2="584" y2="613" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="588" y="592" width="220" height="42" rx="8" fill="#EF5350"/>
+  <text x="698" y="610" class="small w" text-anchor="middle" font-weight="700">统一 Transformer</text>
+  <text x="698" y="627" class="tiny w" text-anchor="middle">理解"图文关系"</text>
+  <line x1="808" y1="613" x2="844" y2="613" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="848" y="592" width="212" height="42" rx="8" fill="#37474F"/>
+  <text x="954" y="618" class="small w" text-anchor="middle">输出文本 token（回答）</text>
+
+  <rect x="40" y="654" width="1020" height="68" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="678" class="ctitle cV">🎯 点你的终点《Attention is All You Need》：</text>
+  <text x="60" y="700" class="small">把图切成 patch、当 token 串起来 —— 这就是 <tspan class="cR" font-weight="700">Vision Transformer (ViT)</tspan>。关键在于：<tspan font-weight="700">自注意力根本不区分</tspan></text>
+  <text x="60" y="718" class="small">token 是"文字"还是"图块"，它只算"<tspan font-weight="700">谁和谁相关</tspan>"。所以"多模态"在底层 = <tspan class="cR" font-weight="700">统一 token 化 + 同一套注意力</tspan>。</text>
+
+  <!-- ⑤ upgrade + file formats -->
+  <text x="40" y="758" class="sec">⑤ 🚀 升级 RAG 其实很简单 + 文件格式红利</text>
+  <text x="40" y="786" class="small">有了"多模态嵌入模型 + 语言视觉模型"两块，升级几乎<tspan font-weight="700">不动整体架构</tspan> —— 高层流程和纯文本 RAG 基本一致，只是现在能吃图。</text>
+  <rect x="40" y="802" width="1020" height="40" rx="9" fill="#FFF3E0" stroke="#FFB74D" stroke-width="1.1"/>
+  <text x="60" y="827" class="small"><tspan class="cO" font-weight="700">红利：</tspan>很多格式都能"转成图片"摄入 —— <tspan font-weight="700">PDF、幻灯片可以直接当图像文件处理</tspan>，省去复杂的文本抽取。</text>
+
+  <!-- ⑥ PDF RAG -->
+  <text x="40" y="882" class="sec">⑥ ⭐ PDF RAG：把整页"当图"切块检索（2026 大热方向）</text>
+  <text x="40" y="910" class="small"><tspan font-weight="700">难点：</tspan>PDF / 幻灯片<tspan class="cR" font-weight="700">信息极密</tspan>（一页里有文字、图表、标题、配图）——<tspan font-weight="700">一页压成一个向量根本装不下</tspan>，得像切文本一样"切图"。</text>
+
+  <rect x="40" y="926" width="500" height="70" rx="10" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="60" y="950" class="ctitle cR">❌ 旧法：复杂版面检测算法</text>
+  <text x="60" y="974" class="small">先判断"哪块是图表 / 哪块是图 / 哪块是文字"</text>
+  <text x="60" y="990" class="tiny cGray">→ 易错、麻烦、脆弱。</text>
+
+  <rect x="560" y="926" width="500" height="70" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="580" y="950" class="ctitle cG">✅ 新法：PDF RAG（暴力切方格）</text>
+  <text x="580" y="974" class="small">整页切成<tspan font-weight="700">网格方块</tspan>，不管边界合不合理；</text>
+  <text x="580" y="990" class="tiny cGray">每格嵌成一个 dense 向量 → 一页 ≈ 1000 个向量。</text>
+
+  <rect x="40" y="1012" width="1020" height="86" rx="10" fill="#37474F"/>
+  <text x="60" y="1036" class="ctitle w">🔢 打分像 ColBERT（后期交互 late interaction）：</text>
+  <text x="60" y="1060" class="small wg">prompt 里<tspan class="w" font-weight="700">每个词</tspan>，都去这一页里找它<tspan class="w" font-weight="700">最匹配的那个方格</tspan>（最大相似度 MaxSim）；</text>
+  <text x="60" y="1082" class="small wg">把所有词的"最大相似度"<tspan class="w" font-weight="700">加总</tspan>，就是这一页文档的得分。逐格比对，比"整页一个向量"细腻得多。</text>
+
+  <text x="40" y="1128" class="small"><tspan class="cG" font-weight="700">优点：</tspan>极灵活（任何图都能切格）、检索效果好、多模态检索的有前景方向。　<tspan class="cR" font-weight="700">缺点：</tspan>向量库要存<tspan font-weight="700">海量向量</tspan>（一页上千）。</text>
+
+  <!-- 📡 2026 intel -->
+  <text x="40" y="1172" class="sec">📡 2026 最新情报（已联网核实 · 截至 2026-06）</text>
+
+  <text x="40" y="1200" class="small">· <tspan class="cR" font-weight="700">🏷️ 课件的"PDF RAG"其实有正式名字：ColPali（2024 提出，2026 已是视觉文档检索的标准做法）。</tspan><tspan x="60" dy="24">它用<tspan font-weight="700">视觉语言模型（如 PaliGemma）</tspan>把页面图块直接嵌成<tspan font-weight="700">多向量</tspan>，<tspan class="cR" font-weight="700">彻底绕过 OCR</tspan>；打分正是 ColBERT 的 MaxSim；</tspan><tspan x="60" dy="24">官方基准 <tspan font-weight="700">ViDoRe</tspan>（12.7 万 PDF 页），榜首已是 ColQwen2 / ColSmol 等变体。</tspan></text>
+
+  <text x="40" y="1300" class="small">· <tspan class="cV" font-weight="700">🧬 多模态嵌入模型（课件说"较实验性"，2026 已能用好几个）：</tspan>Cohere <tspan font-weight="700">Embed v4</tspan>、Voyage <tspan font-weight="700">Multimodal 3.5</tspan><tspan x="60" dy="24">（MongoDB 2.2 亿美元收购 Voyage）、Jina v4（基于 Qwen2.5-VL）、<tspan font-weight="700">Qwen3-VL-Embedding</tspan>（开源、跨模态检索夺冠）、</tspan><tspan x="60" dy="24">Google <tspan font-weight="700">Gemini Embedding 2</tspan>（2026-03，首个"全模态"）。多数把 OCR 流水线一并省掉。</tspan></text>
+
+  <text x="40" y="1400" class="small">· <tspan class="cV" font-weight="700">👁️ 语言视觉模型 VLM 已是标配：</tspan>GPT、Claude、Gemini、Qwen-VL、Llama Vision 等几乎都原生支持看图。<tspan x="60" dy="24">海量向量这个缺点 → 用<tspan font-weight="700">二值量化</tspan>（接量化那节）+ <tspan font-weight="700">多向量索引</tspan>（Qdrant / Vespa / Weaviate）来缓解。</tspan></text>
+
+  <text x="40" y="1500" class="small cV" font-weight="700">一句话：多模态 RAG = 把"图也变成 token + 嵌进同一空间"，于是检索/生成全套照旧；2026 的 ColPali 把<tspan x="40" dy="24">"PDF 当图、逐格 MaxSim"做成了标准，配合多模态嵌入模型，视觉文档检索正快速成熟。</tspan></text>
+
+  <text x="40" y="1580" class="small cGray">🧪 个人补充（非课件，这节是你 Transformer 之旅的高光，务必记牢）：</text>
+  <text x="40" y="1606" class="small cGray">① <tspan class="cR" font-weight="700">图像切 patch = 把图当"一串小图块组成的句子"= ViT</tspan>。自注意力不在乎 token 来自文字还是像素，只算相关性 ——</text>
+  <text x="40" y="1630" class="small cGray">　 这就是为什么"同一套 Transformer"能同时吃文和图。等你读《Attention》时，多模态会让你对"token 是什么都行"豁然开朗。</text>
+  <text x="40" y="1656" class="small cGray">② <tspan class="cR" font-weight="700">ColBERT 的 MaxSim ≈ 逐区块比对，而非整页缩略图比对</tspan>：更细腻、召回更准，代价是存得多 —— 又一次"质量 ↔ 成本"权衡。</text>
+  <text x="40" y="1682" class="small cGray">③ <tspan class="cR" font-weight="700">PDF 当图 ≈ 你熟的"整页截图"，但更聪明</tspan>：直接让模型看像素，免去脆弱的 OCR / 版面解析，工程上反而更稳。</text>
+</svg>

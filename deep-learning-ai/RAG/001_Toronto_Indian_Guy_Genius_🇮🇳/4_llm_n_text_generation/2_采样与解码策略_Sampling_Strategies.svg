@@ -1,0 +1,177 @@
+<svg width="900" height="2360" viewBox="0 0 900 2360" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 12px; fill: #555; }
+    .lab { font-size: 11px; fill: #555; font-family: "SF Mono","Menlo",monospace; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 14px; fill: #1B5E20; }
+    .mono { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 14px; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .panel { fill: #F2F2F4; }
+    .en { font-style: italic; }
+    /* color classes LAST so they win over typography classes */
+    .w { fill: #ffffff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+    .ky { fill: #FFCA28; } .st { fill: #9CCC65; } .nm { fill: #CE93D8; } .cmt { fill: #B0BEC5; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#37474F" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="arR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#C0392B" stroke-width="1.8" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="2360" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">采样与解码策略 🎲 <tspan font-size="17" fill="#666" class="en">Sampling / Decoding Strategies</tspan></text>
+  <text x="40" y="78" class="subtitle">一句话本质：每个 token 都是一次<tspan class="cR" font-weight="700">「加权随机选择」</tspan>；这些参数（温度、top-k、top-p、</text>
+  <text x="40" y="102" class="subtitle">重复惩罚、logit 偏置）就是你<tspan class="cV" font-weight="700">调控这份随机性</tspan>的旋钮 —— 不是消灭随机，而是驾驭它。</text>
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① distribution + peaked/flat -->
+  <text x="40" y="156" class="sec">① 📊 token 是加权随机选择：尖峰=自信，平坦=犹豫</text>
+  <text x="40" y="184" class="small">开源模型会暴露每一步的概率分布。例：prompt "The sky is" 的下一个 token 概率 ——</text>
+
+  <!-- peaked chart -->
+  <text x="60" y="212" class="small cG" font-weight="700">尖峰分布 Peaked → 模型"自信 confident"</text>
+  <g>
+  <rect x="70" y="232" width="34" height="80" fill="#F6A6A6"/><text x="87" y="226" class="tiny" text-anchor="middle">50%</text><text x="87" y="328" class="lab" text-anchor="middle">blue</text>
+  <rect x="112" y="264" width="34" height="48" fill="#F8B7B7"/><text x="129" y="258" class="tiny" text-anchor="middle">25%</text><text x="129" y="328" class="lab" text-anchor="middle">bright</text>
+  <rect x="154" y="288" width="34" height="24" fill="#FAC7C7"/><text x="171" y="282" class="tiny" text-anchor="middle">10%</text><text x="171" y="328" class="lab" text-anchor="middle">falling</text>
+  <rect x="196" y="296" width="34" height="16" fill="#FBD3D3"/><text x="213" y="290" class="tiny" text-anchor="middle">5%</text><text x="213" y="328" class="lab" text-anchor="middle">clear</text>
+  <rect x="238" y="302" width="34" height="10" fill="#FCDCDC"/><text x="255" y="296" class="tiny" text-anchor="middle">2%</text><text x="255" y="328" class="lab" text-anchor="middle">over</text>
+  <rect x="280" y="306" width="34" height="6" fill="#FCE4E4"/><text x="297" y="300" class="tiny" text-anchor="middle">0.8</text><text x="297" y="328" class="lab" text-anchor="middle">dark</text>
+  </g>
+
+  <!-- flat chart -->
+  <text x="500" y="212" class="small cR" font-weight="700">平坦分布 Flat → 模型"犹豫 uncertain"</text>
+  <g>
+  <rect x="510" y="296" width="34" height="16" fill="#FAC7C7"/><text x="527" y="290" class="tiny" text-anchor="middle">3%</text><text x="527" y="328" class="lab" text-anchor="middle">turbid</text>
+  <rect x="552" y="297" width="34" height="15" fill="#FAC7C7"/><text x="569" y="291" class="tiny" text-anchor="middle">2.9</text><text x="569" y="328" class="lab" text-anchor="middle">red</text>
+  <rect x="594" y="297" width="34" height="15" fill="#FAC7C7"/><text x="611" y="291" class="tiny" text-anchor="middle">2.9</text><text x="611" y="328" class="lab" text-anchor="middle">crepu</text>
+  <rect x="636" y="298" width="34" height="14" fill="#FAC7C7"/><text x="653" y="292" class="tiny" text-anchor="middle">2.8</text><text x="653" y="328" class="lab" text-anchor="middle">crims</text>
+  <rect x="678" y="299" width="34" height="13" fill="#FAC7C7"/><text x="695" y="293" class="tiny" text-anchor="middle">2.4</text><text x="695" y="328" class="lab" text-anchor="middle">green</text>
+  <rect x="720" y="299" width="34" height="13" fill="#FAC7C7"/><text x="737" y="293" class="tiny" text-anchor="middle">2.3</text><text x="737" y="328" class="lab" text-anchor="middle">cheese</text>
+  </g>
+
+  <!-- ② greedy -->
+  <text x="40" y="378" class="sec">② 🥇 贪心解码 <tspan class="en">Greedy Decoding</tspan>：永远选概率最高的</text>
+  <text x="40" y="406" class="small">不做随机选择，每一步都<tspan font-weight="700">硬选最高概率 token</tspan>（= 温度设为 0）。</text>
+  <text x="60" y="432" class="small"><tspan class="cG" font-weight="700">优点：</tspan>确定性 deterministic —— 同样的 prompt 永远得到同样的输出（适合代码补全、调试）。</text>
+  <text x="60" y="458" class="small"><tspan class="cR" font-weight="700">缺点：</tspan>文本"平庸"generic；还可能<tspan class="cR" font-weight="700">卡进死循环</tspan>（"which the data confirms, which the data confirms…"）。</text>
+  <text x="60" y="484" class="small">原因：模型只顾"下一个最可能"，不管整句是否通顺，一旦进环就出不来。</text>
+
+  <!-- ③ temperature -->
+  <text x="40" y="540" class="sec">③ 🌡️ 温度 <tspan class="en">Temperature</tspan>：改变分布形状的旋钮</text>
+  <text x="40" y="568" class="small">温度 = 控制随机性最常用的参数。它<tspan font-weight="700">不改变 token 的排序</tspan>，只改变各自被选中的概率：</text>
+  <!-- 5 mini dists baseline y=660 -->
+  <g>
+  <!-- temp 0 -->
+  <rect x="70" y="592" width="14" height="68" fill="#F6A6A6"/><rect x="86" y="657" width="14" height="3" fill="#FBD3D3"/><rect x="102" y="658" width="14" height="2" fill="#FBD3D3"/><rect x="118" y="658" width="14" height="2" fill="#FBD3D3"/>
+  <text x="101" y="678" class="tiny" text-anchor="middle" font-weight="700">Temp 0</text><text x="101" y="694" class="tiny" text-anchor="middle" fill="#888">贪心</text>
+  <!-- temp 0.5 -->
+  <rect x="200" y="608" width="14" height="52" fill="#F6A6A6"/><rect x="216" y="636" width="14" height="24" fill="#F8B7B7"/><rect x="232" y="646" width="14" height="14" fill="#FAC7C7"/><rect x="248" y="652" width="14" height="8" fill="#FBD3D3"/>
+  <text x="231" y="678" class="tiny" text-anchor="middle" font-weight="700">Temp 0.5</text><text x="231" y="694" class="tiny" text-anchor="middle" fill="#888">更尖</text>
+  <!-- temp 1 -->
+  <rect x="330" y="624" width="14" height="36" fill="#F6A6A6"/><rect x="346" y="630" width="14" height="30" fill="#F8B7B7"/><rect x="362" y="638" width="14" height="22" fill="#FAC7C7"/><rect x="378" y="642" width="14" height="18" fill="#FBD3D3"/>
+  <text x="361" y="678" class="tiny" text-anchor="middle" font-weight="700">Temp 1</text><text x="361" y="694" class="tiny" text-anchor="middle" fill="#888">原始分布</text>
+  <!-- temp 1.2 -->
+  <rect x="460" y="634" width="14" height="26" fill="#F6A6A6"/><rect x="476" y="636" width="14" height="24" fill="#F8B7B7"/><rect x="492" y="638" width="14" height="22" fill="#FAC7C7"/><rect x="508" y="640" width="14" height="20" fill="#FBD3D3"/>
+  <text x="491" y="678" class="tiny" text-anchor="middle" font-weight="700">Temp 1.2</text><text x="491" y="694" class="tiny" text-anchor="middle" fill="#2E7D32">更平·创意</text>
+  <!-- temp 5 -->
+  <rect x="600" y="642" width="14" height="18" fill="#F6A6A6"/><rect x="616" y="642" width="14" height="18" fill="#F8B7B7"/><rect x="632" y="643" width="14" height="17" fill="#FAC7C7"/><rect x="648" y="642" width="14" height="18" fill="#FBD3D3"/>
+  <text x="631" y="678" class="tiny" text-anchor="middle" font-weight="700">Temp 5</text><text x="631" y="694" class="tiny" text-anchor="middle" fill="#C62828">极平·胡言</text>
+  </g>
+  <text x="40" y="724" class="small"><tspan class="cV" font-weight="700">口诀：</tspan>温度↓ 越尖越保守（0 即贪心）；温度↑ 越平越随机（1.1~1.3 偏创意；过高则全是废话）。</text>
+
+  <!-- ④ top-k -->
+  <text x="40" y="780" class="sec">④ ✂️ Top-K 采样：只从前 k 个最可能 token 里挑</text>
+  <text x="40" y="808" class="small">把候选池<tspan font-weight="700">截断成固定 k 个</tspan>，其余直接忽略。例：Top-K = 5 → 只在前 5 个里随机选。</text>
+  <!-- bar chart with cutoff after 5 -->
+  <g>
+  <rect x="70" y="840" width="30" height="56" fill="#F26B6B"/><text x="85" y="834" class="tiny" text-anchor="middle">32%</text><text x="85" y="912" class="lab" text-anchor="middle">jumped</text>
+  <rect x="108" y="852" width="30" height="44" fill="#F26B6B"/><text x="123" y="846" class="tiny" text-anchor="middle">25%</text><text x="123" y="912" class="lab" text-anchor="middle">fence</text>
+  <rect x="146" y="864" width="30" height="32" fill="#F26B6B"/><text x="161" y="858" class="tiny" text-anchor="middle">18%</text><text x="161" y="912" class="lab" text-anchor="middle">gate</text>
+  <rect x="184" y="874" width="30" height="22" fill="#F26B6B"/><text x="199" y="868" class="tiny" text-anchor="middle">12%</text><text x="199" y="912" class="lab" text-anchor="middle">wall</text>
+  <rect x="222" y="880" width="30" height="16" fill="#F26B6B"/><text x="237" y="874" class="tiny" text-anchor="middle">9%</text><text x="237" y="912" class="lab" text-anchor="middle">river</text>
+  <line x1="262" y1="836" x2="262" y2="900" stroke="#37474F" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <rect x="272" y="884" width="30" height="12" fill="#FBD3D3"/><text x="287" y="878" class="tiny" text-anchor="middle">7%</text><text x="287" y="912" class="lab" text-anchor="middle">house</text>
+  <text x="320" y="888" class="small cGray">· · · 其余被切掉</text>
+  </g>
+  <text x="40" y="938" class="small cR" font-weight="700">⚠️ 缺点：不管分布形状如何，永远固定取 k 个 —— 不够灵活。</text>
+
+  <!-- ⑤ top-p -->
+  <text x="40" y="994" class="sec">⑤ 🎯 Top-P 采样（核采样 <tspan class="en">nucleus</tspan>）：按累计概率截断</text>
+  <text x="40" y="1022" class="small">从左往右<tspan font-weight="700">累加概率</tspan>，一旦超过阈值 p 就停。例：Top-P = 85% → 累加到刚超 85% 为止。</text>
+  <g>
+  <rect x="70" y="1052" width="30" height="56" fill="#F26B6B"/><text x="85" y="1046" class="tiny" text-anchor="middle">32%</text><text x="85" y="1124" class="lab" text-anchor="middle">jumped</text>
+  <rect x="108" y="1064" width="30" height="44" fill="#F26B6B"/><text x="123" y="1058" class="tiny" text-anchor="middle">25%</text><text x="123" y="1124" class="lab" text-anchor="middle">fence</text>
+  <rect x="146" y="1076" width="30" height="32" fill="#F26B6B"/><text x="161" y="1070" class="tiny" text-anchor="middle">18%</text><text x="161" y="1124" class="lab" text-anchor="middle">gate</text>
+  <rect x="184" y="1086" width="30" height="22" fill="#F26B6B"/><text x="199" y="1080" class="tiny" text-anchor="middle">12%</text><text x="199" y="1124" class="lab" text-anchor="middle">wall</text>
+  <line x1="224" y1="1048" x2="224" y2="1112" stroke="#37474F" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <rect x="232" y="1092" width="30" height="16" fill="#FBD3D3"/><text x="247" y="1086" class="tiny" text-anchor="middle">9%</text><text x="247" y="1124" class="lab" text-anchor="middle">river</text>
+  <rect x="270" y="1095" width="30" height="13" fill="#FBD3D3"/><text x="285" y="1089" class="tiny" text-anchor="middle">7%</text><text x="285" y="1124" class="lab" text-anchor="middle">house</text>
+  </g>
+  <text x="340" y="1066" class="small">累计和 cumulative：</text>
+  <text x="340" y="1090" class="mono" font-size="13" fill="#37474F">32% → 57% → 75% → <tspan class="cO" font-weight="700">87%</tspan> ✋ 停</text>
+  <text x="340" y="1114" class="tiny cGray">到 "wall" 累计达 87% 刚超 85%，到此截断。</text>
+
+  <!-- ⑥ top-k vs top-p -->
+  <text x="40" y="1170" class="sec">⑥ ⚖️ Top-K vs Top-P：谁更聪明？</text>
+  <rect x="40" y="1188" width="400" height="92" rx="10" fill="#FFF3E0" stroke="#FFCC80" stroke-width="1.2"/>
+  <text x="60" y="1214" class="small cO" font-weight="700">Top-K：池子大小固定</text>
+  <text x="60" y="1238" class="small">无论分布尖还是平，永远取同样数量的 token。</text>
+  <text x="60" y="1262" class="tiny cGray">死板，但简单。</text>
+  <rect x="460" y="1188" width="400" height="92" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="480" y="1214" class="small cG" font-weight="700">Top-P：更动态 more dynamic ⭐</text>
+  <text x="480" y="1238" class="small">模型自信(尖) → 只选少数；犹豫(平) → 放宽到</text>
+  <text x="480" y="1262" class="small">更大的池子。随分布"察言观色"。</text>
+
+  <!-- ⑦ repetition penalty -->
+  <text x="40" y="1336" class="sec">⑦ 🔁 重复惩罚 <tspan class="en">Repetition Penalty</tspan>：压低已用过的词</text>
+  <text x="40" y="1364" class="small">降低<tspan font-weight="700">已经在输出里出现过</tspan>的 token 的概率，让文本更自然多样。专治：</text>
+  <text x="60" y="1390" class="small">· 死循环（"I think, I think…"）　· 冗余句式　· 某个词被反复滥用</text>
+  <text x="40" y="1416" class="small">课件示例：上文已用过 "dog" → 它的概率被惩罚（图中 <tspan class="cV" font-weight="700">蓝色 dog 从原本位置被压低到 6%</tspan>）。</text>
+
+  <!-- ⑧ logit bias -->
+  <text x="40" y="1472" class="sec">⑧ 🎚️ Logit 偏置 <tspan class="en">Logit Bias</tspan>：直接手动加减某个 token 的概率</text>
+  <text x="40" y="1500" class="small">对<tspan font-weight="700">指定 token</tspan>的原始概率永久地加 / 减一个值（不是改整体形状，而是点名调整）：</text>
+  <text x="60" y="1526" class="small">· <tspan class="cR" font-weight="700">过滤脏话：</tspan>把不想要的词（如 "poop"）<tspan class="cR" font-weight="700">永久压到极低</tspan>（课件示例 → 0.1%）。</text>
+  <text x="60" y="1552" class="small">· <tspan class="cG" font-weight="700">分类器 LLM：</tspan>把几个目标类别的概率<tspan class="cG" font-weight="700">抬高</tspan>，确保模型只在它们之间选。</text>
+
+  <!-- ⑨ payload + advice -->
+  <text x="40" y="1608" class="sec">⑨ 🧰 组合用法：一个通用的 API 配置 <tspan class="en">payload</tspan></text>
+  <rect x="40" y="1628" width="500" height="220" rx="14" fill="#37474F"/>
+  <text x="64" y="1666" class="mono"><tspan class="w">payload </tspan><tspan class="nm">=</tspan><tspan class="w"> {</tspan></text>
+  <text x="88" y="1696" class="mono"><tspan class="ky">"model"</tspan><tspan class="w">: </tspan><tspan class="st">"meta-llama/Llama-2-70b-hf"</tspan><tspan class="w">,</tspan></text>
+  <text x="88" y="1726" class="mono"><tspan class="ky">"temperature"</tspan><tspan class="w">: </tspan><tspan class="nm">0.8</tspan><tspan class="w">,</tspan></text>
+  <text x="88" y="1756" class="mono"><tspan class="ky">"top_p"</tspan><tspan class="w">: </tspan><tspan class="nm">0.9</tspan><tspan class="w">,</tspan></text>
+  <text x="88" y="1786" class="mono"><tspan class="ky">"repetition_penalty"</tspan><tspan class="w">: </tspan><tspan class="nm">1.2</tspan></text>
+  <text x="64" y="1816" class="mono w">}</text>
+  <text x="560" y="1668" class="small">解读这套"稳健通用"参数：</text>
+  <text x="560" y="1700" class="small"><tspan class="cO" font-weight="700">temp 0.8</tspan> → 选词略保守</text>
+  <text x="560" y="1730" class="small"><tspan class="cO" font-weight="700">top_p 0.9</tspan> → 避开分布尾巴的废话</text>
+  <text x="560" y="1760" class="small"><tspan class="cO" font-weight="700">rep_penalty 1.2</tspan> → 轻度抑制重复</text>
+
+  <text x="40" y="1888" class="sec">　 实战建议 <tspan class="en">Practical advice</tspan></text>
+  <text x="60" y="1916" class="small">· 先定<tspan font-weight="700">温度 + top-p</tspan> 适配你的场景：</text>
+  <text x="80" y="1942" class="small"><tspan class="cV" font-weight="700">代码 / 事实问答</tspan> → 低温度 + 低 top-p（更确定）；</text>
+  <text x="80" y="1968" class="small"><tspan class="cP" font-weight="700">创意写作</tspan> → 高温度 + 高 top-p（更发散有趣）。</text>
+  <text x="60" y="1996" class="small">· 之后再按具体问题加<tspan font-weight="700">重复惩罚、logit 偏置</tspan>等。不断迭代到合适为止。</text>
+
+  <!-- ⑩ latest intel -->
+  <text x="40" y="2056" class="sec">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="2084" class="small">这节课讲的 top-k / top-p / 温度仍是基础，但 2026 年的开源实践已有新共识：</text>
+  <text x="40" y="2112" class="small">· <tspan class="cV" font-weight="700">Min-P 采样：</tspan>一种更"动态"的截断法 —— 按"<tspan font-weight="700">最高概率 token 的某个比例</tspan>"设动态门槛。</text>
+  <text x="40" y="2138" class="small">　llama.cpp / vLLM 高级用户已普遍转向 <tspan class="cG" font-weight="700">温度 + Min-P（约 0.05~0.1）</tspan>，<tspan class="cR" font-weight="700">直接跳过 top-k/top-p</tspan>。</text>
+  <text x="40" y="2164" class="small">· <tspan class="cV" font-weight="700">推测解码 Speculative Decoding：</tspan>用一个小"草稿模型"先快速猜一串 token，大模型一次性</text>
+  <text x="40" y="2190" class="small">　批量校验 → <tspan class="cO" font-weight="700">2~3 倍提速</tspan>，且猜对时<tspan font-weight="700">输出质量完全不变</tspan>（只改速度，不改采样结果）。</text>
+  <text x="40" y="2216" class="small">· <tspan class="cV" font-weight="700">完整采样链：</tspan>现代推理框架会串联多种策略：penalties → top_k → top_p → min_p → temperature。</text>
+  <text x="40" y="2244" class="small cV" font-weight="700">一句话：本课的旋钮是"经典款"；2026 的潮流是 ① 用 Min-P 替代 top-k/p ② 用推测解码压低延迟。</text>
+
+  <text x="40" y="2300" class="small cGray">🧪 个人补充（非课件）：这些参数本质都在操作 softmax 之前/之后的概率分布 —— 你前面学的</text>
+  <text x="40" y="2326" class="small cGray">　 softmax、注意力打分，正是这份"分布"的来源。采样是流水线的最后一棒。</text>
+</svg>

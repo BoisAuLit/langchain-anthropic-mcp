@@ -1,0 +1,182 @@
+<svg width="1160" height="1684" viewBox="0 0 1160 1684" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 25px; font-weight: 800; fill: #0F172A; }
+    .ess { font-size: 16px; fill: #475569; }
+    .sec { font-size: 19px; font-weight: 800; fill: #0F172A; }
+    .b { font-size: 15px; fill: #334155; }
+    .bb { font-size: 15px; font-weight: 700; }
+    .sm { font-size: 13px; fill: #64748B; }
+    .ct { font-size: 15px; font-weight: 700; }
+    .cap { font-size: 13.5px; font-weight: 700; fill: #334155; }
+    .axl { font-size: 13px; font-weight: 700; fill: #475569; }
+    /* color classes LAST */
+    .w{fill:#fff} .wg{fill:#CBD5E1}
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#D97706} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+  </style>
+
+  <rect x="0" y="0" width="1160" height="1684" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">Line Graphs &amp; Ogives 📈 — showing how a number changes over time</text>
+  <text x="40" y="76" class="ess">A <tspan class="bb">line graph</tspan> connects data points with straight lines to show <tspan class="cPink bb">change over time</tspan>. An <tspan class="bb">ogive</tspan> is a line graph of the</text>
+  <text x="40" y="98" class="ess">RUNNING TOTAL — an "accumulated" line that shows how a quantity piles up.</text>
+  <line x1="40" y1="114" x2="1120" y2="114" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ① what a line graph is -->
+  <text x="40" y="148" class="sec">📈 What a line graph is — just connect the tops of the bars</text>
+  <text x="40" y="176" class="b">Start from a bar graph. Connect the middle-top of each bar to the next one with a straight line, then erase the bars.</text>
+  <text x="40" y="198" class="b">What is left is a <tspan class="bb">line graph</tspan> — the SAME data, only the kind of mark changed (bars → a line).</text>
+
+  <!-- combo bar+line drawing -->
+  <text x="110" y="226" class="cap">Bars → connect the tops → a line</text>
+  <line x1="110" y1="240" x2="460" y2="240" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="280" x2="460" y2="280" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="320" x2="460" y2="320" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="360" x2="460" y2="360" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="238" x2="110" y2="400" stroke="#94A3B8" stroke-width="1.6"/>
+  <line x1="110" y1="400" x2="460" y2="400" stroke="#94A3B8" stroke-width="1.6"/>
+  <text x="100" y="404" class="sm" text-anchor="end">0</text>
+  <text x="100" y="364" class="sm" text-anchor="end">5</text>
+  <text x="100" y="324" class="sm" text-anchor="end">10</text>
+  <text x="100" y="284" class="sm" text-anchor="end">15</text>
+  <text x="100" y="244" class="sm" text-anchor="end">20</text>
+  <rect x="125" y="272" width="40" height="128" fill="#F8C9AE"/>
+  <rect x="193" y="352" width="40" height="48" fill="#F8C9AE"/>
+  <rect x="261" y="376" width="40" height="24" fill="#F8C9AE"/>
+  <rect x="329" y="384" width="40" height="16" fill="#F8C9AE"/>
+  <rect x="397" y="392" width="40" height="8" fill="#F8C9AE"/>
+  <polyline points="145,272 213,352 281,376 349,384 417,392" fill="none" stroke="#2563EB" stroke-width="2.4"/>
+  <circle cx="145" cy="272" r="4" fill="#fff" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="213" cy="352" r="4" fill="#fff" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="281" cy="376" r="4" fill="#fff" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="349" cy="384" r="4" fill="#fff" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="417" cy="392" r="4" fill="#fff" stroke="#2563EB" stroke-width="2"/>
+  <text x="145" y="416" class="sm" text-anchor="middle">Europe</text>
+  <text x="213" y="416" class="sm" text-anchor="middle">N.Am</text>
+  <text x="281" y="416" class="sm" text-anchor="middle">Asia</text>
+  <text x="349" y="416" class="sm" text-anchor="middle">Aus</text>
+  <text x="417" y="416" class="sm" text-anchor="middle">S.Am</text>
+
+  <!-- when to use card -->
+  <rect x="560" y="224" width="560" height="168" rx="11" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+  <text x="580" y="248" class="ct cGreen">✅ Use a line graph for: change over TIME</text>
+  <text x="580" y="272" class="b">It shows how one value moves across an ordered axis (months, years).</text>
+  <text x="580" y="294" class="b">The connecting line says "these points follow one after another."</text>
+  <text x="580" y="322" class="ct cPink">❌ Do NOT use it for: separate categories</text>
+  <text x="580" y="346" class="b">The Olympic continents are separate groups, with no time order.</text>
+  <text x="580" y="368" class="b">A line between them fakes a trend that is not real → keep those as <tspan class="bb">BARS</tspan>.</text>
+
+  <!-- ② good line graph: temperature -->
+  <text x="40" y="468" class="sec">🌡️ A line graph done right: temperature across a year</text>
+  <text x="40" y="496" class="b">Here is data that truly fits a line graph: the <tspan class="bb">average high temperature</tspan> in Scottsdale, Arizona, each month (°F).</text>
+  <text x="40" y="518" class="b">Put the month on the bottom and the temperature on the left, then connect the dots. The yearly rise-and-fall pops out.</text>
+
+  <!-- temperature line chart: baseline 760 (60F), 4px/unit -->
+  <text x="110" y="546" class="cap">Average high temperature (°F) by month — Scottsdale, AZ</text>
+  <line x1="110" y1="560" x2="1060" y2="560" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="600" x2="1060" y2="600" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="640" x2="1060" y2="640" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="680" x2="1060" y2="680" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="720" x2="1060" y2="720" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="550" x2="110" y2="760" stroke="#94A3B8" stroke-width="1.6"/>
+  <line x1="110" y1="760" x2="1060" y2="760" stroke="#94A3B8" stroke-width="1.6"/>
+  <text x="100" y="564" class="sm" text-anchor="end">110</text>
+  <text x="100" y="604" class="sm" text-anchor="end">100</text>
+  <text x="100" y="644" class="sm" text-anchor="end">90</text>
+  <text x="100" y="684" class="sm" text-anchor="end">80</text>
+  <text x="100" y="724" class="sm" text-anchor="end">70</text>
+  <text x="100" y="764" class="sm" text-anchor="end">60</text>
+  <polyline points="160,724 240,708 320,688 400,656 480,620 560,588 640,580 720,588 800,600 880,644 960,688 1040,728" fill="none" stroke="#F59E6B" stroke-width="2.6"/>
+  <circle cx="160" cy="724" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="240" cy="708" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="320" cy="688" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="400" cy="656" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="480" cy="620" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="560" cy="588" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="640" cy="580" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="720" cy="588" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="800" cy="600" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="880" cy="644" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="960" cy="688" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="1040" cy="728" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <text x="160" y="780" class="sm" text-anchor="middle">JAN</text>
+  <text x="240" y="780" class="sm" text-anchor="middle">FEB</text>
+  <text x="320" y="780" class="sm" text-anchor="middle">MAR</text>
+  <text x="400" y="780" class="sm" text-anchor="middle">APR</text>
+  <text x="480" y="780" class="sm" text-anchor="middle">MAY</text>
+  <text x="560" y="780" class="sm" text-anchor="middle">JUN</text>
+  <text x="640" y="780" class="sm" text-anchor="middle">JUL</text>
+  <text x="720" y="780" class="sm" text-anchor="middle">AUG</text>
+  <text x="800" y="780" class="sm" text-anchor="middle">SEP</text>
+  <text x="880" y="780" class="sm" text-anchor="middle">OCT</text>
+  <text x="960" y="780" class="sm" text-anchor="middle">NOV</text>
+  <text x="1040" y="780" class="sm" text-anchor="middle">DEC</text>
+
+  <text x="40" y="816" class="b">📐 <tspan class="bb">The slope of each segment = how fast it changed.</tspan> Sep → Oct drops steeply (100 → 89, a big fall in one month);</text>
+  <text x="40" y="838" class="b">Aug → Sep is almost flat (103 → 100, a small fall). A <tspan class="bb">steeper line means a bigger change</tspan> between two points.</text>
+
+  <!-- ③ ogive concept -->
+  <text x="40" y="886" class="sec">📊 An ogive — a "running total" line graph</text>
+  <text x="40" y="914" class="b">An <tspan class="cPurple bb">ogive</tspan> is a line graph of the <tspan class="bb">running total</tspan>. Instead of plotting each value on its own, you plot the <tspan class="bb">sum so far</tspan>.</text>
+  <text x="40" y="936" class="b">Add each new value onto the total before it: Jan = 69, Feb = 69 + 73 = 142, Mar = 142 + 78 = 220, and so on.</text>
+  <rect x="40" y="954" width="1080" height="68" rx="11" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.2"/>
+  <text x="58" y="980" class="b">⚠️ <tspan class="bb">But a running total has to make sense.</tspan> Accumulating temperature is nonsense — it would say December is "1,047°".</text>
+  <text x="58" y="1002" class="b">An ogive only fits data where adding up is meaningful: <tspan class="bb">money, counts, distance</tspan> — not temperature.</text>
+
+  <!-- ④ ogive done right: savings -->
+  <text x="40" y="1058" class="sec">💰 An ogive done right: accumulated savings</text>
+  <text x="40" y="1086" class="b">Invest <tspan class="bb">$5,500 each year</tspan> into a Roth IRA from age 30 to 39. Each single year is just a flat line at 5,500 (not useful).</text>
+  <text x="40" y="1108" class="b">The <tspan class="bb">running total</tspan> is the interesting part — it shows the money piling up: 5,500 → 11,000 → 16,500 → … → 55,000.</text>
+
+  <!-- savings ogive: baseline 1380 (0), 0.004 px/$ -->
+  <text x="110" y="1136" class="cap">Accumulated savings (running total) by age</text>
+  <line x1="110" y1="1140" x2="1040" y2="1140" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="1200" x2="1040" y2="1200" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="1260" x2="1040" y2="1260" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="1320" x2="1040" y2="1320" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="1130" x2="110" y2="1380" stroke="#94A3B8" stroke-width="1.6"/>
+  <line x1="110" y1="1380" x2="1040" y2="1380" stroke="#94A3B8" stroke-width="1.6"/>
+  <text x="100" y="1384" class="sm" text-anchor="end">0</text>
+  <text x="100" y="1324" class="sm" text-anchor="end">15,000</text>
+  <text x="100" y="1264" class="sm" text-anchor="end">30,000</text>
+  <text x="100" y="1204" class="sm" text-anchor="end">45,000</text>
+  <text x="100" y="1144" class="sm" text-anchor="end">60,000</text>
+  <polyline points="170,1358 265,1336 360,1314 455,1292 550,1270 645,1248 740,1226 835,1204 930,1182 1025,1160" fill="none" stroke="#F59E6B" stroke-width="2.6"/>
+  <circle cx="170" cy="1358" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="265" cy="1336" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="360" cy="1314" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="455" cy="1292" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="550" cy="1270" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="645" cy="1248" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="740" cy="1226" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="835" cy="1204" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="930" cy="1182" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <circle cx="1025" cy="1160" r="4.5" fill="#fff" stroke="#EA580C" stroke-width="2"/>
+  <text x="170" y="1398" class="sm" text-anchor="middle">30</text>
+  <text x="265" y="1398" class="sm" text-anchor="middle">31</text>
+  <text x="360" y="1398" class="sm" text-anchor="middle">32</text>
+  <text x="455" y="1398" class="sm" text-anchor="middle">33</text>
+  <text x="550" y="1398" class="sm" text-anchor="middle">34</text>
+  <text x="645" y="1398" class="sm" text-anchor="middle">35</text>
+  <text x="740" y="1398" class="sm" text-anchor="middle">36</text>
+  <text x="835" y="1398" class="sm" text-anchor="middle">37</text>
+  <text x="930" y="1398" class="sm" text-anchor="middle">38</text>
+  <text x="1025" y="1398" class="sm" text-anchor="middle">39</text>
+  <text x="575" y="1418" class="axl" text-anchor="middle">Age</text>
+  <!-- key dot callouts -->
+  <text x="645" y="1240" class="sm cPurple" text-anchor="middle">$33,000</text>
+  <text x="1025" y="1152" class="sm cOrange" text-anchor="middle">$55,000</text>
+
+  <text x="40" y="1452" class="b">👀 <tspan class="bb">Read it straight off the line:</tspan> by age 39 the total sits between $50,000 and $60,000 (exactly $55,000). And you</text>
+  <text x="40" y="1474" class="b">cross the <tspan class="bb">$30,000 mark at age 35</tspan> ($33,000). An ogive turns "how much so far?" into one rising line you read at a glance.</text>
+
+  <!-- ⑤ recap (lesson content) -->
+  <rect x="40" y="1512" width="1080" height="140" rx="12" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1.4"/>
+  <text x="60" y="1538" class="ct cPurple">🧭 Which graph for which data (from this lesson)</text>
+  <text x="60" y="1562" class="b">· <tspan class="bb">Bar graph</tspan> → compare separate categories that have no time order (continents, flavors).</text>
+  <text x="60" y="1584" class="b">· <tspan class="bb">Line graph</tspan> → show how one value CHANGES over time or an ordered sequence; the slope = the rate of change.</text>
+  <text x="60" y="1606" class="b">· <tspan class="bb">Ogive</tspan> → a running total over time; use it only when adding up makes sense (money, counts), not temperature.</text>
+  <text x="60" y="1628" class="b">· All three can come from the same numbers — pick the one that matches your <tspan class="bb">question</tspan> and your kind of data.</text>
+</svg>

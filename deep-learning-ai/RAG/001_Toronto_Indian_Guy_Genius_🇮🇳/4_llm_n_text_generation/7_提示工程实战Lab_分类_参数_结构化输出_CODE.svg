@@ -1,0 +1,114 @@
+<svg width="900" height="1672" viewBox="0 0 900 1672" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 25px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #1B5E20; }
+    .mono { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+    .jk { fill: #4FC3F7; } .js { fill: #A5D6A7; } .jn { fill: #CE93D8; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#546E7A" stroke-width="1.6" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1672" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">提示工程实战 Lab 🛠️ <tspan font-size="15" fill="#666" class="en">Classification · Param Routing · Structured Output</tspan></text>
+  <text x="40" y="78" class="subtitle">一句话本质：把 LLM 从"聊天机器"变成<tspan class="cV" font-weight="700">能被代码调用的零件</tspan> —— 让它输出<tspan class="cO" font-weight="700">固定标签</tspan>、</text>
+  <text x="40" y="102" class="subtitle">按任务<tspan class="cP" font-weight="700">自动切换参数</tspan>、或吐出严格的 <tspan class="cT" font-weight="700">JSON</tspan>，供下游程序直接使用。</text>
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① overview -->
+  <text x="40" y="156" class="sec">① 🗺️ 本 Lab 三个实战</text>
+  <rect x="40" y="174" width="260" height="48" rx="8" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="170" y="194" class="small cV" text-anchor="middle" font-weight="700">1. 文本分类</text>
+  <text x="170" y="214" class="tiny" text-anchor="middle">LLM 当分类器，输出固定标签</text>
+  <rect x="320" y="174" width="260" height="48" rx="8" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.2"/>
+  <text x="450" y="194" class="small cP" text-anchor="middle" font-weight="700">2. 按任务切参数</text>
+  <text x="450" y="214" class="tiny" text-anchor="middle">先判断类型，再用不同温度/top_p</text>
+  <rect x="600" y="174" width="260" height="48" rx="8" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="730" y="194" class="small cG" text-anchor="middle" font-weight="700">3. 结构化输出</text>
+  <text x="730" y="214" class="tiny" text-anchor="middle">强制吐出 JSON 给程序用</text>
+
+  <!-- ② classification -->
+  <text x="40" y="262" class="sec">② 🏷️ 实战 1：LLM 当文本分类器 <tspan class="en">Text Classification</tspan></text>
+  <text x="40" y="290" class="small">场景：运动用品店 bot，把用户问题分成 <tspan class="cO" font-weight="700">"outfit 服饰"</tspan> 或 <tspan class="cO" font-weight="700">"nutritional 营养"</tspan>，好路由到对应数据库。</text>
+  <text x="40" y="318" class="small">写好分类 prompt 的三原则：</text>
+  <text x="64" y="344" class="small"><tspan class="cG" font-weight="700">1. 精确 precise：</tspan>把"要它做什么、输出什么"讲到死（"只回一个单词"）。</text>
+  <text x="64" y="370" class="small"><tspan class="cG" font-weight="700">2. 给例子：</tspan>列出"查询 → 期望标签"的范例（这就是上节课的 few-shot 举例学习）。</text>
+  <text x="64" y="396" class="small"><tspan class="cG" font-weight="700">3. 加边界例子 edge cases：</tspan>放一些模型容易判错的刁钻例子（如"时髦的减肥产品"→营养）。</text>
+  <rect x="40" y="414" width="820" height="50" rx="8" class="chip"/>
+  <text x="56" y="436" class="code">generate_with_single_input(prompt, <tspan class="cm">max_tokens = 2</tspan>)　# 限长，逼它只吐标签、不啰嗦</text>
+  <text x="56" y="456" class="code"><tspan class="cm"># 代码侧再做校验：万一返回 "2" 或一整句，要拦下来，别让下游崩</tspan></text>
+  <text x="40" y="490" class="small cR" font-weight="700">⭐ 双保险：稳健的 prompt（少出错）＋ 代码检查（兜底意外输出）。</text>
+
+  <!-- ③ param routing -->
+  <text x="40" y="536" class="sec">③ 🎚️ 实战 2：按任务自动切换参数 <tspan class="en">Parameter Routing</tspan></text>
+  <text x="40" y="564" class="small">思路：<tspan font-weight="700">先让 LLM 判断查询类型</tspan>（technical 技术 / creative 创意），<tspan font-weight="700">再据此设不同采样参数</tspan>。</text>
+  <!-- flow -->
+  <rect x="50" y="582" width="160" height="40" rx="8" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="1.2"/>
+  <text x="130" y="607" class="small" text-anchor="middle" font-weight="700">用户查询</text>
+  <line x1="214" y1="602" x2="248" y2="602" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="252" y="582" width="220" height="40" rx="8" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="1.2"/>
+  <text x="362" y="607" class="small" text-anchor="middle" font-weight="700">LLM 判类型：技术/创意</text>
+  <line x1="476" y1="602" x2="510" y2="602" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="514" y="582" width="220" height="40" rx="8" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="1.2"/>
+  <text x="624" y="607" class="small" text-anchor="middle" font-weight="700">套对应参数再正式回答</text>
+  <!-- param table -->
+  <rect x="40" y="640" width="820" height="30" fill="#37474F"/>
+  <text x="60" y="660" class="small w" font-weight="700">类型　　　　　temperature　　top_p　　含义</text>
+  <rect x="40" y="670" width="820" height="28" fill="#E3F2FD"/>
+  <text x="60" y="689" class="small"><tspan class="cV" font-weight="700">technical 技术</tspan>　 0　　　　　　0.1　　 要精确、低随机（如"Pi-hole 是什么？"）</text>
+  <rect x="40" y="698" width="820" height="28" fill="#F3E5F5"/>
+  <text x="60" y="717" class="small"><tspan class="cP" font-weight="700">creative 创意</tspan>　 1.1　　　　　0.4　　 要发散、高随机（如"推荐南美三个景点"）</text>
+  <rect x="40" y="726" width="820" height="28" fill="#F5F5F5"/>
+  <text x="60" y="745" class="small cGray">default 兜底　　 0.5　　　　　0.5　　 判不准时用中性参数</text>
+  <text x="40" y="780" class="small cV" font-weight="700">💡 这把上节课"分类"和采样课"温度/top_p"两块拼在了一起 —— 用 LLM 调度 LLM。</text>
+
+  <!-- ④ structured output -->
+  <text x="40" y="826" class="sec">④ 📦 实战 3：强制结构化输出（JSON）—— 两种办法</text>
+  <text x="40" y="854" class="small">场景：智能家居助手，把自然语言（"放点嗨的歌，大声点"）翻译成程序能懂的 JSON 动作列表。目标格式：</text>
+  <rect x="40" y="870" width="500" height="46" rx="8" class="chip"/>
+  <text x="56" y="890" class="code">{ <tspan class="cm">"room", "object_id", "object_name",</tspan></text>
+  <text x="56" y="908" class="code">　 <tspan class="cm">"action", "parameters": { … } </tspan>}</text>
+
+  <text x="40" y="950" class="small cR" font-weight="700">办法 A · 老办法（纯 prompt 工程）</text>
+  <text x="40" y="976" class="small">写一个超详尽的 prompt：列出所有设备/动作/房间/ID + 给几个"命令 → JSON"范例 +</text>
+  <text x="40" y="1002" class="small">强调"<tspan class="cR" font-weight="700">永远只输出列表结构，别的什么都别说</tspan>"。参数用 temp=0.4、top_p=0.1（求稳）。</text>
+  <text x="40" y="1028" class="small cGray">缺点：靠"求"模型听话，仍可能格式跑偏 → 需反复实验调 prompt。</text>
+
+  <text x="40" y="1066" class="small cG" font-weight="700">办法 B · 新办法（结构化输出参数 + Pydantic）⭐</text>
+  <text x="40" y="1092" class="small">用 <tspan class="code" fill="#1B5E20">Pydantic</tspan> 定义数据模型（schema），通过 <tspan class="code" fill="#1B5E20">response_format</tspan> 传给模型 → <tspan class="cG" font-weight="700">保证返回合法 JSON</tspan>：</text>
+  <rect x="40" y="1108" width="820" height="120" rx="10" fill="#34404F"/>
+  <text x="60" y="1132" class="mono"><tspan class="jn">class</tspan> <tspan class="js">VoiceNote</tspan><tspan class="w">(BaseModel):</tspan></text>
+  <text x="60" y="1152" class="mono"><tspan class="jk">title</tspan><tspan class="w">: str　　</tspan><tspan class="js"># 标题</tspan></text>
+  <text x="60" y="1172" class="mono"><tspan class="jk">summary</tspan><tspan class="w">: str　</tspan><tspan class="js"># 一句话摘要</tspan></text>
+  <text x="60" y="1192" class="mono"><tspan class="jk">actionItems</tspan><tspan class="w">: list[str]　</tspan><tspan class="js"># 待办清单</tspan></text>
+  <text x="60" y="1216" class="mono wg">response_format = {"type": "json_schema", "schema": VoiceNote.model_json_schema()}</text>
+  <text x="40" y="1252" class="small">输入一段语音转写 → 模型直接吐出 {title, summary, actionItems} 的 JSON，<tspan class="cG" font-weight="700">无需手动解析</tspan>。</text>
+
+  <!-- ⑤ latest intel -->
+  <text x="40" y="1308" class="sec">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="1336" class="small">Lab 的"办法 B"正是 2026 的<tspan class="cR" font-weight="700">主流做法</tspan>，且已大幅升级：</text>
+  <text x="40" y="1362" class="small">· <tspan class="cV" font-weight="700">原生结构化输出已全面普及：</tspan>OpenAI（2024.8）、Gemini、<tspan class="cO" font-weight="700">Anthropic（2025.11 beta → 2026 初 GA）</tspan>、</text>
+  <text x="40" y="1388" class="small">　Cohere、xAI(Grok) 都原生支持 —— 不再是"求"模型，而是"强制"它合法。</text>
+  <text x="40" y="1414" class="small">· <tspan class="cV" font-weight="700">底层机制 = 约束解码 Constrained Decoding：</tspan>生成每个 token 前，<tspan class="cO" font-weight="700">把"会违反 schema 的 token 屏蔽掉"</tspan>，</text>
+  <text x="40" y="1440" class="small">　于是<tspan class="cG" font-weight="700">100% 合法</tspan>（不是"通常合法"）。反直觉的好处：它<tspan class="cG" font-weight="700">比普通生成更快</tspan>（搜索空间被裁小，少走死路）。</text>
+  <text x="40" y="1466" class="small">· <tspan class="cV" font-weight="700">Pydantic AI（v1.x）</tspan>提供三种结构化输出模式：tool output（当工具参数）、native output（原生 JSON）、</text>
+  <text x="40" y="1492" class="small">　prompted output（schema 塞进 prompt，即 Lab 的办法 A）。</text>
+  <text x="40" y="1518" class="small cV" font-weight="700">一句话：2026 别再用正则手撕 JSON ——直接上 schema 约束解码，又稳又快，办法 A 已沦为兜底。</text>
+
+  <text x="40" y="1574" class="small cGray">🧪 个人补充（非课件）：把这条线串起来——实战 1 让 LLM 吐"标签"、实战 3 让它吐"JSON"，</text>
+  <text x="40" y="1600" class="small cGray">　 本质都是"约束输出格式"。区别只是：prompt 工程靠"叮嘱"，约束解码靠"物理上不让它出错"。</text>
+  <text x="40" y="1626" class="small cGray">　 生产环境优先用后者；它也是把 LLM 接进真实软件管线（function calling / agent）的基石。</text>
+</svg>

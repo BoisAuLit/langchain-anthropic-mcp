@@ -1,0 +1,112 @@
+<svg width="1100" height="1955" viewBox="0 0 1100 1955" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #555; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .ctitle { font-size: 16px; font-weight: 700; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #263238; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #8E24AA; } .cGray { fill: #888; }
+    .kw { fill: #C2185B; } .str { fill: #2E7D32; }
+  </style>
+
+  <rect x="0" y="0" width="1100" height="1955" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">实操 · 用 Phoenix 追踪 RAG 🔬 <tspan font-size="16" fill="#666" class="en">Tracing a RAG system</tspan></text>
+  <text x="40" y="76" class="subtitle">一句话本质：用<tspan class="cR" font-weight="700">遥测 telemetry</tspan>给 RAG 管线"埋点"，让每一步内部过程都<tspan class="cR" font-weight="700">可见、可查、可诊断</tspan>。</text>
+  <text x="40" y="100" class="subtitle">技术栈：<tspan class="cV" font-weight="700">OpenTelemetry</tspan>（埋点标准）+ <tspan class="cV" font-weight="700">Phoenix by Arize</tspan>（可视化/评估）+ <tspan class="cV" font-weight="700">Weaviate</tspan>（向量库）。<tspan class="cGray">课件口播"Arise"实为 Arize。</tspan></text>
+  <line x1="40" y1="118" x2="1060" y2="118" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① concepts + trace tree -->
+  <text x="40" y="152" class="sec">① 🧱 三个核心概念：Span / Trace / Chain</text>
+  <text x="40" y="180" class="small"><tspan class="cV" font-weight="700">Span 跨度：</tspan>单个操作的快照 = 起止时间 + 属性 attributes + 事件 events + 状态 status。</text>
+  <text x="40" y="204" class="small"><tspan class="cT" font-weight="700">Trace 追踪：</tspan>一组相关 span = 一次完整任务（本质是<tspan font-weight="700">一棵 span 树</tspan>）。</text>
+  <text x="40" y="228" class="small"><tspan class="cO" font-weight="700">Chain 链：</tspan>把各步骤串起来的连接点；Phoenix 用 <tspan class="code" font-weight="700">@tracer.chain</tspan> 一键标注。</text>
+
+  <rect x="620" y="150" width="440" height="138" rx="10" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="1.2"/>
+  <text x="640" y="174" class="tiny" font-weight="700">一个 Trace = 一棵 Span 树：</text>
+  <text x="640" y="200" class="code">rag_pipeline           <tspan class="cm"># root span</tspan></text>
+  <text x="640" y="220" class="code">├─ retrieve            <tspan class="cm"># kind=retriever</tspan></text>
+  <text x="640" y="240" class="code">├─ format_documents    <tspan class="cm"># chain</tspan></text>
+  <text x="640" y="260" class="code">├─ augment_prompt      <tspan class="cm"># chain</tspan></text>
+  <text x="640" y="280" class="code">└─ generate            <tspan class="cm"># chain</tspan></text>
+
+  <!-- ② raw OpenTelemetry -->
+  <text x="40" y="324" class="sec">② 🛠️ 裸 OpenTelemetry：四步搭好一个 tracer</text>
+  <rect x="40" y="342" width="1020" height="116" rx="8" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="1.1"/>
+  <text x="60" y="366" class="code">resource = Resource(attributes={"service.name": "Test Service"})</text>
+  <text x="60" y="386" class="code">provider = TracerProvider(resource=resource)              <tspan class="cm"># ① 提供者</tspan></text>
+  <text x="60" y="406" class="code">exporter = ConsoleSpanExporter()             <tspan class="cm"># ② 导出器（生产用 OTLP 发到后端）</tspan></text>
+  <text x="60" y="426" class="code">provider.add_span_processor(SimpleSpanProcessor(exporter))  <tspan class="cm"># ③ 处理器</tspan></text>
+  <text x="60" y="446" class="code">tracer = provider.get_tracer(__name__)                    <tspan class="cm"># ④ 拿到 tracer</tspan></text>
+
+  <text x="40" y="486" class="small" font-weight="700">手动给一个 span 埋点（用 with 上下文，进出自动开始/结束）：</text>
+  <rect x="40" y="498" width="1020" height="138" rx="8" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="1.1"/>
+  <text x="60" y="522" class="code">with tracer.start_as_current_span("retrieving_documents") as span:</text>
+  <text x="60" y="542" class="code">    span.add_event("Starting retrieve")          <tspan class="cm"># 记录一个事件</tspan></text>
+  <text x="60" y="562" class="code">    span.set_attribute("input.query", query)     <tspan class="cm"># 记录一个属性</tspan></text>
+  <text x="60" y="582" class="code">    ...                                          <tspan class="cm"># 你的检索逻辑</tspan></text>
+  <text x="60" y="602" class="code">    span.set_status(Status(StatusCode.OK))       <tspan class="cm"># 成功</tspan></text>
+  <text x="60" y="622" class="code">    <tspan class="cm"># 出错时：span.set_status(Status(StatusCode.ERROR, str(e)))</tspan></text>
+
+  <!-- ③ Phoenix -->
+  <text x="40" y="672" class="sec">③ 🐦 接入 Phoenix：几乎零改动（它底层也是 OpenTelemetry）</text>
+  <rect x="40" y="690" width="1020" height="158" rx="8" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="1.1"/>
+  <text x="60" y="714" class="code">from phoenix.otel import register</text>
+  <text x="60" y="734" class="code">tp = register(project_name="example-rag-pipeline",</text>
+  <text x="60" y="754" class="code">              endpoint="http://127.0.0.1:6006/v1/traces")  <tspan class="cm"># 指向本地 Phoenix</tspan></text>
+  <text x="60" y="774" class="code">tracer = tp.get_tracer(__name__)</text>
+  <text x="60" y="798" class="code"><tspan class="cm"># 相比裸 OTel，只多两处 Phoenix 增强：</tspan></text>
+  <text x="60" y="818" class="code">with tracer.start_as_current_span("retrieving_documents",</text>
+  <text x="60" y="838" class="code">        openinference_span_kind="retriever") as span:  <tspan class="cm"># 标注 span 类型</tspan></text>
+
+  <!-- ④ decorator -->
+  <text x="40" y="884" class="sec">④ ✨ <tspan class="code" font-size="17">@tracer.chain</tspan> 装饰器：最省事的埋点</text>
+  <rect x="40" y="902" width="1020" height="98" rx="8" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="1.1"/>
+  <text x="60" y="926" class="code">@tracer.chain               <tspan class="cm"># 加一行 = 该函数自动变成一个 chain span</tspan></text>
+  <text x="60" y="946" class="code">def format_documents(retrieved_docs):</text>
+  <text x="60" y="966" class="code">    ...                     <tspan class="cm"># 函数体不用动</tspan></text>
+  <text x="60" y="986" class="code"><tspan class="cm"># 想要更细粒度（事件/属性）→ 仍回到 start_as_current_span 手写</tspan></text>
+
+  <!-- ⑤ real weaviate pipeline -->
+  <text x="40" y="1036" class="sec">⑤ 🚀 真实管线：Weaviate 检索 + <tspan class="code" font-size="17">auto_instrument</tspan> 自动追踪 LLM</text>
+  <text x="40" y="1064" class="small"><tspan class="code" font-weight="700">auto_instrument=True</tspan> 是关键：所有 <tspan font-weight="700">OpenAI 兼容</tspan>的 LLM 调用会被<tspan class="cR" font-weight="700">自动埋点</tspan>，连手写都省了。</text>
+  <rect x="40" y="1080" width="1020" height="218" rx="8" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="1.1"/>
+  <text x="60" y="1104" class="code">tp = register(..., auto_instrument=True)   <tspan class="cm"># ★ OpenAI 兼容调用自动被追踪</tspan></text>
+  <text x="60" y="1124" class="code">client = weaviate.connect_to_local(port=8079, grpc_port=50050)</text>
+  <text x="60" y="1148" class="code">def retrieve(q, limit=5):                  <tspan class="cm"># span_kind="retriever"</tspan></text>
+  <text x="60" y="1168" class="code">    return collection.query.near_text(query=q, limit=limit)  <tspan class="cm"># 向量检索</tspan></text>
+  <text x="60" y="1192" class="code">@tracer.chain</text>
+  <text x="60" y="1212" class="code">def query_openai(prompt):                  <tspan class="cm"># 无需手动埋点(auto)</tspan></text>
+  <text x="60" y="1232" class="code">    return llm_client.chat.completions.create(model="Qwen/Qwen3.5-9B", ...)</text>
+  <text x="60" y="1256" class="code">@tracer.chain                              <tspan class="cm"># 把全流程串成一个 trace</tspan></text>
+  <text x="60" y="1276" class="code">def rag_pipeline(q): retrieve → format_context → create_prompt → query_openai</text>
+
+  <text x="40" y="1322" class="small cGray">说明：LLM 端点用 together.ai（OpenAI 兼容），模型 Qwen/Qwen3.5-9B；FAQ 数据来自 M4 作业，存在 Weaviate 的 "Faq" collection 里。</text>
+
+  <!-- ⑥ failure trace + why UI -->
+  <text x="40" y="1362" class="sec">⑥ 💥 故意失败的 trace &amp; 为什么必须用 Phoenix UI</text>
+  <text x="40" y="1390" class="small">· lab 第二次调用传 <tspan class="code" font-weight="700">fail=True</tspan> → span 状态变 <tspan class="cR" font-weight="700">ERROR</tspan>，并记录 <tspan class="code">error.type / error.message</tspan>，异常向上抛。</text>
+  <text x="40" y="1416" class="small">· <tspan font-weight="700">为何要 UI：</tspan>裸 trace 在控制台输出又长又乱，几乎没法读；Phoenix 把它渲染成<tspan font-weight="700">树状结构 + 每步延迟 + 错误高亮</tspan>，</text>
+  <text x="60" y="1440" class="small">一眼定位"哪一步拖慢了 / 哪一步报错了"。这正是上一节"用 trace 定位差回答根因"的动手版。</text>
+
+  <!-- 📡 2026 intel -->
+  <text x="40" y="1486" class="sec">📡 2026 最新情报（已联网核实 · 截至 2026-06）</text>
+
+  <text x="40" y="1514" class="small">· <tspan class="cV" font-weight="700">🧩 span_kind 不是 Phoenix 私货，而是 OpenInference 语义约定：</tspan>Phoenix 建在 <tspan font-weight="700">OpenTelemetry</tspan> 之上、<tspan x="60" dy="24">由 <tspan font-weight="700">OpenInference</tspan> instrumentation 驱动。retriever / llm / chain / embedding / reranker 等 span 类型</tspan><tspan x="60" dy="24">正在成为<tspan class="cR" font-weight="700">行业标准的"AI 专用 trace 语义"</tspan> —— 学会它，换任何平台都通用。</tspan></text>
+
+  <text x="40" y="1614" class="small">· <tspan class="cV" font-weight="700">🔌 一次埋点，到处导出：</tspan>因为底层是 OpenTelemetry GenAI 语义约定，同一份 trace 可同时送往 <tspan x="60" dy="24">Phoenix、<tspan font-weight="700">Datadog、Grafana、Honeycomb</tspan>（代价是失去 LLM 专属 UI，如 prompt diff、评估视图）。</tspan><tspan x="60" dy="24"><tspan font-weight="700">auto_instrument</tspan> 还能一行自动追踪 LangChain / LlamaIndex / OpenAI 等主流框架。</tspan></text>
+
+  <text x="40" y="1714" class="small">· <tspan class="cV" font-weight="700">⚖️ Phoenix 的定位（别用错）：</tspan>它偏 <tspan font-weight="700">tracing + 离线评估</tspan>（开源、可自托管，自带 50+ 评估指标，<tspan x="60" dy="24">能直接对接 RAGAS）；而<tspan font-weight="700">大规模在线评估、告警、生产监控</tspan>通常要上商业版 Arize 平台。</tspan></text>
+
+  <text x="40" y="1794" class="small cV" font-weight="700">一句话：这节 lab 教的"手动 span → span_kind → @tracer.chain → auto_instrument"四级埋点，就是 2026<tspan x="40" dy="24">AI 可观测性的通用手艺；底层标准已收敛到 OpenTelemetry + OpenInference，技能高度可迁移。</tspan></text>
+
+  <text x="40" y="1866" class="small cGray">🧪 个人补充（非课件）：对你（前端）这几乎是<tspan class="cR" font-weight="700">"零迁移成本"</tspan> —— 这就是 APM / 分布式追踪（你可能见过的<tspan x="40" dy="24">Sentry、Jaeger、OpenTelemetry Web SDK）的 LLM 版。<tspan class="code">span</tspan> = 你熟的 trace span；<tspan class="code">@tracer.chain</tspan> ≈ 给函数套个 <tspan class="code">@trace</tspan> 装饰器/中间件；</tspan><tspan x="40" dy="24"><tspan class="code">set_attribute</tspan> ≈ 给 span 打 tag。唯一新东西是 <tspan class="code">span_kind="retriever"</tspan> 这类"AI 语义"标签，让平台能算召回、忠实度等 RAG 专属指标。</tspan></text>
+</svg>

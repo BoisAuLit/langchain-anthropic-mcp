@@ -1,0 +1,163 @@
+<svg width="900" height="1820" viewBox="0 0 900 1820" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 13px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .axis { stroke: #90CAF9; stroke-width: 1.5; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+  <defs>
+    <marker id="aGy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#999" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="aT2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#00897B"/></marker>
+    <marker id="aO2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#C77F26"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1820" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">019 · 行列式就是面积 Determinant as an Area</text>
+  <text x="40" y="82" class="subtitle">一句话本质：Det = 单位正方形（unit square）变形后的<tspan class="cO" font-weight="700">带符号面积 signed area</tspan> ——</text>
+  <text x="40" y="106" class="subtitle">|Det| = 面积放大倍数（area scaling factor），正负号 = 方向翻没翻面（orientation）。</text>
+  <line x1="40" y1="124" x2="860" y2="124" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① non-singular -->
+  <text x="40" y="162" class="sec">① 🟢 Non-singular 非奇异：Det = 面积放大倍数</text>
+  <rect x="50" y="178" width="560" height="28" rx="6" class="chip"/>
+  <text x="62" y="197" class="code">矩阵 [3 1; 1 2]：Det = 3·2 − 1·1 = <tspan class="cO" font-weight="700">5</tspan>　<tspan fill="#7B1FA2"># ad − bc</tspan></text>
+
+  <!-- left: unit square -->
+  <line x1="60" y1="330" x2="250" y2="330" class="axis"/>
+  <line x1="140" y1="240" x2="140" y2="400" class="axis"/>
+  <rect x="140" y="300" width="30" height="30" fill="#B2DFDB" stroke="#00897B" stroke-width="2"/>
+  <text x="155" y="362" class="tiny" text-anchor="middle" font-weight="700" fill="#00897B">Area = 1</text>
+
+  <line x1="255" y1="320" x2="305" y2="320" stroke="#999" stroke-width="2" marker-end="url(#aGy)"/>
+
+  <!-- right: parallelogram scale 30, origin (400,340) -->
+  <line x1="320" y1="340" x2="570" y2="340" class="axis"/>
+  <line x1="400" y1="230" x2="400" y2="410" class="axis"/>
+  <polygon points="400,340 490,310 520,250 430,280" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2"/>
+  <text x="478" y="382" class="tiny" text-anchor="middle" font-weight="700" fill="#EF6C00">Area = 5</text>
+
+  <text x="600" y="270" class="small">单位正方形 unit square（面积 1）</text>
+  <text x="600" y="296" class="small">经过变形机后，变成面积 5 的</text>
+  <text x="600" y="322" class="small">平行四边形 parallelogram。</text>
+  <text x="600" y="356" class="small" font-weight="700" fill="#EF6C00">Det = 5 = 面积放大倍数</text>
+  <text x="600" y="382" class="small" font-weight="700" fill="#EF6C00">(area scaling factor)</text>
+
+  <!-- ② singular -->
+  <text x="40" y="466" class="sec">② 🟠 Singular 奇异：Det = 0 ⇔ 面积归零 Area = 0</text>
+  <rect x="50" y="482" width="560" height="28" rx="6" class="chip"/>
+  <text x="62" y="501" class="code">矩阵 [1 1; 2 2]：Det = 1·2 − 1·2 = <tspan class="cO" font-weight="700">0</tspan></text>
+
+  <!-- square -> line -->
+  <line x1="60" y1="610" x2="250" y2="610" class="axis"/>
+  <line x1="140" y1="530" x2="140" y2="650" class="axis"/>
+  <rect x="140" y="582" width="28" height="28" fill="#B2DFDB" stroke="#00897B" stroke-width="2"/>
+  <text x="155" y="672" class="tiny" text-anchor="middle" font-weight="700" fill="#00897B">Area = 1</text>
+
+  <line x1="258" y1="600" x2="308" y2="600" stroke="#999" stroke-width="2" marker-end="url(#aGy)"/>
+
+  <line x1="330" y1="610" x2="520" y2="610" class="axis"/>
+  <line x1="410" y1="530" x2="410" y2="650" class="axis"/>
+  <line x1="410" y1="610" x2="438" y2="554" stroke="#C77F26" stroke-width="5"/>
+  <circle cx="410" cy="610" r="4" fill="#FB8C00" stroke="#E65100" stroke-width="1.5"/>
+  <circle cx="438" cy="554" r="4" fill="#FB8C00" stroke="#E65100" stroke-width="1.5"/>
+  <text x="430" y="672" class="tiny" text-anchor="middle" font-weight="700" fill="#EF6C00">线段 segment：Area = 0</text>
+
+  <text x="570" y="566" class="small">正方形被压成线段 —— 退化的</text>
+  <text x="570" y="592" class="small">"平行四边形"，面积为 0。</text>
+  <text x="570" y="622" class="small">更狠的 [0 0; 0 0]：压成一个</text>
+  <text x="570" y="648" class="small">点 point，Area 同样 = 0。</text>
+
+  <text x="40" y="714" class="small" font-weight="700" fill="#C62828">Det = 0 ⇔ Singular 奇异 ⇔ 压扁（线段或点）⇔ 不可逆 —— 三张幻灯片说的是同一回事。</text>
+
+  <!-- ③ negative -->
+  <text x="40" y="768" class="sec">③ 🔄 负的 Det：符号 = 方向 orientation（本课新知识）</text>
+  <rect x="50" y="784" width="640" height="28" rx="6" class="chip"/>
+  <text x="62" y="803" class="code">矩阵 [1 3; 2 1]：Det = 1·1 − 3·2 = <tspan class="cO" font-weight="700">−5</tspan>　<tspan fill="#7B1FA2"># Negative!</tspan></text>
+
+  <!-- before: e1,e2 CCW -->
+  <line x1="60" y1="900" x2="250" y2="900" class="axis"/>
+  <line x1="140" y1="820" x2="140" y2="950" class="axis"/>
+  <line x1="140" y1="900" x2="186" y2="900" stroke="#00897B" stroke-width="2.5" marker-end="url(#aT2)"/>
+  <text x="192" y="906" class="tiny" font-weight="700" fill="#00897B">e₁</text>
+  <line x1="140" y1="900" x2="140" y2="854" stroke="#00897B" stroke-width="2.5" marker-end="url(#aT2)"/>
+  <text x="146" y="852" class="tiny" font-weight="700" fill="#00897B">e₂</text>
+  <path d="M164 900 A24 24 0 0 0 140 876" fill="none" stroke="#00897B" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <text x="155" y="975" class="tiny" text-anchor="middle" font-weight="700" fill="#00897B">变换前：e₁→e₂ 逆时针 CCW</text>
+
+  <line x1="262" y1="890" x2="312" y2="890" stroke="#999" stroke-width="2" marker-end="url(#aGy)"/>
+
+  <!-- after: (1,2),(3,1) CW, origin (420,910), scale 26 -->
+  <line x1="340" y1="910" x2="560" y2="910" class="axis"/>
+  <line x1="420" y1="820" x2="420" y2="960" class="axis"/>
+  <line x1="420" y1="910" x2="446" y2="858" stroke="#C77F26" stroke-width="2.5" marker-end="url(#aO2)"/>
+  <text x="450" y="852" class="tiny" font-weight="700" fill="#C77F26">e₁ 的像 (1,2)</text>
+  <line x1="420" y1="910" x2="498" y2="884" stroke="#C77F26" stroke-width="2.5" marker-end="url(#aO2)"/>
+  <text x="504" y="894" class="tiny" font-weight="700" fill="#C77F26">e₂ 的像 (3,1)</text>
+  <path d="M433.4 883.2 A30 30 0 0 1 448.5 900.5" fill="none" stroke="#C77F26" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <text x="450" y="975" class="tiny" text-anchor="middle" font-weight="700" fill="#C77F26">变换后：顺序翻成顺时针 CW</text>
+
+  <text x="600" y="852" class="small">原本 e₁→e₂ 逆时针排列；</text>
+  <text x="600" y="878" class="small">变换后两个像变成顺时针 →</text>
+  <text x="600" y="904" class="small" font-weight="700" fill="#C62828">发生了翻面（flip）→ 负号。</text>
+  <text x="600" y="934" class="small">面积仍然是 |−5| = 5。</text>
+
+  <text x="40" y="1018" class="small" font-weight="700" fill="#1565C0">结论：Det 是带符号的面积 signed area —— |Det| 管大小，符号管方向（orientation）。</text>
+
+  <!-- ④ summary table -->
+  <text x="40" y="1070" class="sec">④ 📋 一张总表 Summary</text>
+  <text x="60" y="1100" class="small" font-weight="700" fill="#888">类型 Type</text>
+  <text x="310" y="1100" class="small" font-weight="700" fill="#888">Det</text>
+  <text x="470" y="1100" class="small" font-weight="700" fill="#888">面积 Area</text>
+  <text x="640" y="1100" class="small" font-weight="700" fill="#888">单位正方形去向</text>
+  <line x1="40" y1="1112" x2="860" y2="1112" stroke="#e0e0e0" stroke-width="1.5"/>
+  <text x="60" y="1138" class="small" font-weight="700" fill="#2E7D32">Non-singular 非奇异</text>
+  <text x="310" y="1138" class="small">≠ 0（如 5 或 −5）</text>
+  <text x="470" y="1138" class="small">|Det| &gt; 0</text>
+  <text x="640" y="1138" class="small">→ 平行四边形</text>
+  <text x="60" y="1166" class="small" font-weight="700" fill="#F57F17">Singular 奇异</text>
+  <text x="310" y="1166" class="small">= 0</text>
+  <text x="470" y="1166" class="small">0</text>
+  <text x="640" y="1166" class="small">→ 线段 segment</text>
+  <text x="60" y="1194" class="small" font-weight="700" fill="#C62828">Singular 最奇异</text>
+  <text x="310" y="1194" class="small">= 0</text>
+  <text x="470" y="1194" class="small">0</text>
+  <text x="640" y="1194" class="small">→ 点 point</text>
+
+  <!-- 💡 insights -->
+  <text x="40" y="1252" class="sec">💡 补充洞察（课程没明说）</text>
+  <text x="40" y="1282" class="small">💡 面积本身永远非负；负号是白送的"额外情报"= 发生了镜像翻面 mirror flip。</text>
+  <text x="40" y="1306" class="small">　 016 课 y 轴镜像的 Det = −1（面积不变、只翻面）正是最纯净的例子。</text>
+  <text x="40" y="1336" class="small">💡 Det = 0 ⇔ 两列共线 collinear ⇔ 像降维（018 课的 rank &lt; 2）—— 面积语言、维度语言、</text>
+  <text x="40" y="1360" class="small">　 可逆语言，是同一个事实的三种说法（the same fact in three languages）。</text>
+
+  <!-- ⚠️ pitfalls -->
+  <text x="40" y="1412" class="sec">⚠️ 易错点</text>
+  <text x="40" y="1442" class="small" fill="#C62828">· Det(A) = Det(Aᵀ)：按行向量画还是按列向量画，结果一样 —— 课件两种画法都出现过，别慌。</text>
+  <text x="40" y="1468" class="small" fill="#C62828">· 交换两个向量的顺序，Det 变号、|Det| 不变 —— 顺序只影响符号，不影响面积。</text>
+  <text x="40" y="1494" class="small" fill="#C62828">· Det = −5 不是"负的面积"：面积是 5，负号只说"翻面了"，别把符号当大小比较。</text>
+
+  <!-- 🔗 connection -->
+  <text x="40" y="1546" class="sec">🔗 承上启下</text>
+  <text x="40" y="1576" class="small">· 013 课那句"det = 5 见到正主"是预告片，本课是正片 —— 还补上了负号的几何意义。</text>
+  <text x="40" y="1602" class="small" font-weight="700" fill="#1565C0">· 全家福对齐：Det ≠ 0 ⇔ Area &gt; 0 ⇔ 满秩 full rank ⇔ Non-singular ⇔ 可逆 invertible。</text>
+
+  <line x1="40" y1="1624" x2="860" y2="1624" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1644" class="tiny" fill="#888" font-size="12">速记：Det = signed area。|Det| = 单位正方形变形后的面积（放大倍数）；符号 = 翻没翻面；Det = 0 = 压扁 = 奇异 = 不可逆。</text>
+
+  <!-- 🧪 quiz -->
+  <text x="40" y="1674" class="sec" font-size="17">🧪 自测（先答后看最底部灰字）</text>
+  <text x="40" y="1700" class="small">Q1 概念：|Det| 和 Det 的正负号，各代表什么？</text>
+  <text x="40" y="1726" class="small">Q2 计算：Det [1 3; 2 1] = ? 对应的平行四边形面积是多少？</text>
+  <text x="40" y="1752" class="small">Q3 为什么：Det = 0 时，面积为什么必然是 0？</text>
+  <text x="40" y="1782" class="tiny" fill="#aaa" font-size="11">A1：|Det| = 面积放大倍数 area scaling factor；符号 = 方向是否翻面 orientation flip。</text>
+  <text x="40" y="1800" class="tiny" fill="#aaa" font-size="11">A2：1·1 − 3·2 = −5；面积 = |−5| = 5，且发生了翻面。　A3：两列共线 collinear，图形退化成线段或点，撑不起面积。</text>
+</svg>

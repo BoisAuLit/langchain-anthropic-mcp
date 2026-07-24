@@ -1,0 +1,140 @@
+<svg width="900" height="1730" viewBox="0 0 900 1730" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .axis { stroke: #90CAF9; stroke-width: 1.5; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+  <defs>
+    <marker id="aT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#00897B"/></marker>
+    <marker id="aO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#C77F26"/></marker>
+    <marker id="aR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#C62828"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1730" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">022 · 基 Bases（basis 的复数）</text>
+  <text x="40" y="82" class="subtitle">一句话本质：一组向量是基（basis），当且仅当"沿它们走"能到达平面上的<tspan class="cO" font-weight="700">任何点</tspan>；</text>
+  <text x="40" y="106" class="subtitle">两个向量只要不共线（not collinear）就是 ℝ² 的基 —— 共线就只能困在一条线上。</text>
+  <line x1="40" y1="124" x2="860" y2="124" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① what is a basis -->
+  <text x="40" y="162" class="sec">① ✅ 什么是基 What is a Basis</text>
+  <text x="40" y="192" class="small">一组向量构成<tspan class="cV" font-weight="700">基（basis）</tspan>：沿它们的方向走（步数可放缩、可为负），能到达平面上任何点。</text>
+  <text x="40" y="218" class="small">这种"a 步 v₁ ＋ b 步 v₂"的走法，术语叫<tspan class="cP" font-weight="700">线性组合（linear combination）</tspan>。</text>
+
+  <!-- plot: walk v1 then v2 -->
+  <line x1="80" y1="380" x2="420" y2="380" class="axis"/>
+  <line x1="200" y1="260" x2="200" y2="440" class="axis"/>
+  <line x1="200" y1="380" x2="290" y2="350" stroke="#00897B" stroke-width="2.5" marker-end="url(#aT)"/>
+  <text x="240" y="378" class="tiny" font-weight="700" fill="#00897B">v₁=(3,1)</text>
+  <line x1="290" y1="350" x2="320" y2="290" stroke="#00897B" stroke-width="2.5" marker-end="url(#aT)"/>
+  <text x="322" y="330" class="tiny" font-weight="700" fill="#00897B">v₂=(1,2)</text>
+  <circle cx="320" cy="290" r="5" fill="#26C6DA" stroke="#00838F" stroke-width="1.5"/>
+  <text x="330" y="286" class="tiny" font-weight="700" fill="#00838F">(4,3)</text>
+
+  <text x="470" y="296" class="small">例（课件走法）：先沿 v₁=(3,1) 走一步，</text>
+  <text x="470" y="322" class="small">再沿 v₂=(1,2) 走一步 → 到达 (4,3)。</text>
+  <text x="470" y="348" class="small">调整两个步数（可以是小数、负数），</text>
+  <text x="470" y="374" class="small" font-weight="700" fill="#2E7D32">平面上任何点都能到 → 是一组基 ✅</text>
+
+  <!-- ② not a basis -->
+  <text x="40" y="490" class="sec">② ❌ 什么不是基 What is NOT a Basis</text>
+
+  <!-- plot: collinear -->
+  <line x1="80" y1="640" x2="420" y2="640" class="axis"/>
+  <line x1="200" y1="510" x2="200" y2="700" class="axis"/>
+  <line x1="140" y1="670" x2="350" y2="565" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <line x1="200" y1="640" x2="260" y2="610" stroke="#C62828" stroke-width="2.5" marker-end="url(#aR)"/>
+  <line x1="200" y1="640" x2="320" y2="580" stroke="#C62828" stroke-width="2.5" marker-end="url(#aR)"/>
+  <text x="262" y="632" class="tiny" font-weight="700" fill="#C62828">(2,1) 与 (4,2)</text>
+  <circle cx="230" cy="550" r="5" fill="#26C6DA" stroke="#00838F" stroke-width="1.5"/>
+  <text x="242" y="548" class="tiny" font-weight="700" fill="#C62828">到不了 ✗</text>
+
+  <text x="470" y="556" class="small">两个向量<tspan class="cR" font-weight="700">共线 collinear</tspan>（同向或反向）：</text>
+  <text x="470" y="582" class="small">步数怎么调，都困在同一条直线上。</text>
+  <text x="470" y="608" class="small">线外的点（课件那个孤独的圆点）</text>
+  <text x="470" y="634" class="small" font-weight="700" fill="#C62828">永远到不了 → 不是基 not a basis ❌</text>
+
+  <!-- ③ how to tell -->
+  <text x="40" y="746" class="sec">③ 👀 一眼判定：课件的"两面墙"</text>
+  <text x="40" y="776" class="small">课件给了 12 组 Bases（方向各异）和 12 组 Not bases（全部共线）。判定只看一件事：</text>
+  <text x="40" y="802" class="small" font-weight="700" fill="#1565C0">两个向量共线吗？不共线（= 线性独立 linearly independent）⇔ 是基。</text>
+
+  <!-- mini walls -->
+  <rect x="60" y="822" width="90" height="90" fill="#F1F8E9" stroke="#AED581" stroke-width="1.2"/>
+  <line x1="105" y1="867" x2="140" y2="852" stroke="#00897B" stroke-width="2" marker-end="url(#aT)"/>
+  <line x1="105" y1="867" x2="105" y2="832" stroke="#00897B" stroke-width="2" marker-end="url(#aT)"/>
+  <rect x="160" y="822" width="90" height="90" fill="#F1F8E9" stroke="#AED581" stroke-width="1.2"/>
+  <line x1="205" y1="867" x2="170" y2="842" stroke="#00897B" stroke-width="2" marker-end="url(#aT)"/>
+  <line x1="205" y1="867" x2="235" y2="887" stroke="#00897B" stroke-width="2" marker-end="url(#aT)"/>
+  <rect x="260" y="822" width="90" height="90" fill="#F1F8E9" stroke="#AED581" stroke-width="1.2"/>
+  <line x1="305" y1="867" x2="340" y2="867" stroke="#00897B" stroke-width="2" marker-end="url(#aT)"/>
+  <line x1="305" y1="867" x2="315" y2="832" stroke="#00897B" stroke-width="2" marker-end="url(#aT)"/>
+  <text x="205" y="934" class="tiny" text-anchor="middle" font-weight="700" fill="#2E7D32">✓ Bases：方向各异（不共线）</text>
+
+  <rect x="460" y="822" width="90" height="90" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <line x1="505" y1="867" x2="540" y2="847" stroke="#C62828" stroke-width="2" marker-end="url(#aR)"/>
+  <line x1="505" y1="867" x2="470" y2="887" stroke="#C62828" stroke-width="2" marker-end="url(#aR)"/>
+  <rect x="560" y="822" width="90" height="90" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <line x1="605" y1="867" x2="640" y2="857" stroke="#C62828" stroke-width="2" marker-end="url(#aR)"/>
+  <line x1="605" y1="867" x2="570" y2="877" stroke="#C62828" stroke-width="2" marker-end="url(#aR)"/>
+  <rect x="660" y="822" width="90" height="90" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <line x1="705" y1="867" x2="720" y2="832" stroke="#C62828" stroke-width="2" marker-end="url(#aR)"/>
+  <line x1="705" y1="867" x2="690" y2="902" stroke="#C62828" stroke-width="2" marker-end="url(#aR)"/>
+  <text x="605" y="934" class="tiny" text-anchor="middle" font-weight="700" fill="#C62828">✗ Not bases：全部共线（含反向）</text>
+
+  <!-- ④ basis & matrix -->
+  <text x="40" y="990" class="sec">④ 🔁 基与矩阵 Basis ↔ Matrix（课件双图）</text>
+
+  <line x1="80" y1="1100" x2="280" y2="1100" class="axis"/>
+  <line x1="160" y1="1020" x2="160" y2="1150" class="axis"/>
+  <line x1="160" y1="1100" x2="200" y2="1100" stroke="#00897B" stroke-width="2.5" marker-end="url(#aT)"/>
+  <line x1="160" y1="1100" x2="160" y2="1060" stroke="#00897B" stroke-width="2.5" marker-end="url(#aT)"/>
+  <text x="180" y="1136" class="tiny" text-anchor="middle" font-weight="700" fill="#00897B">标准基 standard basis e₁, e₂</text>
+
+  <rect x="330" y="1056" width="220" height="28" rx="6" class="chip"/>
+  <text x="342" y="1075" class="code">[3 1; 1 2]　det = 5 ≠ 0</text>
+
+  <line x1="480" y1="1100" x2="720" y2="1100" class="axis"/>
+  <line x1="580" y1="1020" x2="580" y2="1150" class="axis"/>
+  <line x1="580" y1="1100" x2="640" y2="1080" stroke="#C77F26" stroke-width="2.5" marker-end="url(#aO)"/>
+  <line x1="580" y1="1100" x2="600" y2="1060" stroke="#C77F26" stroke-width="2.5" marker-end="url(#aO)"/>
+  <text x="615" y="1136" class="tiny" text-anchor="middle" font-weight="700" fill="#C77F26">新基 new basis (3,1), (1,2)</text>
+
+  <text x="40" y="1186" class="small" font-weight="700" fill="#1565C0">非奇异矩阵的两列必不共线 → 两列构成一组基。变形机把标准基送到新基，给平面换了套坐标语言。</text>
+
+  <!-- 💡 insights -->
+  <text x="40" y="1238" class="sec">💡 补充洞察（课程没明说）</text>
+  <text x="40" y="1268" class="small">💡 基 = 给平面选一套"语言/坐标系"：同一个点，标准基下叫 (4,3)，在基 (3,1),(1,2) 下叫 (1,1)——</text>
+  <text x="40" y="1290" class="small">　 因为 1·(3,1) + 1·(1,2) = (4,3)。换基只是换说法，点本身没动。</text>
+  <text x="40" y="1320" class="small">💡 为什么恰好两个：ℝ² 的基不多不少正好 2 个向量（少了铺不满，多了必有冗余）——</text>
+  <text x="40" y="1342" class="small">　 这个"刚刚好的个数"正是维度 dimension 的真正定义，下节课的伏笔。</text>
+
+  <!-- ⚠️ pitfalls -->
+  <text x="40" y="1394" class="sec">⚠️ 易错点</text>
+  <text x="40" y="1424" class="small" fill="#C62828">· 单复数拼写：basis（一组基，单数）/ bases（多组基，复数，读 BAY-seez）。</text>
+  <text x="40" y="1450" class="small" fill="#C62828">· 共线包括反向：(2,1) 与 (−2,−1) 也共线，同样不是基 —— 课件 Not bases 墙里就有反向对。</text>
+  <text x="40" y="1476" class="small" fill="#C62828">· 夹角再小，只要不共线就是合法的基 —— Bases 墙里就有夹角很小的组合，别凭"看着像"判断。</text>
+
+  <!-- 🔗 connection -->
+  <text x="40" y="1528" class="sec">🔗 承上启下</text>
+  <text x="40" y="1556" class="small">· 与 016"列 = 基向量的像"接轨：非奇异 ⇔ det ≠ 0 ⇔ 两列不共线 ⇔ 列构成基 —— 门上又挂一把钥匙。</text>
+  <text x="40" y="1580" class="small" font-weight="700" fill="#1565C0">· Transformer：W_Q、W_K、W_V 相当于给词向量空间挑三套"新基/新视角"重新描述同一个词。</text>
+
+  <line x1="40" y1="1598" x2="860" y2="1598" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1616" class="tiny" fill="#888" font-size="12">速记：基 = 能走遍全平面的一组向量；判定 = 不共线（线性独立）；共线 = 困在一条线 = 不是基；非奇异矩阵的列必为基。</text>
+
+  <!-- 🧪 quiz -->
+  <text x="40" y="1646" class="sec" font-size="17">🧪 自测（先答后看最底部灰字）</text>
+  <text x="40" y="1670" class="small">Q1 概念：什么样的两个向量能构成 ℝ² 的基？</text>
+  <text x="40" y="1694" class="small">Q2 判断：(2,1) 和 (4,2) 是一组基吗？　Q3 为什么：共线向量为什么到不了线外的点？</text>
+  <text x="40" y="1718" class="tiny" fill="#aaa" font-size="11">A1：不共线（线性独立）的两个向量。　A2：不是 —— (4,2) = 2·(2,1)，共线。　A3：所有线性组合都是同一方向的倍数之和，全部落在那条过原点的直线上，缺第二个独立方向。</text>
+</svg>

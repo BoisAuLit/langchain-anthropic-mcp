@@ -1,0 +1,115 @@
+<svg width="1100" height="1500" viewBox="0 0 1100 1500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #555; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .ctitle { font-size: 15px; font-weight: 700; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #263238; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #8E24AA; } .cGray { fill: #888; }
+  </style>
+
+  <rect x="0" y="0" width="1100" height="1500" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">成本优化 💸 <tspan font-size="17" fill="#666" class="en">Cost Optimization</tspan></text>
+  <text x="40" y="76" class="subtitle">一句话本质：原型期只管"跑通"，<tspan class="cR" font-weight="700">上规模到百万级请求后，省钱就成了硬指标</tspan> —— 在不太掉质量的前提下砍成本。</text>
+  <text x="40" y="100" class="subtitle">核心心法：<tspan class="cV" font-weight="700">搞清钱花在哪，并确保每一笔都被"性能"证明值得</tspan>。两大花钱大头：向量库 + LLM。</text>
+  <line x1="40" y1="118" x2="1060" y2="118" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① two cost drivers -->
+  <text x="40" y="152" class="sec">① 💰 两大成本来源 <tspan class="en">Primary Cost Drivers</tspan></text>
+  <rect x="40" y="168" width="500" height="72" rx="10" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="60" y="196" class="ctitle cR">🗄️ 向量数据库 Vector Database</text>
+  <text x="60" y="222" class="small">存储 storage + 查询 query 成本（数据量越大越贵）。</text>
+  <rect x="560" y="168" width="500" height="72" rx="10" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="580" y="196" class="ctitle cR">🧠 大语言模型 LLM</text>
+  <text x="580" y="222" class="small">推理 inference + 生成 generation 成本（按 token 计费）。</text>
+
+  <!-- ② LLM three levers -->
+  <text x="40" y="278" class="sec">② 🤖 降 LLM 成本：三招</text>
+  <rect x="40" y="296" width="330" height="172" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.1"/>
+  <text x="58" y="320" class="ctitle cV">🔻 更小模型 Smaller Models</text>
+  <text x="58" y="344" class="tiny">· 核心 LLM、或 agentic 里的</text>
+  <text x="58" y="362" class="tiny">　router 都可换更小的模型。</text>
+  <text x="58" y="384" class="tiny">· "小" = 参数本就少，<tspan font-weight="700">或被量化</tspan></text>
+  <text x="58" y="402" class="tiny">　（如 8-bit，接上一节）。</text>
+  <text x="58" y="424" class="tiny">· 把小模型<tspan font-weight="700">微调到单一任务</tspan>，</text>
+  <text x="58" y="442" class="tiny">　低成本也能有好效果。</text>
+  <text x="58" y="462" class="tiny cGray">常有惊喜：小模型够用。</text>
+
+  <rect x="386" y="296" width="330" height="172" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.1"/>
+  <text x="404" y="320" class="ctitle cG">✂️ 更短 prompt Smaller Prompts</text>
+  <text x="404" y="344" class="tiny">· 少检索几篇文档 → <tspan class="code" font-weight="700">调小 top_k</tspan>。</text>
+  <text x="404" y="366" class="tiny">　RAG prompt 很容易暴涨变长。</text>
+  <text x="404" y="388" class="tiny">· 用系统提示要求<tspan font-weight="700">回答简短</tspan>，</text>
+  <text x="404" y="406" class="tiny">　或设<tspan font-weight="700">硬性 token 上限</tspan>。</text>
+  <text x="404" y="428" class="tiny cR" font-weight="700">· 记住：每个生成 token 都花钱。</text>
+  <text x="404" y="450" class="tiny cGray">LLM 常啰嗦，省 token 立竿见影。</text>
+
+  <rect x="732" y="296" width="328" height="172" rx="10" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.1"/>
+  <text x="750" y="320" class="ctitle cP">🖥️ 专用端点 Dedicated Endpoint</text>
+  <text x="750" y="344" class="tiny">· 云厂便捷端点（together.ai /</text>
+  <text x="750" y="362" class="tiny">　AWS / Google）适合原型。</text>
+  <text x="750" y="384" class="tiny">· 上规模 → 改成<tspan font-weight="700">按小时租专用</tspan></text>
+  <text x="750" y="402" class="tiny">　<tspan font-weight="700">GPU</tspan>（而非按 token 付费）。</text>
+  <text x="750" y="424" class="tiny">· 量大时<tspan font-weight="700">省很多</tspan>，且<tspan font-weight="700">更可靠</tspan></text>
+  <text x="750" y="442" class="tiny">　（硬件只服务你的流量）。</text>
+
+  <!-- ③ vector DB storage tiers -->
+  <text x="40" y="514" class="sec">③ 🗄️ 降向量库成本：三级存储 + 关键原则</text>
+  <text x="40" y="542" class="small">大多数向量库提供三种"内存"，按"快/贵"排成阶梯（每 GB 价格 RAM &gt; disk &gt; object，通常各差几倍）：</text>
+
+  <rect x="40" y="556" width="440" height="32" rx="7" fill="#EF5350"/>
+  <text x="56" y="577" class="small w" font-weight="700">RAM 内存　—　最快 · 最贵</text>
+  <rect x="40" y="594" width="370" height="32" rx="7" fill="#FB8C00"/>
+  <text x="56" y="615" class="small w" font-weight="700">Disk / SSD 磁盘　—　较快 · 较便宜</text>
+  <rect x="40" y="632" width="300" height="32" rx="7" fill="#43A047"/>
+  <text x="56" y="653" class="small w" font-weight="700">Cloud Object Storage　—　最慢 · 最便宜</text>
+
+  <rect x="500" y="552" width="560" height="116" rx="10" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1.2"/>
+  <text x="518" y="576" class="ctitle">关键原则：贵存储只留"能换来性能"的东西</text>
+  <text x="518" y="600" class="small">· <tspan class="cR" font-weight="700">HNSW 索引 → 放 RAM</tspan>（保证向量检索最快）。</text>
+  <text x="518" y="622" class="small">· <tspan font-weight="700">文档原文 → 不必放 RAM</tspan>：常用的放 Disk，</text>
+  <text x="518" y="640" class="small">　冷门的丢 Object Storage。</text>
+  <text x="518" y="660" class="tiny cGray">· 很多库能监控并在三层间"动态搬运"数据。</text>
+
+  <text x="40" y="694" class="tiny cGray">💡 HNSW（分层可导航小世界图 Hierarchical Navigable Small World）= 向量近似最近邻检索用的"图索引"，放 RAM 里查得最快，所以它最该占内存。</text>
+
+  <!-- ④ multi-tenancy -->
+  <text x="40" y="734" class="sec">④ 🏢 多租户 <tspan class="en">Multi-tenancy</tspan>：按"用户"切分，搬运更高效</text>
+  <text x="40" y="762" class="small">· 按<tspan font-weight="700">用户 / 组织</tspan>把文档分开（例：100 万文档 / 1000 个用户）；<tspan font-weight="700">每个租户有自己的 HNSW 索引</tspan>，互不可见。</text>
+  <text x="40" y="788" class="small">· 好处：只在<tspan font-weight="700">需要时</tspan>把"某个租户"的数据搬进/搬出昂贵 RAM —— 粒度更细、更省。</text>
+
+  <rect x="40" y="804" width="500" height="64" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.1"/>
+  <text x="60" y="828" class="ctitle cV">⏳ 按需加载 On-demand Loading</text>
+  <text x="60" y="852" class="small">用户真正登录网站时，才把他的向量载入 RAM。</text>
+  <rect x="560" y="804" width="500" height="64" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.1"/>
+  <text x="580" y="828" class="ctitle cV">🌍 时区优化 Time Zone Optimization</text>
+  <text x="580" y="852" class="small">只在该地区<tspan font-weight="700">白天</tspan>把数据放快存储（夜间放慢的）。</text>
+
+  <!-- ⑤ core mindset -->
+  <text x="40" y="912" class="sec">⑤ 🧭 核心心法</text>
+  <rect x="40" y="930" width="1020" height="62" rx="10" fill="#37474F"/>
+  <text x="60" y="956" class="small w" font-weight="700">理解成本来源，确保它被性能证明值得。LLM → 更小模型 + 更短 prompt；向量库 → 少把数据放贵存储 + 在三层间搬。</text>
+  <text x="60" y="980" class="small wg">最后都靠"实验 + 可观测性监控"来判断：省下的钱，是否值得那一点点质量下降。</text>
+
+  <!-- 📡 2026 intel -->
+  <text x="40" y="1036" class="sec">📡 2026 最新情报（已联网核实 · 截至 2026-06）</text>
+
+  <text x="40" y="1064" class="small">· <tspan class="cV" font-weight="700">🧠 LLM 侧：课件之外，2026 还有 4 个更猛的杠杆（合用常省 70~85%）：</tspan><tspan x="60" dy="24"><tspan font-weight="700">① Prompt caching 提示缓存</tspan>：固定的系统提示/上下文缓存复用，命中读省 <tspan class="cR" font-weight="700">75~90%</tspan>；<tspan font-weight="700">② Batch API</tspan>：异步批处理省 <tspan class="cR" font-weight="700">50%</tspan>（结果 24h 内返回）；</tspan><tspan x="60" dy="24"><tspan font-weight="700">③ 模型路由 / 级联</tspan>：简单问题发便宜小模型、难题才上大模型，省 <tspan class="cR" font-weight="700">40~70%</tspan>；<tspan font-weight="700">④ 语义缓存</tspan>：按"语义相近"命中缓存，重复问法直接复用。</tspan></text>
+
+  <text x="40" y="1184" class="small">· <tspan class="cT" font-weight="700">🗄️ 向量库侧：本课的"三级存储"在 2026 已是标配的冷热分层：</tspan>热=RAM、温=SSD、冷=对象存储；<tspan x="60" dy="24"><tspan font-weight="700">Amazon S3 Vectors</tspan> 2026 年 GA，主打"存储优先"把大规模 RAG 的总成本<tspan class="cR" font-weight="700">降最多 90%</tspan>；<tspan font-weight="700">DiskANN</tspan> 把内存需求压到 30~60GB</tspan><tspan x="60" dy="24">（HNSW 最快但贵 3~5×）；新玩家如 TurboPuffer 靠 S3 把存储压到约 $0.33/GB/月。叠加上节的<tspan font-weight="700">量化</tspan>，降本空间更大。</tspan></text>
+
+  <text x="40" y="1304" class="small cV" font-weight="700">一句话：本课给的是"省钱地图"（小模型/短 prompt/专用 GPU + 三级存储/多租户）；2026 在每条路上都加了自动化工具<tspan x="40" dy="24">（缓存、路由、S3 原生向量、DiskANN）。自托管 vs API 的临界点约在"每天 2M~5M token"，量没到就先用 API。</tspan></text>
+
+  <text x="40" y="1392" class="small cGray">🧪 个人补充（非课件，给你接前端经验）：这一整套你其实都熟 —— <tspan class="cR" font-weight="700">三级存储 = CDN 缓存分层</tspan>（RAM≈边缘/内存缓存热数据、</text>
+  <text x="40" y="1416" class="small cGray">Disk≈区域缓存、Object≈源站冷存储）；<tspan class="cR" font-weight="700">按小时 GPU vs 按 token = 预留实例 vs 按量付费</tspan>；<tspan class="cR" font-weight="700">prompt 缓存 ≈ HTTP 缓存</tspan>、<tspan class="cR" font-weight="700">语义缓存 ≈ 模糊匹配的 CDN</tspan>；</text>
+  <text x="40" y="1440" class="small cGray">多租户 = 你做过的"按租户分片 sharding"。把"省钱"当成性能工程来做，直觉完全通用。</text>
+</svg>

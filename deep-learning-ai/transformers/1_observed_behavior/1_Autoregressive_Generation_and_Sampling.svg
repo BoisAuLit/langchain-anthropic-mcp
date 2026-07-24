@@ -1,0 +1,104 @@
+<svg width="1100" height="1094" viewBox="0 0 1100 1094" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 27px; font-weight: 800; fill: #0F172A; }
+    .ess { font-size: 16px; fill: #475569; }
+    .sec { font-size: 19px; font-weight: 800; fill: #0F172A; }
+    .b { font-size: 14.5px; fill: #334155; }
+    .bb { font-size: 14.5px; font-weight: 700; }
+    .sm { font-size: 13px; fill: #64748B; }
+    .th { font-size: 14px; font-weight: 700; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #0F172A; }
+    /* color classes LAST */
+    .w{fill:#fff} .wg{fill:#CBD5E1}
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#D97706} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+  </style>
+  <defs>
+    <marker id="t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"/></marker>
+    <marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#E11D48" stroke-width="2" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="1094" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">Autoregressive Generation + Token Sampling 🔁🎲</text>
+  <text x="40" y="76" class="ess">An LLM writes one token at a time. At each step it has a probability distribution over the whole vocabulary —</text>
+  <text x="40" y="98" class="ess"><tspan class="cPink bb">how you pick one token from it</tspan> is the thing you actually control.</text>
+  <line x1="40" y1="114" x2="1060" y2="114" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ① the loop -->
+  <text x="40" y="148" class="sec">🔄 The loop (Step 3 is where this lesson zooms in)</text>
+  <rect x="40" y="166" width="180" height="52" rx="11" fill="#ECFEFF" stroke="#0D9488" stroke-width="1.7"/>
+  <text x="130" y="189" class="bb cTeal" text-anchor="middle">1 · Input Tokens</text>
+  <text x="130" y="207" class="sm" text-anchor="middle">= context window</text>
+  <line x1="220" y1="192" x2="256" y2="192" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <rect x="260" y="166" width="205" height="52" rx="11" fill="#ECFEFF" stroke="#0D9488" stroke-width="1.7"/>
+  <text x="362" y="189" class="bb cTeal" text-anchor="middle">2 · Compute Probs</text>
+  <text x="362" y="207" class="sm" text-anchor="middle">over whole vocab</text>
+  <line x1="465" y1="192" x2="501" y2="192" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <rect x="505" y="166" width="165" height="52" rx="11" fill="#FFF1F2" stroke="#E11D48" stroke-width="2.2"/>
+  <text x="587" y="189" class="bb cPink" text-anchor="middle">3 · Select Token</text>
+  <text x="587" y="207" class="sm cPink" text-anchor="middle">👈 focus</text>
+  <line x1="670" y1="192" x2="736" y2="192" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <polygon points="830,166 920,192 830,218 740,192" fill="#ECFEFF" stroke="#0D9488" stroke-width="1.7"/>
+  <text x="830" y="189" class="bb cTeal" text-anchor="middle">4 · Stop or</text>
+  <text x="830" y="206" class="bb cTeal" text-anchor="middle">continue?</text>
+  <path d="M830 218 V242 H130 V220" fill="none" stroke="#E11D48" stroke-width="2.2" marker-end="url(#p)"/>
+  <text x="480" y="261" class="sm cPink" text-anchor="middle" font-weight="700">"continue" → append token → feed window back → repeat 🔁</text>
+
+  <!-- recap lines -->
+  <text x="40" y="296" class="b">🧠 <tspan class="bb">Context window</tspan> (prompt + hidden system/template tokens) = the model's ONLY input &amp; memory, with a fixed max size.</text>
+  <text x="40" y="322" class="b">🎲 Each step → a distribution over the <tspan class="bb">whole vocab</tspan>. ⚠️ Crucial: the model selects by <tspan class="bb cPink">probability, not correctness</tspan>.</text>
+
+  <!-- ④ picking a token -->
+  <text x="40" y="360" class="sec">🎚️ Picking ONE token from the distribution — the heart of this merge</text>
+  <text x="40" y="388" class="b">🎯 <tspan class="bb cGreen">Greedy</tspan> — always take the argmax (highest-prob token). Deterministic. ⚠️ But it sounds boring/boilerplate</text>
+  <text x="40" y="410" class="b">　 ("Sure, here's a…", "As a large language model…") and can fall into <tspan class="bb">repetition loops</tspan> (Xu et al., 2022).</text>
+  <text x="40" y="438" class="b">🎰 <tspan class="bb cPurple">Random sampling</tspan> — spin a wheel weighted by the probabilities → diversity. ⚠️ Unfiltered it can grab a rare,</text>
+  <text x="40" y="460" class="b">　 nonsensical token. So we <tspan class="bb">shape &amp; filter</tspan> the distribution with 3 knobs 👇</text>
+  <text x="40" y="488" class="b">🌡️ <tspan class="bb cOrange">Temperature</tspan> — reshape the distribution before sampling. <tspan class="code">→0</tspan> ≈ greedy (sharp peak); higher = flatter = more creative.</text>
+  <text x="40" y="514" class="b">🔢 <tspan class="bb cBlue">Top-K</tspan> — keep only the top K tokens, sample among them. ⚠️ Fixed K isn't adaptive: K=5 is fine when all 5 are</text>
+  <text x="40" y="536" class="b">　 decent, but bad when only 2 are good and #3-5 are 0.x% noise that can derail the model.</text>
+  <text x="40" y="564" class="b">🎯 <tspan class="bb cTeal">Top-P (nucleus)</tspan> — keep the smallest set whose <tspan class="bb">cumulative probability ≥ P</tspan>, then sample. Adaptive: the set grows</text>
+  <text x="40" y="586" class="b">　 when the model is unsure, shrinks when it's confident → usually the better default.</text>
+  <text x="40" y="614" class="b">🛑 <tspan class="bb">Stop</tspan> when ANY fires: an EOS token <tspan class="code">&lt;|im_end|&gt;</tspan> is sampled · <tspan class="code">max_tokens</tspan> hit · context window full.</text>
+
+  <!-- ⚡ practice + table -->
+  <text x="40" y="652" class="sec">⚡ In practice — the golden rules &amp; provider params (as of Mar 2026)</text>
+  <text x="40" y="680" class="b">🥇 Change <tspan class="bb">temperature OR top-p, NOT both</tspan> (tuning both = non-reproducible debugging). Near <tspan class="code">0</tspan> for code/facts; <tspan class="code">~0.7-1+</tspan> for creative.</text>
+
+  <!-- table -->
+  <rect x="40" y="698" width="1020" height="34" fill="#0D9488"/>
+  <text x="54" y="720" class="th w">Parameter</text>
+  <text x="270" y="720" class="th w">OpenAI (GPT-5.x)</text>
+  <text x="540" y="720" class="th w">Anthropic (Claude 4.6)</text>
+  <text x="820" y="720" class="th w">Google (Gemini 3.1)</text>
+  <rect x="40" y="732" width="1020" height="32" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="54" y="753" class="bb cSlate">Temperature</text>
+  <text x="270" y="753" class="b">0 – 2 (default 1)</text>
+  <text x="540" y="753" class="b">0 – 1 (default 1)</text>
+  <text x="820" y="753" class="b">0 – 2 (default 1)</text>
+  <rect x="40" y="764" width="1020" height="32" fill="#ffffff" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="54" y="785" class="bb cSlate">Top-P</text>
+  <text x="270" y="785" class="b">0 – 1 (default 1)</text>
+  <text x="540" y="785" class="b">0 – 1 (default 1)</text>
+  <text x="820" y="785" class="b">0 – 1 (default 1)</text>
+  <rect x="40" y="796" width="1020" height="32" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="54" y="817" class="bb cSlate">Top-K</text>
+  <text x="270" y="817" class="b cGray">not exposed</text>
+  <text x="540" y="817" class="b">1 – 500 (use temp instead)</text>
+  <text x="820" y="817" class="b">1 – 40</text>
+
+  <!-- 📡 intel -->
+  <text x="40" y="870" class="sec">📡 2026 reality check</text>
+  <text x="40" y="898" class="b">🎛️ Combos: <tspan class="bb">commercial APIs → Temp + Top-P</tspan> · <tspan class="bb">OSS (Llama/DeepSeek) → Temp + Min-P</tspan> · reasoning models → keep defaults.</text>
+  <text x="40" y="924" class="b">🆕 <tspan class="bb">Min-P</tspan> is the newer adaptive filter (keep tokens ≥ P × top-prob) — robust at high temperature. Good starting point: <tspan class="code">top_p≈0.9, temp≈0.7</tspan>.</text>
+  <text x="40" y="950" class="b">🔁 Greedy's repetition loops? Fight them with <tspan class="bb">frequency / presence / repetition penalties</tspan> (separate knobs most APIs expose).</text>
+
+  <!-- 🔑 insight -->
+  <rect x="40" y="982" width="1020" height="96" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="60" y="1012" class="bb cBlue">🔑 First-principles link to "Attention is All You Need":</text>
+  <text x="60" y="1034" class="b">That "distribution" is literally the <tspan class="bb">softmax</tspan> at the top of the transformer. <tspan class="bb">Temperature divides the logits by T</tspan> before</text>
+  <text x="60" y="1054" class="b">softmax (÷T). And "the model picks by <tspan class="bb">probability, not correctness</tspan>" is exactly why hallucination is structural, not a bug.</text>
+</svg>

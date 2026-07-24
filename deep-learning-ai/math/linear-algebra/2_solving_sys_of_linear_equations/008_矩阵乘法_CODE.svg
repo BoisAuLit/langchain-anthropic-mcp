@@ -1,0 +1,120 @@
+<svg width="900" height="1400" viewBox="0 0 900 1400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .gridline { stroke: #aab4d4; stroke-width: 1; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="1400" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">015 · 矩阵乘法 Matrix Multiplication</text>
+  <text x="40" y="82" class="subtitle">一句话本质：C = AB 的每个格子都是一次点积（A 的行 · B 的列）；</text>
+  <text x="40" y="106" class="subtitle">合法的唯一条件是形状"握手"：(m×n)·(n×p) → (m×p)，中间的 n 必须相等。</text>
+  <line x1="40" y1="124" x2="860" y2="124" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① definition -->
+  <text x="40" y="162" class="sec">① 📐 定义：每个格子 = 一次点积</text>
+  <text x="40" y="192" class="small">C 的第 i 行第 j 列 = <tspan class="cV" font-weight="700">A 的第 i 行</tspan> 与 <tspan class="cT" font-weight="700">B 的第 j 列</tspan> 的点积。整个矩阵乘法就是批量做点积。</text>
+  <text x="40" y="218" class="small">形状规则：<tspan class="cO" font-weight="700">(m×n) · (n×p) → (m×p)</tspan>。中间的 n 相等才能"握手"，消掉后剩外面两个数。</text>
+
+  <!-- ② worked example -->
+  <text x="40" y="270" class="sec">② 🧮 实例验算：(3×3) @ (3×2) → (3×2)</text>
+
+  <!-- A -->
+  <rect x="60" y="290" width="108" height="108" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <rect x="60" y="290" width="108" height="36" fill="#FFF3CD"/>
+  <line x1="96" y1="290" x2="96" y2="398" class="gridline"/>
+  <line x1="132" y1="290" x2="132" y2="398" class="gridline"/>
+  <line x1="60" y1="326" x2="168" y2="326" class="gridline"/>
+  <line x1="60" y1="362" x2="168" y2="362" class="gridline"/>
+  <text x="78" y="314" class="cell" text-anchor="middle" font-weight="700">4</text><text x="114" y="314" class="cell" text-anchor="middle" font-weight="700">9</text><text x="150" y="314" class="cell" text-anchor="middle" font-weight="700">9</text>
+  <text x="78" y="350" class="cell" text-anchor="middle">9</text><text x="114" y="350" class="cell" text-anchor="middle">1</text><text x="150" y="350" class="cell" text-anchor="middle">6</text>
+  <text x="78" y="386" class="cell" text-anchor="middle">9</text><text x="114" y="386" class="cell" text-anchor="middle">2</text><text x="150" y="386" class="cell" text-anchor="middle">3</text>
+  <text x="114" y="420" class="tiny" text-anchor="middle">A（3×3）</text>
+
+  <text x="195" y="350" class="small">@</text>
+
+  <!-- B -->
+  <rect x="220" y="290" width="72" height="108" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <rect x="256" y="290" width="36" height="108" fill="#FFF3CD"/>
+  <line x1="256" y1="290" x2="256" y2="398" class="gridline"/>
+  <line x1="220" y1="326" x2="292" y2="326" class="gridline"/>
+  <line x1="220" y1="362" x2="292" y2="362" class="gridline"/>
+  <text x="238" y="314" class="cell" text-anchor="middle">2</text><text x="274" y="314" class="cell" text-anchor="middle" font-weight="700">2</text>
+  <text x="238" y="350" class="cell" text-anchor="middle">5</text><text x="274" y="350" class="cell" text-anchor="middle" font-weight="700">7</text>
+  <text x="238" y="386" class="cell" text-anchor="middle">4</text><text x="274" y="386" class="cell" text-anchor="middle" font-weight="700">4</text>
+  <text x="256" y="420" class="tiny" text-anchor="middle">B（3×2）</text>
+
+  <text x="318" y="350" class="small">=</text>
+
+  <!-- C -->
+  <rect x="345" y="290" width="84" height="108" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <rect x="387" y="290" width="42" height="36" fill="#FFE0B2"/>
+  <line x1="387" y1="290" x2="387" y2="398" class="gridline"/>
+  <line x1="345" y1="326" x2="429" y2="326" class="gridline"/>
+  <line x1="345" y1="362" x2="429" y2="362" class="gridline"/>
+  <text x="366" y="314" class="cell" text-anchor="middle">89</text><text x="408" y="314" class="cell" text-anchor="middle" font-weight="700" fill="#EF6C00">107</text>
+  <text x="366" y="350" class="cell" text-anchor="middle">47</text><text x="408" y="350" class="cell" text-anchor="middle">49</text>
+  <text x="366" y="386" class="cell" text-anchor="middle">40</text><text x="408" y="386" class="cell" text-anchor="middle">44</text>
+  <text x="387" y="420" class="tiny" text-anchor="middle">C（3×2）</text>
+
+  <text x="470" y="314" class="small">黄色行 × 黄色列 → 橙色格：</text>
+  <rect x="460" y="330" width="396" height="28" rx="6" class="chip"/>
+  <text x="470" y="349" class="code">C₁₂ = 4×2 + 9×7 + 9×4 = <tspan class="cO" font-weight="700">107</tspan></text>
+  <text x="470" y="390" class="small">其余 5 个格子同理，各做一次点积。</text>
+
+  <!-- ③ python -->
+  <text x="40" y="476" class="sec">③ 🐍 Python 三种写法，与"握手失败"</text>
+  <rect x="50" y="492" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="511" class="code">np.matmul(A, B)　＝　A @ B　＝　np.dot(A, B)　<tspan fill="#7B1FA2"># 2D 时三者等价</tspan></text>
+  <rect x="50" y="528" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="547" class="code">B @ A　→　ValueError！　<tspan fill="#7B1FA2"># B(3×2) 的 2 列 ≠ A(3×3) 的 3 行</tspan></text>
+  <text x="40" y="582" class="small" font-weight="700" fill="#C62828">顺序一换，形状握手立刻失败 —— 矩阵乘法连"能不能乘"都取决于顺序。</text>
+
+  <!-- ④ vectors & broadcasting -->
+  <text x="40" y="634" class="sec">④ 🎁 一维向量的特殊待遇，与广播</text>
+  <rect x="50" y="650" width="700" height="28" rx="6" class="chip"/>
+  <text x="62" y="669" class="code">np.matmul(x, y) → <tspan class="cO" font-weight="700">3</tspan>　<tspan fill="#7B1FA2"># x=(1,-2,-5), y=(4,3,-1)：一维向量被自动当点积算</tspan></text>
+  <rect x="50" y="686" width="700" height="28" rx="6" class="chip"/>
+  <text x="62" y="705" class="code">x.reshape(3,1) @ y.reshape(3,1) → ValueError　<tspan fill="#7B1FA2"># 变成真矩阵后 (3×1)(3×1) 握不上</tspan></text>
+  <rect x="50" y="722" width="700" height="28" rx="6" class="chip"/>
+  <text x="62" y="741" class="code">A - 2 → 每个元素都减 2　<tspan fill="#7B1FA2"># 广播：标量被自动铺成 3×3 再逐元素相减</tspan></text>
+  <text x="40" y="776" class="small">一维数组 shape 是 (3,)，NumPy 会"贴心"地自动转置凑合法 —— 方便，但也会掩盖真正的形状错误。</text>
+
+  <!-- 💡 insights -->
+  <text x="40" y="828" class="sec">💡 补充洞察（课程没明说）</text>
+  <text x="40" y="858" class="small">💡 形状心算口诀：先写 (m×n)(n×p)，中间相等才合法、消掉得 (m×p)。读任何深度学习代码都先心算形状</text>
+  <text x="40" y="880" class="small">　再看内容 —— shape mismatch 是深度学习的头号报错，这个口诀是第一生存技能。</text>
+  <text x="40" y="910" class="small">💡 列视角：AB 的第 j 列 = A 作用在 B 的第 j 列上 —— 矩阵乘法 = 对一捆向量批量做线性变换。</text>
+
+  <!-- ⚠️ pitfalls -->
+  <text x="40" y="962" class="sec">⚠️ 易错点</text>
+  <text x="40" y="992" class="small" fill="#C62828">· AB ≠ BA：顺序不可换 —— 轻则结果不同，重则直接不合法（本课的 B@A）。</text>
+  <text x="40" y="1018" class="small" fill="#C62828">· np.dot 在 2D 与 @ 等价，但更高维数组上行为不同 —— 矩阵乘法一律推荐写 @。</text>
+  <text x="40" y="1044" class="small" fill="#C62828">· 一维 (3,) 和二维 (3,1) 是两种东西：前者会被自动凑，后者严格按矩阵规则报错。</text>
+
+  <!-- 🔗 connection -->
+  <text x="40" y="1096" class="sec">🔗 承上启下</text>
+  <text x="40" y="1126" class="small">· 上节课"矩阵 = 变形机"，今天 AB = 变形机串联（先 B 后 A）；形状规则就是接口必须对得上。</text>
+  <text x="40" y="1152" class="small" font-weight="700" fill="#1565C0">· Transformer 的 Q @ K.T：(词数×64)(64×词数) → (词数×词数) 的注意力分数表 —— 就是这条形状规则。</text>
+
+  <line x1="40" y1="1174" x2="860" y2="1174" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1196" class="tiny" fill="#888" font-size="12">速记：每格 = 行·列点积；(m×n)(n×p)→(m×p) 中间握手；AB≠BA；2D 用 @；一维向量会被自动凑、(3,1) 不会。</text>
+
+  <!-- 🧪 quiz -->
+  <text x="40" y="1234" class="sec" font-size="17">🧪 自测（先答后看最底部灰字）</text>
+  <text x="40" y="1260" class="small">Q1 概念：(4×2) @ (2×5) 的结果是什么形状？</text>
+  <text x="40" y="1286" class="small">Q2 计算：[[1,2],[3,4]] @ [5,6]ᵀ = ?</text>
+  <text x="40" y="1312" class="small">Q3 为什么：B(3×2) @ A(3×3) 为什么不合法？</text>
+  <text x="40" y="1344" class="tiny" fill="#aaa" font-size="11">A1：4×5（中间的 2 握手后消掉）。　A2：(1×5+2×6, 3×5+4×6) = (17, 39)。</text>
+  <text x="40" y="1362" class="tiny" fill="#aaa" font-size="11">A3：B 有 2 列、A 有 3 行，2 ≠ 3 —— 行与列长度不等，点积无法定义。</text>
+</svg>

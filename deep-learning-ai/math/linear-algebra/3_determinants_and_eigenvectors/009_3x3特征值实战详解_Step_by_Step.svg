@@ -1,0 +1,213 @@
+<svg width="900" height="2360" viewBox="0 0 900 2360" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 28px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .gl { stroke: #aab4d4; stroke-width: 1; }
+    .mz { fill: #E3F2FD; stroke: #aab4d4; stroke-width: 1.2; }
+    .vz { fill: #FFE0B2; stroke: #FB8C00; stroke-width: 1.2; }
+    .en { font-style: italic; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="2360" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="48" class="title">026 · 3×3 特征值实战 · 逐步详解 🔬 <tspan font-size="18" fill="#666" class="en">Step by Step</tspan></text>
+  <text x="40" y="80" class="subtitle">流程总览：搭建 A−λI → 余子式展开求 det → 解三次方程得 λ = −3, 1, 4 →</text>
+  <text x="40" y="104" class="subtitle">对每个 λ 解齐次方程组 (A−λI)v = 0，取非零代表 → 三对 (λ, v) 全部到手并回代验算。</text>
+  <line x1="40" y1="122" x2="860" y2="122" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① build A - lambda I -->
+  <text x="40" y="158" class="sec">① 🧱 搭建 A − λI：只动对角线</text>
+  <rect x="60" y="176" width="132" height="90" class="mz"/>
+  <line x1="104" y1="176" x2="104" y2="266" class="gl"/>
+  <line x1="148" y1="176" x2="148" y2="266" class="gl"/>
+  <line x1="60" y1="206" x2="192" y2="206" class="gl"/>
+  <line x1="60" y1="236" x2="192" y2="236" class="gl"/>
+  <text x="82" y="196" class="cell" text-anchor="middle">2</text><text x="126" y="196" class="cell" text-anchor="middle">1</text><text x="170" y="196" class="cell" text-anchor="middle">−1</text>
+  <text x="82" y="226" class="cell" text-anchor="middle">1</text><text x="126" y="226" class="cell" text-anchor="middle">0</text><text x="170" y="226" class="cell" text-anchor="middle">−3</text>
+  <text x="82" y="256" class="cell" text-anchor="middle">−1</text><text x="126" y="256" class="cell" text-anchor="middle">−3</text><text x="170" y="256" class="cell" text-anchor="middle">0</text>
+  <text x="126" y="288" class="tiny" text-anchor="middle">A</text>
+
+  <text x="218" y="226" class="small" font-weight="700">−</text>
+
+  <rect x="248" y="176" width="132" height="90" class="mz"/>
+  <line x1="292" y1="176" x2="292" y2="266" class="gl"/>
+  <line x1="336" y1="176" x2="336" y2="266" class="gl"/>
+  <line x1="248" y1="206" x2="380" y2="206" class="gl"/>
+  <line x1="248" y1="236" x2="380" y2="236" class="gl"/>
+  <text x="270" y="196" class="cell" text-anchor="middle" fill="#8E24AA" font-weight="700">λ</text><text x="314" y="196" class="cell" text-anchor="middle">0</text><text x="358" y="196" class="cell" text-anchor="middle">0</text>
+  <text x="270" y="226" class="cell" text-anchor="middle">0</text><text x="314" y="226" class="cell" text-anchor="middle" fill="#8E24AA" font-weight="700">λ</text><text x="358" y="226" class="cell" text-anchor="middle">0</text>
+  <text x="270" y="256" class="cell" text-anchor="middle">0</text><text x="314" y="256" class="cell" text-anchor="middle">0</text><text x="358" y="256" class="cell" text-anchor="middle" fill="#8E24AA" font-weight="700">λ</text>
+  <text x="314" y="288" class="tiny" text-anchor="middle">λI（λ × 单位矩阵）</text>
+
+  <text x="406" y="226" class="small" font-weight="700">=</text>
+
+  <rect x="436" y="176" width="174" height="90" class="mz"/>
+  <line x1="494" y1="176" x2="494" y2="266" class="gl"/>
+  <line x1="552" y1="176" x2="552" y2="266" class="gl"/>
+  <line x1="436" y1="206" x2="610" y2="206" class="gl"/>
+  <line x1="436" y1="236" x2="610" y2="236" class="gl"/>
+  <text x="465" y="196" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">2−λ</text><text x="523" y="196" class="cell" text-anchor="middle">1</text><text x="581" y="196" class="cell" text-anchor="middle">−1</text>
+  <text x="465" y="226" class="cell" text-anchor="middle">1</text><text x="523" y="226" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">−λ</text><text x="581" y="226" class="cell" text-anchor="middle">−3</text>
+  <text x="465" y="256" class="cell" text-anchor="middle">−1</text><text x="523" y="256" class="cell" text-anchor="middle">−3</text><text x="581" y="256" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">−λ</text>
+  <text x="523" y="288" class="tiny" text-anchor="middle">A − λI（仅对角线被改动）</text>
+
+  <!-- ② cofactor expansion -->
+  <text x="40" y="344" class="sec">② ✂️ 求 3×3 行列式：按第一行做余子式展开（<tspan class="en">cofactor expansion</tspan>）</text>
+  <text x="40" y="374" class="small">法则：沿第一行取元素，各乘"删去其所在行与列后剩下的 2×2 行列式"（余子式 <tspan class="en">minor</tspan>），</text>
+  <text x="40" y="396" class="small">符号按 ➕ ➖ ➕ 交替：</text>
+  <rect x="50" y="412" width="560" height="28" rx="6" class="chip"/>
+  <text x="62" y="431" class="code">det = (2−λ)·M₁₁ − 1·M₁₂ + (−1)·M₁₃</text>
+
+  <!-- M11 -->
+  <text x="60" y="470" class="small" font-weight="700">M₁₁（删第1行第1列）</text>
+  <rect x="80" y="482" width="100" height="60" class="mz"/>
+  <line x1="130" y1="482" x2="130" y2="542" class="gl"/>
+  <line x1="80" y1="512" x2="180" y2="512" class="gl"/>
+  <text x="105" y="502" class="cell" text-anchor="middle">−λ</text><text x="155" y="502" class="cell" text-anchor="middle">−3</text>
+  <text x="105" y="532" class="cell" text-anchor="middle">−3</text><text x="155" y="532" class="cell" text-anchor="middle">−λ</text>
+  <text x="80" y="568" class="code" font-size="13">= λ² − 9</text>
+
+  <!-- M12 -->
+  <text x="330" y="470" class="small" font-weight="700">M₁₂（删第1行第2列）</text>
+  <rect x="350" y="482" width="100" height="60" class="mz"/>
+  <line x1="400" y1="482" x2="400" y2="542" class="gl"/>
+  <line x1="350" y1="512" x2="450" y2="512" class="gl"/>
+  <text x="375" y="502" class="cell" text-anchor="middle">1</text><text x="425" y="502" class="cell" text-anchor="middle">−3</text>
+  <text x="375" y="532" class="cell" text-anchor="middle">−1</text><text x="425" y="532" class="cell" text-anchor="middle">−λ</text>
+  <text x="350" y="568" class="code" font-size="13">= −λ − 3</text>
+
+  <!-- M13 -->
+  <text x="600" y="470" class="small" font-weight="700">M₁₃（删第1行第3列）</text>
+  <rect x="620" y="482" width="100" height="60" class="mz"/>
+  <line x1="670" y1="482" x2="670" y2="542" class="gl"/>
+  <line x1="620" y1="512" x2="720" y2="512" class="gl"/>
+  <text x="645" y="502" class="cell" text-anchor="middle">1</text><text x="695" y="502" class="cell" text-anchor="middle">−λ</text>
+  <text x="645" y="532" class="cell" text-anchor="middle">−1</text><text x="695" y="532" class="cell" text-anchor="middle">−3</text>
+  <text x="620" y="568" class="code" font-size="13">= −3 − λ</text>
+
+  <rect x="50" y="592" width="700" height="28" rx="6" class="chip"/>
+  <text x="62" y="611" class="code">det = (2−λ)(λ²−9) − 1·(−λ−3) + (−1)·(−3−λ)</text>
+  <rect x="50" y="628" width="700" height="28" rx="6" class="chip"/>
+  <text x="62" y="647" class="code">　　= (2−λ)λ² − 9(2−λ) + (λ+3) + (3+λ)　<tspan fill="#7B1FA2"># 即课件的 +3 +3 +λ +λ</tspan></text>
+  <rect x="50" y="664" width="700" height="28" rx="6" class="chip"/>
+  <text x="62" y="683" class="code">　　= 2λ² − λ³ − 18 + 9λ + 2λ + 6 = <tspan class="cO" font-weight="700">−λ³ + 2λ² + 11λ − 12</tspan></text>
+
+  <!-- ③ solve cubic -->
+  <text x="40" y="740" class="sec">③ 🧩 解三次方程：试根 → 因式分解</text>
+  <text x="40" y="770" class="small">两边乘 −1 更顺手：λ³ − 2λ² − 11λ + 12 = 0。整数根只可能是常数项 12 的因数（±1, ±2, ±3, ±4, ±6, ±12）：</text>
+  <rect x="50" y="786" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="805" class="code">试 λ = 1：1 − 2 − 11 + 12 = <tspan class="cO" font-weight="700">0</tspan> ✅ → (λ−1) 是一个因式</text>
+  <rect x="50" y="822" width="700" height="28" rx="6" class="chip"/>
+  <text x="62" y="841" class="code">提出因式：λ³−2λ²−11λ+12 = (λ−1)(λ² − λ − 12) = (λ−1)(λ−4)(λ+3)</text>
+  <rect x="50" y="858" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="877" class="code">∴ <tspan class="cO" font-weight="700">λ = 1, 4, −3</tspan>　<tspan fill="#7B1FA2"># 与课件 −(λ+3)(λ−1)(λ−4)=0 一致 🎉</tspan></text>
+
+  <!-- ④ lambda = 4 -->
+  <text x="40" y="934" class="sec">④ 🧭 λ = 4：完整求特征向量</text>
+  <text x="60" y="1012" class="small" font-weight="700">A − 4I =</text>
+  <rect x="150" y="958" width="132" height="90" class="mz"/>
+  <line x1="194" y1="958" x2="194" y2="1048" class="gl"/>
+  <line x1="238" y1="958" x2="238" y2="1048" class="gl"/>
+  <line x1="150" y1="988" x2="282" y2="988" class="gl"/>
+  <line x1="150" y1="1018" x2="282" y2="1018" class="gl"/>
+  <text x="172" y="978" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">−2</text><text x="216" y="978" class="cell" text-anchor="middle">1</text><text x="260" y="978" class="cell" text-anchor="middle">−1</text>
+  <text x="172" y="1008" class="cell" text-anchor="middle">1</text><text x="216" y="1008" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">−4</text><text x="260" y="1008" class="cell" text-anchor="middle">−3</text>
+  <text x="172" y="1038" class="cell" text-anchor="middle">−1</text><text x="216" y="1038" class="cell" text-anchor="middle">−3</text><text x="260" y="1038" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">−4</text>
+  <text x="320" y="990" class="small">对角线各减 4，</text>
+  <text x="320" y="1014" class="small">写成 (A−4I)·v = 0 的三行：</text>
+
+  <text x="80" y="1086" class="code">R₁:　−2x₁ + x₂ − x₃ = 0</text>
+  <text x="80" y="1112" class="code">R₂:　x₁ − 4x₂ − 3x₃ = 0</text>
+  <text x="80" y="1138" class="code">R₃:　−x₁ − 3x₂ − 4x₃ = 0</text>
+  <text x="420" y="1086" class="code">R₂ + R₃（x₁ 抵消）：−7x₂ − 7x₃ = 0 → <tspan class="cO" font-weight="700">x₂ = −x₃</tspan></text>
+  <text x="420" y="1118" class="code">3R₁ + R₃（x₂ 抵消）：−7x₁ − 7x₃ = 0 → <tspan class="cO" font-weight="700">x₁ = −x₃</tspan></text>
+
+  <text x="40" y="1178" class="small">令 x₃ = −k，则 x₁ = k、x₂ = k。代回 R₁ 自检：−2k + k + k = 0 ✅（第三条方程自动满足）。</text>
+  <text x="40" y="1204" class="small">解族 {(k, k, −k)} 是一条过原点的直线 → 取 k=1 得代表：</text>
+  <rect x="560" y="1182" width="44" height="90" class="vz"/>
+  <line x1="560" y1="1212" x2="604" y2="1212" class="gl"/>
+  <line x1="560" y1="1242" x2="604" y2="1242" class="gl"/>
+  <text x="582" y="1202" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="582" y="1232" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="582" y="1262" class="cell" text-anchor="middle" font-weight="700">−1</text>
+  <rect x="50" y="1288" width="560" height="28" rx="6" class="chip"/>
+  <text x="62" y="1307" class="code">回代验算：A·(1,1,−1) = (4, 4, −4) = 4·(1,1,−1) ✅</text>
+
+  <!-- ⑤ lambda = 1 -->
+  <text x="40" y="1372" class="sec">⑤ 🧭 λ = 1：同一流程</text>
+  <text x="60" y="1450" class="small" font-weight="700">A − I =</text>
+  <rect x="150" y="1396" width="132" height="90" class="mz"/>
+  <line x1="194" y1="1396" x2="194" y2="1486" class="gl"/>
+  <line x1="238" y1="1396" x2="238" y2="1486" class="gl"/>
+  <line x1="150" y1="1426" x2="282" y2="1426" class="gl"/>
+  <line x1="150" y1="1456" x2="282" y2="1456" class="gl"/>
+  <text x="172" y="1416" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">1</text><text x="216" y="1416" class="cell" text-anchor="middle">1</text><text x="260" y="1416" class="cell" text-anchor="middle">−1</text>
+  <text x="172" y="1446" class="cell" text-anchor="middle">1</text><text x="216" y="1446" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">−1</text><text x="260" y="1446" class="cell" text-anchor="middle">−3</text>
+  <text x="172" y="1476" class="cell" text-anchor="middle">−1</text><text x="216" y="1476" class="cell" text-anchor="middle">−3</text><text x="260" y="1476" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">−1</text>
+
+  <text x="80" y="1530" class="code">R₁:　x₁ + x₂ − x₃ = 0</text>
+  <text x="80" y="1556" class="code">R₂:　x₁ − x₂ − 3x₃ = 0</text>
+  <text x="80" y="1582" class="code">R₃:　−x₁ − 3x₂ − x₃ = 0</text>
+  <text x="420" y="1530" class="code">R₁ − R₂：2x₂ + 2x₃ = 0 → <tspan class="cO" font-weight="700">x₂ = −x₃</tspan></text>
+  <text x="420" y="1562" class="code">代回 R₁：x₁ = x₃ − x₂ = <tspan class="cO" font-weight="700">2x₃</tspan></text>
+  <text x="420" y="1594" class="code">自检 R₃：−2x₃ + 3x₃ − x₃ = 0 ✅</text>
+
+  <text x="40" y="1640" class="small">取 x₃ = 1 → 代表 (2, −1, 1)：</text>
+  <rect x="320" y="1620" width="44" height="90" class="vz"/>
+  <line x1="320" y1="1650" x2="364" y2="1650" class="gl"/>
+  <line x1="320" y1="1680" x2="364" y2="1680" class="gl"/>
+  <text x="342" y="1640" class="cell" text-anchor="middle" font-weight="700">2</text>
+  <text x="342" y="1670" class="cell" text-anchor="middle" font-weight="700">−1</text>
+  <text x="342" y="1700" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <rect x="400" y="1646" width="440" height="28" rx="6" class="chip"/>
+  <text x="412" y="1665" class="code">验算：A·(2,−1,1) = (2,−1,1) = 1·(2,−1,1) ✅</text>
+
+  <!-- ⑥ lambda = -3 -->
+  <text x="40" y="1772" class="sec">⑥ 🧭 λ = −3：注意冗余行的出现</text>
+  <text x="60" y="1850" class="small" font-weight="700">A + 3I =</text>
+  <rect x="150" y="1796" width="132" height="90" class="mz"/>
+  <line x1="194" y1="1796" x2="194" y2="1886" class="gl"/>
+  <line x1="238" y1="1796" x2="238" y2="1886" class="gl"/>
+  <line x1="150" y1="1826" x2="282" y2="1826" class="gl"/>
+  <line x1="150" y1="1856" x2="282" y2="1856" class="gl"/>
+  <text x="172" y="1816" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">5</text><text x="216" y="1816" class="cell" text-anchor="middle">1</text><text x="260" y="1816" class="cell" text-anchor="middle">−1</text>
+  <text x="172" y="1846" class="cell" text-anchor="middle">1</text><text x="216" y="1846" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">3</text><text x="260" y="1846" class="cell" text-anchor="middle">−3</text>
+  <text x="172" y="1876" class="cell" text-anchor="middle">−1</text><text x="216" y="1876" class="cell" text-anchor="middle">−3</text><text x="260" y="1876" class="cell" text-anchor="middle" fill="#1565C0" font-weight="700">3</text>
+
+  <text x="80" y="1930" class="code">R₁:　5x₁ + x₂ − x₃ = 0</text>
+  <text x="80" y="1956" class="code">R₂:　x₁ + 3x₂ − 3x₃ = 0</text>
+  <text x="80" y="1982" class="code">R₃:　−x₁ − 3x₂ + 3x₃ = 0</text>
+  <text x="420" y="1930" class="code"><tspan class="cR" font-weight="700">👀 R₃ = −R₂：冗余行！</tspan><tspan fill="#7B1FA2"> # 奇异的标志</tspan></text>
+  <text x="420" y="1962" class="code">3R₁ − R₂：14x₁ = 0 → <tspan class="cO" font-weight="700">x₁ = 0</tspan></text>
+  <text x="420" y="1994" class="code">代回 R₂：3x₂ = 3x₃ → <tspan class="cO" font-weight="700">x₂ = x₃</tspan></text>
+
+  <text x="40" y="2040" class="small">取 x₃ = 1 → 代表 (0, 1, 1)：</text>
+  <rect x="320" y="2020" width="44" height="90" class="vz"/>
+  <line x1="320" y1="2050" x2="364" y2="2050" class="gl"/>
+  <line x1="320" y1="2080" x2="364" y2="2080" class="gl"/>
+  <text x="342" y="2040" class="cell" text-anchor="middle" font-weight="700">0</text>
+  <text x="342" y="2070" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="342" y="2100" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <rect x="400" y="2046" width="460" height="28" rx="6" class="chip"/>
+  <text x="412" y="2065" class="code">验算：A·(0,1,1) = (0,−3,−3) = −3·(0,1,1) ✅</text>
+
+  <!-- ⑦ summary -->
+  <text x="40" y="2172" class="sec">⑦ 📋 汇总与结构性观察</text>
+  <text x="60" y="2202" class="small" font-weight="700">👫 λ=4 ↔ (1,1,−1)　　👫 λ=1 ↔ (2,−1,1)　　👫 λ=−3 ↔ (0,1,1)　（全部已回代验算 ✅）</text>
+  <text x="40" y="2232" class="small">· A − λI 按构造<tspan class="cR" font-weight="700">必为奇异矩阵</tspan>（λ 正是为此而选），故消元后必出现冗余行与自由变量。</text>
+  <text x="40" y="2258" class="small">· 因此解集永远是过原点的直线（无穷多解），任取非零代表即可 —— 倍数不影响"方向"。</text>
+  <text x="40" y="2284" class="small">· 三个特征向量互不共线，构成 ℝ³ 的一组基 —— 即 024 课所说的<tspan class="cT" font-weight="700">特征基 eigenbasis</tspan>。</text>
+
+  <line x1="40" y1="2306" x2="860" y2="2306" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="2328" class="tiny" fill="#888" font-size="12">速记：A−λI 只动对角线；3×3 det 按第一行展开成三个 2×2；三次方程试 12 的因数找首个根再分解；</text>
+  <text x="40" y="2348" class="tiny" fill="#888" font-size="12">每个 λ 回代 → 消元 → 必现自由变量 → 解族取代表 → 回代验算。三对 (λ, v) 即该矩阵的全部"拉伸档案"。</text>
+</svg>

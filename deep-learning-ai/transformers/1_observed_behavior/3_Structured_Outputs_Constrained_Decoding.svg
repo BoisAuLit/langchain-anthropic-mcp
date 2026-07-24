@@ -1,0 +1,109 @@
+<svg width="1100" height="1316" viewBox="0 0 1100 1316" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 26px; font-weight: 800; fill: #0F172A; }
+    .ess { font-size: 16px; fill: #475569; }
+    .sec { font-size: 19px; font-weight: 800; fill: #0F172A; }
+    .b { font-size: 14.5px; fill: #334155; }
+    .bb { font-size: 14.5px; font-weight: 700; }
+    .sm { font-size: 12.5px; fill: #64748B; }
+    .big { font-size: 22px; font-weight: 800; }
+    .chip { font-size: 13px; font-weight: 700; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #0F172A; }
+    /* color classes LAST */
+    .w{fill:#fff} .wg{fill:#CBD5E1}
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#D97706} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+  </style>
+  <defs>
+    <marker id="t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="1316" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">Structured Outputs &amp; Constrained Decoding 🔒{ }</text>
+  <text x="40" y="76" class="ess">You need machine-readable output (JSON / SQL / a function call), but a "helpful" model adds <tspan class="code">Sure, here's…</tspan> and ```json</text>
+  <text x="40" y="98" class="ess">fences that break your parser. <tspan class="cGreen bb">Constrained decoding forces 100%-valid output — by construction, not by luck.</tspan></text>
+  <line x1="40" y1="114" x2="1060" y2="114" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ① the problem -->
+  <text x="40" y="148" class="sec">🙋 Why prompting alone fails</text>
+  <text x="40" y="176" class="b">The next-token distribution blends <tspan class="bb">helpful tokens</tspan> (<tspan class="code">Sure</tspan>, <tspan class="code">Here</tspan>) with <tspan class="bb">structure tokens</tspan> (<tspan class="code">{</tspan>, <tspan class="code">[</tspan>). Ask for JSON and it complies…</text>
+  <text x="40" y="200" class="b">…until it doesn't — it prepends <tspan class="code">"Sure, here's the JSON:"</tspan> or wraps it in <tspan class="code">```json</tspan> fences. Same prompt, <tspan class="bb">inconsistent</tspan> output.</text>
+  <text x="40" y="224" class="b">📉 Prompt-only ≈ <tspan class="cPink bb">40% valid</tspan> (GPT-4o, 2024) → you write brittle post-processing forever.</text>
+
+  <!-- ② the fix -->
+  <text x="40" y="262" class="sec">🔧 The fix: constrain the decoder — don't touch the model</text>
+  <text x="40" y="290" class="b">Give the model a <tspan class="bb">schema</tspan> (JSON Schema / a Pydantic class). At <tspan class="bb">every token step</tspan>, mask out any token that would break the schema,</text>
+  <text x="40" y="312" class="b">then sample only from what's left. The output is valid <tspan class="bb">by construction</tspan>.</text>
+  <rect x="40" y="328" width="1020" height="54" rx="12" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="300" y="362" class="big cPink" text-anchor="middle">Without: 40%</text>
+  <text x="560" y="362" class="big cSlate" text-anchor="middle">→</text>
+  <text x="820" y="362" class="big cGreen" text-anchor="middle">With: 100% ✅</text>
+
+  <!-- ③ how it works -->
+  <text x="40" y="420" class="sec">⭐ How it works: a Finite State Machine (FSM) masks the distribution at every step</text>
+  <text x="40" y="448" class="b">A grammar is compiled into an <tspan class="bb">FSM</tspan> — it tracks <tspan class="bb">where you are</tspan> in the structure; each state says which tokens are legal next; everything</text>
+  <text x="40" y="470" class="b">else gets <tspan class="bb">masked (probability → 0)</tspan>. The model still proposes; the FSM just deletes illegal options before sampling.</text>
+  <text x="40" y="496" class="sm"><tspan class="bb cTeal" font-size="13">States:</tspan>  Start <tspan class="code">→{</tspan>  In Object <tspan class="code">→"</tspan>  In Key <tspan class="code">→:</tspan>  After colon → value (string / number / bool / nested) <tspan class="code">→ , or }</tspan> → loop or Complete</text>
+
+  <!-- masking grid -->
+  <text x="40" y="528" class="sm cGray">Masking in action — green = allowed by the FSM, faded = masked. Notice the "helpful" tokens get killed at step 1:</text>
+  <!-- column 1 -->
+  <rect x="60" y="540" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="120" y="559" class="chip cGreen" text-anchor="middle">{</text>
+  <rect x="60" y="574" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="120" y="591" class="chip cGray" text-anchor="middle">Sure</text>
+  <rect x="60" y="606" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="120" y="623" class="chip cGray" text-anchor="middle">Here</text>
+  <line x1="184" y1="554" x2="208" y2="554" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <!-- column 2 -->
+  <rect x="212" y="540" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="272" y="559" class="chip cGreen" text-anchor="middle">"</text>
+  <rect x="212" y="574" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="272" y="591" class="chip cGray" text-anchor="middle">\n</text>
+  <rect x="212" y="606" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="272" y="623" class="chip cGray" text-anchor="middle">123</text>
+  <line x1="336" y1="554" x2="360" y2="554" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <!-- column 3 -->
+  <rect x="364" y="540" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="424" y="559" class="chip cGreen" text-anchor="middle">answer</text>
+  <rect x="364" y="574" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="424" y="591" class="chip cGray" text-anchor="middle">type</text>
+  <rect x="364" y="606" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="424" y="623" class="chip cGray" text-anchor="middle">id</text>
+  <line x1="488" y1="554" x2="512" y2="554" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <!-- column 4 -->
+  <rect x="516" y="540" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="576" y="559" class="chip cGreen" text-anchor="middle">" :</text>
+  <rect x="516" y="574" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="576" y="591" class="chip cGray" text-anchor="middle">_s</text>
+  <rect x="516" y="606" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="576" y="623" class="chip cGray" text-anchor="middle">,</text>
+  <line x1="640" y1="554" x2="664" y2="554" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <!-- column 5 -->
+  <rect x="668" y="540" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="728" y="559" class="chip cGreen" text-anchor="middle">"no"</text>
+  <rect x="668" y="574" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="728" y="591" class="chip cGray" text-anchor="middle">"maybe"</text>
+  <rect x="668" y="606" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="728" y="623" class="chip cGray" text-anchor="middle">42</text>
+  <line x1="792" y1="554" x2="816" y2="554" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <!-- column 6 -->
+  <rect x="820" y="540" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="880" y="559" class="chip cGreen" text-anchor="middle">}</text>
+  <rect x="820" y="574" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="880" y="591" class="chip cGray" text-anchor="middle">,</text>
+  <rect x="820" y="606" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="880" y="623" class="chip cGray" text-anchor="middle">extra</text>
+  <text x="960" y="559" class="bb cGreen">✅</text>
+  <text x="40" y="656" class="b">Result: <tspan class="code bb">{"answer": "no"}</tspan> — guaranteed valid JSON that matches the schema, with zero post-processing.</text>
+
+  <!-- ④ the catch -->
+  <text x="40" y="694" class="sec">⚠️ The catch: structure can cost accuracy</text>
+  <text x="40" y="722" class="b">Forcing structure too early stops the model from "thinking". Word problem (Eliza): free reasoning → <tspan class="cGreen bb">460 ✓</tspan>, but answer-first JSON → <tspan class="cPink bb">490 ✗</tspan>.</text>
+  <text x="40" y="746" class="b">✅ <tspan class="bb">Fix:</tspan> put a <tspan class="bb">reasoning field FIRST</tspan> in your schema (let it reason, THEN fill <tspan class="code">answer</tspan>). Field order matters; keep schemas small.</text>
+
+  <!-- ⑤ use it -->
+  <text x="40" y="784" class="sec">⚡ How to actually use it</text>
+  <text x="40" y="812" class="b">🟢 <tspan class="bb">OpenAI:</tspan> pass a Pydantic class / JSON schema → <tspan class="code">client.responses.parse(…, text_format=Model)</tspan> → <tspan class="code">response.output_parsed</tspan>.</text>
+  <text x="40" y="838" class="b">🟣 <tspan class="bb">Anthropic:</tspan> structured outputs (beta) → <tspan class="code">response_model=Model</tspan> → <tspan class="code">response.parsed_output</tspan>.</text>
+  <text x="40" y="864" class="b">🛠️ <tspan class="bb">Self-hosted:</tspan> llama.cpp → <tspan class="code">GBNF</tspan> · vLLM → <tspan class="code">XGrammar / llguidance / Outlines</tspan> · TGI → <tspan class="code">llguidance / Outlines</tspan>.</text>
+  <text x="40" y="890" class="b">📦 <tspan class="bb">When you need it:</tspan> JSON extraction · function / tool calls · code · SQL.</text>
+
+  <!-- 📡 intel -->
+  <text x="40" y="928" class="sec">📡 2026 reality check</text>
+  <text x="40" y="956" class="b">✅ OpenAI <tspan class="bb">Structured Outputs</tspan> guarantees 100% schema adherence (gpt-4o-2024-08-06+, o-series). vLLM defaults to <tspan class="bb">XGrammar</tspan></text>
+  <text x="40" y="978" class="b">　 (~97% on nested schemas vs Outlines ~76%); <tspan class="bb">llguidance</tspan> computes token masks in ~50µs/token with no startup cost.</text>
+  <text x="40" y="1004" class="b">⚠️ The accuracy tax is real &amp; measured: GPT-5 extraction <tspan class="cPink bb">fell 87% → 70%</tspan> under strict schema — worst on long outputs.</text>
+  <text x="40" y="1026" class="b">　 → keep schemas lean, reason before constraining, or use a flexible backend (LM-Format-Enforcer) if rigidity hurts.</text>
+
+  <!-- 🔑 insight -->
+  <rect x="40" y="1058" width="1020" height="96" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="60" y="1088" class="bb cBlue">🔑 The mental model that makes it click:</text>
+  <text x="60" y="1110" class="b">Constrained decoding doesn't change the model — it's just a <tspan class="bb">mask on the SAME "Select Token" step</tspan> from the autoregressive loop.</text>
+  <text x="60" y="1130" class="b">It composes with temperature / top-p, and token-by-token masking is the <tspan class="bb">only place</tspan> you can enforce structure in an autoregressive model.</text>
+</svg>

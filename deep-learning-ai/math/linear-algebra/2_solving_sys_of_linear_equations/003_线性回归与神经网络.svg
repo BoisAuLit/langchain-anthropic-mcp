@@ -1,0 +1,133 @@
+<svg width="900" height="1460" viewBox="0 0 900 1460" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .body { font-size: 15px; fill: #333; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .eq { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #333; }
+    .big { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 20px; font-weight: 700; }
+    .node { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 12px; fill: #333; }
+    .cW { fill: #00897B; } .cX { fill: #1565C0; } .cB { fill: #EF6C00; } .cS { fill: #8E24AA; } .cA { fill: #2E7D32; } .cY { fill: #FB8C00; } .cL { fill: #D81B60; }
+  </style>
+  <defs>
+    <marker id="arrP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#AB47BC" stroke-width="1.8" stroke-linecap="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1460" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">🧠 线性回归与神经网络 —— 深挖版（含网络图逐符号拆解）</text>
+  <text x="40" y="82" class="subtitle">主线：一个神经元 = 会拐弯的线性回归 → 连成网 → 全程矩阵乘法。颜色约定：<tspan class="cS" font-weight="700">σ</tspan> <tspan class="cW" font-weight="700">W</tspan> <tspan class="cX" font-weight="700">X</tspan> <tspan class="cB" font-weight="700">b</tspan> <tspan class="cA" font-weight="700">a</tspan> <tspan class="cY" font-weight="700">ŷ</tspan></text>
+  <line x1="40" y1="100" x2="860" y2="100" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① linear regression recap -->
+  <text x="40" y="138" class="sec">① 📊 起点：线性回归就是方程组</text>
+  <text x="60" y="172" class="big"><tspan class="cW">W</tspan> · <tspan class="cX">X</tspan> + <tspan class="cB">b</tspan> = <tspan class="cY">ŷ</tspan></text>
+  <text x="40" y="204" class="small">把 m 条数据逐行摊开，就是 m 个方程（每套房一行）。🔄 反转：x、y 是【已知】数据，<tspan class="cW" font-weight="700">w</tspan> 和 <tspan class="cB" font-weight="700">b</tspan> 才是【未知数】。</text>
+  <text x="40" y="230" class="small">训练 = 解这个方程组。但数据条数 m 远多于未知数 → 没有精确解 → 找<tspan font-weight="700">误差最小的近似解</tspan>。</text>
+  <text x="40" y="256" class="small" font-weight="700" fill="#C62828">📉 天花板：线性模型只会画直线/平面。现实关系一弯曲，它就贴不上去 —— 于是请出神经网络。</text>
+
+  <!-- ② anatomy -->
+  <text x="40" y="306" class="sec">② 🔬 解剖一个神经元（图上每个圆圈里的公式）</text>
+  <text x="60" y="344" class="big"><tspan class="cS">σ</tspan>( <tspan class="cW">W₁⁽¹⁾</tspan> · <tspan class="cX">X</tspan> + <tspan class="cB">b₁⁽¹⁾</tspan> ) = <tspan class="cA">a₁⁽¹⁾</tspan></text>
+  <text x="40" y="380" class="small">🟦 <tspan class="cX" font-weight="700">X</tspan> —— 全部输入特征 (x₁ … xₙ) 打包成的<tspan font-weight="700">向量</tspan>。同一份输入，发给这一层的每个神经元。</text>
+  <text x="40" y="406" class="small">🟩 <tspan class="cW" font-weight="700">W₁⁽¹⁾</tspan> —— 这个神经元【私有】的权重向量，给每个特征打重要性分；<tspan class="cW" font-weight="700">W₁⁽¹⁾</tspan>·<tspan class="cX" font-weight="700">X</tspan> 是点积（attention 里你见过它）。</text>
+  <text x="40" y="432" class="small">🏷️ 记号规则 —— <tspan class="cL" font-weight="700">方括号上标 [1] = 第几层</tspan>；<tspan class="cL" font-weight="700">下标 1 = 这层里第几个神经元</tspan>。每个神经元都有自己的 W 和 b。</text>
+  <text x="40" y="458" class="small">🟧 <tspan class="cB" font-weight="700">b₁⁽¹⁾</tspan> —— 偏置：这个神经元的"基准值"，把结果整体抬高或压低。</text>
+  <text x="40" y="484" class="small">🟣 <tspan class="cS" font-weight="700">σ</tspan> —— 激活函数（activation function）：套在外面、把线性结果"掰弯"的非线性小函数。</text>
+  <text x="40" y="510" class="small">✅ <tspan class="cA" font-weight="700">a₁⁽¹⁾</tspan> —— 激活值（activation）：这个神经元的输出，编号与神经元一致，流向下一层。</text>
+  <text x="40" y="540" class="body" font-weight="700">💡 看穿它：括号里的 <tspan class="cW">W</tspan>·<tspan class="cX">X</tspan>+<tspan class="cB">b</tspan> 就是一个完整的线性回归 —— 一个神经元 = 一个会拐弯的线性回归。</text>
+
+  <!-- ③ network diagram -->
+  <text x="40" y="592" class="sec">③ 🕸️ 把神经元连成网：数据怎么流（复刻课件图）</text>
+
+  <!-- inputs -->
+  <circle cx="92" cy="660" r="24" fill="#BBDEFB" stroke="#1E88E5" stroke-width="2"/>
+  <text x="92" y="666" class="small" text-anchor="middle" font-weight="700" fill="#1565C0">x₁</text>
+  <circle cx="92" cy="730" r="24" fill="#BBDEFB" stroke="#1E88E5" stroke-width="2"/>
+  <text x="92" y="736" class="small" text-anchor="middle" font-weight="700" fill="#1565C0">x₂</text>
+  <text x="92" y="784" class="body" text-anchor="middle" fill="#1565C0">⋮</text>
+  <circle cx="92" cy="822" r="24" fill="#BBDEFB" stroke="#1E88E5" stroke-width="2"/>
+  <text x="92" y="828" class="small" text-anchor="middle" font-weight="700" fill="#1565C0">xₙ</text>
+
+  <!-- layer 1 -->
+  <rect x="258" y="630" width="152" height="44" rx="22" fill="#ffffff" stroke="#546E7A" stroke-width="1.8"/>
+  <text x="334" y="657" class="node" text-anchor="middle"><tspan class="cS">σ</tspan>(<tspan class="cW">W₁⁽¹⁾</tspan>·<tspan class="cX">X</tspan>+<tspan class="cB">b₁⁽¹⁾</tspan>)</text>
+  <text x="416" y="657" class="node" font-weight="700"><tspan class="cA">→a₁⁽¹⁾</tspan></text>
+  <rect x="258" y="710" width="152" height="44" rx="22" fill="#ffffff" stroke="#546E7A" stroke-width="1.8"/>
+  <text x="334" y="737" class="node" text-anchor="middle"><tspan class="cS">σ</tspan>(<tspan class="cW">W₂⁽¹⁾</tspan>·<tspan class="cX">X</tspan>+<tspan class="cB">b₂⁽¹⁾</tspan>)</text>
+  <text x="416" y="737" class="node" font-weight="700"><tspan class="cA">→a₂⁽¹⁾</tspan></text>
+  <rect x="258" y="790" width="152" height="44" rx="22" fill="#ffffff" stroke="#546E7A" stroke-width="1.8"/>
+  <text x="334" y="817" class="node" text-anchor="middle"><tspan class="cS">σ</tspan>(<tspan class="cW">Wₙ⁽¹⁾</tspan>·<tspan class="cX">X</tspan>+<tspan class="cB">bₙ⁽¹⁾</tspan>)</text>
+  <text x="416" y="817" class="node" font-weight="700"><tspan class="cA">→aₙ⁽¹⁾</tspan></text>
+
+  <!-- layer 2 -->
+  <rect x="516" y="668" width="160" height="44" rx="22" fill="#ffffff" stroke="#546E7A" stroke-width="1.8"/>
+  <text x="596" y="695" class="node" text-anchor="middle"><tspan class="cS">σ</tspan>(<tspan class="cW">W₁⁽²⁾</tspan>·<tspan class="cA">A⁽¹⁾</tspan>+<tspan class="cB">b₁⁽²⁾</tspan>)</text>
+  <text x="682" y="695" class="node" font-weight="700"><tspan class="cA">→a₁⁽²⁾</tspan></text>
+  <rect x="516" y="758" width="160" height="44" rx="22" fill="#ffffff" stroke="#546E7A" stroke-width="1.8"/>
+  <text x="596" y="785" class="node" text-anchor="middle"><tspan class="cS">σ</tspan>(<tspan class="cW">W₂⁽²⁾</tspan>·<tspan class="cA">A⁽¹⁾</tspan>+<tspan class="cB">b₂⁽²⁾</tspan>)</text>
+  <text x="682" y="785" class="node" font-weight="700"><tspan class="cA">→a₂⁽²⁾</tspan></text>
+
+  <!-- output -->
+  <circle cx="800" cy="738" r="26" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2"/>
+  <text x="800" y="745" class="body" text-anchor="middle" font-weight="700" fill="#FB8C00">ŷ</text>
+
+  <!-- arrows inputs -> L1 -->
+  <line x1="118" y1="656" x2="254" y2="650" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="118" y1="664" x2="254" y2="728" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="116" y1="672" x2="254" y2="806" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="118" y1="724" x2="254" y2="656" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="118" y1="730" x2="254" y2="732" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="118" y1="738" x2="254" y2="810" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="116" y1="810" x2="254" y2="662" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="118" y1="816" x2="254" y2="738" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="118" y1="824" x2="254" y2="814" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <!-- arrows L1 -> L2 -->
+  <line x1="452" y1="654" x2="512" y2="684" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="452" y1="658" x2="512" y2="772" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="452" y1="734" x2="512" y2="692" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="452" y1="738" x2="512" y2="778" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="452" y1="814" x2="512" y2="700" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="452" y1="810" x2="512" y2="784" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <!-- arrows L2 -> y -->
+  <line x1="718" y1="696" x2="772" y2="726" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+  <line x1="718" y1="778" x2="772" y2="748" stroke="#CE93D8" stroke-width="1.3" marker-end="url(#arrP)"/>
+
+  <!-- layer captions -->
+  <text x="92" y="872" class="tiny" text-anchor="middle" fill="#1565C0" font-weight="700">输入层（特征向量 X）</text>
+  <text x="334" y="872" class="tiny" text-anchor="middle" fill="#546E7A" font-weight="700">第 [1] 层（隐藏层）</text>
+  <text x="596" y="872" class="tiny" text-anchor="middle" fill="#546E7A" font-weight="700">第 [2] 层</text>
+  <text x="800" y="872" class="tiny" text-anchor="middle" fill="#FB8C00" font-weight="700">输出（预测）</text>
+
+  <text x="60" y="906" class="eq" font-weight="700">🚂 数据流：<tspan class="cX">X</tspan> ──第[1]层──▶ <tspan class="cA">A⁽¹⁾</tspan> ──第[2]层──▶ <tspan class="cA">A⁽²⁾</tspan> ──▶ <tspan class="cY">ŷ</tspan></text>
+  <text x="40" y="934" class="small"><tspan class="cA" font-weight="700">A⁽¹⁾</tspan> = 第 1 层所有激活值 (a₁⁽¹⁾ … aₙ⁽¹⁾) 打包成的向量。注意第 2 层公式里乘的不再是 X 而是 <tspan class="cA" font-weight="700">A⁽¹⁾</tspan> —— 层层接力。</text>
+
+  <!-- ④ matrices -->
+  <text x="40" y="986" class="sec">④ 🧮 为什么说神经网络"全是矩阵"：把一层打包</text>
+  <text x="60" y="1016" class="eq">单个神经元：<tspan class="cA">a₁⁽¹⁾</tspan> = <tspan class="cS">σ</tspan>(<tspan class="cW">W₁⁽¹⁾</tspan>·<tspan class="cX">X</tspan> + <tspan class="cB">b₁⁽¹⁾</tspan>)　　← 向量 · 向量（一次点积）</text>
+  <text x="60" y="1044" class="eq" font-weight="700">整层打包：　<tspan class="cA">A⁽¹⁾</tspan> = <tspan class="cS">σ</tspan>(<tspan class="cW">W⁽¹⁾</tspan>·<tspan class="cX">X</tspan> + <tspan class="cB">B⁽¹⁾</tspan>)　　← 矩阵 · 向量，一次算完一整层！</text>
+  <text x="40" y="1072" class="small"><tspan class="cW" font-weight="700">W⁽¹⁾</tspan> 的每一行 = 这层一个神经元的权重向量。n 个神经元的 n 次点积，合并成一次矩阵乘法 —— 这正是矩阵乘法的本职。</text>
+  <text x="40" y="1098" class="small">再把一批数据也打包进去 → 矩阵 × 矩阵；更高维的批量（如一批图片）→ 🧊 张量 tensor 出场。向量 ➝ 矩阵 ➝ 张量，步步升维。</text>
+
+  <!-- ⑤ why sigma -->
+  <text x="40" y="1150" class="sec">⑤ ⚡ 关键追问：没有 σ 会怎样？—— 多层全白堆</text>
+  <text x="60" y="1180" class="eq"><tspan class="cW">W⁽²⁾</tspan>·(<tspan class="cW">W⁽¹⁾</tspan>·<tspan class="cX">X</tspan> + <tspan class="cB">b⁽¹⁾</tspan>) + <tspan class="cB">b⁽²⁾</tspan> ＝ (<tspan class="cW">W⁽²⁾W⁽¹⁾</tspan>)·<tspan class="cX">X</tspan> + (<tspan class="cB">W⁽²⁾b⁽¹⁾+b⁽²⁾</tspan>)</text>
+  <text x="40" y="1208" class="small">看清楚：两层【纯线性】叠加，合并后仍是 W·X + b 的形状 —— 堆 100 层等于 1 层，全部白忙。😱</text>
+  <text x="40" y="1234" class="small" font-weight="700" fill="#8E24AA">σ 的使命：在层与层之间打断线性，让网络能逼近任意弯曲的关系。这是深度学习的命门，不是装饰。</text>
+
+  <!-- ⑥ map -->
+  <text x="40" y="1286" class="sec">⑥ 🗺️ 你在地图上的位置</text>
+  <text x="40" y="1314" class="small">· 已学的方程组 / 矩阵 / 奇异性 = 地基；本课把它和机器学习正式合龙：线性回归 = 方程组，网络 = 矩阵流水线。</text>
+  <text x="40" y="1340" class="small" font-weight="700" fill="#1565C0">· 🎯 Transformer 连接：W_Q·X、W_K·X、W_V·X 和这里的 W⁽¹⁾·X 是同一种操作；attention 里把 σ 的位置</text>
+  <text x="40" y="1362" class="small" font-weight="700" fill="#1565C0">　换成了 softmax。你现在看的，就是那篇论文的"细胞结构图"。</text>
+
+  <line x1="40" y1="1386" x2="860" y2="1386" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1412" class="tiny" fill="#888" font-size="12">🧠 速记：神经元 = σ(W·X+b) = 会拐弯的线性回归；上标[层]下标[第几个]；一层 = 一次矩阵乘法；没有 σ 多层白堆；</text>
+  <text x="40" y="1434" class="tiny" fill="#888" font-size="12">数据流 X → A⁽¹⁾ → A⁽²⁾ → ŷ 层层接力；向量(一条) ➝ 矩阵(一层/一批) ➝ 张量(更高维)。</text>
+</svg>

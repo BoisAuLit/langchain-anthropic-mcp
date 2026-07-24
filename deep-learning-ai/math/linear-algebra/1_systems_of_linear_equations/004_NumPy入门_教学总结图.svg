@@ -1,0 +1,154 @@
+<svg width="900" height="1480" viewBox="0 0 900 1480" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .body { font-size: 15px; fill: #333; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #333; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #333; }
+    .gridline { stroke: #999; stroke-width: 1; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="1480" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="52" class="title">NumPy 入门 —— 数组的创建、形状、运算、切片、堆叠</text>
+  <text x="40" y="84" class="subtitle">Notebook《Intro to NumPy》总结。这是你 Transformer 路线"阶段 2"的第一块积木：以后摆弄词向量矩阵全靠它。</text>
+  <line x1="40" y1="102" x2="860" y2="102" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① why -->
+  <text x="40" y="140" class="sec">① 为什么用 NumPy，不用 Python list</text>
+  <text x="40" y="168" class="small">· NumPy 数组（ndarray）= 同类型元素的网格。比 list 更快、更省内存、自带海量数学函数。</text>
+  <text x="40" y="194" class="small">· 一切从 <tspan class="code" font-weight="700">import numpy as np</tspan> 开始。注意：list 的 + 是"拼接"，NumPy 的 + 才是"数学加法"。</text>
+
+  <!-- ② creation -->
+  <text x="40" y="236" class="sec">② 创建数组的 8 种姿势</text>
+  <text x="60" y="266" class="code">np.array([1, 2, 3])             → [1 2 3]            手动给值</text>
+  <text x="60" y="292" class="code">np.arange(3)                    → [0 1 2]            从 0 数 3 个</text>
+  <text x="60" y="318" class="code">np.arange(1, 23, 3)             → [1 4 7 ... 22]     起点, 终点(不含), 步长</text>
+  <text x="60" y="344" class="code">np.linspace(0, 100, 5)          → [0. 25. 50. 75. 100.]  起点, 终点(含!), 个数</text>
+  <text x="60" y="370" class="code">np.linspace(0,100,5,dtype=int)  → [0 25 50 75 100]   dtype 指定类型</text>
+  <text x="60" y="396" class="code">np.ones(3) / np.zeros(3)        → [1. 1. 1.] / [0. 0. 0.]</text>
+  <text x="60" y="422" class="code">np.random.rand(3)               → 三个 0~1 的随机数</text>
+  <text x="60" y="448" class="code">np.empty(3)                     → 未初始化（最快，但值是内存残留）</text>
+  <text x="40" y="480" class="small" font-weight="700" fill="#F57F17">易错点：arange 的终点【不含】，linspace 的终点【含】；linspace 默认输出 float（所以带小数点）。</text>
+
+  <!-- ③ multidim -->
+  <text x="40" y="524" class="sec">③ 多维数组与三个身份属性</text>
+  <text x="60" y="554" class="code">np.array([[1,2,3], [4,5,6]])    直接造 2-D</text>
+  <text x="60" y="580" class="code">np.reshape(一维数组, (2, 3))     重排形状</text>
+  <text x="60" y="612" class="small">· <tspan class="code" font-weight="700">ndim</tspan> = 2 　→ 几个维度（数方括号层数）</text>
+  <text x="60" y="638" class="small">· <tspan class="code" font-weight="700">shape</tspan> = (2, 3) → 每维多长：2 行 3 列</text>
+  <text x="60" y="664" class="small">· <tspan class="code" font-weight="700">size</tspan> = 6 　→ 元素总个数（2×3）</text>
+
+  <!-- grid 2x3 -->
+  <text x="680" y="540" class="tiny" text-anchor="middle">3 列 →</text>
+  <rect x="620" y="548" width="120" height="80" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.5"/>
+  <line x1="660" y1="548" x2="660" y2="628" class="gridline"/>
+  <line x1="700" y1="548" x2="700" y2="628" class="gridline"/>
+  <line x1="620" y1="588" x2="740" y2="588" class="gridline"/>
+  <text x="640" y="574" class="cell" text-anchor="middle">1</text>
+  <text x="680" y="574" class="cell" text-anchor="middle">2</text>
+  <text x="720" y="574" class="cell" text-anchor="middle">3</text>
+  <text x="640" y="614" class="cell" text-anchor="middle">4</text>
+  <text x="680" y="614" class="cell" text-anchor="middle">5</text>
+  <text x="720" y="614" class="cell" text-anchor="middle">6</text>
+  <text x="752" y="592" class="tiny">2 行 ↓</text>
+  <text x="680" y="650" class="tiny" text-anchor="middle" fill="#1565C0">shape = (2, 3)</text>
+
+  <!-- ④ math ops -->
+  <text x="40" y="704" class="sec">④ 数学运算：逐元素 + 广播（broadcasting）</text>
+  <text x="60" y="734" class="code">[2,4,6] + [1,3,5]      → [3, 7, 11]    逐元素相加</text>
+  <text x="60" y="760" class="code">[2,4,6] * [1,3,5]      → [2, 12, 30]   逐元素相乘（不是矩阵乘法！）</text>
+  <text x="60" y="786" class="code">np.array([1, 2]) * 1.6 → [1.6, 3.2]    广播：标量自动作用到每个元素</text>
+  <text x="40" y="816" class="small">广播的直觉：一个数自动"复制"成整列去参与运算。课中例子：英里数组 × 1.6 = 公里数组，一行完成单位换算。</text>
+  <text x="40" y="842" class="small" font-weight="700" fill="#1565C0">我的提醒：* 永远是逐元素；真正的矩阵乘法用 @（以后学）。这是 NumPy 新手第一大坑，先挂个旗。</text>
+
+  <!-- ⑤ indexing & slicing -->
+  <text x="40" y="886" class="sec">⑤ 索引与切片：array[start : end : step]</text>
+  <text x="60" y="916" class="code">a = [1, 2, 3, 4, 5]</text>
+  <text x="60" y="942" class="code">a[2]   → 3          下标从 0 数</text>
+  <text x="60" y="968" class="code">a[1:4] → [2, 3, 4]  end 不包含！</text>
+  <text x="60" y="994" class="code">a[:3]  → [1, 2, 3]  start 缺省 = 0</text>
+  <text x="60" y="1020" class="code">a[2:]  → [3, 4, 5]  end 缺省 = 到底</text>
+  <text x="60" y="1046" class="code">a[::2] → [1, 3, 5]  step=2 隔一取一</text>
+
+  <text x="60" y="1086" class="code">two_dim[2][1] → 8         第 3 行第 2 列</text>
+  <text x="60" y="1112" class="code">two_dim[0:2]  → 前两行    （按行切）</text>
+  <text x="60" y="1138" class="code">two_dim[:, 1] → [2, 5, 8] 整列抽出（右图）</text>
+
+  <!-- 3x3 grid with column highlight -->
+  <rect x="640" y="960" width="108" height="108" fill="#ffffff" stroke="#999" stroke-width="1.2"/>
+  <rect x="676" y="960" width="36" height="108" fill="#FFF3CD" stroke="#F57F17" stroke-width="1.5"/>
+  <line x1="676" y1="960" x2="676" y2="1068" class="gridline"/>
+  <line x1="712" y1="960" x2="712" y2="1068" class="gridline"/>
+  <line x1="640" y1="996" x2="748" y2="996" class="gridline"/>
+  <line x1="640" y1="1032" x2="748" y2="1032" class="gridline"/>
+  <text x="658" y="984" class="cell" text-anchor="middle">1</text>
+  <text x="694" y="984" class="cell" text-anchor="middle" font-weight="700">2</text>
+  <text x="730" y="984" class="cell" text-anchor="middle">3</text>
+  <text x="658" y="1020" class="cell" text-anchor="middle">4</text>
+  <text x="694" y="1020" class="cell" text-anchor="middle" font-weight="700">5</text>
+  <text x="730" y="1020" class="cell" text-anchor="middle">6</text>
+  <text x="658" y="1056" class="cell" text-anchor="middle">7</text>
+  <text x="694" y="1056" class="cell" text-anchor="middle" font-weight="700">8</text>
+  <text x="730" y="1056" class="cell" text-anchor="middle">9</text>
+  <text x="694" y="1090" class="tiny" text-anchor="middle" fill="#F57F17">[:, 1] 抽出第 1 列（所有行）</text>
+
+  <!-- ⑥ stacking -->
+  <text x="40" y="1186" class="sec">⑥ 堆叠：把数组拼起来</text>
+
+  <!-- a1 -->
+  <rect x="60" y="1206" width="60" height="60" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.5"/>
+  <line x1="90" y1="1206" x2="90" y2="1266" class="gridline"/>
+  <line x1="60" y1="1236" x2="120" y2="1236" class="gridline"/>
+  <text x="75" y="1226" class="cell" text-anchor="middle">1</text><text x="105" y="1226" class="cell" text-anchor="middle">1</text>
+  <text x="75" y="1256" class="cell" text-anchor="middle">2</text><text x="105" y="1256" class="cell" text-anchor="middle">2</text>
+  <text x="90" y="1284" class="tiny" text-anchor="middle">a1</text>
+  <text x="138" y="1242" class="body">+</text>
+  <!-- a2 -->
+  <rect x="165" y="1206" width="60" height="60" fill="#E0F2F1" stroke="#26A69A" stroke-width="1.5"/>
+  <line x1="195" y1="1206" x2="195" y2="1266" class="gridline"/>
+  <line x1="165" y1="1236" x2="225" y2="1236" class="gridline"/>
+  <text x="180" y="1226" class="cell" text-anchor="middle">3</text><text x="210" y="1226" class="cell" text-anchor="middle">3</text>
+  <text x="180" y="1256" class="cell" text-anchor="middle">4</text><text x="210" y="1256" class="cell" text-anchor="middle">4</text>
+  <text x="195" y="1284" class="tiny" text-anchor="middle">a2</text>
+
+  <!-- vstack -->
+  <rect x="330" y="1206" width="60" height="60" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.5"/>
+  <rect x="330" y="1266" width="60" height="60" fill="#E0F2F1" stroke="#26A69A" stroke-width="1.5"/>
+  <line x1="360" y1="1206" x2="360" y2="1326" class="gridline"/>
+  <line x1="330" y1="1236" x2="390" y2="1236" class="gridline"/>
+  <line x1="330" y1="1296" x2="390" y2="1296" class="gridline"/>
+  <text x="345" y="1226" class="cell" text-anchor="middle">1</text><text x="375" y="1226" class="cell" text-anchor="middle">1</text>
+  <text x="345" y="1256" class="cell" text-anchor="middle">2</text><text x="375" y="1256" class="cell" text-anchor="middle">2</text>
+  <text x="345" y="1286" class="cell" text-anchor="middle">3</text><text x="375" y="1286" class="cell" text-anchor="middle">3</text>
+  <text x="345" y="1316" class="cell" text-anchor="middle">4</text><text x="375" y="1316" class="cell" text-anchor="middle">4</text>
+  <text x="360" y="1344" class="tiny" text-anchor="middle" fill="#1565C0">vstack 竖着摞 → (4, 2)</text>
+
+  <!-- hstack -->
+  <rect x="500" y="1206" width="60" height="60" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.5"/>
+  <rect x="560" y="1206" width="60" height="60" fill="#E0F2F1" stroke="#26A69A" stroke-width="1.5"/>
+  <line x1="530" y1="1206" x2="530" y2="1266" class="gridline"/>
+  <line x1="590" y1="1206" x2="590" y2="1266" class="gridline"/>
+  <line x1="500" y1="1236" x2="620" y2="1236" class="gridline"/>
+  <text x="515" y="1226" class="cell" text-anchor="middle">1</text><text x="545" y="1226" class="cell" text-anchor="middle">1</text>
+  <text x="575" y="1226" class="cell" text-anchor="middle">3</text><text x="605" y="1226" class="cell" text-anchor="middle">3</text>
+  <text x="515" y="1256" class="cell" text-anchor="middle">2</text><text x="545" y="1256" class="cell" text-anchor="middle">2</text>
+  <text x="575" y="1256" class="cell" text-anchor="middle">4</text><text x="605" y="1256" class="cell" text-anchor="middle">4</text>
+  <text x="560" y="1284" class="tiny" text-anchor="middle" fill="#00695C">hstack 横着拼 → (2, 4)</text>
+
+  <text x="680" y="1230" class="code" font-size="13">np.vstack((a1, a2))</text>
+  <text x="680" y="1254" class="code" font-size="13">np.hstack((a1, a2))</text>
+  <text x="680" y="1278" class="code" font-size="13">np.hsplit(...) 反向拆开</text>
+
+  <!-- ⑦ quiz -->
+  <text x="40" y="1392" class="sec">⑦ 课后题：np.zeros() 和 np.empty() 的区别</text>
+  <text x="40" y="1420" class="small">答案是 <tspan font-weight="700">D</tspan>：zeros 真正写入 0；empty 只"圈地不打扫"——值是内存残留，碰巧常显示 0。empty 更快，但用前必须自己填值。</text>
+
+  <line x1="40" y1="1440" x2="860" y2="1440" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1464" class="tiny" fill="#888" font-size="12">速记：arange 不含尾、linspace 含尾；ndim/shape/size 三件套；* 是逐元素、矩阵乘以后用 @；切片 end 不包含；vstack 竖、hstack 横。</text>
+</svg>

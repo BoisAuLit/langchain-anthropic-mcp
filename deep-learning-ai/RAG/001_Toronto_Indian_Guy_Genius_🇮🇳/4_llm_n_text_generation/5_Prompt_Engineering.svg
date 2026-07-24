@@ -1,0 +1,129 @@
+<svg width="900" height="1990" viewBox="0 0 900 1990" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 26px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #1B5E20; }
+    .mono { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+    /* dark-box syntax colors */
+    .jk { fill: #4FC3F7; } .js { fill: #A5D6A7; } .jp { fill: #CE93D8; } .jc { fill: #90A4AE; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="1990" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">提示工程与 Prompt 模板 ✍️ <tspan font-size="16" fill="#666" class="en">Prompt Engineering for RAG</tspan></text>
+  <text x="40" y="78" class="subtitle">一句话本质：prompt 在代码里是一串带<tspan class="cV" font-weight="700">角色</tspan>的消息（messages）；用 <tspan class="cP" font-weight="700">System Prompt</tspan> 定行为、用</text>
+  <text x="40" y="102" class="subtitle"><tspan class="cP" font-weight="700">模板 template</tspan> 把"系统指令＋对话历史＋检索文档＋当前问题"拼成一个增强 prompt。</text>
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① messages format -->
+  <text x="40" y="156" class="sec">① 📨 Messages 格式（OpenAI 标准，最常用）</text>
+  <text x="40" y="184" class="small">一条消息 = <tspan class="cO" font-weight="700">content</tspan>（消息文本）＋ <tspan class="cV" font-weight="700">role</tspan>（角色：system / user / assistant）。整体是一段 JSON：</text>
+  <rect x="40" y="200" width="450" height="186" rx="12" fill="#34404F"/>
+  <text x="60" y="226" class="mono w">{</text>
+  <text x="76" y="246" class="mono"><tspan class="js">"messages"</tspan><tspan class="w">: [</tspan></text>
+  <text x="96" y="266" class="mono w">{</text>
+  <text x="116" y="286" class="mono"><tspan class="js">"role"</tspan><tspan class="w">: </tspan><tspan class="js">"system"</tspan><tspan class="w">,</tspan></text>
+  <text x="116" y="306" class="mono"><tspan class="js">"content"</tspan><tspan class="w">: </tspan><tspan class="js">"You are a helpful…"</tspan></text>
+  <text x="96" y="326" class="mono w">},</text>
+  <text x="96" y="346" class="mono w">{ <tspan class="js">"role"</tspan>: <tspan class="js">"user"</tspan>, <tspan class="js">"content"</tspan>: <tspan class="js">"…?"</tspan> }</text>
+  <text x="76" y="366" class="mono w">]</text>
+  <text x="60" y="382" class="mono w">}</text>
+  <text x="510" y="232" class="small">· 这是和 LLM 交互的"通用信封"。</text>
+  <text x="510" y="258" class="small">· 灵活：能往里塞各种上下文，</text>
+  <text x="510" y="280" class="small">　精细地控制 LLM 如何回应。</text>
+  <text x="510" y="312" class="small cV" font-weight="700">提示工程 Prompt Engineering</text>
+  <text x="510" y="334" class="small">= 一系列让结果更好的</text>
+  <text x="510" y="356" class="small">　写 prompt 的技巧总称。</text>
+
+  <!-- ② three roles -->
+  <text x="40" y="426" class="sec">② 🎭 三种角色 <tspan class="en">system / user / assistant</tspan></text>
+  <rect x="40" y="444" width="260" height="100" rx="10" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.2"/>
+  <text x="60" y="470" class="small cP" font-weight="700">system 系统</text>
+  <text x="60" y="494" class="tiny">给 LLM 的"高层指令"，</text>
+  <text x="60" y="514" class="tiny">影响整体行为、语气、流程。</text>
+  <text x="60" y="534" class="tiny cP">最重要的一条 ↓ 详见 ④</text>
+  <rect x="320" y="444" width="260" height="100" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="340" y="470" class="small cV" font-weight="700">user 用户</text>
+  <text x="340" y="494" class="tiny">记录用户已发送的 prompt</text>
+  <text x="340" y="514" class="tiny">（你说过的话）。</text>
+  <rect x="600" y="444" width="260" height="100" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="620" y="470" class="small cG" font-weight="700">assistant 助手</text>
+  <text x="620" y="494" class="tiny">记录 LLM 之前生成的回复</text>
+  <text x="620" y="514" class="tiny">（它说过的话）。</text>
+
+  <!-- ③ multi-turn + chat template -->
+  <text x="40" y="588" class="sec">③ 🔁 多轮对话的真相 ＋ chat template 特殊标签</text>
+  <text x="40" y="616" class="small">多轮对话（multi-turn）里，LLM <tspan class="cR" font-weight="700">并没有"记住"前文</tspan> —— 而是每次把<tspan font-weight="700">整段对话</tspan>转成 messages、</text>
+  <text x="40" y="642" class="small">新消息放末尾，<tspan class="cR" font-weight="700">每轮都把全部历史重新提交一次</tspan>（与上节 Lab 的 context 机制完全一致）。</text>
+  <text x="40" y="672" class="small">提交时，JSON 会被拼成<tspan font-weight="700">一段纯文本</tspan>，用特殊标签标出每条消息的起止，模型训练时学会识别它们：</text>
+  <rect x="40" y="688" width="820" height="118" rx="12" fill="#34404F"/>
+  <text x="60" y="712" class="mono"><tspan class="jk">&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;</tspan><tspan class="js">system</tspan><tspan class="jk">&lt;|end_header_id|&gt;</tspan></text>
+  <text x="60" y="732" class="mono wg">You are a helpful AI assistant…<tspan class="jk">&lt;|eot_id|&gt;</tspan></text>
+  <text x="60" y="760" class="mono"><tspan class="jk">&lt;|start_header_id|&gt;</tspan><tspan class="js">user</tspan><tspan class="jk">&lt;|end_header_id|&gt;</tspan></text>
+  <text x="60" y="780" class="mono wg">What's the capital of Canada?<tspan class="jk">&lt;|eot_id|&gt;</tspan></text>
+  <text x="60" y="800" class="mono"><tspan class="jk">&lt;|start_header_id|&gt;</tspan><tspan class="js">assistant</tspan><tspan class="jk">&lt;|end_header_id|&gt;</tspan> <tspan class="wg">Ottawa…</tspan></text>
+
+  <!-- ④ system prompt -->
+  <text x="40" y="850" class="sec">④ 🧭 System Prompt：给 LLM 立"行为准则"</text>
+  <text x="40" y="878" class="small">提供"该如何表现"的高层指令：固定语气、固定流程都写在这里。<tspan class="cO" font-weight="700">每个请求都会带上它</tspan>。</text>
+  <text x="40" y="904" class="small">课件用某知名 chatbot 的真实 system prompt 举例 —— 第一印象就是<tspan class="cR" font-weight="700">长</tspan>：约 <tspan class="cO" font-weight="700">2100 词、4~5 页</tspan>！它含两大块：</text>
+  <rect x="40" y="920" width="400" height="120" rx="10" fill="#F5F5F5" stroke="#ccc" stroke-width="1"/>
+  <text x="60" y="946" class="small cV" font-weight="700">高层指令 High-Level Instructions</text>
+  <text x="60" y="970" class="tiny">· 基础行为与<tspan font-weight="700">知识截止日期</tspan>（如"知识更新到 2024 年 10 月"）</text>
+  <text x="60" y="994" class="tiny">· 当前日期 → 帮模型判断自己信息有多旧、能否答某问题</text>
+  <text x="60" y="1022" class="tiny cGray">让模型对"信息时效"有自知之明</text>
+  <rect x="460" y="920" width="400" height="120" rx="10" fill="#F5F5F5" stroke="#ccc" stroke-width="1"/>
+  <text x="480" y="946" class="small cP" font-weight="700">语气与人格 Tone &amp; Personality</text>
+  <text x="480" y="970" class="tiny">· 逐步推理 step by step　· 不协助有害请求</text>
+  <text x="480" y="994" class="tiny">· 用 markdown 回复　· "求知欲强、爱听人类观点"</text>
+  <text x="480" y="1022" class="tiny cGray">这些设定赋予了它一种"人格"</text>
+
+  <!-- ⑤ your own system prompt -->
+  <text x="40" y="1084" class="sec">⑤ 🛠️ 写你自己的 System Prompt（尤其为 RAG）</text>
+  <text x="40" y="1112" class="small">· 指定回复风格：<tspan font-weight="700">详尽展开</tspan> 或 <tspan font-weight="700">简洁作答</tspan>。</text>
+  <text x="40" y="1138" class="small">· 给 RAG 应用的三条黄金指令：</text>
+  <text x="64" y="1164" class="small"><tspan class="cG" font-weight="700">1.</tspan> 只用<tspan class="cV" font-weight="700">检索到的文档</tspan>来回答（不要自由发挥）；</text>
+  <text x="64" y="1190" class="small"><tspan class="cG" font-weight="700">2.</tspan> 自行<tspan class="cV" font-weight="700">判断文档是否相关</tspan>；</text>
+  <text x="64" y="1216" class="small"><tspan class="cG" font-weight="700">3.</tspan> 在回答里<tspan class="cV" font-weight="700">标注来源 cite sources</tspan>。</text>
+  <text x="40" y="1246" class="small cR" font-weight="700">⭐ 关键：system prompt 会附加到你 LLM 处理的【每一个】prompt 上 —— 打磨它，性价比极高。</text>
+
+  <!-- ⑥ prompt template -->
+  <text x="40" y="1302" class="sec">⑥ 🧩 Prompt 模板：决定"内容塞在哪"的结构</text>
+  <text x="40" y="1330" class="small">增强 prompt 包含很多块信息，用模板固定结构、方便实验（改一块就能看效果）。四段顺序：</text>
+  <rect x="40" y="1346" width="820" height="40" rx="8" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.2"/>
+  <text x="56" y="1371" class="small"><tspan class="cP" font-weight="700"># 系统指令 System Instructions</tspan> —— 高层行为引导（含上面三条 RAG 指令）</text>
+  <rect x="40" y="1392" width="820" height="40" rx="8" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="56" y="1417" class="small"><tspan class="cV" font-weight="700"># 对话历史 Conversation History</tspan> —— 若支持多轮，放之前的 User/Assistant 往来</text>
+  <rect x="40" y="1438" width="820" height="40" rx="8" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="56" y="1463" class="small"><tspan class="cG" font-weight="700"># 检索文档 Retrieved Documents</tspan> —— 检索器召回的前 5~10 个 chunk + 处理说明</text>
+  <rect x="40" y="1484" width="820" height="40" rx="8" fill="#FFF3E0" stroke="#FFCC80" stroke-width="1.2"/>
+  <text x="56" y="1509" class="small"><tspan class="cO" font-weight="700"># 当前问题 Current Query</tspan> —— 用户最新的那条 prompt，模型要回答的就是它</text>
+  <text x="40" y="1554" class="small">课件示例把这四段拼成一个完整 prompt（系统指令 + 一轮历史 + 三个 [DOC] + 当前问题"加拿大首都？"）。</text>
+
+  <!-- ⑦ latest intel -->
+  <text x="40" y="1610" class="sec">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="1638" class="small">这节课教你"手写 system prompt + 设计模板" —— 2026 年这件事正在<tspan class="cR" font-weight="700">升级换名</tspan>：</text>
+  <text x="40" y="1664" class="small">· <tspan class="cV" font-weight="700">上下文工程 Context Engineering（新前沿）：</tspan>随着模型推理变强，"措辞"变次要，<tspan class="cP" font-weight="700">"模型看到的</tspan></text>
+  <text x="40" y="1690" class="small">　<tspan class="cP" font-weight="700">全部上下文质量"成了核心变量</tspan>。重点从"写好一句话"转向"设计 prompt 里出现的一切"——</text>
+  <text x="40" y="1716" class="small">　正是本课"模板 + 检索 + 历史"那套结构的放大版。提示工程的演进：2023 咒语 → 2024 XML/思维链 →</text>
+  <text x="40" y="1742" class="small">　2025 RAG 成主流 → 2026 与"提示管理 Prompt Management / 上下文工程"合流。</text>
+  <text x="40" y="1768" class="small">· <tspan class="cV" font-weight="700">RAG 新共识：</tspan>不是"塞更多上下文"，而是"<tspan class="cG" font-weight="700">在对的时机给对的上下文</tspan>"——每个 query 只召回真正</text>
+  <text x="40" y="1794" class="small">　需要的 chunk。进阶玩法：Multi-vector RAG、GraphRAG（知识图谱检索）、Self-RAG（模型自己决定何时检索）。</text>
+  <text x="40" y="1820" class="small">· <tspan class="cV" font-weight="700">自动优化提示：</tspan>Stanford 的 <tspan class="cO" font-weight="700">DSPy 2.x（MIPROv2 优化器）</tspan>—— 你只"声明想要什么 + 给一批样例"，</text>
+  <text x="40" y="1846" class="small">　它自动生成并按可量化指标迭代优化 prompt，取代手工调措辞。</text>
+  <text x="40" y="1872" class="small cV" font-weight="700">一句话：本课的手写 system prompt 仍是地基；2026 的杠杆在"上下文工程"和"自动优化"，而非死磕用词。</text>
+
+  <text x="40" y="1928" class="small cGray">🧪 个人补充（非课件）：这节课的"模板四段结构"其实就是上下文工程的雏形 —— 你已经在做正确的事，</text>
+  <text x="40" y="1954" class="small cGray">　 只是 2026 把"检索哪些、放什么顺序、给多少"这件事，提升成了比"措辞"更重要的核心技能。</text>
+</svg>

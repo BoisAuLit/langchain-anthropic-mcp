@@ -1,0 +1,132 @@
+<svg width="1100" height="2105" viewBox="0 0 1100 2105" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #555; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .nlab { font-size: 14px; font-weight: 700; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#37474F" stroke-width="1.8" stroke-linecap="round"/></marker>
+    <marker id="arD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#90A4AE" stroke-width="1.6" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="2105" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">微调 🎛️ <tspan font-size="17" fill="#666" class="en">Fine-Tuning</tspan></text>
+  <text x="40" y="76" class="subtitle">一句话本质：不改 prompt，而是用你的数据"重训"现成 LLM，真正改写它的内部参数（parameters）。</text>
+  <text x="40" y="100" class="subtitle">与 RAG 的分工：<tspan class="cV" font-weight="700">RAG 管"知道什么"（注入知识）</tspan>，<tspan class="cO" font-weight="700">微调管"怎么说话"（领域适配）</tspan> —— 互补，常一起用。</text>
+  <line x1="40" y1="118" x2="1060" y2="118" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① core idea + SFT loop -->
+  <text x="40" y="154" class="sec">① 🧠 核心思想：监督微调 <tspan class="en">Supervised Fine-Tuning (SFT)</tspan></text>
+  <text x="40" y="182" class="small">用一份<tspan font-weight="700">带标注的领域数据集（labeled dataset）</tspan>重新训练模型，调整其内部参数。<tspan x="40" dy="24">过程很像最初的预训练 pre-training，只是把数据换成某个专精领域的。</tspan></text>
+  <text x="40" y="234" class="small">· <tspan class="cV" font-weight="700">SFT（监督）：</tspan>"监督"指用了有标准答案的数据集；<tspan x="60" dy="24">喂入"指令 + 标准最佳答案（ground truth）"配对训练。</tspan></text>
+  <text x="40" y="286" class="small">· <tspan class="cV" font-weight="700">指令微调（Instruction tuning）：</tspan>数据集 = 一条条"指令/问题" +<tspan x="60" dy="24">"期望的正确答案"，专门教模型"听话办事"的行为。</tspan></text>
+
+  <!-- SFT training loop flowchart : left-to-right, loop arc below -->
+  <rect x="40" y="338" width="220" height="50" rx="9" fill="#EF5350"/>
+  <text x="150" y="360" class="small w" text-anchor="middle" font-weight="700">① 喂入指令</text>
+  <text x="150" y="378" class="tiny w" text-anchor="middle">Feed Instructions</text>
+  <line x1="260" y1="363" x2="296" y2="363" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="300" y="338" width="250" height="50" rx="9" fill="#EF5350"/>
+  <text x="425" y="360" class="small w" text-anchor="middle" font-weight="700">② 对比"标准答案"</text>
+  <text x="425" y="378" class="tiny w" text-anchor="middle">Compare output to correct answers</text>
+  <line x1="550" y1="363" x2="586" y2="363" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="590" y="338" width="250" height="50" rx="9" fill="none" stroke="#37474F" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="715" y="360" class="small" text-anchor="middle" font-weight="700">③ 调整内部参数</text>
+  <text x="715" y="378" class="tiny" text-anchor="middle">Adjust internal parameters</text>
+  <path d="M715 388 V414 H150 V394" fill="none" stroke="#90A4AE" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arD)"/>
+  <text x="432" y="432" class="tiny cGray" text-anchor="middle">↑ 反复迭代：让输出越来越贴近标准答案（与预训练同理，只是换了领域数据）</text>
+
+  <!-- ② before / after example -->
+  <text x="40" y="476" class="sec">② 🏥 直观例子：把通用模型微调到"医疗领域"</text>
+  <text x="40" y="504" class="small">同一个问题：<tspan font-weight="700">"我有关节痛、皮疹、对阳光敏感，可能是什么?"</tspan> —— 看微调前后回答的差别：</text>
+
+  <rect x="40" y="520" width="500" height="122" rx="10" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="60" y="546" class="small cR" font-weight="700">✗ 微调前 Before（通用模型）</text>
+  <text x="60" y="570" class="tiny"><tspan font-weight="700">输入：</tspan>关节痛 + 皮疹 + 光敏，可能是什么?</text>
+  <text x="60" y="594" class="tiny"><tspan font-weight="700">输出：</tspan>"这些都挺常见的，关节痛可能是健身过度，<tspan x="60" dy="18">皮疹很普遍，光敏也许只是该擦防晒霜!"</tspan></text>
+  <text x="60" y="634" class="tiny cGray">→ 语气随意、泛泛而谈，没在医学数据上专精过。</text>
+
+  <rect x="560" y="520" width="500" height="122" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="580" y="546" class="small cG" font-weight="700">✓ 微调后 After（医疗专精模型）</text>
+  <text x="580" y="570" class="tiny"><tspan font-weight="700">输入：</tspan>（完全相同的问题）</text>
+  <text x="580" y="594" class="tiny"><tspan font-weight="700">输出：</tspan>"这组症状可能提示<tspan class="cG" font-weight="700">自身免疫病</tspan>，如<tspan x="580" dy="18"><tspan class="cG" font-weight="700">系统性红斑狼疮 (SLE)</tspan>，建议就医做正规评估。"</tspan></text>
+  <text x="580" y="634" class="tiny cGray">→ 更准确、更专业、语气更贴合医疗场景。</text>
+
+  <!-- ③ when it works well + tradeoffs -->
+  <text x="40" y="682" class="sec">③ ✅ 何时适用 &amp; 两条必记的权衡</text>
+  <text x="40" y="710" class="small" font-weight="700">微调擅长的场景（让模型"专精某一领域/任务"）：</text>
+  <text x="60" y="736" class="small">· 提供<tspan font-weight="700">初步医疗诊断</tspan>　· 总结<tspan font-weight="700">法律摘要（legal briefs）</tspan></text>
+  <text x="60" y="762" class="small">· <tspan class="cV" font-weight="700">智能体系统里的小模型：</tspan>若只干一件事（如"判断要不要查库"），<tspan x="60" dy="24">就乐于用<tspan font-weight="700">轻量模型重度微调</tspan>到只擅长那一步。</tspan></text>
+
+  <rect x="40" y="794" width="1020" height="54" rx="10" fill="#FFF3E0" stroke="#FFB74D" stroke-width="1.2"/>
+  <text x="60" y="818" class="small cO" font-weight="700">⚠️ 权衡 1：此长彼消 —— 目标领域变强，其它领域可能变弱。</text>
+  <text x="60" y="838" class="tiny">微调只优化目标领域；只要模型只在该领域内使用，这个代价通常划算。</text>
+
+  <rect x="40" y="860" width="1020" height="54" rx="10" fill="#EDE7F6" stroke="#B39DDB" stroke-width="1.2"/>
+  <text x="60" y="884" class="small cP" font-weight="700">⚠️ 权衡 2：微调不擅长"教新知识"。</text>
+  <text x="60" y="904" class="tiny">它更多改变<tspan font-weight="700">"模型怎么说"（用词/风格/结构）</tspan>，而非<tspan font-weight="700">"模型知道什么"</tspan> —— 新知识请用 RAG。</text>
+
+  <!-- ④ RAG vs Fine-Tuning -->
+  <text x="40" y="952" class="sec">④ ⚖️ RAG vs 微调：分工对照</text>
+  <rect x="40" y="970" width="500" height="120" rx="10" fill="#fff" stroke="#EF9A9A" stroke-width="1.2"/>
+  <rect x="40" y="970" width="500" height="34" rx="10" fill="#EF5350"/>
+  <rect x="40" y="988" width="500" height="16" fill="#EF5350"/>
+  <text x="290" y="993" class="small w" text-anchor="middle" font-weight="700">RAG（检索增强）</text>
+  <text x="60" y="1032" class="small">· 当 LLM 需要<tspan class="cR" font-weight="700">新信息</tspan>时最佳。</text>
+  <text x="60" y="1058" class="small">· 把上下文<tspan font-weight="700">注入 prompt</tspan>，模型即可用上。</text>
+  <text x="60" y="1082" class="small cR" font-weight="700">RAG = 最擅长「知识注入 knowledge injection」</text>
+
+  <rect x="560" y="970" width="500" height="120" rx="10" fill="#fff" stroke="#80DEEA" stroke-width="1.2"/>
+  <rect x="560" y="970" width="500" height="34" rx="10" fill="#00ACC1"/>
+  <rect x="560" y="988" width="500" height="16" fill="#00ACC1"/>
+  <text x="810" y="993" class="small w" text-anchor="middle" font-weight="700">Fine-Tuning（微调）</text>
+  <text x="580" y="1032" class="small">· 用于<tspan class="cT" font-weight="700">任务 / 领域专精化</tspan>。</text>
+  <text x="580" y="1058" class="small">· 尤其适合<tspan font-weight="700">单一、明确、聚焦</tspan>的任务（如路由）。</text>
+  <text x="580" y="1082" class="small cT" font-weight="700">微调 = 最擅长「领域适配 domain adaptation」</text>
+
+  <!-- ⑤ why choose - both -->
+  <text x="40" y="1134" class="sec">⑤ 🤝 二选一？答案常常是"两个都用"</text>
+  <text x="40" y="1162" class="small">· <tspan class="cV" font-weight="700">RAG</tspan> 提供<tspan font-weight="700">实时、准确</tspan>的信息；<tspan class="cT" font-weight="700">微调</tspan>优化<tspan font-weight="700">模型如何使用</tspan>这些被检索来的信息。</text>
+  <text x="40" y="1188" class="small">· <tspan font-weight="700">为 RAG 而微调（Fine-tuning for RAG）：</tspan>专门训练模型"把检索到的<tspan x="60" dy="24">内容更好地融进最终回答"，即让它专精于自己在 RAG 系统里的角色。</tspan></text>
+  <rect x="40" y="1228" width="1020" height="48" rx="10" fill="#37474F"/>
+  <text x="550" y="1258" class="small w" text-anchor="middle" font-weight="700">💡 它们不是竞争对手，而是互补工具 —— 决定用哪个时，最佳答案往往是「both 两个都用」。</text>
+
+  <!-- ⑥ getting started -->
+  <text x="40" y="1318" class="sec">⑥ 🚀 如何上手 <tspan class="en">Getting Started</tspan></text>
+  <rect x="40" y="1336" width="500" height="58" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="1362" class="small cV" font-weight="700">📚 上一门专门的微调课</text>
+  <text x="60" y="1383" class="tiny">微调是个复杂话题，本课不深入；建议单独系统学习。</text>
+  <rect x="560" y="1336" width="500" height="58" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="580" y="1362" class="small cG" font-weight="700">📦 直接用"已微调好"的现成模型</text>
+  <text x="580" y="1383" class="tiny">很多在线仓库提供别人调好的模型，常能拿来即用，免自己训。</text>
+
+  <!-- 📡 2026 intel -->
+  <text x="40" y="1438" class="sec">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="1466" class="small">课件说"微调 = 复杂、需另开课"—— 2026 它其实已被<tspan class="cR" font-weight="700">大幅平民化</tspan>，<tspan x="40" dy="24">核心是<tspan class="cP" font-weight="700">参数高效微调（PEFT）</tspan>，不再全参数重训：</tspan></text>
+
+  <text x="40" y="1518" class="small">· <tspan class="cV" font-weight="700">LoRA（低秩适配 Low-Rank Adaptation）：</tspan>只训一小撮"适配器"参数，<tspan x="60" dy="24">显存从全参数微调 7B 的 ~100–120GB 降到 <tspan class="cG" font-weight="700">16–24GB</tspan>。</tspan></text>
+  <text x="40" y="1570" class="small">· <tspan class="cV" font-weight="700">QLoRA（量化版）：</tspan>底座 4-bit 量化，再降到 <tspan class="cG" font-weight="700">8–12GB</tspan> —— 一张 ~$1500 的<tspan x="60" dy="24">RTX 4090 就能微调 7B 模型（全参数则需约 $5 万的 H100）。</tspan></text>
+  <text x="40" y="1622" class="small">· <tspan class="cV" font-weight="700">PEFT 总体可省 10–20× 显存、保留 90–95% 质量。</tspan>主流栈：<tspan x="60" dy="24">HuggingFace（transformers / peft / trl）+ <tspan font-weight="700">Unsloth</tspan> 加速内核。</tspan></text>
+
+  <text x="40" y="1696" class="small">· <tspan class="cV" font-weight="700">偏好对齐 = 微调的"行为"分支：</tspan>除 SFT 外，2026 还广用 <tspan class="cO" font-weight="700">DPO（直接偏好优化）</tspan>，<tspan x="60" dy="24">比传统 RLHF 更简单稳定、无需单独奖励模型；及训练推理模型的 <tspan class="cO" font-weight="700">GRPO</tspan></tspan><tspan x="60" dy="24">（DeepSeek-R1 同款）。一句话：<tspan class="cR" font-weight="700">微调改"形"（风格/结构/拒答），</tspan></tspan><tspan x="60" dy="24"><tspan class="cR" font-weight="700">不改"实"（会变的知识用 RAG）</tspan>。</tspan></text>
+
+  <text x="40" y="1796" class="small">· <tspan class="cV" font-weight="700">2026 公认优化顺序：</tspan><tspan font-weight="700">Prompt → RAG → 微调 → 蒸馏（Distill）</tspan>。最高性价比是<tspan x="60" dy="24">"在强底座上挂一层薄 LoRA/QLoRA 适配器 + 继续配合检索"，而非替代检索。</tspan></text>
+
+  <text x="40" y="1848" class="small">· <tspan class="cV" font-weight="700">呼应本课"小模型进智能体"：</tspan>2026 趋势正是先用大模型蒸馏（distillation）<tspan x="60" dy="24">热身，再做 RL 微调，把推理 / 工具调用能力压进小模型 —— 延迟低、成本省，</tspan><tspan x="60" dy="24">正好当 Router / Evaluator。</tspan></text>
+
+  <text x="40" y="1928" class="small cV" font-weight="700">一句话串起来：本课讲"用你的数据重训模型、改行为"；2026 把它变便宜（LoRA/<tspan x="40" dy="24">QLoRA）、变稳健（DPO/GRPO），并明确了与 RAG 的协作顺序（Prompt→RAG→微调→蒸馏）。</tspan></text>
+
+  <!-- personal note -->
+  <text x="40" y="1990" class="small cGray">🧪 个人补充（非课件）：对你（前端 + 想吃透 Transformer）最该记住的一点 ——<tspan x="40" dy="24">微调改的就是 Transformer 里的<tspan class="cR" font-weight="700">权重矩阵</tspan>（你学过的 W）。LoRA 的精妙在于：不动原始大 W，</tspan><tspan x="40" dy="24">只额外学一个低秩 ΔW = B·A（两个瘦长小矩阵相乘），用你学过的"矩阵乘法 + 秩 rank"</tspan><tspan x="40" dy="24">就能理解它为何省显存、又几乎不掉效果 —— 这是线性代数直接落地前沿工程的绝佳一例。</tspan></text>
+</svg>

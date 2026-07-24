@@ -1,0 +1,150 @@
+<svg width="900" height="2196" viewBox="0 0 900 2196" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 26px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #1B5E20; }
+    .mono { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #37474F; }
+    .cell { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .box { fill: #ECEFF1; stroke: #B0BEC5; stroke-width: 1.2; }
+    .vz { fill: #FFE0B2; stroke: #FB8C00; stroke-width: 1.1; }
+    .gl { stroke: #aab4d4; stroke-width: 1; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#546E7A" stroke-width="1.6" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="2196" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">采样参数实战 Lab · 调参与对话上下文 🧪 <tspan font-size="15" fill="#666" class="en">Exploring LLM Capabilities</tspan></text>
+  <text x="40" y="78" class="subtitle">一句话本质：上一节的四个旋钮（top_p / top_k / 温度 / 重复惩罚）在代码里实际跑一遍；</text>
+  <text x="40" y="102" class="subtitle">并多学一招——<tspan class="cV" font-weight="700">让 LLM"记住对话"的机制</tspan>，以及温度背后的<tspan class="cP" font-weight="700">精确数学公式</tspan>。</text>
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① two takeaways -->
+  <text x="40" y="156" class="sec">① 🎁 本 Lab 的两个新收获（超出上节课的部分）</text>
+  <rect x="40" y="174" width="400" height="62" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="200" class="small cV" font-weight="700">A. 让 LLM 维持对话上下文 🗣️</text>
+  <text x="60" y="222" class="tiny">把历史消息递归拼进输入 → 像 chatbot 一样记忆</text>
+  <rect x="460" y="174" width="400" height="62" rx="10" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.2"/>
+  <text x="480" y="200" class="small cP" font-weight="700">B. 温度的数学公式 🧮</text>
+  <text x="480" y="222" class="tiny">adjusted(pᵢ) = exp(ln pᵢ / T) 归一化 = pᵢ^(1/T)</text>
+
+  <!-- ② generation functions -->
+  <text x="40" y="280" class="sec">② 🔧 生成函数与参数字典 <tspan class="en">kwargs</tspan></text>
+  <rect x="40" y="298" width="820" height="86" rx="8" class="chip"/>
+  <text x="56" y="322" class="code">generate_with_single_input(prompt, top_p=None, temperature=None, max_tokens=500, model=...)</text>
+  <text x="56" y="346" class="code">generate_with_multiple_input(messages, ...)　<tspan class="cm"># messages = 多条对话，用于"造上下文"</tspan></text>
+  <text x="56" y="370" class="code">kwargs = {"prompt": "...", "top_p": 0.7, "temperature": 1.4};　generate_with_single_input(**kwargs)</text>
+  <text x="40" y="406" class="small"><tspan class="cV" font-weight="700">kwargs（关键字字典）</tspan>= 把参数打包成字典再用 <tspan class="code" fill="#1B5E20">**kwargs</tspan> 解包传入，比每次手写参数更灵活。</text>
+
+  <!-- ③ conversation context -->
+  <text x="40" y="462" class="sec">③ 🗣️ 对话上下文机制：LLM 如何"记住"前面的对话</text>
+  <text x="40" y="490" class="small">核心函数 <tspan class="code" fill="#1B5E20">call_llm_with_context(prompt, context)</tspan> 的三步循环：</text>
+  <rect x="50" y="510" width="200" height="44" rx="8" class="box"/>
+  <text x="150" y="537" class="small" text-anchor="middle" font-weight="700">① 把用户消息</text>
+  <line x1="254" y1="532" x2="288" y2="532" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="292" y="510" width="240" height="44" rx="8" class="box"/>
+  <text x="412" y="531" class="small" text-anchor="middle" font-weight="700">② 把【整个 context】</text>
+  <text x="412" y="548" class="tiny" text-anchor="middle">连同历史一起发给 LLM</text>
+  <line x1="536" y1="532" x2="570" y2="532" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="574" y="510" width="240" height="44" rx="8" class="box"/>
+  <text x="694" y="531" class="small" text-anchor="middle" font-weight="700">③ 把 LLM 回复</text>
+  <text x="694" y="548" class="tiny" text-anchor="middle">也追加回 context 列表</text>
+  <path d="M694 554 V570 H150 V556" fill="none" stroke="#546E7A" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+  <text x="430" y="588" class="tiny cGray" text-anchor="middle">↻ context 不断变长，下一轮把全部历史再发一遍 —— 这就是"记忆"的真相</text>
+  <text x="40" y="624" class="small cR" font-weight="700">⚠️ 真相：LLM 本身无记忆。所谓"记住"，是每一轮都把<tspan font-weight="700">完整历史重新塞进 prompt</tspan>。</text>
+
+  <!-- ④ top_p -->
+  <text x="40" y="680" class="sec">④ 🎯 核采样 <tspan class="en">Nucleus Sampling · top_p</tspan></text>
+  <text x="40" y="708" class="small">从概率最高的 token 开始累加，直到累计概率达到 p 为止，再在这个池子里按概率随机选。范围 0~1。</text>
+  <text x="40" y="734" class="small">概率向量例子（行向量，1×3）：</text>
+  <rect x="330" y="718" width="132" height="24" class="vz"/>
+  <line x1="374" y1="718" x2="374" y2="742" class="gl"/><line x1="418" y1="718" x2="418" y2="742" class="gl"/>
+  <text x="352" y="735" class="cell" text-anchor="middle">0.6</text><text x="396" y="735" class="cell" text-anchor="middle">0.3</text><text x="440" y="735" class="cell" text-anchor="middle">0.1</text>
+  <text x="60" y="766" class="small"><tspan class="code" fill="#1B5E20">top_p = 0</tspan> → 永远选第 1 个（0.6）→ <tspan class="cR" font-weight="700">确定性</tspan>（Lab 实测：三次输出完全相同）。</text>
+  <text x="60" y="792" class="small"><tspan class="code" fill="#1B5E20">top_p = 1</tspan> → 三个都可能，按 60% / 30% / 10% 的概率选 → 多样。</text>
+  <text x="60" y="818" class="small"><tspan class="code" fill="#1B5E20">top_p = 0.8</tspan>（Lab 实测）→ 三次得到三句不同但都合理的话；开头常相同（前几个 token 概率太高）。</text>
+
+  <!-- ⑤ top_k -->
+  <text x="40" y="874" class="sec">⑤ ✂️ Top-k 采样：按"个数"而非"概率阈值"截断</text>
+  <text x="40" y="902" class="small">只从概率最高的 <tspan font-weight="700">k 个</tspan> token 里选。k 小 → 更可预测；k 大 → 更多样。</text>
+  <text x="60" y="928" class="small"><tspan class="code" fill="#1B5E20">top_k = 0</tspan> → 等价于 top_p=0，确定性（Lab 实测：输出与 top_p=0 完全一致）。</text>
+  <text x="60" y="954" class="small"><tspan class="code" fill="#1B5E20">top_k = 10</tspan> → 允许前 10 个 token 被选 → 输出多样化。</text>
+  <text x="40" y="984" class="small cV" font-weight="700">区别：top_k 池子大小固定；top_p 按累计概率动态变化。</text>
+
+  <!-- ⑥ temperature math -->
+  <text x="40" y="1040" class="sec">⑥ 🌡️ 温度的精确数学 <tspan class="en">Temperature</tspan>（本 Lab 最硬核的部分）</text>
+  <rect x="40" y="1058" width="560" height="40" rx="8" class="chip"/>
+  <text x="56" y="1084" class="code">adjusted(pᵢ) = exp( ln(pᵢ) / T ) / Σⱼ exp( ln(pⱼ) / T )　＝　pᵢ^(1/T) 再归一化</text>
+  <text x="40" y="1124" class="small">三步：① 每个概率取对数后除以 T　② 取指数　③ 重新归一化到和为 1。</text>
+
+  <text x="40" y="1158" class="small">原始向量 <tspan class="mono" fill="#37474F">[0.6, 0.3, 0.1]</tspan> 在不同温度下（笔记本给的示例值）：</text>
+  <!-- T=0.5 -->
+  <text x="60" y="1192" class="small cT" font-weight="700">T = 0.5（低·更尖）</text>
+  <rect x="220" y="1176" width="150" height="22" class="vz"/>
+  <line x1="270" y1="1176" x2="270" y2="1198" class="gl"/><line x1="320" y1="1176" x2="320" y2="1198" class="gl"/>
+  <text x="245" y="1192" class="cell" text-anchor="middle">0.77</text><text x="295" y="1192" class="cell" text-anchor="middle">0.18</text><text x="345" y="1192" class="cell" text-anchor="middle">0.05</text>
+  <text x="390" y="1192" class="tiny cGray">最大值更大、最小值更小 → 更确定</text>
+  <!-- T=1 -->
+  <text x="60" y="1224" class="small" font-weight="700">T = 1（中性·不变）</text>
+  <rect x="220" y="1208" width="150" height="22" class="vz"/>
+  <line x1="270" y1="1208" x2="270" y2="1230" class="gl"/><line x1="320" y1="1208" x2="320" y2="1230" class="gl"/>
+  <text x="245" y="1224" class="cell" text-anchor="middle">0.6</text><text x="295" y="1224" class="cell" text-anchor="middle">0.3</text><text x="345" y="1224" class="cell" text-anchor="middle">0.1</text>
+  <text x="390" y="1224" class="tiny cGray">分布不变</text>
+  <!-- T=2 -->
+  <text x="60" y="1256" class="small cR" font-weight="700">T = 2（高·更平）</text>
+  <rect x="220" y="1240" width="150" height="22" class="vz"/>
+  <line x1="270" y1="1240" x2="270" y2="1262" class="gl"/><line x1="320" y1="1240" x2="320" y2="1262" class="gl"/>
+  <text x="245" y="1256" class="cell" text-anchor="middle">0.49</text><text x="295" y="1256" class="cell" text-anchor="middle">0.27</text><text x="345" y="1256" class="cell" text-anchor="middle">0.24</text>
+  <text x="390" y="1256" class="tiny cGray">差距被抹平 → 冷门 token 更有机会</text>
+
+  <text x="40" y="1294" class="tiny cR">⚠️ 我用公式 pᵢ^(1/T) 亲手验算：T=0.5 精确值应为 [0.78, 0.20, 0.02]，T=2 应为 [0.47, 0.33, 0.19]。</text>
+  <text x="40" y="1312" class="tiny cR">　 笔记本印的 [0.77,0.18,0.05] / [0.49,0.27,0.24] 与其自身公式略有出入，应视为"示意值"，趋势正确即可。</text>
+
+  <text x="40" y="1346" class="small"><tspan class="cV" font-weight="700">关键提醒：</tspan>T=1 <tspan class="cR" font-weight="700">不等于</tspan>确定性！温度只改分布形状，仍可能选到长尾里的冷门 token。</text>
+  <text x="40" y="1372" class="small">　 想要确定性，只有 <tspan class="code" fill="#1B5E20">temperature=0</tspan> 或 <tspan class="code" fill="#1B5E20">top_p / top_k = 0</tspan> 三条路。</text>
+  <text x="40" y="1398" class="small"><tspan class="cO" font-weight="700">副作用：</tspan>高温会压低"停止符 stop token"的概率 → 模型难自然停下 → 容易跑满 max_tokens、变慢变长。</text>
+
+  <!-- ⑦ temp + top_p -->
+  <text x="40" y="1454" class="sec">⑦ 🤝 温度 ＋ top_p 联用：既要随机，又不胡言</text>
+  <text x="40" y="1482" class="small">温度负责"<tspan font-weight="700">改变分布形状</tspan>"，top_p 负责"<tspan font-weight="700">限制候选池大小</tspan>"，两者搭配最稳。Lab 实测：</text>
+  <text x="60" y="1508" class="small">· <tspan class="code" fill="#1B5E20">temp=1.5, top_p=0.5</tspan> → 文本连贯不胡言（分布虽平，但池子被 top_p 收窄到靠谱 token）。</text>
+  <text x="60" y="1534" class="small">· <tspan class="code" fill="#1B5E20">temp=3, top_p=0.05</tspan> → 温度过高，即便低 top_p 也救不全；但至少多是真词，比不设 top_p 强。</text>
+
+  <!-- ⑧ repetition penalty -->
+  <text x="40" y="1590" class="sec">⑧ 🔁 重复惩罚 <tspan class="en">repetition_penalty</tspan></text>
+  <text x="40" y="1618" class="small">给"已用过的词"加惩罚，逼模型换新词 → 文本更生动（讲故事 / 对话尤其有用）。</text>
+  <text x="60" y="1644" class="small">Lab 实测 <tspan class="code" fill="#1B5E20">[None, 1.2, 2]</tspan>：1.2 自然多样；<tspan class="cR" font-weight="700">2 过高 → 胡言</tspan>。</text>
+  <text x="40" y="1670" class="small cR" font-weight="700">原因：介词、冠词等本就该自然重复；惩罚太狠会逼模型硬选不合适的词。</text>
+
+  <!-- ⑨ determinism summary -->
+  <text x="40" y="1726" class="sec">⑨ ✅ 确定性速查（Lab 反复强调的要点）</text>
+  <rect x="40" y="1744" width="820" height="92" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="60" y="1770" class="small"><tspan class="cG" font-weight="700">确定（同输入→同输出）：</tspan>贪心解码 ＝ <tspan class="code" fill="#1B5E20">temperature=0</tspan> ＝ <tspan class="code" fill="#1B5E20">top_p=0</tspan> ＝ <tspan class="code" fill="#1B5E20">top_k=0</tspan></text>
+  <text x="60" y="1798" class="small"><tspan class="cR" font-weight="700">不确定（每次可能不同）：</tspan>temperature=1、top_p&gt;0、top_k&gt;0 等 —— 引入了加权随机。</text>
+  <text x="60" y="1824" class="small cV" font-weight="700">易错点：很多人以为 temperature=1 是"默认确定"，其实它只是"原始分布"，依旧随机。</text>
+
+  <!-- ⑩ latest intel -->
+  <text x="40" y="1892" class="sec">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="1920" class="small">本 Lab 的对话机制是"每轮把<tspan font-weight="700">完整历史重新发一遍</tspan>" —— 这正是 2026 年最大的省钱痛点与解法：</text>
+  <text x="40" y="1948" class="small">· <tspan class="cV" font-weight="700">提示缓存 Prompt Caching：</tspan>OpenAI / Anthropic / Google 都已支持。复用注意力层算好的 KV 张量，</text>
+  <text x="40" y="1974" class="small">　跳过对"重复前缀"的重算 —— <tspan class="cO" font-weight="700">缓存命中价低至基础输入的 0.1×（省约 90%）</tspan>，首轮之后整段会话省 70~85%。</text>
+  <text x="40" y="2000" class="small">· <tspan class="cV" font-weight="700">结构纪律：</tspan>把<tspan font-weight="700">静态内容放顶部</tspan>（系统指令、工具定义、检索文档），<tspan font-weight="700">动态内容放底部</tspan>（对话历史）——</text>
+  <text x="40" y="2026" class="small">　这样前缀稳定、缓存才能命中。正好印证本 Lab 的 context 结构（system 在前、对话在后）。</text>
+  <text x="40" y="2052" class="small">· <tspan class="cV" font-weight="700">缓存有效期：</tspan>Anthropic 的临时缓存 5 分钟 TTL，每次命中刷新；持续提问就一直"热着"。</text>
+  <text x="40" y="2078" class="small cV" font-weight="700">一句话：本 Lab 教你"如何重发历史维持对话"；2026 的工程重点是"重发时别重算"——这就是 prompt caching。</text>
+
+  <text x="40" y="2134" class="small cGray">🧪 个人补充（非课件）：温度公式里的 ln(pᵢ)/T 本质就是对 logits 做缩放后再 softmax ——</text>
+  <text x="40" y="2160" class="small cGray">　 你前面学的 softmax 正是这里的"归一化"步骤，温度只是在 softmax 前加了一个除以 T 的旋钮。</text>
+</svg>

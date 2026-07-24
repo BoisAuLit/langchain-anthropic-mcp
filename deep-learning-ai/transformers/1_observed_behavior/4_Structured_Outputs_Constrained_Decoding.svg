@@ -1,0 +1,156 @@
+<svg width="1160" height="1796" viewBox="0 0 1160 1796" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 26px; font-weight: 800; fill: #0F172A; }
+    .ess { font-size: 16px; fill: #475569; }
+    .sec { font-size: 19px; font-weight: 800; fill: #0F172A; }
+    .b { font-size: 15px; fill: #334155; }
+    .bb { font-size: 15px; font-weight: 700; }
+    .sm { font-size: 13px; fill: #64748B; }
+    .big { font-size: 22px; font-weight: 800; }
+    .chip { font-size: 13px; font-weight: 700; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 12.5px; fill: #0F172A; }
+    .codew { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13.5px; fill: #334155; }
+    /* color classes LAST */
+    .w{fill:#fff} .wg{fill:#CBD5E1}
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#D97706} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+    .kw{fill:#7C3AED} .str{fill:#16A34A} .key{fill:#2563EB}
+  </style>
+  <defs>
+    <marker id="t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1160" height="1796" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">Structured Outputs &amp; Constrained Decoding 🔒{ }</text>
+  <text x="40" y="76" class="ess">What it is: a way to <tspan class="cGreen bb">force the model to answer in an exact format</tspan> (like JSON), so your program can read</text>
+  <text x="40" y="98" class="ess">the answer correctly <tspan class="bb">every single time</tspan> — not just most of the time.</text>
+  <line x1="40" y1="114" x2="1120" y2="114" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ① the problem -->
+  <text x="40" y="148" class="sec">🙋 The problem: the model adds extra text, and that breaks your program</text>
+  <text x="40" y="176" class="b">You ask the model to answer ONLY in JSON. Sometimes it obeys.</text>
+  <text x="40" y="198" class="b">But sometimes it adds extra "friendly" text you did not ask for:</text>
+  <rect x="40" y="212" width="648" height="30" rx="7" fill="#FEF2F2" stroke="#FECACA"/>
+  <text x="54" y="232" class="code"><tspan class="cPink" font-weight="700">Sure! Here is the JSON:</tspan>  {"answer":"no"}   ← extra sentence first</text>
+  <rect x="40" y="248" width="648" height="30" rx="7" fill="#FEF2F2" stroke="#FECACA"/>
+  <text x="54" y="268" class="code"><tspan class="cPink" font-weight="700">```json</tspan>  {"answer":"no"}  <tspan class="cPink" font-weight="700">```</tspan>   ← wrapped in code marks</text>
+  <text x="40" y="302" class="b">Your program expects pure JSON, so this extra text makes it crash.</text>
+  <text x="40" y="324" class="b">And it is unpredictable: same prompt, works once, fails next time.</text>
+  <text x="40" y="356" class="b">🤔 <tspan class="bb">Why?</tspan> At each step the model picks the next token by probability.</text>
+  <text x="40" y="378" class="b">A friendly token (<tspan class="code">Sure</tspan>) and a format token (<tspan class="code">{</tspan>) <tspan class="bb">both</tspan> have probability,</text>
+  <text x="40" y="400" class="b">so sometimes the friendly one wins.</text>
+  <text x="40" y="432" class="b">📉 With a prompt only, only about <tspan class="cPink bb">40% of answers are valid JSON</tspan></text>
+  <text x="40" y="454" class="b">(GPT-4o, 2024). You keep writing cleanup code again and again.</text>
+
+  <!-- mini next-token chart (right) -->
+  <rect x="720" y="158" width="400" height="300" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.2"/>
+  <text x="740" y="186" class="bb cSlate">The model's possible next tokens</text>
+  <text x="740" y="206" class="sm">green = format token · pink = "friendly" word</text>
+  <text x="804" y="246" class="code" text-anchor="end">{</text>
+  <rect x="814" y="236" width="180" height="14" rx="3" fill="#16A34A"/><text x="1004" y="247" class="b">50%</text>
+  <text x="804" y="284" class="code" text-anchor="end">Sure</text>
+  <rect x="814" y="274" width="108" height="14" rx="3" fill="#E11D48"/><text x="1004" y="285" class="b">30%</text>
+  <text x="804" y="322" class="code" text-anchor="end">[</text>
+  <rect x="814" y="312" width="36" height="14" rx="3" fill="#16A34A"/><text x="1004" y="323" class="b">10%</text>
+  <text x="804" y="360" class="code" text-anchor="end">Here</text>
+  <rect x="814" y="350" width="18" height="14" rx="3" fill="#E11D48"/><text x="1004" y="361" class="b">5%</text>
+  <text x="804" y="398" class="code" text-anchor="end">"</text>
+  <rect x="814" y="388" width="18" height="14" rx="3" fill="#16A34A"/><text x="1004" y="399" class="b">5%</text>
+  <text x="740" y="438" class="sm cPink" font-weight="700">⚠️ "Sure" has 30% — that is why it slips in.</text>
+
+  <!-- ② the fix -->
+  <text x="40" y="496" class="sec">🔧 The fix: block the bad tokens while the model writes (the model is NOT changed)</text>
+  <text x="40" y="524" class="b">This is called <tspan class="bb">constrained decoding</tspan> (a friendlier name is <tspan class="bb">"structured outputs"</tspan>). Plain meaning: at every step, we <tspan class="bb">block</tspan></text>
+  <text x="40" y="546" class="b">any token that would break the format. The model can only choose from tokens that keep the format correct.</text>
+  <text x="40" y="568" class="b">We do not retrain the model — we only <tspan class="bb">filter its choices while it writes</tspan>. So a wrong token is never even possible.</text>
+  <rect x="40" y="584" width="1080" height="56" rx="12" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="300" y="619" class="big cPink" text-anchor="middle">Without it: 40% valid</text>
+  <text x="600" y="619" class="big cSlate" text-anchor="middle">→</text>
+  <text x="860" y="619" class="big cGreen" text-anchor="middle">With it: 100% valid ✅</text>
+
+  <!-- ③ how it works -->
+  <text x="40" y="678" class="sec">⭐ How it works, step by step (this is the part that feels confusing — let us go slow)</text>
+  <text x="40" y="706" class="b"><tspan class="bb cBlue">Step 1 — You give a SCHEMA.</tspan> A schema is a rulebook. It says exactly what the output must look like: which</text>
+  <text x="40" y="728" class="b">fields exist, what type each field is, and which fields are required. Example:</text>
+
+  <rect x="40" y="744" width="500" height="190" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.2"/>
+  <text x="58" y="772" class="codew cGray">{</text>
+  <text x="58" y="792" class="codew"><tspan class="key">"type"</tspan>: <tspan class="str">"object"</tspan>,</text>
+  <text x="58" y="812" class="codew"><tspan class="key">"properties"</tspan>: {</text>
+  <text x="78" y="832" class="codew"><tspan class="key">"answer"</tspan>: {</text>
+  <text x="98" y="852" class="codew"><tspan class="key">"type"</tspan>: <tspan class="str">"string"</tspan>,</text>
+  <text x="98" y="872" class="codew"><tspan class="key">"enum"</tspan>: [<tspan class="str">"yes"</tspan>, <tspan class="str">"no"</tspan>] }  },</text>
+  <text x="58" y="892" class="codew"><tspan class="key">"required"</tspan>: [<tspan class="str">"answer"</tspan>],</text>
+  <text x="58" y="912" class="codew"><tspan class="key">"additionalProperties"</tspan>: <tspan class="kw">false</tspan> }</text>
+
+  <text x="566" y="772" class="bb cSlate">In plain words:</text>
+  <text x="566" y="798" class="b">· the output must be one <tspan class="bb">object</tspan> <tspan class="code">{ }</tspan></text>
+  <text x="566" y="824" class="b">· it must have a field called <tspan class="code">answer</tspan></text>
+  <text x="566" y="850" class="b">· <tspan class="code">answer</tspan> must be exactly <tspan class="code">"yes"</tspan> or <tspan class="code">"no"</tspan></text>
+  <text x="566" y="876" class="b">· <tspan class="code">answer</tspan> is <tspan class="bb">required</tspan> (it must appear)</text>
+  <text x="566" y="902" class="b">· nothing else is allowed</text>
+
+  <text x="40" y="962" class="b"><tspan class="bb cBlue">Step 2 — The computer turns the schema into a "finite state machine" (FSM).</tspan> An FSM is just a small map that</text>
+  <text x="40" y="984" class="b">always knows two things: <tspan class="bb">"where am I now"</tspan> and <tspan class="bb">"which tokens are allowed next"</tspan>. Think of it as a GPS for the format.</text>
+  <text x="40" y="1014" class="b"><tspan class="bb cBlue">Step 3 — At every token step:</tspan> the FSM finds the allowed tokens → every other token gets probability set to <tspan class="bb">0</tspan></text>
+  <text x="40" y="1036" class="b">(this is called <tspan class="bb">masking</tspan>) → the model samples only from the allowed tokens → the FSM moves to the next state.</text>
+
+  <text x="40" y="1072" class="sm cGray">One example building <tspan class="code" font-size="13">{"answer":"no"}</tspan> — green = allowed now, faded = blocked. Step 1 blocks "Sure"/"Here", because the output must start with "{".</text>
+  <!-- masking grid -->
+  <rect x="60" y="1086" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="120" y="1105" class="chip cGreen" text-anchor="middle">{</text>
+  <rect x="60" y="1120" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="120" y="1137" class="chip cGray" text-anchor="middle">Sure</text>
+  <rect x="60" y="1152" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="120" y="1169" class="chip cGray" text-anchor="middle">Here</text>
+  <line x1="184" y1="1100" x2="208" y2="1100" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <rect x="212" y="1086" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="272" y="1105" class="chip cGreen" text-anchor="middle">"</text>
+  <rect x="212" y="1120" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="272" y="1137" class="chip cGray" text-anchor="middle">\n</text>
+  <rect x="212" y="1152" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="272" y="1169" class="chip cGray" text-anchor="middle">123</text>
+  <line x1="336" y1="1100" x2="360" y2="1100" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <rect x="364" y="1086" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="424" y="1105" class="chip cGreen" text-anchor="middle">answer</text>
+  <rect x="364" y="1120" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="424" y="1137" class="chip cGray" text-anchor="middle">type</text>
+  <rect x="364" y="1152" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="424" y="1169" class="chip cGray" text-anchor="middle">id</text>
+  <line x1="488" y1="1100" x2="512" y2="1100" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <rect x="516" y="1086" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="576" y="1105" class="chip cGreen" text-anchor="middle">" :</text>
+  <rect x="516" y="1120" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="576" y="1137" class="chip cGray" text-anchor="middle">_s</text>
+  <rect x="516" y="1152" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="576" y="1169" class="chip cGray" text-anchor="middle">,</text>
+  <line x1="640" y1="1100" x2="664" y2="1100" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <rect x="668" y="1086" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="728" y="1105" class="chip cGreen" text-anchor="middle">"no"</text>
+  <rect x="668" y="1120" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="728" y="1137" class="chip cGray" text-anchor="middle">"maybe"</text>
+  <rect x="668" y="1152" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="728" y="1169" class="chip cGray" text-anchor="middle">42</text>
+  <line x1="792" y1="1100" x2="816" y2="1100" stroke="#16A34A" stroke-width="2" marker-end="url(#t)"/>
+  <rect x="820" y="1086" width="120" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.6"/><text x="880" y="1105" class="chip cGreen" text-anchor="middle">}</text>
+  <rect x="820" y="1120" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="880" y="1137" class="chip cGray" text-anchor="middle">,</text>
+  <rect x="820" y="1152" width="120" height="26" rx="6" fill="#FEF2F2" stroke="#FECACA"/><text x="880" y="1169" class="chip cGray" text-anchor="middle">extra</text>
+  <text x="968" y="1105" class="big cGreen">✅</text>
+  <text x="40" y="1198" class="b">Final output: <tspan class="code bb">{"answer": "no"}</tspan> — valid JSON, guaranteed, with zero cleanup code.</text>
+
+  <!-- ④ the cost -->
+  <text x="40" y="1236" class="sec">⚠️ The hidden cost: forcing a format can make the ANSWER wrong</text>
+  <text x="40" y="1264" class="b">If you force the model to write the final answer right away, it has no room to <tspan class="bb">think first</tspan>. Real example (a math word</text>
+  <text x="40" y="1286" class="b">problem): the free answer was <tspan class="cGreen bb">460 (correct)</tspan>, but when forced to fill <tspan class="code">answer</tspan> first in JSON, it gave <tspan class="cPink bb">490 (wrong)</tspan>.</text>
+  <rect x="40" y="1301" width="1080" height="69" rx="12" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+  <text x="60" y="1329" class="b"><tspan class="bb cOrange">✅ How to avoid it:</tspan> in your schema, put a <tspan class="bb">reasoning field FIRST</tspan> and the <tspan class="bb">answer field LAST</tspan>. Now the model thinks in</text>
+  <text x="60" y="1349" class="b">the reasoning field, and only then writes the answer. Also: keep schemas small and simple.</text>
+
+  <!-- ⑤ use it -->
+  <text x="40" y="1398" class="sec">⚡ How to use it in real code</text>
+  <text x="40" y="1426" class="b">🟢 <tspan class="bb">OpenAI:</tspan> give it a Pydantic class or JSON schema → <tspan class="code">client.responses.parse(…, text_format=Model)</tspan> → read <tspan class="code">.output_parsed</tspan>.</text>
+  <text x="40" y="1452" class="b">🟣 <tspan class="bb">Anthropic:</tspan> structured outputs (beta) → <tspan class="code">response_model=Model</tspan> → read <tspan class="code">.parsed_output</tspan>.</text>
+  <text x="40" y="1478" class="b">🛠️ <tspan class="bb">Your own server:</tspan> llama.cpp → <tspan class="code">GBNF</tspan> · vLLM → <tspan class="code">XGrammar / llguidance / Outlines</tspan> · TGI → <tspan class="code">llguidance / Outlines</tspan>.</text>
+  <text x="40" y="1504" class="b">📦 <tspan class="bb">When you need this:</tspan> getting JSON data · calling a tool / function · generating code · generating SQL.</text>
+
+  <!-- 📡 intel -->
+  <text x="40" y="1542" class="sec">📡 2026 reality check</text>
+  <text x="40" y="1570" class="b">✅ OpenAI "Structured Outputs" now promises a <tspan class="bb">100% match to your schema</tspan> (gpt-4o-2024-08-06 and newer). vLLM uses</text>
+  <text x="40" y="1592" class="b">　 <tspan class="bb">XGrammar</tspan> by default (~97% correct on nested schemas, vs Outlines ~76%); <tspan class="bb">llguidance</tspan> builds the mask in ~50µs per token.</text>
+  <text x="40" y="1620" class="b">⚠️ The accuracy cost is real and measured: GPT-5's extraction score <tspan class="cPink bb">dropped from 87% to 70%</tspan> under a strict schema</text>
+  <text x="40" y="1642" class="b">　 (worst on long outputs). So keep schemas small, let the model reason first, or use a softer backend (LM-Format-Enforcer).</text>
+
+  <!-- 🔑 insight -->
+  <rect x="40" y="1674" width="1080" height="91" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="60" y="1702" class="bb cBlue">🔑 The simple mental model:</text>
+  <text x="60" y="1724" class="b">Constrained decoding does not change the model. It only adds a <tspan class="bb">filter (a mask) on the same "Select Token" step</tspan> from the</text>
+  <text x="60" y="1744" class="b">autoregressive loop. That is why it works together with temperature and top-p — they all act on the same probability list.</text>
+</svg>

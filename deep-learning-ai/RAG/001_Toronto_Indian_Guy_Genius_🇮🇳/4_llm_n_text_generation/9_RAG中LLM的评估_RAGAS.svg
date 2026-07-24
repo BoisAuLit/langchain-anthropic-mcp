@@ -1,0 +1,116 @@
+<svg width="900" height="1724" viewBox="0 0 900 1724" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 25px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .mono { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#546E7A" stroke-width="1.6" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1724" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">RAG 里 LLM 部分的评估 📐 <tspan font-size="15" fill="#666" class="en">Evaluating the LLM with RAGAS</tspan></text>
+  <text x="40" y="78" class="subtitle">一句话本质：调温度、改系统提示、换模型前，得有<tspan class="cV" font-weight="700">指标</tspan>衡量影响。LLM 的活很<tspan class="cR" font-weight="700">主观</tspan>，</text>
+  <text x="40" y="102" class="subtitle">所以评估大多<tspan class="cP" font-weight="700">用"另一个 LLM 当裁判"</tspan>（如 RAGAS 库），或靠人类反馈。</text>
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① who does what -->
+  <text x="40" y="156" class="sec">① 🔪 先分清"谁的活"：别拿错指标怪错人</text>
+  <rect x="40" y="174" width="400" height="76" rx="10" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="60" y="200" class="small cR" font-weight="700">检索器 Retriever（找信息）</text>
+  <text x="60" y="224" class="tiny">从知识库找出相关信息。</text>
+  <text x="60" y="242" class="tiny cGray">这部分的问题，改系统提示没用。</text>
+  <rect x="460" y="174" width="400" height="76" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="480" y="200" class="small cV" font-weight="700">LLM（组织回答）</text>
+  <text x="480" y="224" class="tiny">用检索到的信息，写出高质量回答。</text>
+  <text x="480" y="242" class="tiny cGray">本课要评的，就是这部分。</text>
+  <rect x="40" y="262" width="820" height="30" rx="8" fill="#37474F"/>
+  <text x="450" y="282" class="small w" text-anchor="middle" font-weight="700">⭐ 评 LLM 时，指标要聚焦"LLM 在管线里的职责"，别把检索器的锅算到 LLM 头上。</text>
+
+  <!-- ② LLM responsibilities -->
+  <text x="40" y="330" class="sec">② 📋 LLM 的四项职责（评估它做得好不好）</text>
+  <text x="40" y="358" class="small">前提：假设检索器基本靠谱 —— 找回的<tspan font-weight="700">大多相关</tspan>，可能夹带<tspan class="cR" font-weight="700">个别无关文档</tspan>。那么 LLM 应当：</text>
+  <text x="64" y="386" class="small"><tspan class="cG" font-weight="700">1.</tspan> 清晰地回答用户问题；　<tspan class="cG" font-weight="700">2.</tspan> 把<tspan class="cV" font-weight="700">相关信息</tspan>融进回答；</text>
+  <text x="64" y="412" class="small"><tspan class="cG" font-weight="700">3.</tspan> 恰当<tspan class="cV" font-weight="700">标注来源</tspan>；　　　　<tspan class="cG" font-weight="700">4.</tspan> <tspan class="cR" font-weight="700">不被无关信息带偏</tspan>（忽略噪声）。</text>
+  <text x="40" y="444" class="small cR" font-weight="700">⚠️ 难点：这些都很"主观"——怎么量化"答得好不好""忽略噪声"？</text>
+  <text x="40" y="470" class="small">→ 解法：<tspan class="cP" font-weight="700">用别的 LLM 来打分</tspan>。把 LLM 引入评估，能以可扩展的方式容纳"主观/灵活"。<tspan class="cT" font-weight="700">RAGAS 库</tspan>就是干这个的。</text>
+
+  <!-- ③ response relevancy -->
+  <text x="40" y="516" class="sec">③ 🎯 RAGAS 指标一：答案相关性 <tspan class="en">Response Relevancy</tspan></text>
+  <text x="40" y="544" class="small">问：回答<tspan font-weight="700">跟用户问题对不对得上</tspan>（不管事实对不对）。巧妙的"反推"算法：</text>
+  <!-- flow -->
+  <rect x="40" y="562" width="150" height="44" rx="8" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="1.1"/>
+  <text x="115" y="582" class="tiny" text-anchor="middle" font-weight="700">① RAG 的回答</text>
+  <text x="115" y="598" class="tiny" text-anchor="middle">喂给一个新 LLM</text>
+  <line x1="194" y1="584" x2="226" y2="584" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="230" y="562" width="190" height="44" rx="8" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="1.1"/>
+  <text x="325" y="582" class="tiny" text-anchor="middle" font-weight="700">② 它"反推"出几个</text>
+  <text x="325" y="598" class="tiny" text-anchor="middle">可能导致该回答的问题</text>
+  <line x1="424" y1="584" x2="456" y2="584" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="460" y="562" width="190" height="44" rx="8" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="1.1"/>
+  <text x="555" y="582" class="tiny" text-anchor="middle" font-weight="700">③ 把"真问题"与这些</text>
+  <text x="555" y="598" class="tiny" text-anchor="middle">"反推问题"都做成向量</text>
+  <line x1="654" y1="584" x2="686" y2="584" stroke="#546E7A" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="690" y="562" width="170" height="44" rx="8" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.1"/>
+  <text x="775" y="582" class="tiny" text-anchor="middle" font-weight="700">④ 算余弦相似度</text>
+  <text x="775" y="598" class="tiny" text-anchor="middle">取平均 = 相关性分</text>
+  <text x="40" y="636" class="small cGray">直觉：如果能从"回答"漂亮地<tspan font-weight="700">倒推回"原问题"</tspan>，说明回答确实切题。</text>
+  <text x="40" y="662" class="small cR" font-weight="700">⚠️ 注意：它只测"切不切题"，<tspan font-weight="700">不保证事实正确</tspan> —— 那是下面 faithfulness 的事。</text>
+
+  <!-- ④ faithfulness -->
+  <text x="40" y="708" class="sec">④ 🪝 RAGAS 指标二：忠实度 <tspan class="en">Faithfulness</tspan>（最重要）</text>
+  <text x="40" y="736" class="small">问：回答<tspan font-weight="700">是否真的"扎根"于检索到的信息</tspan>（而非自己编）。三步：</text>
+  <text x="64" y="764" class="small"><tspan class="cO" font-weight="700">①</tspan> 用 LLM 把回答<tspan class="cV" font-weight="700">拆成所有"事实声明 claim"</tspan>。</text>
+  <text x="64" y="790" class="small"><tspan class="cO" font-weight="700">②</tspan> 再用 LLM 逐条核对：<tspan class="cV" font-weight="700">每条声明能否被检索到的信息支撑</tspan>。</text>
+  <text x="64" y="816" class="small"><tspan class="cO" font-weight="700">③</tspan> <tspan class="cG" font-weight="700">被支撑声明的占比 = 忠实度</tspan>。</text>
+  <rect x="40" y="832" width="820" height="30" rx="8" class="chip"/>
+  <text x="56" y="852" class="mono" fill="#1B5E20">例：回答含 3 条声明，其中 2 条被文档支撑、1 条是编的 → Faithfulness = 2/3 ≈ 0.67</text>
+  <text x="40" y="888" class="small cV" font-weight="700">这就是上节课"减少幻觉"的量化版 —— 直接数"有多少话是有根据的"。</text>
+
+  <!-- ⑤ other metrics -->
+  <text x="40" y="934" class="sec">⑤ 🧰 其他 RAGAS 指标 ＋ 一个共性</text>
+  <text x="40" y="962" class="small">还有衡量"<tspan class="cV" font-weight="700">对噪声的敏感度</tspan>""<tspan class="cV" font-weight="700">引用准确性</tspan>"等指标，做法类似。</text>
+  <text x="40" y="988" class="small cR" font-weight="700">共性：所有这些指标，最终都要在某一步<tspan font-weight="700">调用 LLM 当裁判（LLM-as-a-judge）</tspan>，有时还需要"标准答案"。</text>
+  <text x="40" y="1014" class="small cGray">原因：LLM 在 RAG 里的角色太复杂，简单的自动化指标量不出来，只能让另一个 LLM 来"评判"。</text>
+
+  <!-- ⑥ indirect -->
+  <text x="40" y="1060" class="sec">⑥ 📈 间接评估 <tspan class="en">Measuring LLM Performance Indirectly</tspan></text>
+  <text x="40" y="1088" class="small">除了上面的专项指标，还能<tspan font-weight="700">用整个系统的表现</tspan>来反推 LLM 好坏：</text>
+  <text x="64" y="1114" class="small">· 收集系统级反馈（如用户的<tspan class="cG" font-weight="700">👍/👎 thumbs up/down</tspan>）。</text>
+  <text x="64" y="1140" class="small">· 对 LLM 的改动做 <tspan class="cV" font-weight="700">A/B 测试</tspan>，看整体满意度变化。</text>
+  <text x="40" y="1168" class="small cR" font-weight="700">⭐ 关键：每次只动 LLM 这一处（隔离变量），才能把整体表现的变化"归因"到这次 LLM 改动上。</text>
+
+  <!-- takeaway -->
+  <rect x="40" y="1190" width="820" height="54" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="60" y="1216" class="small cO" font-weight="700">🎯 老师总结：LLM 回答质量很主观 → 评估靠"LLM 当裁判"或"人类反馈"，两者都带主观性。</text>
+  <text x="60" y="1238" class="small">把两类方法<tspan font-weight="700">组合</tspan>使用，才能对"LLM 工作得好不好"有信心。</text>
+
+  <!-- ⑦ latest intel -->
+  <text x="40" y="1296" class="sec">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="1324" class="small">本课的 response relevancy ＋ faithfulness，正是 2026 标准化的「<tspan class="cP" font-weight="700">RAG 三元组 RAG Triad</tspan>」中的两环：</text>
+  <text x="64" y="1352" class="small">· <tspan class="cT" font-weight="700">忠实度 Faithfulness / 接地</tspan>（回答↔检索内容）　· <tspan class="cT" font-weight="700">答案相关性 Answer Relevance</tspan>（回答↔问题）</text>
+  <text x="64" y="1378" class="small">· <tspan class="cT" font-weight="700">上下文相关性 Context Relevance</tspan>（检索内容↔问题，这环属<tspan class="cR" font-weight="700">检索器</tspan>）。四大核心指标连读 = 故障全景。</text>
+  <text x="40" y="1410" class="small cR" font-weight="700">⚠️ 最重要的前沿（呼应本课"全靠 LLM 当裁判"）：LLM 裁判自带系统性偏见！</text>
+  <text x="64" y="1436" class="small">· <tspan class="cR" font-weight="700">偏爱更长的回答</tspan>、偏爱啰嗦的模棱两可、<tspan class="cR" font-weight="700">偏袒和自己同家族的模型</tspan>，不同裁判给分还不一致。</text>
+  <text x="64" y="1462" class="small">· <tspan class="cG" font-weight="700">解法：</tspan>① 用<tspan font-weight="700">和被测系统"不同家族"的模型</tspan>当裁判；② 拿人工标注<tspan font-weight="700">校准</tspan>（一致性 Cohen's κ ≥ 0.6）。</text>
+  <text x="40" y="1494" class="small">· <tspan class="cV" font-weight="700">RAGAS 忠实度的内部实现</tspan>：LLM 先抽取离散声明 → 另一个 LLM 对每条声明做 <tspan class="cO" font-weight="700">NLI 自然语言推理</tspan>核验（与本课④一致）。</text>
+  <text x="40" y="1520" class="small">· <tspan class="cV" font-weight="700">生产级范式：</tspan>两层评估（离线测试集 + 线上流量监控）＋ <tspan class="cO" font-weight="700">把评估接进 CI/CD 当门禁 gate</tspan>＋ 持续校准。</text>
+  <text x="40" y="1546" class="small">　优先级：先建"黄金数据集 golden dataset" → 立基线 → 接 CI/CD → 上线监控 → 持续校准。</text>
+  <text x="40" y="1572" class="small cV" font-weight="700">一句话：本课的 RAGAS 指标仍是地基；2026 把它升级成"三元组 + CI/CD 门禁 + 人机校准闭环"的持续工程。</text>
+
+  <text x="40" y="1628" class="small cGray">🧪 个人补充（非课件）：注意一个"套娃"风险 —— 你用 LLM 评 LLM，裁判本身也会幻觉/有偏。所以</text>
+  <text x="40" y="1654" class="small cGray">　 自动指标只能"每次改动都跑、快速迭代"，真正的<tspan class="cR" font-weight="700">定盘星仍是人类标注</tspan>（尤其高风险场景 100% 人工）。</text>
+  <text x="40" y="1680" class="small cGray">　 最佳实践：自动指标跑全量 ＋ 人工抽检分层样本 ＋ 把人工标签反哺给自动评估器校准，让两者逐季收敛。</text>
+</svg>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="1200" height="1980" viewBox="0 0 1200 1980" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 26px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .nlab { font-size: 14px; font-weight: 700; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#37474F" stroke-width="1.8" stroke-linecap="round"/>
+    </marker>
+    <marker id="arD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#90A4AE" stroke-width="1.6" stroke-linecap="round"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="1980" fill="#ffffff"/>
+  <text x="40" y="46" class="title" style="white-space: pre;">智能体系统与工作流 🤖 <tspan font-size="16" fill="#666" class="en">Agentic Systems &amp; Workflows</tspan></text>
+  <text x="40" y="78" class="subtitle" style="white-space: pre;">一句话本质：把 RAG 从"一个 LLM 包打天下"拆成<tspan class="cR" font-weight="700">一张流程图</tspan> —— 每个 LLM 只干一步、可调用<tspan class="cP" font-weight="700">工具</tspan>，并按"步骤与决策"串联。</text>
+  <text x="40" y="102" class="subtitle" style="white-space: pre;">LLM 从"独立方案"变成"<tspan class="cV" font-weight="700">流水线里的模块零件</tspan>"。</text>
+  <line x1="40" y1="120" x2="1160" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+  <text x="40" y="156" class="sec" style="white-space: pre;">① 🧩 什么是 Agentic Workflow：两大改变</text>
+  <text x="40" y="184" class="small" style="white-space: pre;">普通用法：一个 prompt 进 → 一个 response 出。<tspan font-weight="700">智能体（agentic）系统</tspan>做了两点改变：</text>
+  <rect x="40" y="200" width="540" height="80" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="226" class="small cV" font-weight="700" style="white-space: pre;">改变 1：任务 = 一连串"步骤与决策"</text>
+  <text x="60" y="250" class="tiny" style="white-space: pre;">每一步由<tspan font-weight="700">不同的 LLM 调用</tspan>完成（你已见过：查询扩展、</text>
+  <text x="60" y="270" class="tiny" style="white-space: pre;">prompt 改写、引用生成…）。</text>
+  <rect x="620" y="200" width="540" height="80" rx="10" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.2"/>
+  <text x="640" y="226" class="small cP" font-weight="700" style="white-space: pre;">改变 2：LLM 能调用"工具 tools"</text>
+  <text x="640" y="250" class="tiny" style="white-space: pre;">代码解释器 💻、网页浏览器 🌐、（RAG 场景下）</text>
+  <text x="640" y="270" class="tiny" style="white-space: pre;">向量数据库 🗄️ 等外部能力。</text>
+  <text x="40" y="324" class="sec" style="white-space: pre;">② 🗺️ 完整示例：一个 Agentic RAG 系统（边看图边读）</text>
+  <text x="40" y="352" class="small" style="white-space: pre;">用户问"有学生折扣吗?"→ 先过一个<tspan class="cR" font-weight="700">小 Router LLM</tspan>，它判断"<tspan font-weight="700">需要查库吗?</tspan>"，只输出 yes / no。</text>
+  <rect x="40" y="380" width="170" height="52" rx="8" fill="#37474F"/>
+  <text x="125" y="402" class="small w" text-anchor="middle" style="white-space: pre;">用户 prompt</text>
+  <text x="125" y="420" class="tiny w" text-anchor="middle" style="white-space: pre;">"有学生折扣吗?"</text>
+  <line x1="125" y1="432" x2="125" y2="468" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="40" y="472" width="170" height="56" rx="8" fill="#EF5350"/>
+  <text x="125" y="506" class="nlab w" text-anchor="middle" style="white-space: pre;">Router LLM</text>
+  <text x="250" y="460" class="tiny cG" font-weight="700" style="white-space: pre;">yes → 需查库</text>
+  <line x1="210" y1="500" x2="286" y2="500" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="290" y="472" width="180" height="56" rx="8" fill="#EF5350"/>
+  <text x="380" y="496" class="small w" text-anchor="middle" font-weight="700" style="white-space: pre;">检索器 ↔ 知识库</text>
+  <text x="380" y="516" class="tiny w" text-anchor="middle" style="white-space: pre;">Retriever ↔ KB</text>
+  <line x1="470" y1="500" x2="506" y2="500" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="510" y="472" width="180" height="56" rx="8" fill="#EF5350"/>
+  <text x="600" y="496" class="small w" text-anchor="middle" font-weight="700" style="white-space: pre;">Evaluator LLM</text>
+  <text x="600" y="516" class="tiny w" text-anchor="middle" style="white-space: pre;">检索文档够了吗?</text>
+  <line x1="690" y1="500" x2="716" y2="500" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="720" y="472" width="210" height="56" rx="8" fill="#EF5350"/>
+  <text x="825" y="496" class="small w" text-anchor="middle" font-weight="700" style="white-space: pre;">增强 prompt → LLM</text>
+  <text x="825" y="516" class="tiny w" text-anchor="middle" style="white-space: pre;">→ 引用 Citation LLM</text>
+  <line x1="930" y1="500" x2="956" y2="500" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="960" y="472" width="180" height="56" rx="8" fill="#37474F"/>
+  <text x="1050" y="506" class="small w" text-anchor="middle" font-weight="700" style="white-space: pre;">最终 Response</text>
+  <path d="M600 528 C600 560, 380 560, 380 530" fill="none" stroke="#90A4AE" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arD)"/>
+  <text x="490" y="582" class="tiny cGray" text-anchor="middle" style="white-space: pre;">不够 → 再查一轮（循环 loop）</text>
+  <text x="205" y="628" class="tiny cR" text-anchor="middle" font-weight="700" style="white-space: pre;">no → 无需查库</text>
+  <path d="M125 528 V640 H286" fill="none" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="290" y="616" width="200" height="48" rx="8" fill="#37474F"/>
+  <text x="390" y="645" class="small w" text-anchor="middle" font-weight="700" style="white-space: pre;">直接 LLM 回答</text>
+  <path d="M490 640 H1050 V532" fill="none" stroke="#37474F" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+  <text x="40" y="700" class="small cGray" style="white-space: pre;">完整链路：Router 判路 → 查库 / 跳过 → Evaluator 评估是否够（不够就再查）→ 增强 prompt → LLM 生成 → 引用 LLM 补来源 → 回答。</text>
+  <text x="40" y="746" class="sec" style="white-space: pre;">③ 🔑 任何 Agentic 系统的两个通用要点</text>
+  <rect x="40" y="764" width="540" height="76" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="60" y="790" class="small cO" font-weight="700" style="white-space: pre;">要点 A：设计 = 画流程图 flowchart</text>
+  <text x="60" y="814" class="tiny" style="white-space: pre;">每个 LLM 仍只是"文字进、文字出"，但被安排成</text>
+  <text x="60" y="832" class="tiny" style="white-space: pre;">"在旅程中各完成一步"。</text>
+  <rect x="620" y="764" width="540" height="76" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="640" y="790" class="small cG" font-weight="700" style="white-space: pre;">要点 B：每步可用不同 LLM</text>
+  <text x="640" y="814" class="tiny" style="white-space: pre;">Router / Evaluator → <tspan font-weight="700">轻量模型</tspan>（快又便宜）；</text>
+  <text x="640" y="832" class="tiny" style="white-space: pre;">生成回答 → 大模型；引用 → 专用模型。</text>
+  <text x="40" y="886" class="sec" style="white-space: pre;">④ 🔀 四种工作流模式（本课核心，逐一看图）</text>
+  <text x="40" y="916" class="small cV" font-weight="700" style="white-space: pre;">1. 顺序 Sequential：一条直线，逐个专精</text>
+  <rect x="40" y="930" width="100" height="40" rx="6" fill="#37474F"/>
+  <text x="90" y="955" class="tiny w" text-anchor="middle" style="white-space: pre;">Prompt</text>
+  <line x1="144" y1="950" x2="174" y2="950" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="178" y="930" width="130" height="40" rx="6" fill="#EF5350"/>
+  <text x="243" y="955" class="tiny w" text-anchor="middle" style="white-space: pre;">解析 parser</text>
+  <line x1="312" y1="950" x2="342" y2="950" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="346" y="930" width="140" height="40" rx="6" fill="#EF5350"/>
+  <text x="416" y="955" class="tiny w" text-anchor="middle" style="white-space: pre;">改写 re-writer</text>
+  <line x1="490" y1="950" x2="520" y2="950" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="524" y="930" width="140" height="40" rx="6" fill="#EF5350"/>
+  <text x="594" y="955" class="tiny w" text-anchor="middle" style="white-space: pre;">引用 citation</text>
+  <line x1="668" y1="950" x2="698" y2="950" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="702" y="930" width="110" height="40" rx="6" fill="#37474F"/>
+  <text x="757" y="955" class="tiny w" text-anchor="middle" style="white-space: pre;">Response</text>
+  <text x="840" y="955" class="tiny cGray" style="white-space: pre;">每个 LLM 只专精一步</text>
+  <text x="40" y="1012" class="small cV" font-weight="700" style="white-space: pre;">2. 条件 Conditional：路由器决定走哪条路</text>
+  <rect x="40" y="1026" width="100" height="40" rx="6" fill="#37474F"/>
+  <text x="90" y="1051" class="tiny w" text-anchor="middle" style="white-space: pre;">Prompt</text>
+  <line x1="144" y1="1046" x2="174" y2="1046" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="178" y="1026" width="130" height="40" rx="6" fill="#EF5350"/>
+  <text x="243" y="1051" class="tiny w" text-anchor="middle" style="white-space: pre;">LLM router</text>
+  <path d="M312 1046 H348 V994 H368" fill="none" stroke="#90A4AE" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arD)"/>
+  <path d="M348 1046 H368" fill="none" stroke="#90A4AE" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arD)"/>
+  <path d="M348 1046 V1098 H368" fill="none" stroke="#90A4AE" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arD)"/>
+  <rect x="372" y="980" width="180" height="28" rx="6" fill="#ECEFF1" stroke="#B0BEC5"/>
+  <text x="462" y="998" class="tiny" text-anchor="middle" style="white-space: pre;">→ 检索器 Retriever</text>
+  <rect x="372" y="1032" width="180" height="28" rx="6" fill="#ECEFF1" stroke="#B0BEC5"/>
+  <text x="462" y="1050" class="tiny" text-anchor="middle" style="white-space: pre;">→ 某个专长 LLM</text>
+  <rect x="372" y="1084" width="180" height="28" rx="6" fill="#ECEFF1" stroke="#B0BEC5"/>
+  <text x="462" y="1102" class="tiny" text-anchor="middle" style="white-space: pre;">→ LLM Agent</text>
+  <text x="580" y="1051" class="tiny cGray" style="white-space: pre;">按问题特性，挑最合适的路径 / 专家模型</text>
+  <text x="40" y="1158" class="small cV" font-weight="700" style="white-space: pre;">3. 迭代 Iterative：写 → 评 → 反馈，循环 N 次（绕回前面成环）</text>
+  <rect x="40" y="1172" width="100" height="40" rx="6" fill="#37474F"/>
+  <text x="90" y="1197" class="tiny w" text-anchor="middle" style="white-space: pre;">Prompt</text>
+  <line x1="144" y1="1192" x2="174" y2="1192" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="178" y="1172" width="130" height="40" rx="6" fill="#EF5350"/>
+  <text x="243" y="1197" class="tiny w" text-anchor="middle" style="white-space: pre;">LLM writer</text>
+  <text x="340" y="1184" class="tiny cGray" style="white-space: pre;">方案</text>
+  <line x1="312" y1="1192" x2="368" y2="1192" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="372" y="1172" width="140" height="40" rx="6" fill="#EF5350"/>
+  <text x="442" y="1197" class="tiny w" text-anchor="middle" style="white-space: pre;">LLM evaluator</text>
+  <path d="M372 1212 C320 1244, 295 1244, 243 1214" fill="none" stroke="#90A4AE" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arD)"/>
+  <text x="320" y="1256" class="tiny cGray" text-anchor="middle" style="white-space: pre;">反馈 feedback（不合格 → 打回重写）</text>
+  <line x1="512" y1="1192" x2="542" y2="1192" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="546" y="1172" width="110" height="40" rx="6" fill="#37474F"/>
+  <text x="601" y="1197" class="tiny w" text-anchor="middle" style="white-space: pre;">Response</text>
+  <text x="686" y="1197" class="tiny cGray" style="white-space: pre;">例：反复改代码，直到能跑通</text>
+  <text x="39.983" y="1286.67" class="small cV" font-weight="700" style="white-space: pre; font-size: 14px;">4. 并行 Parallel：拆任务 → 多个 LLM 同时干 → 合并</text>
+  <rect x="40" y="1332" width="100" height="40" rx="6" fill="#37474F"/>
+  <text x="90" y="1357" class="tiny w" text-anchor="middle" style="white-space: pre;">Prompt</text>
+  <line x1="144" y1="1352" x2="174" y2="1352" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="178" y="1332" width="140" height="40" rx="6" fill="#EF5350"/>
+  <text x="248" y="1357" class="tiny w" text-anchor="middle" style="white-space: pre;">Orchestrator</text>
+  <text x="248" y="1384" class="tiny cGray" text-anchor="middle" style="white-space: pre;">拆成子任务</text>
+  <line x1="322" y1="1342" x2="356" y2="1314" stroke="#37474F" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="322" y1="1352" x2="356" y2="1352" stroke="#37474F" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="322" y1="1362" x2="356" y2="1390" stroke="#37474F" stroke-width="1.6" marker-end="url(#ar)"/>
+  <rect x="360" y="1298" width="120" height="32" rx="6" fill="#EF5350"/>
+  <text x="420" y="1319" class="tiny w" text-anchor="middle" style="white-space: pre;">LLM Agent</text>
+  <rect x="360" y="1336" width="120" height="32" rx="6" fill="#EF5350"/>
+  <text x="420" y="1357" class="tiny w" text-anchor="middle" style="white-space: pre;">LLM Agent</text>
+  <rect x="360" y="1374" width="120" height="32" rx="6" fill="#EF5350"/>
+  <text x="420" y="1395" class="tiny w" text-anchor="middle" style="white-space: pre;">LLM Agent</text>
+  <line x1="480" y1="1314" x2="514" y2="1342" stroke="#37474F" stroke-width="1.6"/>
+  <line x1="480" y1="1352" x2="514" y2="1352" stroke="#37474F" stroke-width="1.6"/>
+  <line x1="480" y1="1390" x2="514" y2="1362" stroke="#37474F" stroke-width="1.6"/>
+  <rect x="518" y="1332" width="130" height="40" rx="6" fill="#EF5350"/>
+  <text x="583" y="1357" class="tiny w" text-anchor="middle" style="white-space: pre;">Synthesizer</text>
+  <text x="583" y="1384" class="tiny cGray" text-anchor="middle" style="white-space: pre;">合并结果</text>
+  <line x1="648" y1="1352" x2="678" y2="1352" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="682" y="1332" width="110" height="40" rx="6" fill="#37474F"/>
+  <text x="737" y="1357" class="tiny w" text-anchor="middle" style="white-space: pre;">Response</text>
+  <text x="820" y="1357" class="tiny cGray" style="white-space: pre;">例：并行总结两篇论文再比较</text>
+  <text x="40" y="1454" class="sec" style="white-space: pre;">⑤ 🔨 如何实现 <tspan class="en">Implementing</tspan></text>
+  <text x="40" y="1482" class="small" style="white-space: pre;">· <tspan class="cG" font-weight="700">简单系统：</tspan>自己写工作流逻辑（几个 if/else + 几次 LLM 调用）即可。</text>
+  <text x="40" y="1508" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">复杂系统：</tspan>用现成的<tspan font-weight="700">工具 / 库 / 平台</tspan>来构建和管理（见 📡 情报）。</text>
+  <text x="40" y="1554" class="sec" style="white-space: pre;">⑥ 🧠 心态转变（这节最重要的领悟）</text>
+  <rect x="40" y="1572" width="1120" height="58" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="60" y="1598" class="small cO" font-weight="700" style="white-space: pre;">LLM 不再像"独立解决方案"，而更像"嵌进大流程的模块零件"。</text>
+  <text x="60" y="1620" class="small" style="white-space: pre;">于是你会<tspan font-weight="700">乐于用小模型、专精模型</tspan> —— 因为它们的能力与所负责的那一步刚好对齐，省钱又快。</text>
+  <text x="40" y="1678" class="sec" style="white-space: pre;">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="1706" class="small" style="white-space: pre;">这节课的"画流程图搭智能体"正是 2026 <tspan class="cR" font-weight="700">最火的方向（Agentic AI）</tspan>；本课的四种模式已被框架标准化：</text>
+  <text x="40" y="1734" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">LangGraph（#1）：</tspan>把工作流建成<tspan class="cP" font-weight="700">有状态的图 graph</tspan>，支持重试、人在环 HITL、"时间旅行"调试 —— 本课四种流都是它图上的边与节点。复杂系统首选。</text>
+  <text x="40" y="1762" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">Claude Agent SDK（#2）：</tspan>Anthropic 官方框架（驱动 Claude Code 的同款架构），强在 hooks、subagents、工具调用。</text>
+  <text x="40" y="1790" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">CrewAI（#3）：</tspan>少量代码快速搭"<tspan class="cO" font-weight="700">角色制多智能体 role-based crew</tspan>"（正是本课的并行 / 编排思路）。</text>
+  <text x="40" y="1818" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">LlamaIndex：</tspan>从 RAG 库长成完整 agent 框架，强项仍是"对大文档库做检索与推理"——agentic RAG 的天然选择。</text>
+  <text x="40" y="1846" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">MCP（模型上下文协议 Model Context Protocol）：</tspan>已成<tspan class="cO" font-weight="700">"智能体↔工具"通信的行业标准</tspan>，VS Code、JetBrains 等原生支持 —— 正是本课"LLM 调用工具"那一改变的标准化接口。</text>
+  <text x="40" y="1874" class="small cV" font-weight="700" style="white-space: pre;">一句话：本课教你"用流程图把多个 LLM + 工具编排起来"；2026 的 LangGraph / Claude Agent SDK / MCP 就是把它工程化、标准化的产物。</text>
+  <text x="40" y="1930" class="small cGray" style="white-space: pre;">🧪 个人补充（非课件）：这节课其实是<tspan class="cR" font-weight="700">整门 RAG 课的"总装车间"</tspan>——前面学的检索、提示、采样、幻觉缓解、评估，在这里全变成流程图里的节点。它也直接通向你的终点</text>
+  <text x="11.564" y="1955.99" class="small cGray" style="white-space: pre; font-size: 14px;">　《Attention is All You Need》：单个 Transformer 是"细胞"，agent 系统是"器官"——把会推理的 Transformer 当模块，编排成能查工具、自我评估、多步规划的系统，就是 2026 AI 主线。</text>
+</svg>

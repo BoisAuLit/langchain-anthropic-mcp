@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="900" height="2120" viewBox="0 0 900 2120" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 26px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .mono { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#37474F" stroke-width="1.8" stroke-linecap="round"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="2120" fill="#ffffff"/>
+  <text x="40" y="46" class="title" style="white-space: pre;">LLM 幻觉与缓解 👻 <tspan font-size="16" fill="#666" class="en">Hallucinations &amp; Grounding</tspan></text>
+  <text x="40" y="78" class="subtitle" style="white-space: pre;">一句话本质：LLM 只会生成<tspan class="cR" font-weight="700">"概率高"</tspan>的文字，分不清真假 —— 所以会一本正经地<tspan class="cR" font-weight="700">编</tspan>。</text>
+  <text x="40" y="102" class="subtitle" style="white-space: pre;">没有完美解法；<tspan class="cG" font-weight="700">RAG 接地（grounding）＋ 引用 ＋ 评估</tspan>是目前最有效的组合拳。</text>
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+  <text x="40" y="156" class="sec" style="white-space: pre;">① 🎫 翻车案例：凭空捏造的"学生折扣"</text>
+  <rect x="40" y="178" width="148.228" height="40" rx="8" fill="#37474F" style=""/>
+  <text x="112.687" y="202.673" class="tiny w" text-anchor="middle" style="white-space: pre; font-size: 13px;">用户："有学生折扣吗?"</text>
+  <line x1="100" y1="220" x2="100" y2="244" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="55" y="248" width="90" height="36" rx="8" fill="#EF5350"/>
+  <text x="100" y="271" class="tiny w" text-anchor="middle" font-weight="700" style="white-space: pre;">检索器</text>
+  <line x1="150" y1="266" x2="184" y2="266" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="188" y="248" width="100" height="36" rx="8" fill="#EF5350"/>
+  <text x="238" y="271" class="tiny w" text-anchor="middle" font-weight="700" style="white-space: pre;">相关文档</text>
+  <line x1="292" y1="266" x2="326" y2="266" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="330" y="248" width="110" height="36" rx="8" fill="#EF5350"/>
+  <text x="385" y="271" class="tiny w" text-anchor="middle" font-weight="700" style="white-space: pre;">增强 prompt</text>
+  <line x1="444" y1="266" x2="478" y2="266" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="482" y="248" width="70" height="36" rx="8" fill="#37474F"/>
+  <text x="517" y="271" class="tiny w" text-anchor="middle" font-weight="700" style="white-space: pre;">LLM</text>
+  <line x1="556" y1="266" x2="590" y2="266" stroke="#37474F" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="594" y="240" width="266" height="52" rx="8" fill="#37474F"/>
+  <text x="608" y="262" class="tiny w" style="white-space: pre;">"当然！凭学生证可享 10% 折扣，</text>
+  <text x="608" y="282" class="tiny w" style="white-space: pre;">和老人、新客户一样的优惠！"</text>
+  <text x="55" y="312" class="tiny cGray" style="white-space: pre;">知识库里只有"老人 10%"和"新客户 10%"，系统提示是"对客户友好" →</text>
+  <rect x="55" y="324" width="320" height="30" rx="8" fill="#EF5350"/>
+  <text x="215" y="344" class="small w" text-anchor="middle" font-weight="700" style="white-space: pre;">⚠️ 学生折扣根本不存在 —— LLM 编的！</text>
+  <text x="40" y="396" class="sec" style="white-space: pre;">② 🎲 为什么会幻觉 <tspan class="en">Why LLMs Hallucinate</tspan></text>
+  <text x="40" y="424" class="small" style="white-space: pre;">· LLM 的设计目标 = 生成<tspan class="cR" font-weight="700">"概率高的文字序列"</tspan>（再加一点随机）。</text>
+  <text x="40" y="450" class="small" style="white-space: pre;">· "概率高" <tspan class="cR" font-weight="700">≠ 事实正确</tspan>。而且模型<tspan font-weight="700">只会区分"可能/不可能"，不会区分"真/假"</tspan> —— 它没有真假概念。</text>
+  <text x="40" y="496" class="sec" style="white-space: pre;">③ ⚠️ 幻觉为什么危险 <tspan class="en">Why It Matters</tspan></text>
+  <text x="40" y="524" class="small" style="white-space: pre;"><tspan class="cR" font-weight="700">1. 信息不准：</tspan>本身就糟。</text>
+  <text x="40" y="550" class="small" style="white-space: pre;"><tspan class="cR" font-weight="700">2. 难发现：</tspan>幻觉"听起来很合理"，比胡言乱语更难被察觉。</text>
+  <text x="40" y="576" class="small" style="white-space: pre;"><tspan class="cR" font-weight="700">3. 侵蚀信任：</tspan>哪怕系统大部分准确，<tspan font-weight="700">偶尔一次幻觉</tspan>也会让用户不再信任整个系统。</text>
+  <text x="40" y="602" class="small cG" style="white-space: pre;"><tspan font-weight="700">RAG 有帮助：</tspan>用检索信息"接地"回答、补足训练数据的空缺 —— 但<tspan class="cR" font-weight="700">仍可能幻觉</tspan>，需额外手段。</text>
+  <text x="40" y="648" class="sec" style="white-space: pre;">④ 🎭 幻觉的类型 <tspan class="en">Types of Hallucinations</tspan></text>
+  <text x="40" y="676" class="small" style="white-space: pre;"><tspan class="cO" font-weight="700">小错：</tspan>把真实的老人折扣说成 5%（实为 10%）。　<tspan class="cR" font-weight="700">大错：</tspan>说"没有老人折扣"，或<tspan class="cR" font-weight="700">凭空发明新折扣</tspan>。</text>
+  <text x="40" y="702" class="small" style="white-space: pre;">→ 想确信准确，必须<tspan font-weight="700">在多个层面评估</tspan> LLM 的输出。</text>
+  <rect x="40" y="718" width="820" height="34" rx="8" fill="#EF5350"/>
+  <text x="450" y="740" class="small w" text-anchor="middle" font-weight="700" style="white-space: pre;">🧊 残酷真相：幻觉目前没有完美解法 There's no perfect solution（至少现在没有）。</text>
+  <text x="40" y="796" class="sec" style="white-space: pre;">⑤ 🔁 缓解一：自我一致性 <tspan class="en">Self-Consistency</tspan>（没知识库时）</text>
+  <text x="40" y="824" class="small" style="white-space: pre;">对同一 prompt <tspan font-weight="700">反复生成多次</tspan>，比对其中的事实是否一致。思路：如果在编，多次结果会<tspan class="cR" font-weight="700">互相矛盾</tspan>。</text>
+  <text x="40" y="850" class="small cGray" style="white-space: pre;">例：同一问题三次答"老人 10%"/"10%"/"5%" → 不一致 → 疑似幻觉。</text>
+  <text x="40" y="876" class="small cR" font-weight="700" style="white-space: pre;">⚠️ 实践中：又贵又不可靠。有知识库时，优先用知识库。</text>
+  <text x="40" y="922" class="sec" style="white-space: pre;">⑥ 🪝 缓解二：RAG 接地 <tspan class="en">Grounding</tspan>（最有效的一步）</text>
+  <text x="40" y="950" class="small" style="white-space: pre;">RAG 里你有知识库 → 让回答"<tspan class="cG" font-weight="700">扎根于检索到的信息</tspan>"。改系统提示即可：</text>
+  <rect x="40" y="966" width="820" height="32" rx="8" fill="#37474F"/>
+  <text x="56" y="987" class="mono w" style="white-space: pre;">System Prompt: "只能基于检索到的信息做事实陈述（only make factual claims based on retrieved info）"</text>
+  <text x="40" y="1024" class="small cGray" style="white-space: pre;">流程：没接地时模型乱猜（5%? 没有?）→ RAG 注入事实 + 接地提示 → 输出"是的，65 岁以上凭证享 10%"。</text>
+  <text x="40" y="1070" class="sec" style="white-space: pre;">⑦ 📎 缓解三：引用生成 <tspan class="en">Citation</tspan> ＋ ContextCite</text>
+  <text x="40" y="1098" class="small" style="white-space: pre;">让 LLM <tspan font-weight="700">每句话/每段后标注来源</tspan>（[1][2]…）→ 提高接地概率，也方便人类核查。</text>
+  <text x="40" y="1124" class="small cR" font-weight="700" style="white-space: pre;">⚠️ 风险：LLM 可能连引用都是编的（hallucinate citations）！</text>
+  <text x="40" y="1150" class="small" style="white-space: pre;">更可靠的办法：用<tspan class="cV" font-weight="700">外部系统 ContextCite</tspan> ——</text>
+  <rect x="40" y="1166" width="820" height="70" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="56" y="1190" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">逐句</tspan>把回答<tspan class="cV" font-weight="700">归因 attribute</tspan> 到某个检索文档；给每句打"来源 = 哪份文档"的标签。</text>
+  <text x="56" y="1214" class="small" style="white-space: pre;">· 找不到支撑材料 → 标 "no source"；有的还给"句子↔来源"的相似度分数。</text>
+  <text x="56" y="1232" class="tiny cGray" style="white-space: pre;">用途：① 生成靠谱的引用　② 评估 LLM"接地频率"有多高。</text>
+  <text x="40" y="1282" class="sec" style="white-space: pre;">⑧ 📊 评估引用质量：ALCE 基准 <tspan class="en">Benchmark</tspan></text>
+  <text x="40" y="1310" class="small" style="white-space: pre;">提供"预制知识库 + 样例问题"，让你的 RAG 跑一遍，再由 ALCE 给三个指标打分：</text>
+  <rect x="40" y="1326" width="260" height="44" rx="8" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="170" y="1346" class="small cR" text-anchor="middle" font-weight="700" style="white-space: pre;">流畅度 Fluency</text>
+  <text x="170" y="1364" class="tiny" text-anchor="middle" style="white-space: pre;">文字是否清晰好读</text>
+  <rect x="320" y="1326" width="260" height="44" rx="8" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="450" y="1346" class="small cR" text-anchor="middle" font-weight="700" style="white-space: pre;">正确性 Correctness</text>
+  <text x="450" y="1364" class="tiny" text-anchor="middle" style="white-space: pre;">内容是否事实准确</text>
+  <rect x="600" y="1326" width="260" height="44" rx="8" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="730" y="1346" class="small cR" text-anchor="middle" font-weight="700" style="white-space: pre;">引用质量 Citation</text>
+  <text x="730" y="1364" class="tiny" text-anchor="middle" style="white-space: pre;">引用是否对得上正确来源</text>
+  <text x="40" y="1398" class="small cGray" style="white-space: pre;">注意：基准不能在生产中"管住"幻觉，只能告诉你系统避免幻觉、标注来源做得好不好。</text>
+  <rect x="40" y="1420" width="820" height="58" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="60" y="1446" class="small cO" font-weight="700" style="white-space: pre;">🎯 老师总结：① 建 RAG 本身就是抑制幻觉最有效的一步。</text>
+  <text x="60" y="1468" class="small" style="white-space: pre;">② 再用<tspan font-weight="700">系统提示把回答"接地"</tspan>到检索信息。③ 用<tspan font-weight="700">幻觉专项基准</tspan>测试，确保回答有根有据、引用规范。</text>
+  <text x="40" y="1526" class="sec" style="white-space: pre;">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="1554" class="small" style="white-space: pre;">这节课的 ALCE 是早期基准；2026 的主流评估工具已升级，核心思路殊途同归 —— <tspan class="cP" font-weight="700">把回答拆成"声明"逐条核对</tspan>：</text>
+  <text x="40" y="1580" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">RAGAS（忠实度 Faithfulness）：</tspan>计算"回答中有多少比例的<tspan class="cO" font-weight="700">声明 claim</tspan>能被检索上下文支撑"，</text>
+  <text x="40" y="1606" class="small" style="white-space: pre;">　用 LLM 自动抽取并核验声明。与人工标注一致率高达 <tspan class="cG" font-weight="700">95%</tspan>（忠实度维度）。已成事实标准。</text>
+  <text x="40" y="1632" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">评估三件套：</tspan>RAGAS / TruLens / DeepEval —— 都能抓"输出与上下文矛盾或无支撑"的<tspan class="cR" font-weight="700">忠实度失败</tspan>。</text>
+  <text x="40" y="1658" class="small" style="white-space: pre;">　（但对复杂问题仍吃力，简单检索式问题更准。）</text>
+  <text x="40" y="1684" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">FACTSCORE / FaithLens：</tspan>把长回答<tspan class="cO" font-weight="700">分解成原子声明</tspan>逐一判真伪，做更细粒度的幻觉检测。</text>
+  <text x="40" y="1710" class="small" style="white-space: pre;">· <tspan class="cV" font-weight="700">生产级公式（2026 共识）：</tspan>grounding 接地 ＋ runtime detection 运行时检测 ＋ per-mode 分模式报告。</text>
+  <text x="40" y="1736" class="small cV" font-weight="700" style="white-space: pre;">一句话：本课"接地 + 引用 + 评估"的思路完全没过时；2026 只是把"评估"标准化成了 RAGAS 这类"声明级核验"。</text>
+  <text x="40" y="1792" class="small cGray" style="white-space: pre;">🧪 个人补充（非课件）：幻觉的根子在 ② —— 模型只懂"概率"不懂"真假"。所以一切缓解手段本质都是</text>
+  <text x="40" y="1818" class="small cGray" style="white-space: pre;">　 "外挂一个真值来源"：RAG 用知识库、引用用文档归因、RAGAS 用上下文核验声明。模型自己永远不知道自己错。</text>
+  <text x="40" y="1844" class="small cGray" style="white-space: pre;">　 顺带：2026 的推理模型（上节课）幻觉更少但<tspan class="cR" font-weight="700">不为零</tspan>——"会推理"≠"不会编"，接地依然必要。</text>
+</svg>

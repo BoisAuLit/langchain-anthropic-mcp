@@ -1,0 +1,173 @@
+<svg width="1200" height="2032" viewBox="0 0 1200 2032" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 26px; font-weight: 800; fill: #0F172A; }
+    .ess { font-size: 16px; fill: #475569; }
+    .sec { font-size: 19px; font-weight: 800; fill: #0F172A; }
+    .b { font-size: 15px; fill: #334155; }
+    .bb { font-size: 15px; font-weight: 700; }
+    .sm { font-size: 13px; fill: #64748B; }
+    .ct { font-size: 15px; font-weight: 700; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #0F172A; }
+    /* color classes LAST */
+    .w{fill:#fff} .wg{fill:#CBD5E1}
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#D97706} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+  </style>
+  <defs>
+    <marker id="t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="2032" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">Grounding &amp; RAG 📚 — giving the model facts it does not have</text>
+  <text x="40" y="76" class="ess">A model only knows what it learned in training, and that knowledge is <tspan class="cPink bb">frozen at the training date</tspan>. <tspan class="bb">Grounding</tspan> means automatically</text>
+  <text x="40" y="98" class="ess">adding the missing facts into the prompt, so the correct answer becomes the most probable one.</text>
+  <line x1="40" y1="114" x2="1160" y2="114" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ① the problem -->
+  <text x="40" y="148" class="sec">🧊 The core problem: knowledge is frozen, and the model will not say "I don't know"</text>
+  <text x="40" y="176" class="b">The model can only use what it saw in training. So it does NOT know: 🗓️ events after training · 🏢 your company's internal</text>
+  <text x="40" y="198" class="b">docs · 🔒 personal / private data. And it was never trained to say <tspan class="bb">"I don't know"</tspan> — so it outputs the most probable words</text>
+  <text x="40" y="220" class="b">instead, which can be <tspan class="cPink bb">confidently wrong</tspan>. Three questions it cannot answer, but answers anyway:</text>
+  <text x="40" y="250" class="b">❓ <tspan class="bb">"Acme Corp's Q3 revenue?"</tspan> (internal data)　→　🤖 <tspan class="cPink">"$42.3M, up 8% YoY"</tspan>  ❌ invented</text>
+  <text x="40" y="276" class="b">❓ <tspan class="bb">"Who won the 2026 FIFA Women's Champions Cup?"</tspan> (after training)　→　🤖 <tspan class="cPink">"France"</tspan>  ❌ wrong</text>
+  <text x="40" y="302" class="b">❓ <tspan class="bb">"Drug interactions for metformin + lisinopril?"</tspan> (no access)　→　🤖 <tspan class="cPink">"Risk of acute hyperkalemic crisis"</tspan>  ❌</text>
+
+  <!-- ② the mechanism -->
+  <text x="40" y="346" class="sec">⭐ Why grounding works: the right context changes the probabilities (the key idea)</text>
+  <text x="40" y="374" class="b">The model picks the next token by probability. If you put the right facts INTO the prompt, the right token becomes the most</text>
+  <text x="40" y="396" class="b">probable one. Here is the SAME question — without context (left) vs with context added (right):</text>
+
+  <rect x="40" y="412" width="545" height="186" rx="12" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.3"/>
+  <text x="60" y="438" class="ct cPink">WITHOUT context → the model just guesses</text>
+  <text x="60" y="460" class="sm">next-token probabilities (spread out, top guess is only 11%):</text>
+  <text x="150" y="486" class="code" text-anchor="end">France</text>
+  <rect x="160" y="476" width="120" height="13" rx="3" fill="#E11D48"/><text x="290" y="487" class="b">11.1%  ❌</text>
+  <text x="150" y="510" class="code" text-anchor="end">Spain</text>
+  <rect x="160" y="500" width="93" height="13" rx="3" fill="#FDA4AF"/><text x="290" y="511" class="b">8.6%</text>
+  <text x="150" y="534" class="code" text-anchor="end">Brazil</text>
+  <rect x="160" y="524" width="73" height="13" rx="3" fill="#FDA4AF"/><text x="290" y="535" class="b">6.7%</text>
+  <text x="150" y="558" class="code" text-anchor="end">Argentina</text>
+  <rect x="160" y="548" width="57" height="13" rx="3" fill="#FDA4AF"/><text x="290" y="559" class="b">5.3%</text>
+  <text x="150" y="582" class="code" text-anchor="end">England</text>
+  <rect x="160" y="572" width="50" height="13" rx="3" fill="#FDA4AF"/><text x="290" y="583" class="b">4.6%</text>
+
+  <rect x="615" y="412" width="545" height="186" rx="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.3"/>
+  <text x="635" y="438" class="ct cGreen">WITH context added to the prompt → one clear answer</text>
+  <text x="635" y="462" class="sm">prompt now also contains this retrieved fact:</text>
+  <rect x="635" y="472" width="505" height="30" rx="7" fill="#fff" stroke="#86EFAC"/>
+  <text x="648" y="492" class="code">Arsenal won the 2026 FIFA Women's Champions Cup</text>
+  <text x="725" y="540" class="code" text-anchor="end">Arsenal</text>
+  <rect x="735" y="528" width="330" height="16" rx="3" fill="#16A34A"/><text x="1075" y="541" class="bb cGreen">100%</text>
+  <text x="635" y="578" class="b cGreen" font-weight="700">✅ The right context makes "Arsenal" the obvious next token.</text>
+
+  <!-- ③ grounding methods -->
+  <text x="40" y="640" class="sec">🛠️ Grounding = add the missing facts automatically. The 4 main ways</text>
+  <text x="40" y="668" class="b">You already do a manual version when you paste code or files to debug. But that breaks when the docs are <tspan class="bb">too large</tspan>, there</text>
+  <text x="40" y="690" class="b">are <tspan class="bb">too many</tspan>, or they <tspan class="bb">keep changing</tspan>. Grounding does it automatically:</text>
+
+  <rect x="40" y="706" width="270" height="100" rx="11" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="58" y="730" class="ct cBlue">🔍 RAG</text>
+  <text x="58" y="752" class="sm">Pull document chunks from a</text>
+  <text x="58" y="770" class="sm">vector DB that are similar to your</text>
+  <text x="58" y="788" class="sm">question, and add them to the prompt.</text>
+
+  <rect x="324" y="706" width="270" height="100" rx="11" fill="#ECFDF5" stroke="#86EFAC" stroke-width="1.2"/>
+  <text x="342" y="730" class="ct cGreen">🌐 Web search</text>
+  <text x="342" y="752" class="sm">Do a live search and add fresh,</text>
+  <text x="342" y="770" class="sm">up-to-date web results to the</text>
+  <text x="342" y="788" class="sm">prompt.</text>
+
+  <rect x="608" y="706" width="270" height="100" rx="11" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.2"/>
+  <text x="626" y="730" class="ct cOrange">🧰 Tool use (agents)</text>
+  <text x="626" y="752" class="sm">Let the model call tools — APIs,</text>
+  <text x="626" y="770" class="sm">code, or databases. (Search is</text>
+  <text x="626" y="788" class="sm">just one popular tool.)</text>
+
+  <rect x="892" y="706" width="268" height="100" rx="11" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1.2"/>
+  <text x="910" y="730" class="ct cPurple">🕸️ Knowledge graph</text>
+  <text x="910" y="752" class="sm">Feed structured facts: entities</text>
+  <text x="910" y="770" class="sm">and their relationships (linked</text>
+  <text x="910" y="788" class="sm">facts).</text>
+
+  <!-- ④ RAG pipeline -->
+  <text x="40" y="844" class="sec">🔁 The RAG pipeline (the dominant method), step by step</text>
+  <rect x="40" y="864" width="180" height="50" rx="10" fill="#fff" stroke="#0D9488" stroke-width="1.6"/>
+  <text x="130" y="885" class="bb cTeal" text-anchor="middle">1 · Chunk + embed</text>
+  <text x="130" y="903" class="sm" text-anchor="middle">all docs → Vector DB</text>
+  <line x1="220" y1="889" x2="256" y2="889" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <rect x="260" y="864" width="175" height="50" rx="10" fill="#fff" stroke="#0D9488" stroke-width="1.6"/>
+  <text x="347" y="885" class="bb cTeal" text-anchor="middle">2 · Search the DB</text>
+  <text x="347" y="903" class="sm" text-anchor="middle">with the user's query</text>
+  <line x1="435" y1="889" x2="471" y2="889" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <rect x="475" y="864" width="195" height="50" rx="10" fill="#fff" stroke="#0D9488" stroke-width="1.6"/>
+  <text x="572" y="885" class="bb cTeal" text-anchor="middle">3 · Pick top-K chunks</text>
+  <text x="572" y="903" class="sm" text-anchor="middle">most similar (e.g. K = 3)</text>
+  <line x1="670" y1="889" x2="706" y2="889" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <rect x="710" y="864" width="195" height="50" rx="10" fill="#fff" stroke="#0D9488" stroke-width="1.6"/>
+  <text x="807" y="885" class="bb cTeal" text-anchor="middle">4 · Paste into context</text>
+  <text x="807" y="903" class="sm" text-anchor="middle">chunks + the query</text>
+  <line x1="905" y1="889" x2="941" y2="889" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <rect x="945" y="864" width="215" height="50" rx="10" fill="#0D9488"/>
+  <text x="1052" y="885" class="bb w" text-anchor="middle">5 · LLM answers</text>
+  <text x="1052" y="903" class="sm wg" text-anchor="middle">using query + retrieved facts</text>
+  <text x="40" y="948" class="b">✅ <tspan class="bb">Does RAG help?</tspan> Yes. A systematic review (2020 → May 2025) found RAG <tspan class="bb">consistently reduces hallucinations</tspan>, especially outdated knowledge.</text>
+
+  <!-- ⑤ RAG failures -->
+  <text x="40" y="992" class="sec">⚠️ But RAG is NOT error-free — it only injects extra text into the context. 3 ways it fails</text>
+  <text x="40" y="1020" class="b">🟥 <tspan class="bb">Bad docs:</tspan> if the retrieved document is wrong, the model trusts it and gives a wrong answer.</text>
+
+  <rect x="40" y="1036" width="1120" height="84" rx="11" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.3"/>
+  <text x="58" y="1060" class="ct cAmber">📑 Contradictory docs</text>
+  <text x="58" y="1082" class="b">Q: "How do I authenticate to our internal API?" RAG retrieves BOTH: <tspan class="bb">api-docs-v1.md (2021)</tspan> "use token auth" AND</text>
+  <text x="58" y="1104" class="b"><tspan class="bb">api-migration-guide-v2.md (2023)</tspan> "token auth is deprecated". The model mixes them → says <tspan class="cPink bb">"both formats are supported"</tspan> ❌</text>
+
+  <rect x="40" y="1132" width="1120" height="84" rx="11" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.3"/>
+  <text x="58" y="1156" class="ct cAmber">✂️ Poorly chunked docs</text>
+  <text x="58" y="1178" class="b">Q: "How do I handle a RateLimitError?" A naive split put the warning in <tspan class="bb">Chunk A (score 0.91, picked)</tspan>: "retrying now = permanent ban".</text>
+  <text x="58" y="1200" class="b">But the FIX ("wait 30s, then retry") sits in <tspan class="bb">Chunk B (score 0.6, NOT picked)</tspan>. So the model says you cannot recover ❌ — the chunking lost the answer.</text>
+
+  <!-- ⑥ lost in the middle -->
+  <text x="40" y="1256" class="sec">🎯 Attention is biased: "lost in the middle"</text>
+  <text x="40" y="1284" class="b">Researchers found models pay the most attention to the <tspan class="bb">beginning</tspan> and the <tspan class="bb">end</tspan> of the</text>
+  <text x="40" y="1306" class="b">context window, and tend to miss things in the <tspan class="cPink bb">middle</tspan>. So WHERE you place a document</text>
+  <text x="40" y="1328" class="b">matters — not just whether it is there.</text>
+  <rect x="780" y="1248" width="130" height="26" rx="5" fill="#15803D"/><text x="845" y="1266" class="sm w" text-anchor="middle">high attention 👀</text>
+  <rect x="780" y="1278" width="130" height="26" rx="5" fill="#86EFAC"/><text x="845" y="1296" class="sm cSlate" text-anchor="middle">↑ start of context</text>
+  <rect x="780" y="1308" width="130" height="26" rx="5" fill="#F1F5F9" stroke="#E2E8F0"/><text x="845" y="1326" class="sm cGray" text-anchor="middle">middle</text>
+  <rect x="780" y="1338" width="130" height="26" rx="5" fill="#F1F5F9" stroke="#E2E8F0"/><text x="845" y="1356" class="sm cGray" text-anchor="middle">(easily ignored)</text>
+  <rect x="780" y="1368" width="130" height="26" rx="5" fill="#86EFAC"/><text x="845" y="1386" class="sm cSlate" text-anchor="middle">↓ end of context</text>
+  <rect x="780" y="1398" width="130" height="26" rx="5" fill="#15803D"/><text x="845" y="1416" class="sm w" text-anchor="middle">high attention 👀</text>
+  <text x="934" y="1330" class="bb cPink">⟵ "Lost in</text>
+  <text x="934" y="1352" class="bb cPink">　 the middle"</text>
+
+  <!-- ⑦ context engineering -->
+  <text x="40" y="1470" class="sec">🧰 The fix discipline: "Context engineering"</text>
+  <text x="40" y="1498" class="b">🧹 <tspan class="bb">Curate:</tspan> use a few GOOD docs, not many mixed good-and-bad ones.</text>
+  <text x="40" y="1524" class="b">🧱 <tspan class="bb">Chunk well:</tspan> split documents in a smart, meaning-aware way — not naive half-half cuts.</text>
+  <text x="40" y="1550" class="b">📍 <tspan class="bb">Position for attention:</tspan> put the most important docs at the START and END, where attention is highest.</text>
+
+  <!-- ⑧ soft conditioning -->
+  <rect x="40" y="1576" width="1120" height="92" rx="12" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.3"/>
+  <text x="60" y="1602" class="ct cPink">🪧 Important: RAG is "soft conditioning", not a hard rule</text>
+  <text x="60" y="1624" class="b">The model CAN ignore the retrieved context and fall back to training. Example: "What is OpenAI's newest model?" — the context</text>
+  <text x="60" y="1646" class="b">says one thing, but the model may still answer "GPT-3.5 Turbo" from training. It weighs grounding vs training probabilities.</text>
+
+  <!-- 📡 intel -->
+  <text x="40" y="1708" class="sec">📡 2026 reality check</text>
+  <text x="40" y="1736" class="b">🏗️ <tspan class="bb">"Context engineering"</tspan> is now a #1 named challenge for enterprise AI teams (with hallucinations) — managing what goes into</text>
+  <text x="40" y="1758" class="b">　 the context window at scale is the real work.</text>
+  <text x="40" y="1784" class="b">🎯 <tspan class="bb">"Lost in the middle"</tspan> comes from positional bias (e.g. RoPE decay) and a U-shaped attention curve. As of 2026, <tspan class="bb">no production</tspan></text>
+  <text x="40" y="1806" class="b">　 <tspan class="bb">model has fully fixed it</tspan> — even with 1M-token windows, position still matters.</text>
+  <text x="40" y="1832" class="b">🥇 The standard fix is a <tspan class="bb">reranker</tspan>: it re-scores the chunks and puts the single most relevant one at the TOP of the context,</text>
+  <text x="40" y="1854" class="b">　 where the LLM looks hardest. For medical / legal / financial use, teams add extra validation on top of RAG.</text>
+
+  <!-- 🔑 insight -->
+  <rect x="40" y="1886" width="1120" height="116" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="60" y="1914" class="bb cBlue">🔑 The one idea to keep:</text>
+  <text x="60" y="1936" class="b">"The right context makes the right tokens more probable." That is the whole game. The prompt is the conditioning</text>
+  <text x="60" y="1958" class="b">for the autoregressive loop, and "lost in the middle" is literally a bias inside the attention mechanism.</text>
+  <text x="60" y="1980" class="b">Next up: the model builds its OWN context by reasoning step by step (chain of thought).</text>
+</svg>

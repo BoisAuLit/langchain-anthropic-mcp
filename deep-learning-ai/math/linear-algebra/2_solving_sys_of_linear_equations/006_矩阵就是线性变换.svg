@@ -1,0 +1,131 @@
+<svg width="900" height="1630" viewBox="0 0 900 1630" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .body { font-size: 15px; fill: #333; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 15px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .axis { stroke: #90CAF9; stroke-width: 1.5; }
+    .gridline { stroke: #aab4d4; stroke-width: 1; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+  <defs>
+    <marker id="aT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#00897B"/></marker>
+    <marker id="aP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#8E24AA"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1630" fill="#ffffff"/>
+
+  <!-- Header / BLUF -->
+  <text x="40" y="50" class="title">013 · 矩阵就是线性变换</text>
+  <text x="40" y="82" class="subtitle">一句话本质：矩阵不是数字表格，而是一台<tspan class="cO" font-weight="700">"空间变形机"</tspan>——吃进一个点、吐出一个新点，</text>
+  <text x="40" y="106" class="subtitle">整个平面的方格网跟着一起变成平行四边形网。（Matrices as Linear Transformations）</text>
+  <line x1="40" y1="124" x2="860" y2="124" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① matrix times vector -->
+  <text x="40" y="162" class="sec">① 🔢 矩阵 × 向量怎么算（行视角）</text>
+
+  <text x="78" y="192" class="tiny" text-anchor="middle" font-weight="700">a</text>
+  <text x="114" y="192" class="tiny" text-anchor="middle" font-weight="700">b</text>
+  <rect x="60" y="200" width="72" height="72" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="96" y1="200" x2="96" y2="272" class="gridline"/>
+  <line x1="60" y1="236" x2="132" y2="236" class="gridline"/>
+  <text x="78" y="224" class="cell" text-anchor="middle" font-weight="700">3</text><text x="114" y="224" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="78" y="260" class="cell" text-anchor="middle" font-weight="700">1</text><text x="114" y="260" class="cell" text-anchor="middle" font-weight="700">2</text>
+  <rect x="146" y="200" width="36" height="72" fill="#B2DFDB" stroke="#00897B" stroke-width="1.2"/>
+  <line x1="146" y1="236" x2="182" y2="236" class="gridline"/>
+  <text x="164" y="224" class="cell" text-anchor="middle">1</text>
+  <text x="164" y="260" class="cell" text-anchor="middle">1</text>
+  <text x="200" y="242" class="body">=</text>
+  <rect x="222" y="200" width="36" height="72" fill="#FFE0B2" stroke="#FB8C00" stroke-width="1.2"/>
+  <line x1="222" y1="236" x2="258" y2="236" class="gridline"/>
+  <text x="240" y="224" class="cell" text-anchor="middle" font-weight="700" fill="#EF6C00">4</text>
+  <text x="240" y="260" class="cell" text-anchor="middle" font-weight="700" fill="#EF6C00">3</text>
+
+  <rect x="300" y="202" width="420" height="28" rx="6" class="chip"/>
+  <text x="312" y="221" class="code">第1行 · 向量：3×1 + 1×1 = <tspan class="cO" font-weight="700">4</tspan></text>
+  <rect x="300" y="238" width="420" height="28" rx="6" class="chip"/>
+  <text x="312" y="257" class="code">第2行 · 向量：1×1 + 2×1 = <tspan class="cO" font-weight="700">3</tspan></text>
+  <text x="40" y="306" class="small">输出的每个分量 = 矩阵的<tspan class="cV" font-weight="700">每一行</tspan>分别与输入向量做<tspan class="cT" font-weight="700">点积</tspan>（上节课的主角，立刻上岗）。</text>
+
+  <!-- ② unit square -->
+  <text x="40" y="356" class="sec">② 🟦→🟧 单位正方形的命运（课件主例）</text>
+
+  <!-- left plot -->
+  <line x1="60" y1="494" x2="300" y2="494" class="axis"/>
+  <line x1="170" y1="392" x2="170" y2="598" class="axis"/>
+  <polygon points="170,494 200,494 200,464 170,464" fill="#B2DFDB" stroke="#00897B" stroke-width="2"/>
+  <circle cx="170" cy="494" r="3.5" fill="#00897B"/><circle cx="200" cy="494" r="3.5" fill="#00897B"/>
+  <circle cx="200" cy="464" r="3.5" fill="#00897B"/><circle cx="170" cy="464" r="3.5" fill="#00897B"/>
+  <text x="180" y="622" class="tiny" text-anchor="middle" font-weight="700" fill="#00897B">变换前：单位正方形（面积 1）</text>
+
+  <!-- mapping list -->
+  <text x="330" y="428" class="code" font-size="13"><tspan class="cT" font-weight="700">(0,0)</tspan> → <tspan class="cO" font-weight="700">(0,0)</tspan>　原点不动</text>
+  <text x="330" y="456" class="code" font-size="13"><tspan class="cT" font-weight="700">(1,0)</tspan> → <tspan class="cO" font-weight="700">(3,1)</tspan>　= 第 1 列！</text>
+  <text x="330" y="484" class="code" font-size="13"><tspan class="cT" font-weight="700">(0,1)</tspan> → <tspan class="cO" font-weight="700">(1,2)</tspan>　= 第 2 列！</text>
+  <text x="330" y="512" class="code" font-size="13"><tspan class="cT" font-weight="700">(1,1)</tspan> → <tspan class="cO" font-weight="700">(4,3)</tspan>　= 两列之和</text>
+
+  <!-- right plot: scale 30, origin (560,534) -->
+  <line x1="470" y1="534" x2="840" y2="534" class="axis"/>
+  <line x1="560" y1="404" x2="560" y2="614" class="axis"/>
+  <polygon points="560,534 650,504 680,444 590,474" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2"/>
+  <line x1="560" y1="534" x2="650" y2="504" stroke="#00897B" stroke-width="2.5" marker-end="url(#aT)"/>
+  <text x="654" y="522" class="tiny" font-weight="700" fill="#00897B">列1 (3,1)</text>
+  <line x1="560" y1="534" x2="590" y2="474" stroke="#8E24AA" stroke-width="2.5" marker-end="url(#aP)"/>
+  <text x="566" y="466" class="tiny" font-weight="700" fill="#8E24AA">列2 (1,2)</text>
+  <circle cx="680" cy="444" r="3.5" fill="#FB8C00"/>
+  <text x="688" y="440" class="tiny" font-weight="700" fill="#EF6C00">(4,3)</text>
+  <text x="655" y="622" class="tiny" text-anchor="middle" font-weight="700" fill="#EF6C00">变换后：平行四边形（面积 5，见 💡）</text>
+
+  <!-- ③ columns -->
+  <text x="40" y="676" class="sec">③ 🗝️ 解码秘诀：矩阵的【列】= 基向量的新家</text>
+  <text x="40" y="706" class="small"><tspan class="cV" font-weight="700">基向量（basis vector）</tspan>= 老网格的"标准一步"：(1,0) 横着一步，(0,1) 竖着一步。</text>
+  <text x="40" y="732" class="small">任何点都是"横走几步＋竖走几步"。变换后网格变形，但<tspan font-weight="700">走法不变</tspan>：两个基向量分别搬进第 1、2 列。</text>
+  <rect x="50" y="748" width="560" height="28" rx="6" class="chip"/>
+  <text x="62" y="767" class="code">列视角：M·(x, y) = x·列1 + y·列2　<tspan fill="#7B1FA2"># 输出 = 各列的加权混合</tspan></text>
+  <rect x="50" y="784" width="640" height="28" rx="6" class="chip"/>
+  <text x="62" y="803" class="code">课件例：(−2,3) → −2·(3,1) + 3·(1,2) = <tspan class="cO" font-weight="700">(−3, 4)</tspan> ✅</text>
+  <text x="40" y="834" class="small">课件黑色折线的含义：老网格里"左 2 步、上 3 步"到 (−2,3)；</text>
+  <text x="40" y="858" class="small">新网格里沿着<tspan class="cT" font-weight="700">新的两条边</tspan>照同样步数走，落在 (−3,4)。</text>
+
+  <!-- ④ whole plane -->
+  <text x="40" y="908" class="sec">④ 🌐 整个平面一起变形："线性"到底约束了什么</text>
+  <text x="40" y="938" class="small">课件右图：整张方格网变成平行四边形网。<tspan class="cV" font-weight="700">线性变换（linear transformation）</tspan>的三条铁律：</text>
+  <text x="40" y="964" class="small">　<tspan class="cG" font-weight="700">原点不动</tspan>（0 → 0）　·　<tspan class="cG" font-weight="700">直线仍是直线</tspan>（不掰弯）　·　<tspan class="cG" font-weight="700">等距格子仍等距</tspan></text>
+  <text x="40" y="990" class="small" font-weight="700" fill="#1565C0">所以整个变换被两根"新基"完全决定 —— 区区 4 个数（2×2）就能描述整个平面的变形。</text>
+
+  <!-- 💡 insights -->
+  <text x="40" y="1040" class="sec">💡 补充洞察（课程没明说）</text>
+  <text x="40" y="1070" class="small">💡 <tspan font-weight="700">行视角 vs 列视角</tspan>：同一次 M·v —— 行视角 = 每行和 v 做点积（适合<tspan class="cT" font-weight="700">动手算</tspan>）；</text>
+  <text x="40" y="1094" class="small">　列视角 = 用 v 的分量加权混合各列（适合<tspan class="cP" font-weight="700">理解空间</tspan>）。两个视角随时切换，是线代内功。</text>
+  <text x="40" y="1124" class="small">💡 <tspan font-weight="700">与行列式课接轨</tspan>：det = 3×2 − 1×1 = <tspan class="cO" font-weight="700">5</tspan> → 这台变形机把面积放大 5 倍。</text>
+  <text x="40" y="1148" class="small">　验证：单位正方形面积 1 → 平行四边形面积恰好 5。"det = 面积缩放倍数"今天见到正主。</text>
+
+  <!-- ⚠️ pitfalls -->
+  <text x="40" y="1198" class="sec">⚠️ 易错点</text>
+  <text x="40" y="1228" class="small" fill="#C62828">· 是【列】对应基向量的去向，不是行 —— 行是用来与输入做点积、算输出分量的。</text>
+  <text x="40" y="1254" class="small" fill="#C62828">· 写法约定：M·v 中 v 是竖着的列向量；顺序和形状都不能随意换。</text>
+  <text x="40" y="1280" class="small" fill="#C62828">· 平移（整体挪动）不是线性变换 —— 原点动了。神经网络的 +b 就是补这块拼图（仿射 affine）。</text>
+
+  <!-- 🔗 connection -->
+  <text x="40" y="1330" class="sec">🔗 承上启下</text>
+  <text x="40" y="1360" class="small">· 行列式课"变换、压扁、缩放"的直觉今天拿到正式定义；奇异矩阵 = 把图形压成线/点的变形机。</text>
+  <text x="40" y="1386" class="small" font-weight="700" fill="#1565C0">· Transformer：W_Q·x 就是给词向量空间做一次这样的变形；Q、K、V 是同一个词在</text>
+  <text x="40" y="1410" class="small" font-weight="700" fill="#1565C0">　三套"新网格"里的坐标。下一站：矩阵 × 矩阵 = 变形机串联。</text>
+
+  <line x1="40" y1="1432" x2="860" y2="1432" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1454" class="tiny" fill="#888" font-size="12">速记：矩阵 = 空间变形机；列 = 基向量的新家；M·v = 沿新网格照走；det = 变形的面积倍数；平移要靠 +b。</text>
+
+  <!-- 🧪 quiz -->
+  <text x="40" y="1492" class="sec" font-size="17">🧪 自测（先答后看最底部灰字）</text>
+  <text x="40" y="1518" class="small">Q1 概念：矩阵 [5 2; 1 4] 的第 2 列 (2,4)，在几何上代表什么？</text>
+  <text x="40" y="1544" class="small">Q2 计算：[3 1; 1 2]·(2,1) = ?</text>
+  <text x="40" y="1570" class="small">Q3 为什么：线性变换为什么必须把原点留在原点？</text>
+  <text x="40" y="1600" class="tiny" fill="#aaa" font-size="11">A1：基向量 (0,1)（竖直一步）变换后的落点。　A2：(3×2+1×1, 1×2+2×1) = (7, 4)。</text>
+  <text x="40" y="1618" class="tiny" fill="#aaa" font-size="11">A3：M·0 = 各列 × 0 再相加 = 0 —— 只要能写成矩阵乘法，原点必然映回原点。</text>
+</svg>

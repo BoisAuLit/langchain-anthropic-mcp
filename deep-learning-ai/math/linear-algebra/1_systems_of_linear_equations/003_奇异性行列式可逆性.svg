@@ -1,0 +1,164 @@
+<svg width="900" height="1480" viewBox="0 0 900 1480" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .body { font-size: 15px; fill: #333; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .eq { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 15px; fill: #333; }
+    .cap { font-size: 15px; font-weight: 700; }
+    .node { font-size: 14px; font-weight: 700; }
+    .axis { stroke: #90CAF9; stroke-width: 1.5; }
+    .ln { stroke: #1a1a1a; stroke-width: 2; fill: none; }
+  </style>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#999" stroke-width="1.6" stroke-linecap="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1480" fill="#ffffff"/>
+
+  <!-- ================== Header ================== -->
+  <text x="40" y="54" class="title">线性代数 · 奇异性 / 行列式 / 可逆性 —— 一页复习总纲</text>
+  <text x="40" y="86" class="subtitle">七张图的精华，去重整合。复习时从上往下读：每一节都建立在上一节之上。</text>
+  <line x1="40" y1="104" x2="860" y2="104" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ================== ① Trinity ================== -->
+  <text x="40" y="142" class="sec">① 三位一体：方程组 ⇔ 矩阵 ⇔ 直线</text>
+  <text x="40" y="168" class="body">同一个对象的三种长相。看到任何一种，脑子里要能立刻切换出另外两种。</text>
+
+  <text x="60" y="232" class="eq">a +  b = 10</text>
+  <text x="60" y="260" class="eq">a + 2b = 12</text>
+
+  <text x="225" y="252" font-size="20" fill="#888">⇔</text>
+
+  <path d="M293 206 h-8 v68 h8" stroke="#333" fill="none" stroke-width="1.5"/>
+  <path d="M362 206 h8 v68 h-8" stroke="#333" fill="none" stroke-width="1.5"/>
+  <text x="313" y="232" class="eq" text-anchor="middle">1</text>
+  <text x="343" y="232" class="eq" text-anchor="middle">1</text>
+  <text x="313" y="260" class="eq" text-anchor="middle">1</text>
+  <text x="343" y="260" class="eq" text-anchor="middle">2</text>
+  <path d="M382 206 h-8 v68 h8" stroke="#333" fill="none" stroke-width="1.5"/>
+  <path d="M424 206 h8 v68 h-8" stroke="#333" fill="none" stroke-width="1.5"/>
+  <text x="403" y="232" class="eq" text-anchor="middle">a</text>
+  <text x="403" y="260" class="eq" text-anchor="middle">b</text>
+  <text x="442" y="250" font-size="16" fill="#333">=</text>
+  <path d="M472 206 h-8 v68 h8" stroke="#333" fill="none" stroke-width="1.5"/>
+  <path d="M528 206 h8 v68 h-8" stroke="#333" fill="none" stroke-width="1.5"/>
+  <text x="500" y="232" class="eq" text-anchor="middle">10</text>
+  <text x="500" y="260" class="eq" text-anchor="middle">12</text>
+  <text x="328" y="296" class="tiny" text-anchor="middle" fill="#1565C0">A 系数矩阵（命运全在这）</text>
+  <text x="500" y="296" class="tiny" text-anchor="middle">b 常数</text>
+
+  <text x="552" y="252" font-size="20" fill="#888">⇔</text>
+
+  <!-- mini plot -->
+  <line x1="595" y1="255" x2="845" y2="255" class="axis" />
+  <line x1="700" y1="195" x2="700" y2="318" class="axis" />
+  <line x1="660" y1="215" x2="765" y2="320" class="ln"/>
+  <line x1="615" y1="220" x2="815" y2="320" class="ln"/>
+  <circle cx="715" cy="270" r="4.5" fill="#1a1a1a"/>
+  <text x="726" y="262" class="tiny" font-weight="700">(8, 2) 解 = 交点</text>
+
+  <!-- ================== ② Three fates ================== -->
+  <text x="40" y="368" class="sec">② 三种命运（全课核心，把这一节刻进脑子）</text>
+
+  <!-- col 1 -->
+  <rect x="40" y="388" width="260" height="260" rx="12" fill="#F1F8E9" stroke="#AED581" stroke-width="1.5"/>
+  <text x="58" y="416" class="cap" fill="#2E7D32">两线相交 Cross</text>
+  <line x1="65" y1="495" x2="275" y2="495" class="axis"/>
+  <line x1="170" y1="435" x2="170" y2="555" class="axis"/>
+  <line x1="118" y1="443" x2="222" y2="547" class="ln"/>
+  <line x1="95" y1="460" x2="245" y2="530" class="ln"/>
+  <circle cx="170" cy="495" r="4.5" fill="#1a1a1a"/>
+  <text x="58" y="584" class="tiny">信息：Complete 完整独立，谁也凑不出谁</text>
+  <text x="58" y="606" class="small" font-weight="700">解：唯一解（就是那个交点）</text>
+  <rect x="58" y="618" width="190" height="22" rx="11" fill="#2E7D32"/>
+  <text x="153" y="633" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Non-singular · det ≠ 0</text>
+
+  <!-- col 2 -->
+  <rect x="320" y="388" width="260" height="260" rx="12" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <text x="338" y="416" class="cap" fill="#F57F17">两线重合 Same line</text>
+  <line x1="345" y1="495" x2="555" y2="495" class="axis"/>
+  <line x1="450" y1="435" x2="450" y2="555" class="axis"/>
+  <line x1="398" y1="443" x2="502" y2="547" class="ln"/>
+  <circle cx="410" cy="455" r="3.5" fill="#1a1a1a"/>
+  <circle cx="430" cy="475" r="3.5" fill="#1a1a1a"/>
+  <circle cx="450" cy="495" r="3.5" fill="#1a1a1a"/>
+  <circle cx="470" cy="515" r="3.5" fill="#1a1a1a"/>
+  <circle cx="490" cy="535" r="3.5" fill="#1a1a1a"/>
+  <text x="338" y="584" class="tiny">信息：Redundant 冗余，第二句是废话</text>
+  <text x="338" y="606" class="small" font-weight="700">解：无穷多（线上每个点）</text>
+  <rect x="338" y="618" width="160" height="22" rx="11" fill="#C62828"/>
+  <text x="418" y="633" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Singular · det = 0</text>
+
+  <!-- col 3 -->
+  <rect x="600" y="388" width="260" height="260" rx="12" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="618" y="416" class="cap" fill="#C62828">两线平行 Parallel</text>
+  <line x1="625" y1="495" x2="835" y2="495" class="axis"/>
+  <line x1="730" y1="435" x2="730" y2="555" class="axis"/>
+  <line x1="670" y1="447" x2="778" y2="555" class="ln"/>
+  <line x1="690" y1="435" x2="798" y2="543" class="ln"/>
+  <text x="618" y="584" class="tiny">信息：Contradictory 矛盾，自相冲突</text>
+  <text x="618" y="606" class="small" font-weight="700">解：无解（永不相遇）</text>
+  <rect x="618" y="618" width="160" height="22" rx="11" fill="#C62828"/>
+  <text x="698" y="633" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Singular · det = 0</text>
+
+  <!-- ================== ③ det ================== -->
+  <text x="40" y="694" class="sec">③ 行列式 det：一个数，判生死</text>
+  <text x="60" y="722" class="eq">算法 (2×2)：det[a b; c d] = ad − bc　　例：det[1 1; 1 2] = 1·2 − 1·1 = 1 ≠ 0</text>
+  <text x="40" y="750" class="small">· 几何含义：det = 变换的"面积 / 体积缩放倍数"。det = 0 ⇔ 空间被压扁 ⇔ 信息被销毁、回不去。</text>
+  <text x="40" y="776" class="small">· 代数含义：det = 0 ⇔ 有一行能被其他行加减凑出来（冗余或矛盾的"句子"）。</text>
+  <text x="40" y="802" class="small" font-weight="700" fill="#1565C0">· 黄金类比：det 就是矩阵"那个不能为零的数" —— 数字 a 有倒数 ⇔ a ≠ 0；矩阵 A 有逆 ⇔ det(A) ≠ 0。</text>
+  <text x="40" y="828" class="small">· 3×3 按第一行展开成三个 2×2 来算；公式不用背，含义才是重点：缩放了多少、压没压扁。</text>
+
+  <!-- ================== ④ Seven synonyms ================== -->
+  <text x="40" y="872" class="sec">④ 七个同义词（不是因果推导，是同一件事的不同名字）</text>
+  <rect x="40" y="888" width="820" height="34" rx="17" fill="#E8F5E9" stroke="#66BB6A" stroke-width="1.5"/>
+  <text x="450" y="910" class="node" fill="#2E7D32" text-anchor="middle">Non-singular ＝ 可逆(有A⁻¹) ＝ det≠0 ＝ 行列独立 ＝ 满秩 ＝ 唯一解 ＝ 不压扁空间</text>
+  <rect x="40" y="930" width="820" height="34" rx="17" fill="#FFEBEE" stroke="#EF5350" stroke-width="1.5"/>
+  <text x="450" y="952" class="node" fill="#C62828" text-anchor="middle">Singular ＝ 不可逆 ＝ det=0 ＝ 行相关 ＝ 缺秩 ＝ 无唯一解 ＝ 压扁丢信息</text>
+  <text x="40" y="988" class="small">"买一送六"：实战只验证最好算的一条（算 det），其余六条自动成立。它们的关系像"单身汉"和"未婚男人"。</text>
+
+  <!-- ================== ⑤ Solution count ================== -->
+  <text x="40" y="1032" class="sec">⑤ 解的个数：只有 0、1、∞ 三种，没有别的</text>
+  <text x="40" y="1060" class="small" font-weight="700">铁律：若有两个不同的解，它们连线上每点都是解 → 超过 1 个立刻变 ∞。世上不存在"恰好 2 个解"。</text>
+
+  <rect x="290" y="1080" width="320" height="36" rx="10" fill="#E3F2FD" stroke="#1E88E5" stroke-width="2"/>
+  <text x="450" y="1104" class="node" fill="#1565C0" text-anchor="middle">解 Ax = b：先算 det(A)</text>
+
+  <line x1="370" y1="1116" x2="215" y2="1152" stroke="#999" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="250" y="1136" class="small" font-weight="700" fill="#2E7D32">det ≠ 0</text>
+  <rect x="80" y="1156" width="250" height="56" rx="10" fill="#E8F5E9" stroke="#66BB6A" stroke-width="2"/>
+  <text x="205" y="1180" class="node" fill="#2E7D32" text-anchor="middle">恰好 1 个解，到站</text>
+  <text x="205" y="1202" class="tiny" text-anchor="middle">与 b 无关，永远如此</text>
+
+  <line x1="530" y1="1116" x2="655" y2="1146" stroke="#999" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="630" y="1134" class="small" font-weight="700" fill="#C62828">det = 0</text>
+  <rect x="560" y="1150" width="200" height="34" rx="10" fill="#FFF8E1" stroke="#FFB300" stroke-width="2"/>
+  <text x="660" y="1172" class="node" fill="#F57F17" text-anchor="middle">还没完：再看 b</text>
+
+  <line x1="610" y1="1184" x2="550" y2="1216" stroke="#999" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="710" y1="1184" x2="760" y2="1216" stroke="#999" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="450" y="1220" width="190" height="50" rx="10" fill="#FFF8E1" stroke="#FFB300" stroke-width="2"/>
+  <text x="545" y="1242" class="node" fill="#F57F17" text-anchor="middle">b 配合 → ∞ 个</text>
+  <text x="545" y="1262" class="tiny" text-anchor="middle">冗余但不冲突</text>
+  <rect x="660" y="1220" width="190" height="50" rx="10" fill="#FFEBEE" stroke="#EF5350" stroke-width="2"/>
+  <text x="755" y="1242" class="node" fill="#C62828" text-anchor="middle">b 矛盾 → 0 个</text>
+  <text x="755" y="1262" class="tiny" text-anchor="middle">方程自相冲突</text>
+
+  <text x="40" y="1300" class="small">特例 b = 0（齐次方程组）：x = 0 永远是解，"无解"被堵死 → <tspan font-weight="700" fill="#C62828">det = 0 时必为 ∞ 个</tspan>。（这就是归零后"矛盾变冗余"的原因）</text>
+
+  <!-- ================== ⑥ Boundaries ================== -->
+  <text x="40" y="1344" class="sec">⑥ 三个边界，防止理解过头</text>
+  <text x="40" y="1372" class="small">1. 常数项 b 不参与"体检"：奇异性只看系数 A —— 把 b 全改成 0，所有线滑回原点，奇异性纹丝不动；</text>
+  <text x="40" y="1394" class="small">　 但 b 参与"生活"：它决定解的具体数值（x = A⁻¹b），以及奇异时走"无解"还是"无穷多"。</text>
+  <text x="40" y="1420" class="small">2. det 只属于方阵：矩形矩阵不是 det = 0，而是根本无定义（没有"体积倍数"可言）；它们看秩 rank。</text>
+  <text x="40" y="1446" class="small" font-weight="700" fill="#1565C0">3. 系数定方向，常数定位置：平行与否只由斜率（系数）决定 —— 这就是奇异性与 b 无关的几何原因。</text>
+
+  <line x1="40" y1="1458" x2="860" y2="1458" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1474" class="tiny" fill="#888" font-size="12">终极速记：det(A) ≠ 0 → 可逆 → 恰好 1 解，天下太平；det(A) = 0 → 压扁 → 0 或 ∞ 解，看 b 脸色。解的个数 ∈ {0, 1, ∞}，仅此三种。</text>
+</svg>

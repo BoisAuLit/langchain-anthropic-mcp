@@ -1,0 +1,90 @@
+<svg width="1100" height="1360" viewBox="0 0 1100 1360" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #555; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .ctitle { font-size: 16px; font-weight: 700; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+  </style>
+
+  <rect x="0" y="0" width="1100" height="1360" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">生产环境的挑战 🚀 <tspan font-size="17" fill="#666" class="en">Production Challenges</tspan></text>
+  <text x="40" y="76" class="subtitle">一句话本质：把 RAG 交到<tspan class="cR" font-weight="700">真实用户</tspan>手里后，会遇到一批原型期没有的新难题，需要的技能也完全不同。</text>
+  <text x="40" y="100" class="subtitle">本课先盘点这些挑战；核心铁律是 —— <tspan class="cR" font-weight="700">生产环境里的错误会带来真实的财务和声誉代价</tspan>。</text>
+  <line x1="40" y1="118" x2="1060" y2="118" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- intro -->
+  <text x="40" y="152" class="sec">🌐 五大新挑战：原型 → 生产，难度跃升</text>
+  <text x="40" y="180" class="small">真实用户一上手，系统要面对和原型期完全不同的考验 —— 下面是 4 类"技术挑战" + 1 条"代价铁律"。</text>
+
+  <!-- 2x2 grid of challenge cards -->
+  <!-- ① Scaling -->
+  <rect x="40" y="196" width="500" height="120" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="222" class="ctitle cV">① 📈 扩展性能 <tspan class="en">Scaling</tspan></text>
+  <text x="60" y="248" class="small">· 流量↑ → <tspan font-weight="700">延迟 latency</tspan> 和负载↑。</text>
+  <text x="60" y="272" class="small">· 请求↑ → <tspan font-weight="700">内存 / 算力↑ → 成本↑</tspan>。</text>
+  <text x="60" y="296" class="small">· 规模上去还要保持高性能，很难。</text>
+
+  <!-- ② Unpredictable -->
+  <rect x="560" y="196" width="500" height="120" rx="10" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.2"/>
+  <text x="580" y="222" class="ctitle cP">② 🎲 提示不可预测 <tspan class="en">Unpredictability</tspan></text>
+  <text x="580" y="248" class="small">· 哪怕严格测试，也无法预测用户的每种问法。</text>
+  <text x="580" y="272" class="small">· 上线后可能在新问法上翻车（测试时却没事）。</text>
+  <text x="580" y="296" class="small">· 经典："我该吃几块石头?" 🪨（用户天马行空）</text>
+
+  <!-- ③ Messy data -->
+  <rect x="40" y="332" width="500" height="120" rx="10" fill="#FFF3E0" stroke="#FFB74D" stroke-width="1.2"/>
+  <text x="60" y="358" class="ctitle cO">③ 🗂️ 真实数据脏乱 <tspan class="en">Messy Data</tspan></text>
+  <text x="60" y="384" class="small">· 常碎片化、格式差、缺<tspan font-weight="700">元数据 metadata</tspan>。</text>
+  <text x="60" y="408" class="small">· 很多不是文本：图片、PDF、幻灯片。</text>
+  <text x="60" y="432" class="small">· 要进知识库，得先用<tspan font-weight="700">抽取工具 extraction</tspan>。</text>
+
+  <!-- ④ Security & Privacy -->
+  <rect x="560" y="332" width="500" height="120" rx="10" fill="#E0F2F1" stroke="#80CBC4" stroke-width="1.2"/>
+  <text x="580" y="358" class="ctitle cT">④ 🔒 安全与隐私 <tspan class="en">Security &amp; Privacy</tspan></text>
+  <text x="580" y="384" class="small">· 很多 RAG 正因数据<tspan font-weight="700">私密 / 专有</tspan>才部署。</text>
+  <text x="580" y="408" class="small">· 要害：既保私密，又让<tspan font-weight="700">授权用户</tspan>能访问。</text>
+  <text x="580" y="432" class="small">· 私密与可用之间的平衡是关键功能。</text>
+
+  <!-- ⑤ Eat Rocks -->
+  <text x="40" y="488" class="sec">⑤ 💸 代价铁律：生产环境的错误代价高昂 ——「吃石头」案</text>
+  <text x="40" y="516" class="small">当年 Google 上线 AI 搜索摘要时，竟建议用户"吃石头补充营养"。复盘后发现：</text>
+
+  <rect x="40" y="532" width="1020" height="118" rx="10" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.2"/>
+  <text x="60" y="558" class="small">🪨 起因：有用户问"我每天该吃几块石头?"，系统检索到的资料里很多是搞笑 / 讽刺帖子，</text>
+  <text x="60" y="582" class="small">但 AI 没识别出"这是玩笑"，直接采信、给出"为补充营养应吃石头"的离谱建议。</text>
+  <text x="60" y="606" class="small cGray">（实际来源是讽刺媒体 The Onion 2021 年的旧文"地质学家建议每天至少吃一小块石头"。）</text>
+  <text x="60" y="632" class="small cR" font-weight="700">→ 教训：错误会同时损害声誉与财务，且各行业都会发生（不止 Google）。Google 已修复并发博客复盘。</text>
+
+  <!-- ⑥ more failures -->
+  <text x="40" y="688" class="sec">⑥ 🗞️ 更多翻车案例 &amp; 本课结论</text>
+  <text x="40" y="716" class="small">· ✈️ 航空公司聊天机器人向好心顾客承诺了<tspan font-weight="700">根本不存在的折扣</tspan>。</text>
+  <text x="40" y="742" class="small">· 😈 恶意用户会诱导 RAG 系统<tspan font-weight="700">"免费把货卖给他"</tspan>或<tspan font-weight="700">"吐露机密信息"</tspan>。</text>
+  <text x="40" y="768" class="small">· 🍔 McDonald's AI 点单出错（培根冰淇淋刷屏）、NYC 政务机器人竟<tspan font-weight="700">教商家违法</tspan>。</text>
+
+  <rect x="40" y="786" width="1020" height="58" rx="10" fill="#37474F"/>
+  <text x="60" y="812" class="small w" font-weight="700">📌 结论：生产天然艰难 → 必须建立机制来【预判 anticipate · 追踪 track · 验证 verify】问题与修复，</text>
+  <text x="60" y="834" class="small wg">　　且验证"改动是否真带来提升"。下一课主题：搭建稳健的可观测性系统 observability。</text>
+
+  <!-- 📡 2026 intel -->
+  <text x="40" y="884" class="sec">📡 2026 最新情报（已联网核实 · 截至 2026-06）</text>
+
+  <text x="40" y="912" class="small">· <tspan class="cV" font-weight="700">🔭 可观测性 Observability / LLMOps（正是下一课主题，2026 已成独立学科）：</tspan>LLM 应用会<tspan x="60" dy="24">"静默失败"——输出听起来合理却是错的，传统报错监控抓不到。五大支柱：持续输出评估、</tspan><tspan x="60" dy="24">分布式追踪 tracing、prompt 优化、RAG 监控、模型生命周期管理；主流工具如 LangSmith 做</tspan><tspan x="60" dy="24">端到端追踪 + 评测，RAG 用 RAGAS 四指标，并用"模型路由"控成本。</tspan></text>
+
+  <text x="40" y="1012" class="small">· <tspan class="cR" font-weight="700">🛡️ 安全（呼应"恶意用户"）：</tspan>提示注入 prompt injection 自榜单设立起<tspan font-weight="700">一直是 OWASP LLM 风险 #1</tspan>。<tspan x="60" dy="24">RAG 特有风险：<tspan font-weight="700">间接注入 / 检索投毒</tspan>（把恶意文本塞进会被检索到的文档里）。防御要"纵深"：</tspan><tspan x="60" dy="24">输入分类器（Llama Guard 3 / NeMo）、检索护栏、输出净化、最小权限、高危操作需人工审批。</tspan><tspan x="60" dy="24">《OWASP 智能体应用 Top 10 (2026)》已于 2025-12-10 发布。</tspan></text>
+
+  <text x="40" y="1112" class="small">· <tspan class="cP" font-weight="700">⚖️ 真实代价（2026 已成法律热点）：</tspan>Air Canada 因机器人<tspan font-weight="700">虚构的退票政策</tspan>被判败诉、须赔偿 ——<tspan x="60" dy="24">确立了"公司要为聊天机器人说的话负责"。另有经销商机器人被提示注入后以"1 美元"卖出一辆车；</tspan><tspan x="60" dy="24">2026 Q1 美国法院已开出超 $14.5 万 AI 幻觉罚单；EU AI Act 透明度义务 2026-08 生效，罚款最高 €35M。</tspan></text>
+
+  <text x="40" y="1192" class="small cV" font-weight="700">一句话：本课列出生产的 5 大挑战与"错误代价"；2026 已把【可观测性 + 安全护栏 + 合规】变成上线 RAG 的<tspan x="40" dy="24">必备工程而非可选项 —— 下一课的 observability，就是这套防线的第一道。</tspan></text>
+
+  <text x="40" y="1264" class="small cGray">🧪 个人补充（非课件）：对你（前端）最好懂的类比 —— 这就是 AI 时代的"线上事故与 SRE"。你熟悉的<tspan x="40" dy="24">监控告警、灰度、回滚、WAF 防注入，在 RAG 里分别对应：tracing 追踪、评测看板、模型路由降级、</tspan><tspan x="40" dy="24">提示注入护栏。技能是迁移的，只是被监控的对象从"接口返回值"变成了"模型生成的内容"。</tspan></text>
+</svg>

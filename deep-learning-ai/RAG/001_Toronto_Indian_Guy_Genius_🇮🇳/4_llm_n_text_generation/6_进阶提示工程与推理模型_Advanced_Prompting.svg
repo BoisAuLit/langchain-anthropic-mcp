@@ -1,0 +1,138 @@
+<svg width="900" height="2080" viewBox="0 0 900 2080" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 25px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .mono { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+    .pk { fill: #F06292; } .ec { fill: #B0BEC5; }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#546E7A" stroke-width="1.6" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="2080" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">进阶提示工程与推理模型 🧠 <tspan font-size="15" fill="#666" class="en">Advanced Prompting &amp; Reasoning Models</tspan></text>
+  <text x="40" y="78" class="subtitle">一句话本质：在 prompt 里<tspan class="cV" font-weight="700">塞例子</tspan>（举例学习）或<tspan class="cP" font-weight="700">让模型先想后答</tspan>（思维链）都能提升质量；</text>
+  <text x="40" y="102" class="subtitle">推理模型把"先想后答"<tspan class="cO" font-weight="700">内置</tspan>了 —— 更准但更贵更慢，还会更快吃满上下文窗口。</text>
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① overview -->
+  <text x="40" y="156" class="sec">① 🗺️ 本课地图：四类进阶技巧 ＋ 一个管理问题</text>
+  <text x="40" y="184" class="small"><tspan class="cV" font-weight="700">A 举例学习</tspan>（给例子）　<tspan class="cP" font-weight="700">B 鼓励推理</tspan>（让它想）　<tspan class="cO" font-weight="700">C 思维链</tspan>（分步走）　<tspan class="cT" font-weight="700">D 推理模型</tspan>（内置会想）</text>
+  <text x="40" y="210" class="small cR" font-weight="700">⚠️ 代价：这些技巧都会让 prompt / 回复变长 → 必须做"上下文窗口管理"（见 ⑦）。</text>
+
+  <!-- ② in-context learning -->
+  <text x="40" y="256" class="sec">② 📚 举例学习 <tspan class="en">In-Context Learning</tspan>：用范例教模型"照着答"</text>
+  <text x="40" y="284" class="small">在 prompt 里塞<tspan font-weight="700">"问题—优质回答"范例对</tspan>，让 LLM 学会该用的<tspan class="cV" font-weight="700">结构与语气</tspan>。本质和 RAG 一样——给额外信息来"锚定"回答。</text>
+  <text x="60" y="312" class="small"><tspan class="cO" font-weight="700">few-shot 少样本</tspan>＝塞多个例子　|　<tspan class="cO" font-weight="700">one-shot 单样本</tspan>＝塞一个　|　<tspan class="cGray">zero-shot＝不给例子</tspan></text>
+  <text x="40" y="342" class="small">两种实现方式：</text>
+  <rect x="40" y="358" width="400" height="58" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="382" class="small cV" font-weight="700">① 硬编码 hard-code</text>
+  <text x="60" y="404" class="tiny">把固定例子写死在 prompt 里 —— 想要稳定行为时够用。</text>
+  <rect x="460" y="358" width="400" height="58" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="480" y="382" class="small cG" font-weight="700">② 用 RAG 动态检索例子</text>
+  <text x="480" y="404" class="tiny">把成功的客服对话存进向量库，按当前话题召回相似范例。</text>
+  <text x="40" y="442" class="tiny cGray">客服 bot 示例：用户问"How do I return an item?" → 检索到同类范例 → 模型照范例的结构回答（带订单号、退货标签、联系邮箱）。</text>
+
+  <!-- ③ encouraging reasoning -->
+  <text x="40" y="488" class="sec">③ 💭 鼓励推理 <tspan class="en">Encouraging Reasoning</tspan>：给模型一块"草稿纸"</text>
+  <text x="40" y="516" class="small">让 LLM 在给最终答案前先"<tspan font-weight="700">出声思考 think aloud / 一步步想</tspan>"。常用做法：约定 <tspan class="mono" fill="#1B5E20">&lt;scratchpad&gt;</tspan> 标签内是</text>
+  <text x="40" y="542" class="small">"思考区"，不算最终答案。模型在里面权衡选项、整理思路，再给结论。</text>
+  <rect x="40" y="558" width="500" height="92" rx="12" fill="#34404F"/>
+  <text x="60" y="582" class="mono"><tspan class="pk">&lt;scratchpad&gt;</tspan></text>
+  <text x="60" y="602" class="mono wg">Option 1: Could be X because…</text>
+  <text x="60" y="622" class="mono wg">Actually, Z makes most sense because…</text>
+  <text x="60" y="642" class="mono"><tspan class="pk">&lt;/scratchpad&gt;</tspan></text>
+  <text x="560" y="588" class="small">💡 我的理解：模型是"边写边想"的，</text>
+  <text x="560" y="610" class="small">先把推理写出来，等于给自己</text>
+  <text x="560" y="632" class="small">铺好台阶，最后一步更不容易错。</text>
+
+  <!-- ④ chain of thought -->
+  <text x="40" y="696" class="sec">④ ⛓️ 思维链 <tspan class="en">Chain of Thought (CoT)</tspan>：先列步骤，再照步骤走</text>
+  <text x="40" y="724" class="small">指示 LLM <tspan font-weight="700">不要立刻作答</tspan>，而是先生成"解题步骤"，再按步骤推进。它"<tspan class="cV" font-weight="700">把过程写出来</tspan>"→ 更准、且出错时好追查。</text>
+  <text x="40" y="752" class="small">例：<tspan class="mono" fill="#37474F">"加拿大首都是哪？Think step by step"</tspan> →</text>
+  <rect x="40" y="768" width="500" height="92" rx="10" fill="#ECEFF1"/>
+  <text x="58" y="790" class="tiny">1. 我需要找加拿大的首都城市</text>
+  <text x="58" y="810" class="tiny">2. 加拿大是北美国家</text>
+  <text x="58" y="830" class="tiny">3. 首都在安大略省</text>
+  <text x="58" y="850" class="tiny" font-weight="700">4. 因此 → 渥太华 Ottawa</text>
+  <text x="560" y="790" class="small cP" font-weight="700">💡 为什么有效？</text>
+  <text x="560" y="814" class="small">每个 token 都基于前面的 token 生成；</text>
+  <text x="560" y="836" class="small">先写出中间推理，等于把"难题"</text>
+  <text x="560" y="858" class="small">拆成"一连串小步"，每步都更简单。</text>
+
+  <!-- ⑤ reasoning models -->
+  <text x="40" y="906" class="sec">⑤ 🤖 推理模型 <tspan class="en">Reasoning Models</tspan>：把"先想后答"内置进模型</text>
+  <text x="40" y="934" class="small">CoT 太好用了，于是很多 LLM 干脆<tspan class="cT" font-weight="700">出厂就是推理模型</tspan>，擅长代码、数学、规划、多步工作流。内部分两段：</text>
+  <rect x="40" y="950" width="380" height="46" rx="8" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="230" y="978" class="small" text-anchor="middle" font-weight="700">① 推理 token（先规划、权衡，像草稿纸）</text>
+  <text x="430" y="978" class="small">→</text>
+  <rect x="450" y="950" width="380" height="46" rx="8" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="640" y="978" class="small" text-anchor="middle" font-weight="700">② 回复 token（给用户的最终答案）</text>
+  <text x="40" y="1024" class="small">有的厂商只给你看②，有的两段都给。<tspan class="cR" font-weight="700">推理 token 也是 token —— 照样花钱、占时间</tspan>。</text>
+  <text x="40" y="1050" class="small cR" font-weight="700">所以推理模型更准，但更慢、更贵。</text>
+  <text x="40" y="1076" class="small cG" font-weight="700">在 RAG 里值不值？值 —— 它特别擅长判断检索文档是否相关、如何整合进复杂回答。</text>
+
+  <!-- ⑥ warnings -->
+  <text x="40" y="1122" class="sec">⑥ ⚠️ 反直觉警告：很多技巧对推理模型【不灵】</text>
+  <text x="40" y="1150" class="small">· <tspan class="cR" font-weight="700">别再让它"think step by step"</tspan> —— 它早被训练成天生会想，你这么说反而多余。</text>
+  <text x="40" y="1176" class="small">· <tspan class="cR" font-weight="700">举例学习可能帮倒忙</tspan> —— 它会傻乎乎地把你给的"范例答案"当成当前问题的一部分去整合。</text>
+  <text x="40" y="1202" class="small">· 它们偏好：<tspan class="cV" font-weight="700">清晰的目标</tspan> ＋ <tspan class="cV" font-weight="700">严格的输出格式</tspan> ＋ <tspan class="cV" font-weight="700">完整的上下文一次性丢给它</tspan>（高层指导即可，别手把手）。</text>
+  <text x="40" y="1228" class="small cGray">· 新模型不断出，厂商通常会给"怎么 prompt 这个新模型"的官方建议 —— 照着看。</text>
+
+  <!-- ⑦ context window management -->
+  <text x="40" y="1274" class="sec">⑦ 📦 上下文窗口管理 <tspan class="en">Context Window Management</tspan></text>
+  <text x="40" y="1302" class="small">进阶技巧都<tspan class="cR" font-weight="700">更耗上下文</tspan>。prompt 和模型生成的回复<tspan font-weight="700">都占用</tspan>窗口：</text>
+  <!-- regular bar -->
+  <text x="40" y="1330" class="tiny cGray">普通用法：</text>
+  <rect x="110" y="1318" width="150" height="20" fill="#EF5350"/><text x="185" y="1333" class="tiny w" text-anchor="middle">Initial Prompt</text>
+  <rect x="260" y="1318" width="180" height="20" fill="#37474F"/><text x="350" y="1333" class="tiny w" text-anchor="middle">Response Tokens</text>
+  <rect x="440" y="1318" width="380" height="20" fill="#E0E0E0"/>
+  <!-- reasoning+RAG bar -->
+  <text x="40" y="1362" class="tiny cGray">推理＋RAG：</text>
+  <rect x="110" y="1350" width="120" height="20" fill="#EF5350"/><text x="170" y="1365" class="tiny w" text-anchor="middle">Prompt</text>
+  <rect x="230" y="1350" width="200" height="20" fill="#26C6DA"/><text x="330" y="1365" class="tiny w" text-anchor="middle">Reasoning Tokens</text>
+  <rect x="430" y="1350" width="170" height="20" fill="#AB47BC"/><text x="515" y="1365" class="tiny w" text-anchor="middle">RAG Docs</text>
+  <rect x="600" y="1350" width="160" height="20" fill="#37474F"/><text x="680" y="1365" class="tiny w" text-anchor="middle">Response</text>
+  <rect x="760" y="1350" width="60" height="20" fill="#E0E0E0"/>
+  <text x="40" y="1394" class="small cR" font-weight="700">→ 一不留神就把窗口塞满。对策：上下文修剪 Context Pruning。</text>
+
+  <text x="40" y="1428" class="small"><tspan class="cV" font-weight="700">单轮对话：</tspan>如果某技巧（CoT / 举例）没带来提升，就<tspan font-weight="700">直接删掉</tspan>它，别白占空间。</text>
+  <text x="40" y="1454" class="small"><tspan class="cV" font-weight="700">多轮对话（最耗窗口）：</tspan></text>
+  <text x="64" y="1480" class="small">· <tspan class="cG" font-weight="700">只留最近 N 条</tspan>（如最后 5 条），丢掉更早的（课件图：保留最近 5 条，旧的打 ✗ 删除）。</text>
+  <text x="64" y="1506" class="small">· 更高级：用<tspan class="cV" font-weight="700">另一个 LLM 把旧消息"摘要"</tspan>，缩小体积但保留要点。</text>
+  <text x="64" y="1532" class="small">· 用推理模型时：<tspan class="cR" font-weight="700">把历史里的推理 token 丢掉</tspan>，只留回复 token。</text>
+  <text x="64" y="1558" class="small">· RAG 里：只放支撑<tspan font-weight="700">最新那个问题</tspan>的 chunk，别把每轮的文档都堆着。</text>
+  <text x="40" y="1586" class="small">· 实在需要深上下文 → 换<tspan class="cV" font-weight="700">长上下文模型</tspan>；但即便窗口大，长 prompt 仍又慢又贵，仍要精简。</text>
+
+  <!-- final takeaway -->
+  <rect x="40" y="1610" width="820" height="58" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="60" y="1636" class="small cO" font-weight="700">🎯 老师的总忠告：你的 RAG 不一定需要这些进阶技巧。</text>
+  <text x="60" y="1658" class="small">简单模板 + 好的 system prompt 可能就够了。<tspan font-weight="700">确认真的需要，再加</tspan>。提示更像艺术，多实验找最优。</text>
+
+  <!-- ⑧ latest intel -->
+  <text x="40" y="1716" class="sec">📡 2026 最新情报（你额外要求，已联网核实 · 截至 2026-06）</text>
+  <text x="40" y="1744" class="small">这节课的"推理模型"如今已是行业主战场，背后是<tspan class="cP" font-weight="700">「测试时计算 test-time compute」</tspan>—— 让模型答前先"多想"：</text>
+  <text x="40" y="1770" class="small">· <tspan class="cV" font-weight="700">OpenAI o3 / o4-mini：</tspan>靠加大推理算力解出更大模型都做不到的题（o3 在 ARC-AGI 拿 45.1%）。</text>
+  <text x="40" y="1796" class="small">· <tspan class="cV" font-weight="700">DeepSeek-R1：</tspan>纯强化学习"长"出推理能力，<tspan class="cO" font-weight="700">把推理过程放在 &lt;think&gt; 标签里公开</tspan>（正是本课说的"推理</text>
+  <text x="40" y="1822" class="small">　token"），可看到它的犹豫、纠错、验证；MIT 开源、达 o1 水平。</text>
+  <text x="40" y="1848" class="small">· <tspan class="cV" font-weight="700">Claude（扩展思考 extended thinking）：</tspan>开发者可<tspan class="cO" font-weight="700">自定义"思考预算 thinking budget"</tspan>——想多想还是快答，你说了算。</text>
+  <text x="40" y="1874" class="small">· <tspan class="cV" font-weight="700">Gemini（thinking mode）：</tspan>按任务难度<tspan class="cO" font-weight="700">自动调推理力度</tspan>，Flash 快答 / Pro 深想。</text>
+  <text x="40" y="1900" class="small cR" font-weight="700">⚠️ 前沿警告（呼应本课成本观）：测试时算力不是越多越好 —— 想太多有时反而降低准确率（"过度思考"）。</text>
+  <text x="40" y="1928" class="small cV" font-weight="700">一句话：本课的 scratchpad / 推理 token，2026 已变成可调的"思考预算"；DeepSeek 的 &lt;think&gt; 就是它的开源现身。</text>
+
+  <text x="40" y="1984" class="small cGray">🧪 个人补充（非课件）：把这节课串起来——CoT 是"嘴上让模型想"，推理模型是"它天生会想"，</text>
+  <text x="40" y="2010" class="small cGray">　 而 2026 的"思考预算"是"你能拧旋钮决定它想多久"。三者是同一条路的递进。选模型时：</text>
+  <text x="40" y="2036" class="small cGray">　 简单事实问答用普通模型省钱；要多步推理（代码/数学/判断文档相关性）才上推理模型。</text>
+</svg>

@@ -1,0 +1,119 @@
+<svg width="1100" height="1955" viewBox="0 0 1100 1955" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #555; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .ctitle { font-size: 16px; font-weight: 700; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .big { font-size: 20px; font-weight: 700; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 14px; fill: #263238; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #8E24AA; } .cGray { fill: #888; }
+  </style>
+
+  <rect x="0" y="0" width="1100" height="1955" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">量化 🗜️ <tspan font-size="17" fill="#666" class="en">Quantization</tspan></text>
+  <text x="40" y="76" class="subtitle">一句话本质：<tspan class="cR" font-weight="700">量化 = 给 LLM 权重和向量"压缩"</tspan> —— 把高精度数字换成低精度数据类型，体积更小、更快、更便宜。</text>
+  <text x="40" y="100" class="subtitle">代价：质量只损失一点点。这是"成本 / 速度 / 质量"经典三角里最划算的一招。</text>
+  <line x1="40" y1="118" x2="1060" y2="118" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① image analogy -->
+  <text x="40" y="152" class="sec">① 🖼️ 一图秒懂：就像图片压缩</text>
+  <text x="40" y="180" class="small">同一张照片，每像素用的<tspan font-weight="700">色彩位数</tspan>越少 → 文件越小，但色块 / 失真越明显。量化对模型做的是<tspan font-weight="700">同一件事</tspan>。</text>
+  <rect x="40" y="196" width="320" height="48" rx="8" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.1"/>
+  <text x="200" y="216" class="small cG" text-anchor="middle" font-weight="700">24-bit（8/通道）</text>
+  <text x="200" y="236" class="tiny" text-anchor="middle">清晰，但占空间大</text>
+  <rect x="390" y="196" width="320" height="48" rx="8" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.1"/>
+  <text x="550" y="216" class="small cO" text-anchor="middle" font-weight="700">12-bit（4/通道）</text>
+  <text x="550" y="236" class="tiny" text-anchor="middle">½ 大小，已经略糊</text>
+  <rect x="740" y="196" width="320" height="48" rx="8" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.1"/>
+  <text x="900" y="216" class="small cR" text-anchor="middle" font-weight="700">6-bit（2/通道）</text>
+  <text x="900" y="236" class="tiny" text-anchor="middle">¼ 大小，明显色块</text>
+
+  <!-- ② where + why vectors are a problem -->
+  <text x="40" y="288" class="sec">② 📍 用在哪两处？为什么向量是个大问题</text>
+  <text x="40" y="316" class="small">· <tspan class="cV" font-weight="700">LLM 权重：</tspan>典型 <tspan font-weight="700">16-bit / 参数</tspan>；模型 1B~1T 参数 → 占巨量内存。压到 8 或 4-bit → 省 GPU 内存，质量略降。</text>
+  <text x="40" y="342" class="small">· <tspan class="cV" font-weight="700">嵌入向量：</tspan>768 维 × 32-bit 浮点 = <tspan font-weight="700">3KB / 条</tspan>（768×4 字节）。百万~十亿条 → 海量数据，还得塞进昂贵 RAM 才能快速检索。</text>
+
+  <rect x="40" y="360" width="1020" height="150" rx="10" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1.2"/>
+  <text x="62" y="386" class="tiny" font-weight="700">常见嵌入模型的尺寸（未量化，32-bit 浮点）</text>
+  <text x="560" y="386" class="tiny cGray" text-anchor="middle">维度 Dims</text>
+  <text x="760" y="386" class="tiny cGray" text-anchor="middle">单条 1 vector</text>
+  <text x="960" y="386" class="tiny cGray" text-anchor="middle">百万条 1e6</text>
+  <line x1="62" y1="398" x2="1038" y2="398" stroke="#E0E0E0" stroke-width="1"/>
+  <text x="62" y="424" class="small"><tspan font-weight="700">SBERT</tspan> all-mpnet-base-v2</text>
+  <text x="560" y="424" class="small" text-anchor="middle">768</text>
+  <text x="760" y="424" class="small" text-anchor="middle">3 KB</text>
+  <text x="960" y="424" class="small" text-anchor="middle">3 GB</text>
+  <text x="62" y="458" class="small"><tspan font-weight="700">OpenAI</tspan> ada-002</text>
+  <text x="560" y="458" class="small" text-anchor="middle">1536</text>
+  <text x="760" y="458" class="small" text-anchor="middle">6 KB</text>
+  <text x="960" y="458" class="small" text-anchor="middle">6 GB</text>
+  <text x="62" y="492" class="small"><tspan font-weight="700">Cohere</tspan> embed-english-v2.0</text>
+  <text x="560" y="492" class="small" text-anchor="middle">4096</text>
+  <text x="760" y="492" class="small" text-anchor="middle">16 KB</text>
+  <text x="960" y="492" class="small" text-anchor="middle">16 GB</text>
+
+  <!-- ③ THE MATH -->
+  <text x="40" y="552" class="sec">③ ⭐ 核心数学：整数量化怎么算（一步步带验算，这节最该弄懂的）</text>
+  <text x="40" y="580" class="small">目标：把 4 个 32-bit 浮点 <tspan class="code" font-weight="700">[0.0, 0.5, 1.0, 2.0]</tspan> 压成 8-bit 整数（取值只能是 <tspan class="code">0~255</tspan>）。</text>
+
+  <rect x="40" y="596" width="1020" height="210" rx="10" fill="#FFFDF5" stroke="#FFD54F" stroke-width="1.4"/>
+  <text x="60" y="624" class="ctitle cO">量化四步</text>
+  <text x="60" y="652" class="small"><tspan class="cR" font-weight="700">① 找 min / max：</tspan>看这组数的最小、最大值 → <tspan class="code">min = 0.0，max = 2.0</tspan>，范围就是 [0, 2]。</text>
+  <text x="60" y="680" class="small"><tspan class="cR" font-weight="700">② 切 256 段：</tspan>8-bit 能表示 2⁸ = 256 个不同值。每段宽 <tspan class="code">scale = (max−min) / 256 = 2 / 256 = 0.0078125</tspan>。</text>
+  <text x="60" y="708" class="small"><tspan class="cR" font-weight="700">③ 每个浮点 → 落在第几段就编几号：</tspan><tspan class="code">index = round((v − min) / scale)</tspan></text>
+  <text x="80" y="732" class="code">0.0 → 0    0.5 → 0.5/0.0078125 = 64    1.0 → 128    2.0 → 想要256, 但最高只到255 → 取 255</text>
+  <text x="60" y="760" class="small"><tspan class="cR" font-weight="700">④ 只额外存 min 和 scale：</tspan>用 <tspan class="code">原值 ≈ index × scale + min</tspan> 就能近似还原（这就是"可逆"的关键）。</text>
+  <text x="80" y="784" class="code">还原：0→0.0   64→0.5   128→1.0   255→255×0.0078125 = 1.992 ≈ 2.0  <tspan class="cR">（这点误差=量化损失）</tspan></text>
+
+  <rect x="40" y="822" width="1020" height="40" rx="8" fill="#FCE4EC"/>
+  <text x="60" y="848" class="code cR" font-weight="700">结果：[0.0, 0.5, 1.0, 2.0]  →  8-bit 量化向量 [0, 64, 128, 255]，只占原来 1/4 大小，Recall@K 通常只掉几个百分点。</text>
+
+  <text x="40" y="892" class="small cGray">🧮 我的验算补充：为什么 2.0 是 255 不是 256？因为 8-bit 只有 256 个编号（0~255），2.0 取最高号 255，还原回 1.992 —— 这点</text>
+  <text x="40" y="914" class="small cGray">舍入就是损失。有些库改用 <tspan class="code">/255</tspan>（而非 /256）让最大值刚好落 255、误差更小；思路完全一样。0.5→64、1.0→128 都是精确的。</text>
+
+  <!-- ④ 1-bit / binary -->
+  <text x="40" y="956" class="sec">④ 🔩 极限压缩：1-bit / 二值量化 <tspan class="en">Binary</tspan></text>
+  <text x="40" y="984" class="small">· 压缩率 <tspan class="cR" font-weight="700">32×</tspan>（32-bit → 1-bit / 维）。每个值只留 <tspan font-weight="700">0 或 1</tspan>，表示这一维原本是<tspan font-weight="700">正还是负</tspan>。</text>
+  <text x="40" y="1010" class="small">· 压这么狠，检索性能会<tspan class="cR" font-weight="700">明显下降</tspan>；但可搭配技巧救回来 ——</text>
+  <rect x="40" y="1026" width="1020" height="44" rx="8" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.1"/>
+  <text x="60" y="1053" class="small cV" font-weight="700">💡 黄金组合：先用 1-bit 向量做"快速粗筛"召回 → 再用完整 32-bit 原向量对候选"精排 re-rank"。又快又准。</text>
+
+  <!-- ⑤ Matryoshka -->
+  <text x="40" y="1112" class="sec">⑤ 🪆 套娃量化 <tspan class="en">Matryoshka</tspan>（俄罗斯套娃，另一种缩小思路）</text>
+  <text x="40" y="1140" class="small">· 普通向量：每一维信息量差不多。<tspan class="cP" font-weight="700">套娃向量：维度按"信息密度"排序</tspan> —— 训练时让<tspan font-weight="700">靠前的维度方差更大、信息更多</tspan>。</text>
+  <text x="40" y="1166" class="small">· 于是你能<tspan font-weight="700">只取前 k 维</tspan>（如 1000 维只用前 100 维）来比相似度，丢掉后面维度代价很小。</text>
+  <text x="40" y="1192" class="small">· 两种用法：<tspan class="cP" font-weight="700">(a)</tspan> 永远只用前 100 维 → 省空间、算得快；<tspan class="cP" font-weight="700">(b)</tspan> 先用前 100 维粗筛，再拉满 1000 维精排。</text>
+  <text x="40" y="1218" class="small cGray">→ 特别适合"需要在 低保真 ↔ 高保真 之间快速切换"的动态场景。</text>
+
+  <!-- ⑥ takeaway -->
+  <text x="40" y="1262" class="sec">⑥ ✅ 本课结论</text>
+  <rect x="40" y="1280" width="1020" height="44" rx="10" fill="#37474F"/>
+  <text x="60" y="1307" class="small w" font-weight="700">大多数 LLM / 嵌入模型供应商都提供 8-bit 或 4-bit 量化版 —— 去试它们：省空间省钱很可观，质量损失很小。</text>
+
+  <!-- 📡 2026 intel -->
+  <text x="40" y="1368" class="sec">📡 2026 最新情报（已联网核实 · 截至 2026-06）</text>
+
+  <text x="40" y="1396" class="small">· <tspan class="cP" font-weight="700">🪆 Matryoshka 已成主流，并不止于"实验":</tspan>OpenAI 的 <tspan font-weight="700">text-embedding-3</tspan> 就是用 MRL 训练的 ——<tspan x="60" dy="24">把 large 版截断到 <tspan class="cR" font-weight="700">仅 256 维，竟超过老款 ada-002 的完整 1536 维</tspan>（MTEB 基准），体积小 6× 反而更强。</tspan></text>
+
+  <text x="40" y="1468" class="small">· <tspan class="cV" font-weight="700">🔗 量化 + 套娃可叠加（2026 标准打法）：</tspan>二值量化省 <tspan font-weight="700">32×</tspan>，再叠 MRL 截断省 <tspan font-weight="700">8×</tspan>；Azure AI Search<tspan x="60" dy="24">报告靠"标量/二值量化 + 维度截断 + 全精度 rescore"做到<tspan class="cR" font-weight="700">近 100× 压缩、质量几乎不掉</tspan>。</tspan></text>
+
+  <text x="40" y="1540" class="small">· <tspan class="cO" font-weight="700">🧊 LLM 这边走到了 1-bit：</tspan>微软 <tspan font-weight="700">BitNet b1.58</tspan> 每个权重只取 <tspan class="code">−1 / 0 / +1</tspan>（log₂3 ≈ 1.58 bit）——<tspan x="60" dy="24">关键区别是<tspan font-weight="700">从一开始就带量化训练</tspan>（不是事后压）。2025 年开源的 2B 模型甚至能<tspan font-weight="700">在 CPU 上跑</tspan>（bitnet.cpp）。</tspan></text>
+
+  <text x="40" y="1640" class="small">· <tspan class="cT" font-weight="700">🛠️ 你会听到的实战名词：</tspan>事后量化 <tspan font-weight="700">GPTQ / AWQ</tspan>（用样本校准的 4-bit）、<tspan font-weight="700">GGUF</tspan>（llama.cpp，混合精度、<tspan x="60" dy="24">重要层多给几位）、<tspan font-weight="700">QAT</tspan>（量化感知训练，边训边量、质量最好）。挑模型时认准这些后缀就对了。</tspan></text>
+
+  <text x="40" y="1740" class="small cV" font-weight="700">一句话：本课讲的 int8 / 二值 / 套娃，在 2026 已是向量库与模型供应商的默认能力；前沿已推到 LLM 原生 1.58-bit。<tspan x="40" dy="24">"用低精度换大空间、只掉一点点质量"这条原则，从向量一路贯通到模型权重。</tspan></text>
+
+  <text x="40" y="1816" class="small cGray">🧪 个人补充（非课件，帮你彻底理解）：对你（前端）最贴切的两个类比 ——</text>
+  <text x="40" y="1840" class="small cGray">① <tspan class="cR" font-weight="700">量化 ≈ JPEG 的"质量"滑块</tspan>：往下拉，文件骤小、画面略糊；8-bit 量化就是"质量 90%"那档，几乎看不出差别。</text>
+  <text x="40" y="1864" class="small cGray">② <tspan class="cR" font-weight="700">Matryoshka ≈ 渐进式 JPEG / 响应式图片 srcset</tspan>：先加载小图（前 100 维）秒出占位，需要时再拉全图（1000 维）精修。</text>
+  <text x="40" y="1888" class="small cGray">而这一切的数学内核，就是你学过的<tspan class="cR" font-weight="700">线性映射</tspan>：<tspan class="code">浮点 ↔ 整数</tspan> 之间靠 <tspan class="code">y = (x − min) / scale</tspan> 来回换算，<tspan x="40" dy="24">量化的本质就是"把连续值钉到等距的整数格点上"。</tspan></text>
+</svg>

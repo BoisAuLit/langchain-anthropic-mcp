@@ -1,0 +1,125 @@
+<svg width="900" height="1900" viewBox="0 0 900 1900" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .big { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 22px; font-weight: 700; fill: #1B5E20; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .axis { stroke: #90CAF9; stroke-width: 1.5; }
+    .en { font-style: italic; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+  <defs>
+    <marker id="aT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#00897B"/></marker>
+    <marker id="aO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#FB8C00"/></marker>
+    <marker id="aR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#B71C1C"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1900" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">024 · 特征值与特征向量 🌟 <tspan font-size="20" fill="#666" class="en">Eigenvalues &amp; Eigenvectors</tspan></text>
+  <text x="40" y="82" class="subtitle">一句话本质：<tspan class="cO" font-weight="700">特征向量 = 变换中"方向不变、只被拉伸"的方向</tspan>，<tspan class="cT" font-weight="700">特征值 = 拉伸倍数</tspan>；</text>
+  <text x="40" y="106" class="subtitle">核心公式 <tspan class="cV" font-weight="700">A·v = λ·v</tspan>：沿这些方向，矩阵乘法 ➡️ 标量乘法（大计算变小计算）。</text>
+  <line x1="40" y1="124" x2="860" y2="124" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① eigenbasis intro -->
+  <text x="40" y="162" class="sec">① 👑 从换基说起：有一种基"统治一切"（<tspan class="en">eigenbasis</tspan>）</text>
+  <text x="40" y="192" class="small">矩阵 A = [2 1; 0 3]。用<tspan class="cT" font-weight="700">标准基</tspan>看：(1,0)→(2,0)、(0,1)→(1,3)，正方形 → 平行四边形，</text>
+  <text x="40" y="214" class="small">这就是一次换坐标 / 换基（<tspan class="en">change of basis</tspan>）—— 你已经会了。现在换一组<tspan class="cO" font-weight="700">特殊的基</tspan>试试：</text>
+  <rect x="50" y="230" width="480" height="28" rx="6" class="chip"/>
+  <text x="62" y="249" class="code">[2 1; 0 3] · (1,0) = (2,0) = <tspan class="cO" font-weight="700">2</tspan>·(1,0)</text>
+  <rect x="50" y="266" width="480" height="28" rx="6" class="chip"/>
+  <text x="62" y="285" class="code">[2 1; 0 3] · (1,1) = (3,3) = <tspan class="cO" font-weight="700">3</tspan>·(1,1)</text>
+
+  <!-- parallelograms -->
+  <line x1="100" y1="470" x2="320" y2="470" class="axis"/>
+  <line x1="180" y1="395" x2="180" y2="510" class="axis"/>
+  <polygon points="180,470 220,470 260,430 220,430" fill="#B2DFDB" stroke="#00897B" stroke-width="2"/>
+  <text x="210" y="535" class="tiny" text-anchor="middle" font-weight="700" fill="#00897B">变换前：基 (1,0) 与 (1,1)</text>
+
+  <text x="400" y="445" class="small" text-anchor="middle">⟶ 变换 ⟶</text>
+
+  <line x1="480" y1="470" x2="800" y2="470" class="axis"/>
+  <line x1="560" y1="330" x2="560" y2="510" class="axis"/>
+  <polygon points="560,470 640,470 760,350 680,350" fill="#FFE0B2" stroke="#FB8C00" stroke-width="2"/>
+  <text x="660" y="535" class="tiny" text-anchor="middle" font-weight="700" fill="#EF6C00">变换后：(2,0) 与 (3,3) —— 对应边互相平行 ‖ ！</text>
+
+  <text x="40" y="576" class="small" font-weight="700" fill="#1565C0">特别之处：两个平行四边形的边互相平行 → 整个变换只是两个拉伸 stretchings：</text>
+  <text x="40" y="600" class="small" font-weight="700" fill="#1565C0">水平方向 ×2、对角方向 ×3。这组基就叫 特征基（eigenbasis）👑（老师预告：PCA 等 ML 应用的核心）</text>
+
+  <!-- ② naming + (3,2) -->
+  <text x="40" y="656" class="sec">② 🏷️ 正式起名，并用点 (3,2) 体验一次</text>
+  <text x="40" y="686" class="small">基向量 (1,0)、(1,1) = <tspan class="cO" font-weight="700">特征向量 eigenvectors</tspan>（拉伸的方向）；倍数 2、3 = <tspan class="cT" font-weight="700">特征值 eigenvalues</tspan>。</text>
+  <rect x="50" y="702" width="500" height="28" rx="6" class="chip"/>
+  <text x="62" y="721" class="code">常规：[2 1; 0 3]·(3,2) = (8,6)　<tspan fill="#7B1FA2"># 矩阵乘法</tspan></text>
+  <rect x="50" y="738" width="730" height="28" rx="6" class="chip"/>
+  <text x="62" y="757" class="code">捷径：(3,2) = 1·(1,0)+2·(1,1) → 1·<tspan class="cO" font-weight="700">2</tspan>·(1,0) + 2·<tspan class="cO" font-weight="700">3</tspan>·(1,1) = (2,0)+(6,6) = (8,6) ✅</text>
+  <text x="40" y="790" class="small">课件路径图：沿水平走 1 段（被拉 <tspan class="cO" font-weight="700">×2</tspan>），沿对角走 2 段（各被拉 <tspan class="cO" font-weight="700">×3、×3</tspan>）—— 全程只有拉伸 🎉</text>
+
+  <!-- ③ three tests -->
+  <text x="40" y="846" class="sec">③ 🔬 三连测试：谁是特征向量，谁不是</text>
+  <rect x="50" y="862" width="600" height="28" rx="6" class="chip"/>
+  <text x="62" y="881" class="code">(1,0) → (2,0) = 2·(1,0)　<tspan class="cG" font-weight="700">✅ 方向没变，只是拉长</tspan></text>
+  <rect x="50" y="898" width="600" height="28" rx="6" class="chip"/>
+  <text x="62" y="917" class="code">(1,1) → (3,3) = 3·(1,1)　<tspan class="cG" font-weight="700">✅ 方向没变</tspan></text>
+  <rect x="50" y="934" width="730" height="28" rx="6" class="chip"/>
+  <text x="62" y="953" class="code">(−1,2) → (0,6)　<tspan class="cR" font-weight="700">❌ 方向变了！不存在 λ 使 λ·(−1,2) = (0,6)</tspan></text>
+
+  <!-- before/after vector plots -->
+  <line x1="100" y1="1090" x2="300" y2="1090" class="axis"/>
+  <line x1="180" y1="990" x2="180" y2="1130" class="axis"/>
+  <line x1="180" y1="1090" x2="220" y2="1090" stroke="#FB8C00" stroke-width="2.5" marker-end="url(#aO)"/>
+  <line x1="180" y1="1090" x2="220" y2="1050" stroke="#FB8C00" stroke-width="2.5" marker-end="url(#aO)"/>
+  <line x1="180" y1="1090" x2="140" y2="1010" stroke="#B71C1C" stroke-width="2.5" marker-end="url(#aR)"/>
+  <text x="200" y="1155" class="tiny" text-anchor="middle" font-weight="700">变换前：🟠 (1,0),(1,1)　🟥 (−1,2)</text>
+
+  <text x="390" y="1060" class="small" text-anchor="middle">⟶ A ⟶</text>
+
+  <line x1="480" y1="1090" x2="720" y2="1090" class="axis"/>
+  <line x1="560" y1="920" x2="560" y2="1130" class="axis"/>
+  <line x1="560" y1="1090" x2="610" y2="1090" stroke="#FB8C00" stroke-width="2.5" marker-end="url(#aO)"/>
+  <line x1="560" y1="1090" x2="635" y2="1015" stroke="#FB8C00" stroke-width="2.5" marker-end="url(#aO)"/>
+  <line x1="560" y1="1090" x2="560" y2="940" stroke="#B71C1C" stroke-width="2.5" marker-end="url(#aR)"/>
+  <text x="620" y="1155" class="tiny" text-anchor="middle" font-weight="700">变换后：🟠 还在原方向上　🟥 (0,6) 转向了</text>
+
+  <!-- ④ formal -->
+  <text x="40" y="1212" class="sec">④ 📜 正式定义 <tspan class="en">The formal equation</tspan></text>
+  <rect x="50" y="1228" width="280" height="42" rx="8" class="chip"/>
+  <text x="62" y="1258" class="big"><tspan fill="#1565C0">A</tspan>·<tspan fill="#EF6C00">v</tspan> = <tspan fill="#00897B">λ</tspan>·<tspan fill="#EF6C00">v</tspan></text>
+  <text x="360" y="1244" class="small"><tspan class="cV" font-weight="700">A</tspan> = 矩阵　<tspan class="cO" font-weight="700">v</tspan> = 特征向量 <tspan class="en">eigenvector</tspan></text>
+  <text x="360" y="1268" class="small"><tspan class="cT" font-weight="700">λ</tspan>（读 lambda）= 特征值 <tspan class="en">eigenvalue</tspan></text>
+  <text x="40" y="1302" class="small" font-weight="700">它们成对出现 in pairs 👫：第一对（v₁=(1,0), λ₁=2）；第二对（v₂=(1,1), λ₂=3）。</text>
+
+  <!-- ⑤ why special -->
+  <text x="40" y="1356" class="sec">⑤ ⚡ 为什么特别：8 次乘法 vs 2 次乘法</text>
+  <text x="40" y="1386" class="small">等号<tspan class="cR" font-weight="700">左边 A·v 是矩阵乘法</tspan>（matrix multiplication）：2×2 就要 <tspan class="cR" font-weight="700">8 次</tspan>乘法，More work 😓</text>
+  <text x="40" y="1412" class="small">等号<tspan class="cG" font-weight="700">右边 λ·v 是标量乘法</tspan>（scalar multiplication）：只要 <tspan class="cG" font-weight="700">2 次</tspan>，Less work 😎</text>
+  <text x="40" y="1438" class="small" font-weight="700" fill="#1565C0">矩阵有成百上千列时，差距是"天文数字 astronomical"——沿着特征向量，大计算变小计算。</text>
+
+  <!-- ⑥ shortcut everywhere -->
+  <text x="40" y="1494" class="sec">⑥ 🛤️ 把捷径用到任意向量（课件完整推导）</text>
+  <text x="40" y="1524" class="small">(1,0) 和 (1,1) 线性独立 + 张成平面 → 构成基 = A 的<tspan class="cO" font-weight="700">特征基 eigenbasis</tspan>。</text>
+  <text x="40" y="1548" class="small">红向量 (−1,2) 不是特征向量，但能写成特征向量的<tspan class="cP" font-weight="700">线性组合</tspan>，然后逐项用捷径：</text>
+  <rect x="50" y="1564" width="640" height="28" rx="6" class="chip"/>
+  <text x="62" y="1583" class="code">(−1,2) = −3·(1,0) + 2·(1,1)　<tspan fill="#7B1FA2"># 验算：(−3+2, 0+2) = (−1,2) ✅</tspan></text>
+  <rect x="50" y="1600" width="640" height="28" rx="6" class="chip"/>
+  <text x="62" y="1619" class="code">A·(−1,2) = −3·[A·(1,0)] + 2·[A·(1,1)]　<tspan fill="#7B1FA2"># A 分进括号</tspan></text>
+  <rect x="50" y="1636" width="730" height="28" rx="6" class="chip"/>
+  <text x="62" y="1655" class="code">= −3·<tspan class="cO" font-weight="700">2</tspan>·(1,0) + 2·<tspan class="cO" font-weight="700">3</tspan>·(1,1) = (−6,0) + (6,6) = <tspan class="cO" font-weight="700">(0,6)</tspan> ✅</text>
+  <text x="40" y="1688" class="small" font-weight="700" fill="#2E7D32">与直接矩阵乘法结果一模一样，但全程只用了标量乘法！🎉</text>
+
+  <!-- ⑦ confession -->
+  <text x="40" y="1740" class="sec">⑦ 😅 老师的坦白 <tspan class="en">"I lied a little bit"</tspan></text>
+  <text x="40" y="1770" class="small">坐标 (−3, 2) 不是白来的：一般要先算<tspan class="cR" font-weight="700">特征基的逆 inverse</tspan>、再乘你的向量 —— 这本身</text>
+  <text x="40" y="1792" class="small">就是不小的工作量（还是一次矩阵乘法）。所以更准确的说法是：</text>
+  <text x="40" y="1820" class="small" font-weight="700" fill="#1565C0">特征向量不是消灭工作，而是让你【决定什么时候做工作】⏰ —— ML 中常提前算好坐标，用时飞快。</text>
+
+  <!-- ⑧ takeaways -->
+  <text x="40" y="1862" class="small" font-weight="700">📋 官方总结：A·v=λ·v 成对成立；特征向量 = <tspan class="cO">拉伸方向</tspan>；特征值 = <tspan class="cT">拉多少</tspan>；特征基常排成"一列一个</text>
+  <text x="40" y="1884" class="small" font-weight="700">特征向量"的矩阵；作用 = <tspan class="cG">省计算 save work</tspan> + <tspan class="cP">刻画变换 characterize a transformation</tspan>。</text>
+</svg>

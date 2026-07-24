@@ -1,0 +1,134 @@
+<svg width="1160" height="1752" viewBox="0 0 1160 1752" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 25px; font-weight: 800; fill: #0F172A; }
+    .ess { font-size: 16px; fill: #475569; }
+    .sec { font-size: 19px; font-weight: 800; fill: #0F172A; }
+    .b { font-size: 15px; fill: #334155; }
+    .bb { font-size: 15px; font-weight: 700; }
+    .sm { font-size: 13px; fill: #64748B; }
+    .ct { font-size: 15px; font-weight: 700; }
+    .th { font-size: 13.5px; font-weight: 700; }
+    /* color classes LAST */
+    .w{fill:#fff} .wg{fill:#CBD5E1}
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#D97706} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+  </style>
+  <defs>
+    <marker id="t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1160" height="1752" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">One-Way Tables 📊 — the starting point of statistics</text>
+  <text x="40" y="76" class="ess"><tspan class="bb">Individuals</tspan> (the items) each have <tspan class="bb">variables</tspan> (their properties). Together they are <tspan class="bb">data</tspan>. Knowing each variable's <tspan class="cPink bb">TYPE</tspan></text>
+  <text x="40" y="98" class="ess">controls what math, what charts, and what ML encoding you are allowed to use.</text>
+  <line x1="40" y1="114" x2="1120" y2="114" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ① individuals / variables / data -->
+  <text x="40" y="148" class="sec">🧱 Individuals, variables, data</text>
+  <text x="40" y="176" class="b"><tspan class="bb">Individual</tspan> = one item in the data set (a person, a thing, a case). <tspan class="bb">Variable</tspan> = a property of that individual.</text>
+  <text x="40" y="198" class="b"><tspan class="bb">Data</tspan> = individuals + variables. Put it in a table → a <tspan class="bb">data table</tspan> (usually individuals down the left, variables across the top).</text>
+
+  <rect x="40" y="216" width="700" height="26" fill="#FED7AA"/>
+  <text x="52" y="234" class="th cSlate">Flavor</text><text x="280" y="234" class="th cSlate">Scoops sold</text><text x="430" y="234" class="th cSlate">Contains chocolate?</text><text x="620" y="234" class="th cSlate">Smooth/chunky?</text>
+  <rect x="40" y="242" width="700" height="24" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="52" y="259" class="sm">Vanilla</text><text x="280" y="259" class="sm">300</text><text x="430" y="259" class="sm">No</text><text x="620" y="259" class="sm">Smooth</text>
+  <rect x="40" y="266" width="700" height="24" fill="#fff" stroke="#FDE68A"/>
+  <text x="52" y="283" class="sm">Chocolate</text><text x="280" y="283" class="sm">450</text><text x="430" y="283" class="sm">Yes</text><text x="620" y="283" class="sm">Smooth</text>
+  <rect x="40" y="290" width="700" height="24" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="52" y="307" class="sm">Cookies &amp; Cream</text><text x="280" y="307" class="sm">275</text><text x="430" y="307" class="sm">Yes</text><text x="620" y="307" class="sm">Chunky</text>
+  <text x="760" y="262" class="sm">↤ individuals = the flavors (rows)</text>
+  <text x="760" y="286" class="sm">↥ variables = the columns</text>
+
+  <!-- ② variable type tree -->
+  <text x="40" y="352" class="sec">🌳 Every variable is one of these types</text>
+  <rect x="40" y="372" width="130" height="44" rx="9" fill="#1E293B"/><text x="105" y="399" class="bb w" text-anchor="middle">Variable</text>
+  <line x1="170" y1="388" x2="234" y2="410" stroke="#0D9488" stroke-width="2" marker-end="url(#t)"/>
+  <line x1="170" y1="402" x2="234" y2="476" stroke="#0D9488" stroke-width="2" marker-end="url(#t)"/>
+  <rect x="238" y="384" width="290" height="62" rx="9" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1.3"/>
+  <text x="256" y="408" class="ct cPurple">Categorical (qualitative)</text>
+  <text x="256" y="428" class="sm">values are WORDS — yes/no, color, smooth/chunky</text>
+  <rect x="238" y="452" width="290" height="62" rx="9" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.3"/>
+  <text x="256" y="476" class="ct cBlue">Quantitative</text>
+  <text x="256" y="496" class="sm">values are NUMBERS — height, scoops sold</text>
+  <line x1="528" y1="470" x2="592" y2="452" stroke="#0D9488" stroke-width="2" marker-end="url(#t)"/>
+  <line x1="528" y1="490" x2="592" y2="518" stroke="#0D9488" stroke-width="2" marker-end="url(#t)"/>
+  <rect x="596" y="426" width="290" height="58" rx="9" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.1"/>
+  <text x="614" y="449" class="bb cBlue">Discrete — counted, whole steps</text>
+  <text x="614" y="467" class="sm">scoops sold (no 8.3 scoops)</text>
+  <rect x="596" y="494" width="290" height="58" rx="9" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.1"/>
+  <text x="614" y="517" class="bb cBlue">Continuous — any value</text>
+  <text x="614" y="535" class="sm">height (5.83 ft, decimals OK)</text>
+
+  <!-- ③ levels of measurement -->
+  <text x="40" y="588" class="sec">📏 The 4 levels of measurement — each one adds a new power (Stevens, 1940s)</text>
+  <text x="40" y="616" class="b">Going up the ladder, each level keeps everything below it and <tspan class="bb">adds one more thing you can do</tspan>:</text>
+
+  <rect x="40" y="632" width="1080" height="40" rx="9" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1.2"/>
+  <text x="58" y="657" class="b"><tspan class="bb cPurple">1 · Nominal</tspan> — just labels, <tspan class="bb">NO order</tspan>. (colors, names, yes/no, favorite food)　<tspan class="sm">[categorical]</tspan></text>
+  <rect x="40" y="680" width="1080" height="40" rx="9" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1.2"/>
+  <text x="58" y="705" class="b"><tspan class="bb cPurple">2 · Ordinal</tspan> — labels <tspan class="bb">+ ORDER</tspan> (but gaps are not equal). (terrible &lt; satisfactory &lt; good &lt; awesome)　<tspan class="sm">[categorical]</tspan></text>
+  <rect x="40" y="728" width="1080" height="40" rx="9" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="58" y="753" class="b"><tspan class="bb cBlue">3 · Interval</tspan> — order <tspan class="bb">+ EQUAL gaps</tspan>, but <tspan class="bb">no true zero</tspan> (can be negative). (temperature: 50→60 is a real 10° gap)　<tspan class="sm">[quantitative]</tspan></text>
+  <rect x="40" y="776" width="1080" height="40" rx="9" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="58" y="801" class="b"><tspan class="bb cBlue">4 · Ratio</tspan> — interval <tspan class="bb">+ a TRUE zero</tspan> (can't be negative, ratios make sense). (height, weight, time: 20 kg = twice 10 kg)　<tspan class="sm">[quantitative]</tspan></text>
+
+  <!-- ③b interval vs ratio deep dive -->
+  <text x="40" y="858" class="sec">🌡️ Interval vs Ratio — the difference, finally clear</text>
+  <text x="40" y="886" class="b">The whole difference is <tspan class="bb">ONE thing</tspan>: does the scale have a <tspan class="cPink bb">TRUE ZERO</tspan> — a value 0 that means "<tspan class="bb">none of it at all</tspan>"?</text>
+
+  <rect x="40" y="902" width="540" height="106" rx="11" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="58" y="926" class="ct cBlue">❄️ Interval = NO true zero</text>
+  <text x="58" y="948" class="b">0 is just an arbitrary point — it does NOT mean "none".</text>
+  <text x="58" y="968" class="b">→ "twice as much" is meaningless; values <tspan class="bb">CAN be negative</tspan>.</text>
+  <text x="58" y="990" class="sm">e.g. temperature °C / °F  (0°C is just where water freezes)</text>
+
+  <rect x="600" y="902" width="520" height="106" rx="11" fill="#ECFDF5" stroke="#86EFAC" stroke-width="1.2"/>
+  <text x="618" y="926" class="ct cGreen">📏 Ratio = has a TRUE zero (0 = none)</text>
+  <text x="618" y="948" class="b">0 really means "nothing at all".</text>
+  <text x="618" y="968" class="b">→ "twice as much" works; values are <tspan class="bb">NEVER negative</tspan>.</text>
+  <text x="618" y="990" class="sm">e.g. weight, height, time, money  (20 kg = twice 10 kg)</text>
+
+  <rect x="40" y="1024" width="1080" height="68" rx="11" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.2"/>
+  <text x="58" y="1048" class="b">🧪 <tspan class="bb cAmber">Proof that 40°C is NOT twice 20°C:</tspan> convert to °F → 20°C = 68°F, 40°C = 104°F.</text>
+  <text x="58" y="1070" class="b">Now <tspan class="code">104 / 68 ≈ 1.53</tspan>, not 2 — the "twice" broke just by changing units → it was <tspan class="bb">never a real ratio</tspan> (the fake zero is the culprit).</text>
+
+  <text x="40" y="1120" class="b">✅ <tspan class="bb">3-second test for any column:</tspan> (1) does 0 mean "none"? (2) does "twice as much" make sense? (3) can it be negative?</text>
+  <text x="40" y="1142" class="b">　 <tspan class="cGreen bb">YES / YES / NO → ratio</tspan>　·　<tspan class="cBlue bb">NO / NO / YES → interval</tspan>.</text>
+  <text x="40" y="1170" class="b">🌡️ <tspan class="bb">Mind-bender:</tspan> Kelvin IS ratio (0 K = absolute zero = no heat → 200 K really is twice 100 K), but °C / °F are interval.</text>
+  <text x="40" y="1192" class="b">　 Same quantity, different zero → different scale type. (Both still share real <tspan class="bb">differences</tspan>: a 10° gap is always a 10° gap.)</text>
+
+  <!-- ④ one-way tables -->
+  <text x="40" y="1240" class="sec">🧾 What is a "one-way" table — and how to lay it out</text>
+  <text x="40" y="1268" class="b">A <tspan class="bb">one-way table</tspan> shows the variables for (usually) <tspan class="bb">one individual</tspan>. That is why it is called "one-way". When you build one, ask:</text>
+  <text x="40" y="1290" class="b">do I have more individuals, or more variables? Then orient the table so it fits:</text>
+
+  <rect x="40" y="1306" width="540" height="106" rx="11" fill="#ECFDF5" stroke="#86EFAC" stroke-width="1.2"/>
+  <text x="58" y="1330" class="ct cTeal">More individuals than variables</text>
+  <text x="58" y="1352" class="b">Individuals <tspan class="bb">down the left</tspan>, variables <tspan class="bb">across the top</tspan>.</text>
+  <text x="58" y="1374" class="sm">(the ice cream table above — 6 flavors, 3 variables)</text>
+  <text x="58" y="1394" class="sm">Each new individual = a new row.</text>
+
+  <rect x="600" y="1306" width="520" height="106" rx="11" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.2"/>
+  <text x="618" y="1330" class="ct cOrange">Few individuals, many variables → FLIP it</text>
+  <text x="618" y="1352" class="b">Individuals <tspan class="bb">across the top</tspan>, variables <tspan class="bb">down the left</tspan>.</text>
+  <text x="618" y="1374" class="sm">(compare 2 houses on ~13 features — 2 columns,</text>
+  <text x="618" y="1394" class="sm">many rows; it just fits the page better.)</text>
+
+  <!-- 📡 practical -->
+  <text x="40" y="1446" class="sec">📡 Why the type matters in real data work (and machine learning)</text>
+  <rect x="40" y="1464" width="1080" height="142" rx="12" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.3"/>
+  <text x="60" y="1490" class="ct cAmber">🔌 The variable type decides how you ENCODE a column for a model (models need numbers)</text>
+  <text x="60" y="1514" class="b">· <tspan class="bb">Nominal → one-hot encoding</tspan> (one yes/no column per category — keeps them independent, adds no fake order).</text>
+  <text x="60" y="1536" class="b">· <tspan class="bb">Ordinal → ordinal / integer encoding</tspan> (map to 1, 2, 3… and keep the order).</text>
+  <text x="60" y="1558" class="b">· <tspan class="cPink bb">⚠️ Trap:</tspan> giving nominal data numbers like 1, 2, 3 invents a fake order → that is <tspan class="bb">noise that confuses the model</tspan>.</text>
+  <text x="60" y="1582" class="b">· It also decides valid stats &amp; charts: categorical → counts, mode, bar charts · quantitative → mean, median, histograms. <tspan class="bb">No "mean of colors".</tspan></text>
+
+  <!-- 🔑 insight -->
+  <rect x="40" y="1638" width="1080" height="94" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="60" y="1666" class="bb cBlue">🔑 The one habit to build:</text>
+  <text x="60" y="1688" class="b">Before any chart, test, or model, ask of every column: <tspan class="bb">"categorical or quantitative? and which of the 4 levels?"</tspan></text>
+  <text x="60" y="1710" class="b">That single question controls which encoding, which average, which chart, and which statistical test you are allowed to use.</text>
+</svg>

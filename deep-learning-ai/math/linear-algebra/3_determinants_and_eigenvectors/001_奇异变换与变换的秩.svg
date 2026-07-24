@@ -1,0 +1,120 @@
+<svg width="900" height="1500" viewBox="0 0 900 1500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 13px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .axis { stroke: #90CAF9; stroke-width: 1.5; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+  <defs>
+    <marker id="aGy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#999" stroke-width="1.6" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1500" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">018 · 奇异变换 与 变换的秩</text>
+  <text x="40" y="82" class="subtitle">一句话本质：把"奇异"放进变形机视角 —— 非奇异变换让平面仍是平面；</text>
+  <text x="40" y="106" class="subtitle">奇异变换把平面压成线、甚至压成点。压扁到几维，秩就是几。</text>
+  <line x1="40" y1="124" x2="860" y2="124" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① non-singular -->
+  <text x="40" y="162" class="sec">① 🟢 非奇异变换：整个平面 → 还是整个平面</text>
+  <text x="40" y="192" class="small">[3 1; 1 2]（013 课那台变形机）：方格网变成平行四边形网，<tspan font-weight="700">但仍铺满整个平面</tspan>。</text>
+  <text x="40" y="218" class="small"><tspan class="cV" font-weight="700">像（image）</tspan>= 所有输出点组成的集合。这里像 = 整个平面 —— 一个维度都没丢。</text>
+
+  <!-- ② singular -->
+  <text x="40" y="270" class="sec">② 🟠 奇异变换：整个平面被压扁成一条线</text>
+
+  <text x="60" y="306" class="code" font-size="13"><tspan class="cT" font-weight="700">(0,0)</tspan> → <tspan class="cO" font-weight="700">(0,0)</tspan>　原点照旧不动</text>
+  <text x="60" y="334" class="code" font-size="13"><tspan class="cT" font-weight="700">(1,0)</tspan> → <tspan class="cO" font-weight="700">(1,2)</tspan>　= 第 1 列</text>
+  <text x="60" y="362" class="code" font-size="13"><tspan class="cT" font-weight="700">(0,1)</tspan> → <tspan class="cO" font-weight="700">(1,2)</tspan>　= 第 2 列，<tspan class="cR" font-weight="700">撞车了！</tspan></text>
+  <text x="60" y="390" class="code" font-size="13"><tspan class="cT" font-weight="700">(1,1)</tspan> → <tspan class="cO" font-weight="700">(2,4)</tspan>　单位正方形变成线段</text>
+  <text x="60" y="430" class="small">矩阵 [1 1; 2 2]：两个基向量</text>
+  <text x="60" y="454" class="small">落到了<tspan class="cR" font-weight="700">同一个点</tspan>上。</text>
+
+  <!-- plot: origin (640,420), scale 28, line dir (1,2) -->
+  <line x1="500" y1="420" x2="830" y2="420" class="axis"/>
+  <line x1="640" y1="285" x2="640" y2="515" class="axis"/>
+  <line x1="606" y1="488" x2="700" y2="300" stroke="#C77F26" stroke-width="3"/>
+  <circle cx="640" cy="420" r="5" fill="#FB8C00" stroke="#E65100" stroke-width="1.5"/>
+  <circle cx="668" cy="364" r="5" fill="#FB8C00" stroke="#E65100" stroke-width="1.5"/>
+  <text x="678" y="360" class="tiny" font-weight="700" fill="#EF6C00">(1,2)</text>
+  <circle cx="696" cy="308" r="5" fill="#FB8C00" stroke="#E65100" stroke-width="1.5"/>
+  <text x="706" y="304" class="tiny" font-weight="700" fill="#EF6C00">(2,4)</text>
+  <text x="730" y="470" class="tiny" font-weight="700" fill="#C77F26">全部输出挤在这条线上</text>
+
+  <rect x="50" y="490" width="720" height="28" rx="6" class="chip"/>
+  <text x="62" y="509" class="code">验算：任意 (a,b) 的输出 = (a+b, 2a+2b) = (a+b)·(1,2)　<tspan fill="#7B1FA2"># 永远是 (1,2) 的倍数</tspan></text>
+
+  <!-- ③ most singular -->
+  <text x="40" y="572" class="sec">③ 🔴 最奇异：零矩阵把一切吸进原点</text>
+  <text x="40" y="602" class="small">[0 0; 0 0]·(a, b) = (0, 0)：无论喂进什么，输出都是原点。整个平面坍缩成<tspan class="cR" font-weight="700">一个点</tspan>。</text>
+
+  <!-- ④ rank cards -->
+  <text x="40" y="654" class="sec">④ 🏆 变换的秩 = "像"的维度（本课核心）</text>
+
+  <rect x="40" y="674" width="260" height="186" rx="12" fill="#F1F8E9" stroke="#AED581" stroke-width="1.5"/>
+  <text x="58" y="702" class="small" font-weight="700" fill="#2E7D32">Rank 2 · 非奇异</text>
+  <text x="58" y="726" class="cell">[3 1; 1 2]</text>
+  <rect x="70" y="748" width="32" height="32" fill="#B2DFDB" stroke="#00897B" stroke-width="1.8"/>
+  <line x1="116" y1="764" x2="152" y2="764" stroke="#999" stroke-width="1.5" marker-end="url(#aGy)"/>
+  <polygon points="168,784 212,770 226,742 182,756" fill="#FFE0B2" stroke="#FB8C00" stroke-width="1.8"/>
+  <text x="58" y="812" class="small">平面 → <tspan font-weight="700">平面</tspan>（维度 2）</text>
+  <text x="58" y="838" class="tiny">没丢维度，可逆，det ≠ 0</text>
+
+  <rect x="320" y="674" width="260" height="186" rx="12" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <text x="338" y="702" class="small" font-weight="700" fill="#F57F17">Rank 1 · 奇异</text>
+  <text x="338" y="726" class="cell">[1 1; 2 2]</text>
+  <rect x="350" y="748" width="32" height="32" fill="#B2DFDB" stroke="#00897B" stroke-width="1.8"/>
+  <line x1="396" y1="764" x2="432" y2="764" stroke="#999" stroke-width="1.5" marker-end="url(#aGy)"/>
+  <line x1="448" y1="788" x2="490" y2="740" stroke="#C77F26" stroke-width="3.5"/>
+  <text x="338" y="812" class="small">平面 → <tspan font-weight="700">直线</tspan>（维度 1）</text>
+  <text x="338" y="838" class="tiny">压扁一维，不可逆，det = 0</text>
+
+  <rect x="600" y="674" width="260" height="186" rx="12" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="618" y="702" class="small" font-weight="700" fill="#C62828">Rank 0 · 最奇异</text>
+  <text x="618" y="726" class="cell">[0 0; 0 0]</text>
+  <rect x="630" y="748" width="32" height="32" fill="#B2DFDB" stroke="#00897B" stroke-width="1.8"/>
+  <line x1="676" y1="764" x2="712" y2="764" stroke="#999" stroke-width="1.5" marker-end="url(#aGy)"/>
+  <circle cx="740" cy="764" r="6" fill="#FB8C00" stroke="#E65100" stroke-width="1.8"/>
+  <text x="618" y="812" class="small">平面 → <tspan font-weight="700">一个点</tspan>（维度 0）</text>
+  <text x="618" y="838" class="tiny">压扁两维，det = 0</text>
+
+  <text x="40" y="892" class="small" font-weight="700" fill="#1565C0">定义：变换的秩（rank）= 输出集合（像）的维度 —— 这台变形机"还能撑起多大的空间"。</text>
+
+  <!-- 💡 insights -->
+  <text x="40" y="944" class="sec">💡 补充洞察（课程没明说）</text>
+  <text x="40" y="974" class="small">💡 列视角解释"为什么压扁"：输出 = a·列1 + b·列2。[1 1; 2 2] 的两列都是 (1,2)，</text>
+  <text x="40" y="998" class="small">　 只能沿一个方向混合 → 困在一条线。列互相独立才能撑满平面 ——"秩 = 独立列数"的几何版。</text>
+  <text x="40" y="1028" class="small">💡 维度守恒：被压没的维度去哪了？变成了解空间。像的维度 + 解空间的维度 = 2，</text>
+  <text x="40" y="1052" class="small">　 与第 12 课公式 Rank = 2 −（解空间维度）一收一支刚好对账（正式名：秩–零化度定理）。</text>
+
+  <!-- ⚠️ pitfalls -->
+  <text x="40" y="1104" class="sec">⚠️ 易错点</text>
+  <text x="40" y="1134" class="small" fill="#C62828">· 压扁不可逆：无数输入挤进同一个输出、回不去 —— 这正是"奇异 = 不可逆"的几何现场。</text>
+  <text x="40" y="1160" class="small" fill="#C62828">· 奇异变换的像（那条线 / 那个点）必然穿过原点 —— 线性铁律 0→0 永远成立。</text>
+  <text x="40" y="1186" class="small" fill="#C62828">· 秩看的是【输出】的维度；输入永远是整个平面，别看反了。</text>
+
+  <!-- 🔗 connection -->
+  <text x="40" y="1238" class="sec">🔗 承上启下</text>
+  <text x="40" y="1268" class="small">· 四个老朋友在几何里合体：det = 0 ⇔ 面积压成 0 ⇔ 像降维 ⇔ rank &lt; 2 ⇔ 不可逆 ⇔ 奇异。</text>
+  <text x="40" y="1294" class="small" font-weight="700" fill="#1565C0">· Transformer：若权重矩阵奇异，词向量被压扁、信息销毁 —— 实际训练出的 W 几乎总是满秩。</text>
+
+  <line x1="40" y1="1316" x2="860" y2="1316" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1336" class="tiny" fill="#888" font-size="12">速记：秩 = 像的维度。Rank 2 平面→平面（非奇异）；Rank 1 平面→线；Rank 0 平面→点。列撞车 = 压扁 = det 0 = 不可逆。</text>
+
+  <!-- 🧪 quiz -->
+  <text x="40" y="1372" class="sec" font-size="17">🧪 自测（先答后看最底部灰字）</text>
+  <text x="40" y="1398" class="small">Q1 概念：线性变换的秩，按本课定义是什么？</text>
+  <text x="40" y="1424" class="small">Q2 计算：[1 1; 2 2]·(3, 1) = ? 它落在哪条线上？</text>
+  <text x="40" y="1450" class="small">Q3 为什么：[1 1; 2 2] 为什么会把整个平面压成一条线？</text>
+  <text x="40" y="1480" class="tiny" fill="#aaa" font-size="11">A1：像（所有输出点的集合）的维度。　A2：(4, 8) = 4·(1,2)，仍在方向 (1,2) 的那条线上。</text>
+  <text x="40" y="1498" class="tiny" fill="#aaa" font-size="11">A3：两列相同（都是 (1,2)），任何输出都只能是 (1,2) 的倍数 —— 只剩一个独立方向。</text>
+</svg>

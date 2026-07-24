@@ -1,0 +1,213 @@
+<svg width="900" height="1780" viewBox="0 0 900 1780" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .body { font-size: 15px; fill: #333; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .eq { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #333; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 15px; fill: #333; }
+    .cap { font-size: 15px; font-weight: 700; }
+    .term { font-size: 14px; font-weight: 700; fill: #1565C0; }
+    .gridline { stroke: #aab4d4; stroke-width: 1; }
+  </style>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#1E88E5" stroke-width="1.6" stroke-linecap="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="1780" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">本课总结：矩阵行化简（高斯消元）与行阶梯形 —— 零黑话版</text>
+  <text x="40" y="82" class="subtitle">本课一句话：你已经会"化简方程组"了，把同样的操作搬到矩阵的行上，就叫矩阵行化简。先把所有术语翻译成人话。</text>
+  <line x1="40" y1="100" x2="860" y2="100" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① glossary -->
+  <text x="40" y="138" class="sec">① 术语字典：先把"黑话"全部翻译成人话</text>
+  <text x="40" y="168" class="small"><tspan class="term">系数 coefficient</tspan> —— 变量前面乘着的数字。5a 的系数是 5；b 自己一个，系数是 1。</text>
+  <text x="40" y="194" class="small"><tspan class="term">元</tspan> —— 中文数学老词，意思是"未知数"。"二元方程" = 有两个未知数（a 和 b）的方程。</text>
+  <text x="40" y="220" class="small"><tspan class="term">消元 elimination</tspan> —— 把某个未知数从方程里"干掉"。比如用第二个方程减去第一个的若干倍，让 a 消失。</text>
+  <text x="40" y="246" class="small"><tspan class="term">高斯消元 / 行化简</tspan> —— 以数学家高斯命名。对矩阵的【行】做三种合法操作：某行乘/除一个非零数；</text>
+  <text x="40" y="268" class="small">　　某行加减另一行的若干倍；两行互换位置。这和你化简方程组的合法操作【一模一样】，只是把"方程"换成了"行"。</text>
+  <text x="40" y="294" class="small"><tspan class="term">主对角线 main diagonal</tspan> —— 矩阵里从左上角到右下角的那条斜线上的格子。</text>
+  <text x="40" y="320" class="small"><tspan class="term">主元 pivot</tspan> —— 每一行里第一个非零的数，这一行的"领头数"（这里的"元"指格子里的元素，不是未知数）。</text>
+  <text x="40" y="342" class="small">　　主元的位置逐行右移、形成楼梯；它【常常】落在对角线上，但也可能滑到对角线右边（见底部 ⑤ 勘误）。</text>
+  <text x="40" y="368" class="small"><tspan class="term">平凡方程 trivial equation</tspan> —— 指 0 = 0：永远成立、但不含任何信息的"废话方程"。</text>
+  <text x="40" y="394" class="small"><tspan class="term">秩 rank</tspan> —— 化简后"真正带信息的行"有几条（= <tspan font-weight="700">主元的个数</tspan>，不是对角线上 1 的个数！）。</text>
+  <text x="40" y="416" class="small">　　"秩"的本义是"等级"，它给矩阵的信息量定级。这是下节课的主角，本课先混个脸熟。</text>
+  <text x="40" y="442" class="small"><tspan class="term">上三角矩阵 upper diagonal matrix</tspan> —— 对角线【下方】全是 0 的矩阵，非零数字堆在右上半边，形似三角。</text>
+
+  <!-- ② main flow -->
+  <text x="40" y="494" class="sec">② 全流程：解方程的每一步，矩阵都在同步"换装"</text>
+
+  <!-- col 1 -->
+  <text x="60" y="526" class="cap">原始 Original</text>
+  <text x="60" y="554" class="eq">5a +  b = 17</text>
+  <text x="60" y="578" class="eq">4a - 3b = 6</text>
+  <rect x="85" y="596" width="80" height="80" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="125" y1="596" x2="125" y2="676" class="gridline"/>
+  <line x1="85" y1="636" x2="165" y2="636" class="gridline"/>
+  <text x="105" y="622" class="cell" text-anchor="middle">5</text><text x="145" y="622" class="cell" text-anchor="middle">1</text>
+  <text x="105" y="662" class="cell" text-anchor="middle">4</text><text x="145" y="662" class="cell" text-anchor="middle">-3</text>
+  <text x="125" y="698" class="tiny" text-anchor="middle">只抄系数，常数先不管</text>
+
+  <line x1="190" y1="630" x2="290" y2="630" stroke="#1E88E5" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="240" y="618" class="tiny" text-anchor="middle" fill="#1565C0">行变换</text>
+
+  <!-- col 2 -->
+  <text x="330" y="526" class="cap">中间 Intermediate</text>
+  <text x="330" y="554" class="eq">a + 0.2b = 3.4</text>
+  <text x="330" y="578" class="eq">       b = 2</text>
+  <rect x="360" y="596" width="80" height="80" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="400" y1="596" x2="400" y2="676" class="gridline"/>
+  <line x1="360" y1="636" x2="440" y2="636" class="gridline"/>
+  <text x="380" y="622" class="cell" text-anchor="middle" font-weight="700">1</text><text x="420" y="622" class="cell" text-anchor="middle">0.2</text>
+  <text x="380" y="662" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="420" y="662" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="400" y="700" class="tiny" text-anchor="middle" fill="#1565C0" font-weight="700">行阶梯形 Row Echelon Form</text>
+  <text x="400" y="718" class="tiny" text-anchor="middle">主元是 1，下方全 0（上三角）</text>
+
+  <line x1="470" y1="630" x2="570" y2="630" stroke="#1E88E5" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="520" y="618" class="tiny" text-anchor="middle" fill="#1565C0">继续行变换</text>
+
+  <!-- col 3 -->
+  <text x="610" y="526" class="cap">解出 Solved</text>
+  <text x="610" y="554" class="eq">1a + 0b = 3</text>
+  <text x="610" y="578" class="eq">0a + 1b = 2</text>
+  <rect x="640" y="596" width="80" height="80" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="680" y1="596" x2="680" y2="676" class="gridline"/>
+  <line x1="640" y1="636" x2="720" y2="636" class="gridline"/>
+  <text x="660" y="622" class="cell" text-anchor="middle" font-weight="700">1</text><text x="700" y="622" class="cell" text-anchor="middle" fill="#aaa">0</text>
+  <text x="660" y="662" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="700" y="662" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <text x="690" y="700" class="tiny" text-anchor="middle" fill="#1565C0" font-weight="700">简化行阶梯形 Reduced Row Echelon Form</text>
+  <text x="690" y="718" class="tiny" text-anchor="middle">对角线全 1、其余全 0，答案 a=3, b=2 直接现形</text>
+
+  <text x="40" y="752" class="body" font-weight="700">要点：矩阵就是方程组"脱掉变量外衣"的样子。解方程组和刷矩阵是【同一件事】的两套衣服，每一步都一一对应。</text>
+
+  <!-- ③ singular cases -->
+  <text x="40" y="800" class="sec">③ 奇异的方程组也能刷，只是刷出来的楼梯是"残缺"的</text>
+
+  <!-- card 1 -->
+  <rect x="40" y="818" width="260" height="216" rx="12" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <text x="58" y="846" class="eq" font-size="13">a + b = 10</text>
+  <text x="58" y="868" class="eq" font-size="13">2a + 2b = 20</text>
+  <text x="58" y="894" class="tiny">第2行 − 2×第1行 → 0 = 0（废话）</text>
+  <rect x="90" y="908" width="60" height="60" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="120" y1="908" x2="120" y2="968" class="gridline"/>
+  <line x1="90" y1="938" x2="150" y2="938" class="gridline"/>
+  <text x="105" y="928" class="cell" text-anchor="middle" font-weight="700">1</text><text x="135" y="928" class="cell" text-anchor="middle">1</text>
+  <text x="105" y="958" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="135" y="958" class="cell" text-anchor="middle" font-weight="700" fill="#C62828">0</text>
+  <text x="170" y="942" class="tiny">← 全零行沉底</text>
+  <text x="58" y="994" class="small" font-weight="700" fill="#F57F17">主元：只有 1 个（秩 = 1）</text>
+  <text x="58" y="1016" class="tiny">这也是行阶梯形，只是楼梯断了一级</text>
+
+  <!-- card 2 -->
+  <rect x="320" y="818" width="260" height="216" rx="12" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <text x="338" y="846" class="eq" font-size="13">5a + b = 11</text>
+  <text x="338" y="868" class="eq" font-size="13">10a + 2b = 22</text>
+  <text x="338" y="894" class="tiny">第2行 − 2×第1行 → 0 = 0，奇异实锤</text>
+  <rect x="370" y="908" width="60" height="60" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="400" y1="908" x2="400" y2="968" class="gridline"/>
+  <line x1="370" y1="938" x2="430" y2="938" class="gridline"/>
+  <text x="385" y="928" class="cell" text-anchor="middle" font-weight="700">1</text><text x="415" y="928" class="cell" text-anchor="middle">0.2</text>
+  <text x="385" y="958" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="415" y="958" class="cell" text-anchor="middle" font-weight="700" fill="#C62828">0</text>
+  <text x="338" y="994" class="small" font-weight="700" fill="#F57F17">同样：1 个主元（秩 = 1）</text>
+  <text x="338" y="1016" class="tiny">第 1 行 ÷5 把领头数洗成 1，得 0.2</text>
+
+  <!-- card 3 -->
+  <rect x="600" y="818" width="260" height="216" rx="12" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="618" y="846" class="eq" font-size="13">0a + 0b = 0</text>
+  <text x="618" y="868" class="eq" font-size="13">0a + 0b = 0</text>
+  <text x="618" y="894" class="tiny">两句全是废话，没法再化简</text>
+  <rect x="650" y="908" width="60" height="60" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="680" y1="908" x2="680" y2="968" class="gridline"/>
+  <line x1="650" y1="938" x2="710" y2="938" class="gridline"/>
+  <text x="665" y="928" class="cell" text-anchor="middle" font-weight="700" fill="#C62828">0</text><text x="695" y="928" class="cell" text-anchor="middle" fill="#aaa">0</text>
+  <text x="665" y="958" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="695" y="958" class="cell" text-anchor="middle" font-weight="700" fill="#C62828">0</text>
+  <text x="618" y="994" class="small" font-weight="700" fill="#C62828">主元：0 个（秩 = 0，最奇异）</text>
+  <text x="618" y="1016" class="tiny">它自己就是自己的行阶梯形</text>
+
+  <!-- ④ general shape -->
+  <text x="40" y="1082" class="sec">④ 行阶梯形的通用长相（本课的简化版定义；* = 随便什么数）</text>
+
+  <!-- 5x5 grid -->
+  <rect x="60" y="1102" width="180" height="180" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <rect x="60" y="1102" width="36" height="36" fill="#FFF3CD"/>
+  <rect x="96" y="1138" width="36" height="36" fill="#FFF3CD"/>
+  <rect x="132" y="1174" width="36" height="36" fill="#ECEFF1"/>
+  <rect x="168" y="1210" width="36" height="36" fill="#ECEFF1"/>
+  <rect x="204" y="1246" width="36" height="36" fill="#ECEFF1"/>
+  <line x1="96" y1="1102" x2="96" y2="1282" class="gridline"/>
+  <line x1="132" y1="1102" x2="132" y2="1282" class="gridline"/>
+  <line x1="168" y1="1102" x2="168" y2="1282" class="gridline"/>
+  <line x1="204" y1="1102" x2="204" y2="1282" class="gridline"/>
+  <line x1="60" y1="1138" x2="240" y2="1138" class="gridline"/>
+  <line x1="60" y1="1174" x2="240" y2="1174" class="gridline"/>
+  <line x1="60" y1="1210" x2="240" y2="1210" class="gridline"/>
+  <line x1="60" y1="1246" x2="240" y2="1246" class="gridline"/>
+  <text x="78" y="1126" class="cell" text-anchor="middle" font-weight="700">1</text><text x="114" y="1126" class="cell" text-anchor="middle">*</text><text x="150" y="1126" class="cell" text-anchor="middle">*</text><text x="186" y="1126" class="cell" text-anchor="middle">*</text><text x="222" y="1126" class="cell" text-anchor="middle">*</text>
+  <text x="78" y="1162" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="114" y="1162" class="cell" text-anchor="middle" font-weight="700">1</text><text x="150" y="1162" class="cell" text-anchor="middle">*</text><text x="186" y="1162" class="cell" text-anchor="middle">*</text><text x="222" y="1162" class="cell" text-anchor="middle">*</text>
+  <text x="78" y="1198" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="114" y="1198" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="150" y="1198" class="cell" text-anchor="middle" font-weight="700">0</text><text x="186" y="1198" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="222" y="1198" class="cell" text-anchor="middle" fill="#aaa">0</text>
+  <text x="78" y="1234" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="114" y="1234" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="150" y="1234" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="186" y="1234" class="cell" text-anchor="middle" font-weight="700">0</text><text x="222" y="1234" class="cell" text-anchor="middle" fill="#aaa">0</text>
+  <text x="78" y="1270" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="114" y="1270" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="150" y="1270" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="186" y="1270" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="222" y="1270" class="cell" text-anchor="middle" font-weight="700">0</text>
+
+  <text x="280" y="1126" class="small">· 主对角线上：先是一串 1，后面可能跟一串 0（可以全是 1，也可以全是 0）</text>
+  <text x="280" y="1156" class="small">· 对角线【下方】：必须全是 0</text>
+  <text x="280" y="1186" class="small">· 1 的右边：随便什么数都行（图中的 * ）</text>
+  <text x="280" y="1216" class="small">· 对角线 0 的右边：必须全是 0 —— 所以那几行整行都是 0（废话行）</text>
+  <text x="280" y="1250" class="small" font-weight="700" fill="#1565C0">· 主元的个数 = 真正带信息的行数 = 秩。（数主元，不是数对角线，见 ⑤）</text>
+  <text x="280" y="1276" class="tiny">2×2 矩阵只有三种行阶梯形：2 个主元、1 个主元、0 个主元 ——</text>
+  <text x="280" y="1296" class="tiny">分别对应：非奇异（唯一解）、奇异（一行是废话）、最奇异（全是废话）。</text>
+
+  <!-- ⑤ erratum -->
+  <line x1="40" y1="1322" x2="860" y2="1322" stroke="#e0e0e0" stroke-width="1.5"/>
+  <text x="40" y="1356" class="sec" fill="#C62828">⑤ 勘误（重要）：秩 = 主元的个数，不是"对角线上 1 的个数"</text>
+
+  <rect x="40" y="1372" width="820" height="58" rx="12" fill="#E8F5E9" stroke="#66BB6A" stroke-width="2"/>
+  <text x="62" y="1396" class="body" font-weight="700" fill="#2E7D32">正确规则：刷成行阶梯形后，秩 = 主元的总个数 = 非零行的条数。</text>
+  <text x="62" y="1420" class="tiny">主元位置逐行右移（楼梯），但楼梯的一级【允许横跨好几列】—— 主元会滑到对角线右边，本图 ④ 的简化版没覆盖这种情况。</text>
+
+  <!-- counterexample grid -->
+  <rect x="60" y="1452" width="180" height="180" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="96" y1="1452" x2="96" y2="1632" class="gridline"/>
+  <line x1="132" y1="1452" x2="132" y2="1632" class="gridline"/>
+  <line x1="168" y1="1452" x2="168" y2="1632" class="gridline"/>
+  <line x1="204" y1="1452" x2="204" y2="1632" class="gridline"/>
+  <line x1="60" y1="1488" x2="240" y2="1488" class="gridline"/>
+  <line x1="60" y1="1524" x2="240" y2="1524" class="gridline"/>
+  <line x1="60" y1="1560" x2="240" y2="1560" class="gridline"/>
+  <line x1="60" y1="1596" x2="240" y2="1596" class="gridline"/>
+  <!-- diagonal dashed -->
+  <rect x="61" y="1453" width="34" height="34" fill="none" stroke="#F57F17" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <rect x="97" y="1489" width="34" height="34" fill="none" stroke="#F57F17" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <rect x="133" y="1525" width="34" height="34" fill="none" stroke="#F57F17" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <rect x="169" y="1561" width="34" height="34" fill="none" stroke="#F57F17" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <rect x="205" y="1597" width="34" height="34" fill="none" stroke="#F57F17" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <!-- values -->
+  <text x="78" y="1476" class="cell" text-anchor="middle" font-weight="700">1</text><text x="114" y="1476" class="cell" text-anchor="middle">*</text><text x="150" y="1476" class="cell" text-anchor="middle">*</text><text x="186" y="1476" class="cell" text-anchor="middle">*</text><text x="222" y="1476" class="cell" text-anchor="middle">*</text>
+  <text x="78" y="1512" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="114" y="1512" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="150" y="1512" class="cell" text-anchor="middle" font-weight="700">1</text><text x="186" y="1512" class="cell" text-anchor="middle">*</text><text x="222" y="1512" class="cell" text-anchor="middle">*</text>
+  <text x="78" y="1548" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="114" y="1548" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="150" y="1548" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="186" y="1548" class="cell" text-anchor="middle" font-weight="700">1</text><text x="222" y="1548" class="cell" text-anchor="middle">*</text>
+  <text x="78" y="1584" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="114" y="1584" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="150" y="1584" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="186" y="1584" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="222" y="1584" class="cell" text-anchor="middle" fill="#aaa">0</text>
+  <text x="78" y="1620" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="114" y="1620" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="150" y="1620" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="186" y="1620" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="222" y="1620" class="cell" text-anchor="middle" fill="#aaa">0</text>
+  <!-- pivot circles -->
+  <circle cx="78" cy="1470" r="15" fill="none" stroke="#1E88E5" stroke-width="2.5"/>
+  <circle cx="150" cy="1506" r="15" fill="none" stroke="#1E88E5" stroke-width="2.5"/>
+  <circle cx="186" cy="1542" r="15" fill="none" stroke="#1E88E5" stroke-width="2.5"/>
+  <text x="150" y="1658" class="tiny" text-anchor="middle">蓝圈 = 主元（3 个）；橙虚线 = 对角线（只有 1 个 1）</text>
+
+  <!-- right text -->
+  <text x="290" y="1476" class="small" font-weight="700" fill="#C62828">数对角线：1, 0, 0, 0, 0 → 只数到 1 个 → "秩 = 1"，错！</text>
+  <text x="290" y="1506" class="small" font-weight="700" fill="#2E7D32">数主元（蓝圈）：3 个 → 秩 = 3，对！（= 非零行 3 条）</text>
+  <text x="290" y="1540" class="small">第 2 行的主元跳过了第 2 列、落在第 3 列：某列消元后"踩空"</text>
+  <text x="290" y="1564" class="small">（钉不死对应的未知数），主元只好右移。被跳过的列对应的</text>
+  <text x="290" y="1588" class="small">未知数可以随便取值，术语叫"自由变量 free variable"。</text>
+  <text x="290" y="1622" class="small" font-weight="700">"数对角线"只在主元恰好全踩在对角线上时碰巧成立</text>
+  <text x="290" y="1646" class="small" font-weight="700">（方阵满秩时必然如此）。通用规则永远是：数主元。</text>
+
+  <line x1="40" y1="1690" x2="860" y2="1690" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1716" class="tiny" fill="#888" font-size="12">速记：刷矩阵的行 = 化简方程组，同一件事两套衣服。楼梯完整（每行都有主元）= 非奇异；出现全零行 = 奇异。</text>
+  <text x="40" y="1738" class="tiny" fill="#888" font-size="12">主元的个数 = 非零行的条数 = 有效信息条数 = 秩。主元允许跳列、滑到对角线右边 —— 所以数主元，别数对角线。</text>
+</svg>

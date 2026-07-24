@@ -1,0 +1,108 @@
+<svg width="900" height="1290" viewBox="0 0 900 1290" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .body { font-size: 15px; fill: #333; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .eq { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 13px; fill: #333; }
+    .cap { font-size: 15px; font-weight: 700; }
+    .term { font-size: 14px; font-weight: 700; fill: #1565C0; }
+    .axis { stroke: #1E88E5; stroke-width: 2; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="1290" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="52" class="title">本课总结：秩 Rank —— 给矩阵的"信息量"称重</text>
+  <text x="40" y="84" class="subtitle">一句话：秩 = 一个系统（或矩阵）真正携带的【独立信息条数】。信息越多，解被锁得越死。</text>
+  <line x1="40" y1="102" x2="860" y2="102" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① glossary -->
+  <text x="40" y="140" class="sec">① 术语字典：先翻译黑话</text>
+  <text x="40" y="170" class="small"><tspan class="term">秩 rank</tspan> —— "秩"的汉字本义是等级、次序。矩阵的秩 = 它携带的独立信息条数，给信息量定级。</text>
+  <text x="40" y="196" class="small"><tspan class="term">解空间 solution space</tspan> —— 把【所有】解收集起来组成的集合（本课讨论常数全为 0 的方程组）。</text>
+  <text x="40" y="222" class="small"><tspan class="term">维度 dimension</tspan> —— 描述一个集合"有多大伸展空间"：一个点是 0 维，一条线是 1 维，整个平面是 2 维。</text>
+  <text x="40" y="248" class="small"><tspan class="term">满秩 full rank</tspan> —— 秩达到上限（2×2 矩阵的上限是 2）。信息拉满，一点冗余都没有。</text>
+
+  <!-- ② sentences & equations -->
+  <text x="40" y="300" class="sec">② 从句子到方程：数一数有几条"真信息"</text>
+
+  <rect x="40" y="320" width="260" height="216" rx="12" fill="#F1F8E9" stroke="#AED581" stroke-width="1.5"/>
+  <text x="58" y="348" class="cap" fill="#2E7D32">System 1</text>
+  <text x="58" y="374" class="tiny">"狗是黑的"、"猫是橙的"</text>
+  <text x="58" y="394" class="tiny">两句话，说了两件不同的事</text>
+  <text x="58" y="424" class="eq">a +  b = 0</text>
+  <text x="58" y="446" class="eq">a + 2b = 0</text>
+  <text x="58" y="478" class="small" font-weight="700" fill="#1565C0">2 个方程 = 2 条信息</text>
+  <rect x="58" y="494" width="100" height="24" rx="12" fill="#2E7D32"/>
+  <text x="108" y="510" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Rank = 2</text>
+
+  <rect x="320" y="320" width="260" height="216" rx="12" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <text x="338" y="348" class="cap" fill="#F57F17">System 2</text>
+  <text x="338" y="374" class="tiny">"狗是黑的"、"狗是黑的"</text>
+  <text x="338" y="394" class="tiny">两句话，只说了一件事（重复）</text>
+  <text x="338" y="424" class="eq">a + b = 0</text>
+  <text x="338" y="446" class="eq">2a + 2b = 0</text>
+  <text x="338" y="478" class="small" font-weight="700" fill="#1565C0">2 个方程 = 只有 1 条信息</text>
+  <rect x="338" y="494" width="100" height="24" rx="12" fill="#F57F17"/>
+  <text x="388" y="510" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Rank = 1</text>
+
+  <rect x="600" y="320" width="260" height="216" rx="12" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="618" y="348" class="cap" fill="#C62828">System 3</text>
+  <text x="618" y="374" class="tiny">"那只狗"、"那只狗"</text>
+  <text x="618" y="394" class="tiny">两个半句，什么事都没说</text>
+  <text x="618" y="424" class="eq">0a + 0b = 0</text>
+  <text x="618" y="446" class="eq">0a + 0b = 0</text>
+  <text x="618" y="478" class="small" font-weight="700" fill="#1565C0">2 个方程 = 0 条信息</text>
+  <rect x="618" y="494" width="100" height="24" rx="12" fill="#C62828"/>
+  <text x="668" y="510" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Rank = 0</text>
+
+  <!-- ③ rank & solution space -->
+  <text x="40" y="592" class="sec">③ 秩 与 解空间：信息每多一条，解的"活动范围"就被压低一维</text>
+
+  <!-- col1: point -->
+  <line x1="65" y1="710" x2="275" y2="710" class="axis"/>
+  <line x1="170" y1="630" x2="170" y2="790" class="axis"/>
+  <circle cx="170" cy="710" r="6" fill="#1a1a1a"/>
+  <text x="182" y="700" class="tiny" font-weight="700">(0, 0)</text>
+  <text x="170" y="816" class="small" text-anchor="middle" font-weight="700">Rank 2：解只有原点一个</text>
+  <text x="170" y="838" class="tiny" text-anchor="middle">解空间 = 一个点 → 维度 0</text>
+
+  <!-- col2: line -->
+  <line x1="345" y1="710" x2="555" y2="710" class="axis"/>
+  <line x1="450" y1="630" x2="450" y2="790" class="axis"/>
+  <line x1="385" y1="645" x2="515" y2="775" stroke="#1a1a1a" stroke-width="2.5"/>
+  <text x="450" y="816" class="small" text-anchor="middle" font-weight="700">Rank 1：整条线上都是解</text>
+  <text x="450" y="838" class="tiny" text-anchor="middle">解空间 = 一条线 → 维度 1</text>
+
+  <!-- col3: plane -->
+  <rect x="630" y="635" width="200" height="150" fill="#CFD8DC" opacity="0.7"/>
+  <line x1="625" y1="710" x2="835" y2="710" class="axis"/>
+  <line x1="730" y1="630" x2="730" y2="790" class="axis"/>
+  <text x="730" y="816" class="small" text-anchor="middle" font-weight="700">Rank 0：任何 (a, b) 都是解</text>
+  <text x="730" y="838" class="tiny" text-anchor="middle">解空间 = 整个平面 → 维度 2</text>
+
+  <rect x="230" y="858" width="440" height="40" rx="10" fill="#E3F2FD" stroke="#1E88E5" stroke-width="2"/>
+  <text x="450" y="884" class="cap" fill="#1565C0" text-anchor="middle">Rank = 2 −（解空间的维度）</text>
+  <text x="40" y="928" class="small">直觉：没有信息时（秩 0），解满天飞（2 维）；每来一条真信息，就"钉死"一个方向，解空间降一维；</text>
+  <text x="40" y="950" class="small">两条真信息（秩 2）把解钉死成一个点（0 维）。信息 = 约束，秩就在数约束的条数。</text>
+
+  <!-- ④ rank & singularity -->
+  <text x="40" y="1000" class="sec">④ 秩 与 奇异性、与上节课的楼梯</text>
+  <text x="40" y="1028" class="small" font-weight="700" fill="#2E7D32">· Rank = 2（满秩）⇔ 非奇异 ⇔ 唯一解。</text>
+  <text x="40" y="1054" class="small" font-weight="700" fill="#C62828">· Rank = 1 或 0（缺秩）⇔ 奇异。秩越低，矩阵"病"得越重。</text>
+  <text x="40" y="1080" class="small">· 怎么快速求秩？把矩阵刷成上节课的行阶梯形，数主对角线上 1 的个数 —— 楼梯完整几级，秩就是几。</text>
+
+  <!-- ⑤ image compression -->
+  <text x="40" y="1130" class="sec">⑤ 真实应用：图像压缩 = 主动降秩</text>
+  <text x="40" y="1158" class="small">· 一张灰度图就是一个数字矩阵（每个格子 = 一个像素的亮度）。课中示例原图的秩是 200。</text>
+  <text x="40" y="1184" class="small">· 只用秩 1、2、5、15、50 的"低秩近似"去重建：秩 50 时肉眼已几乎看不出差别 —— 只用了四分之一的信息。</text>
+  <text x="40" y="1210" class="small">· 为什么可行？真实图片行与行高度相似（大量冗余），真正独立的信息远少于 200 行。秩衡量的正是这个。</text>
+  <text x="40" y="1236" class="small" font-weight="700" fill="#1565C0">· 机器学习连接：这就是"压缩 / 降维"思想的雏形，以后它会以 SVD（奇异值分解）的名字与你重逢。</text>
+
+  <line x1="40" y1="1256" x2="860" y2="1256" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1278" class="tiny" fill="#888" font-size="12">速记：秩 = 独立信息条数 = 行阶梯形对角线上 1 的个数；Rank = 2 − 解空间维度；满秩 ⇔ 非奇异 ⇔ 唯一解；真实数据秩常常很低，所以能压缩。</text>
+</svg>

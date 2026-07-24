@@ -1,0 +1,225 @@
+<svg width="1160" height="1924" viewBox="0 0 1160 1924" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 25px; font-weight: 800; fill: #0F172A; }
+    .ess { font-size: 16px; fill: #475569; }
+    .sec { font-size: 19px; font-weight: 800; fill: #0F172A; }
+    .b { font-size: 15px; fill: #334155; }
+    .bb { font-size: 15px; font-weight: 700; }
+    .sm { font-size: 13px; fill: #64748B; }
+    .ct { font-size: 15px; font-weight: 700; }
+    .th { font-size: 13.5px; font-weight: 700; }
+    .cap { font-size: 13.5px; font-weight: 700; fill: #334155; }
+    /* color classes LAST */
+    .w{fill:#fff} .wg{fill:#CBD5E1}
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#D97706} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+  </style>
+
+  <rect x="0" y="0" width="1160" height="1924" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">Bar Graphs &amp; Pie Charts 📊🥧 — two ways to picture a frequency table</text>
+  <text x="40" y="76" class="ess">Both charts start by <tspan class="bb">COUNTING</tspan> your data into a frequency table. Then you pick the chart by the <tspan class="cPink bb">question you are asking</tspan>:</text>
+  <text x="40" y="98" class="ess">a bar graph for "which category is bigger?", a pie chart for "what share of the whole is each part?".</text>
+  <line x1="40" y1="114" x2="1120" y2="114" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ① two charts, different questions -->
+  <text x="40" y="148" class="sec">🍦 Same job (summarize data), different question</text>
+  <text x="40" y="176" class="b">A bar graph and a pie chart can show the <tspan class="bb">exact same numbers</tspan>. They are not rivals — each is better at a different question.</text>
+  <text x="40" y="198" class="b">Decide what you want the reader to see, then choose:</text>
+
+  <rect x="40" y="216" width="540" height="132" rx="11" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="58" y="240" class="ct cBlue">📊 Bar graph (= bar chart) — "Which is bigger?"</text>
+  <text x="58" y="264" class="b">Compares the <tspan class="bb">size</tspan> of separate categories.</text>
+  <text x="58" y="286" class="b">Bar length = the value. Easy to rank biggest → smallest.</text>
+  <text x="58" y="308" class="b">Handles many categories, negatives, and time trends.</text>
+  <text x="58" y="330" class="sm">the safe default choice for almost any comparison</text>
+
+  <rect x="600" y="216" width="520" height="132" rx="11" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.2"/>
+  <text x="618" y="240" class="ct cOrange">🥧 Pie chart — "What share of the whole?"</text>
+  <text x="618" y="264" class="b">Shows each part as a <tspan class="bb">slice of ONE whole</tspan> (100%).</text>
+  <text x="618" y="286" class="b">Slice size = proportion. Parts MUST add to a real total.</text>
+  <text x="618" y="308" class="b">Best for few categories (about 3–6), simple part-to-whole.</text>
+  <text x="618" y="330" class="sm">if the parts don't sum to a whole, a pie is the wrong chart</text>
+
+  <!-- ② workflow + frequency table -->
+  <text x="40" y="390" class="sec">🔢 The workflow: raw list → frequency table → chart</text>
+  <text x="40" y="418" class="b">Every chart here starts from a data table. First you <tspan class="bb">COUNT</tspan> how often each value appears → a <tspan class="cPurple bb">frequency table</tspan></text>
+  <text x="40" y="440" class="b">(also called a summary table). Lesson example: how many times each continent hosted the <tspan class="bb">Summer Olympics, 1896–2016</tspan>.</text>
+
+  <rect x="40" y="458" width="300" height="26" fill="#FED7AA"/>
+  <text x="54" y="476" class="th cSlate">Continent</text><text x="250" y="476" class="th cSlate">Count</text>
+  <rect x="40" y="484" width="300" height="24" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="54" y="501" class="sm">Europe</text><text x="258" y="501" class="sm">16</text>
+  <rect x="40" y="508" width="300" height="24" fill="#fff" stroke="#FDE68A"/>
+  <text x="54" y="525" class="sm">North America</text><text x="258" y="525" class="sm">6</text>
+  <rect x="40" y="532" width="300" height="24" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="54" y="549" class="sm">Asia</text><text x="258" y="549" class="sm">3</text>
+  <rect x="40" y="556" width="300" height="24" fill="#fff" stroke="#FDE68A"/>
+  <text x="54" y="573" class="sm">Australia</text><text x="258" y="573" class="sm">2</text>
+  <rect x="40" y="580" width="300" height="24" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="54" y="597" class="sm">South America</text><text x="258" y="597" class="sm">1</text>
+
+  <text x="372" y="500" class="b">🔹 "Frequency" just means <tspan class="bb">COUNT</tspan> — how many times each individual appears.</text>
+  <text x="372" y="524" class="b">🔹 Here the individuals are the <tspan class="bb">continents</tspan>; the count is a quantitative variable.</text>
+  <text x="372" y="548" class="b">🔹 Europe hosted 16 times, so its frequency is 16. All counts add to <tspan class="bb">28 games</tspan>.</text>
+  <text x="372" y="572" class="b">🔹 Africa and Antarctica are missing → you can infer they have <tspan class="bb">never hosted</tspan>.</text>
+  <text x="372" y="596" class="sm">once you have the counts, you can draw a bar graph OR a pie chart from them</text>
+
+  <!-- ③ bar graphs: vertical + horizontal drawn -->
+  <text x="40" y="648" class="sec">📊 Building a bar graph — two orientations</text>
+  <text x="40" y="676" class="b">Put the categories on one axis and the count on the other. Each bar's <tspan class="bb">length = the count</tspan>. By custom you sort it:</text>
+  <text x="40" y="698" class="b">vertical → tallest bar on the <tspan class="bb">left</tspan>; horizontal → biggest bar on <tspan class="bb">top</tspan>.</text>
+
+  <!-- VERTICAL bar chart -->
+  <text x="110" y="744" class="cap">▮ Vertical — Summer hosts</text>
+  <line x1="110" y1="760" x2="462" y2="760" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="795" x2="462" y2="795" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="830" x2="462" y2="830" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="865" x2="462" y2="865" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="758" x2="110" y2="900" stroke="#94A3B8" stroke-width="1.6"/>
+  <line x1="110" y1="900" x2="462" y2="900" stroke="#94A3B8" stroke-width="1.6"/>
+  <text x="100" y="904" class="sm" text-anchor="end">0</text>
+  <text x="100" y="869" class="sm" text-anchor="end">5</text>
+  <text x="100" y="834" class="sm" text-anchor="end">10</text>
+  <text x="100" y="799" class="sm" text-anchor="end">15</text>
+  <text x="100" y="764" class="sm" text-anchor="end">20</text>
+  <rect x="123" y="788" width="44" height="112" fill="#F59E6B"/>
+  <rect x="196" y="858" width="44" height="42" fill="#F59E6B"/>
+  <rect x="269" y="879" width="44" height="21" fill="#F59E6B"/>
+  <rect x="342" y="886" width="44" height="14" fill="#F59E6B"/>
+  <rect x="415" y="893" width="44" height="7" fill="#F59E6B"/>
+  <text x="145" y="781" class="sm cSlate" text-anchor="middle">16</text>
+  <text x="218" y="851" class="sm cSlate" text-anchor="middle">6</text>
+  <text x="291" y="872" class="sm cSlate" text-anchor="middle">3</text>
+  <text x="364" y="879" class="sm cSlate" text-anchor="middle">2</text>
+  <text x="437" y="886" class="sm cSlate" text-anchor="middle">1</text>
+  <text x="145" y="916" class="sm" text-anchor="middle">Europe</text>
+  <text x="218" y="916" class="sm" text-anchor="middle">N.Am</text>
+  <text x="291" y="916" class="sm" text-anchor="middle">Asia</text>
+  <text x="364" y="916" class="sm" text-anchor="middle">Aus</text>
+  <text x="437" y="916" class="sm" text-anchor="middle">S.Am</text>
+
+  <!-- HORIZONTAL bar chart -->
+  <text x="640" y="744" class="cap">▭ Horizontal — biggest on top</text>
+  <line x1="740" y1="768" x2="740" y2="900" stroke="#94A3B8" stroke-width="1.6"/>
+  <line x1="820" y1="768" x2="820" y2="900" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="900" y1="768" x2="900" y2="900" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="980" y1="768" x2="980" y2="900" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="1060" y1="768" x2="1060" y2="900" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="740" y="777" width="256" height="18" fill="#F59E6B"/>
+  <rect x="740" y="803" width="96" height="18" fill="#F59E6B"/>
+  <rect x="740" y="829" width="48" height="18" fill="#F59E6B"/>
+  <rect x="740" y="855" width="32" height="18" fill="#F59E6B"/>
+  <rect x="740" y="881" width="16" height="18" fill="#F59E6B"/>
+  <text x="732" y="790" class="sm" text-anchor="end">Europe</text>
+  <text x="732" y="816" class="sm" text-anchor="end">N. America</text>
+  <text x="732" y="842" class="sm" text-anchor="end">Asia</text>
+  <text x="732" y="868" class="sm" text-anchor="end">Australia</text>
+  <text x="732" y="894" class="sm" text-anchor="end">S. America</text>
+  <text x="1004" y="790" class="sm cSlate">16</text>
+  <text x="844" y="816" class="sm cSlate">6</text>
+  <text x="796" y="842" class="sm cSlate">3</text>
+  <text x="780" y="868" class="sm cSlate">2</text>
+  <text x="764" y="894" class="sm cSlate">1</text>
+  <text x="740" y="916" class="sm" text-anchor="middle">0</text>
+  <text x="820" y="916" class="sm" text-anchor="middle">5</text>
+  <text x="900" y="916" class="sm" text-anchor="middle">10</text>
+  <text x="980" y="916" class="sm" text-anchor="middle">15</text>
+  <text x="1060" y="916" class="sm" text-anchor="middle">20</text>
+
+  <text x="40" y="952" class="b">⚠️ <tspan class="bb">Reading exact values is hard:</tspan> the axis is marked every 5, so for Europe you only <tspan class="bb">KNOW</tspan> it is between 15 and 20. You</text>
+  <text x="40" y="974" class="b">would guess about 16, but not be fully sure. A bar graph gives a <tspan class="bb">fast picture</tspan>, not exact numbers — but it makes the ranking obvious.</text>
+
+  <!-- ④ pie chart drawn (fixed geometry) -->
+  <text x="40" y="1020" class="sec">🥧 Building a pie chart from the same counts</text>
+  <text x="40" y="1048" class="b">Same 28 games, now as slices of one whole. Each slice's <tspan class="bb">angle = its share of 360°</tspan>: angle = (count ÷ 28) × 360°.</text>
+  <text x="40" y="1070" class="b">Give each slice a different color, and (by custom) place the biggest slices next to each other.</text>
+
+  <!-- pie: center 235,1205 r108 -->
+  <path d="M235 1205 L235 1097 A108 108 0 1 1 188.14 1302.32 Z" fill="#F59E6B" stroke="#ffffff" stroke-width="2"/>
+  <path d="M235 1205 L188.14 1302.32 A108 108 0 0 1 129.71 1180.97 Z" fill="#5B7A99" stroke="#ffffff" stroke-width="2"/>
+  <path d="M235 1205 L129.71 1180.97 A108 108 0 0 1 167.66 1120.56 Z" fill="#A9C7E0" stroke="#ffffff" stroke-width="2"/>
+  <path d="M235 1205 L167.66 1120.56 A108 108 0 0 1 210.97 1099.71 Z" fill="#F0D58B" stroke="#ffffff" stroke-width="2"/>
+  <path d="M235 1205 L210.97 1099.71 A108 108 0 0 1 235 1097 Z" fill="#F4EFE0" stroke="#ffffff" stroke-width="2"/>
+  <text x="298" y="1224" class="bb w" text-anchor="middle">16</text>
+  <text x="177" y="1238" class="bb w" text-anchor="middle">6</text>
+  <text x="180" y="1175" class="sm cSlate" text-anchor="middle">3</text>
+
+  <text x="440" y="1115" class="ct cBlue">Each slice: (count ÷ 28) × 360°</text>
+  <rect x="440" y="1130" width="14" height="14" fill="#F59E6B"/>
+  <text x="462" y="1142" class="b">Europe　16 / 28 = 57% → <tspan class="bb">205.7°</tspan></text>
+  <rect x="440" y="1156" width="14" height="14" fill="#5B7A99"/>
+  <text x="462" y="1168" class="b">North America　6 / 28 = 21% → <tspan class="bb">77.1°</tspan></text>
+  <rect x="440" y="1182" width="14" height="14" fill="#A9C7E0"/>
+  <text x="462" y="1194" class="b">Asia　3 / 28 = 11% → <tspan class="bb">38.6°</tspan></text>
+  <rect x="440" y="1208" width="14" height="14" fill="#F0D58B"/>
+  <text x="462" y="1220" class="b">Australia　2 / 28 = 7% → <tspan class="bb">25.7°</tspan></text>
+  <rect x="440" y="1234" width="14" height="14" fill="#F4EFE0" stroke="#CBD5E1"/>
+  <text x="462" y="1246" class="b">South America　1 / 28 = 4% → <tspan class="bb">12.9°</tspan></text>
+  <text x="440" y="1274" class="sm">the angles add up to 360° (and the parts to 100%) — that is why a pie only works for parts of one whole</text>
+
+  <text x="40" y="1342" class="b">👀 <tspan class="bb">Notice:</tspan> comparing the small slices is harder than comparing the bars. Our eyes judge bar <tspan class="bb">lengths</tspan> better than pie</text>
+  <text x="40" y="1364" class="b">　 <tspan class="bb">angles</tspan>, so for many categories a bar graph is usually clearer. A pie is best when there are just a few parts of one whole.</text>
+
+  <!-- ⑤ grouped side-by-side bars drawn -->
+  <text x="40" y="1408" class="sec">📊📊 Grouped (side-by-side) bars — compare two variables at once</text>
+  <text x="40" y="1436" class="b">A bar graph really shines when each individual has <tspan class="bb">more than one number</tspan>. Put summer and winter games side by side per</text>
+  <text x="40" y="1458" class="b">continent (Winter Olympics 1924–2018: Europe 14, North America 6, Asia 3). One picture now tells two stories at once:</text>
+
+  <!-- grouped chart: baseline 1640, scale 6 -->
+  <line x1="110" y1="1520" x2="720" y2="1520" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="1550" x2="720" y2="1550" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="1580" x2="720" y2="1580" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="1610" x2="720" y2="1610" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="110" y1="1510" x2="110" y2="1640" stroke="#94A3B8" stroke-width="1.6"/>
+  <line x1="110" y1="1640" x2="720" y2="1640" stroke="#94A3B8" stroke-width="1.6"/>
+  <text x="100" y="1644" class="sm" text-anchor="end">0</text>
+  <text x="100" y="1614" class="sm" text-anchor="end">5</text>
+  <text x="100" y="1584" class="sm" text-anchor="end">10</text>
+  <text x="100" y="1554" class="sm" text-anchor="end">15</text>
+  <text x="100" y="1524" class="sm" text-anchor="end">20</text>
+  <!-- Europe -->
+  <rect x="167" y="1544" width="30" height="96" fill="#F59E6B"/>
+  <rect x="203" y="1556" width="30" height="84" fill="#F0D58B"/>
+  <text x="182" y="1538" class="sm cSlate" text-anchor="middle">16</text>
+  <text x="218" y="1550" class="sm cSlate" text-anchor="middle">14</text>
+  <!-- North America -->
+  <rect x="287" y="1604" width="30" height="36" fill="#F59E6B"/>
+  <rect x="323" y="1604" width="30" height="36" fill="#F0D58B"/>
+  <text x="302" y="1598" class="sm cSlate" text-anchor="middle">6</text>
+  <text x="338" y="1598" class="sm cSlate" text-anchor="middle">6</text>
+  <!-- Asia -->
+  <rect x="407" y="1622" width="30" height="18" fill="#F59E6B"/>
+  <rect x="443" y="1622" width="30" height="18" fill="#F0D58B"/>
+  <text x="422" y="1616" class="sm cSlate" text-anchor="middle">3</text>
+  <text x="458" y="1616" class="sm cSlate" text-anchor="middle">3</text>
+  <!-- Australia (summer only) -->
+  <rect x="527" y="1628" width="30" height="12" fill="#F59E6B"/>
+  <text x="542" y="1622" class="sm cSlate" text-anchor="middle">2</text>
+  <!-- South America (summer only) -->
+  <rect x="647" y="1634" width="30" height="6" fill="#F59E6B"/>
+  <text x="662" y="1628" class="sm cSlate" text-anchor="middle">1</text>
+  <!-- category labels -->
+  <text x="200" y="1658" class="sm" text-anchor="middle">Europe</text>
+  <text x="320" y="1658" class="sm" text-anchor="middle">N. America</text>
+  <text x="440" y="1658" class="sm" text-anchor="middle">Asia</text>
+  <text x="560" y="1658" class="sm" text-anchor="middle">Australia</text>
+  <text x="680" y="1658" class="sm" text-anchor="middle">S. America</text>
+  <!-- legend -->
+  <rect x="300" y="1676" width="14" height="14" fill="#F59E6B"/>
+  <text x="320" y="1688" class="sm">Summer games</text>
+  <rect x="460" y="1676" width="14" height="14" fill="#F0D58B"/>
+  <text x="480" y="1688" class="sm">Winter games</text>
+
+  <text x="40" y="1722" class="b">✅ <tspan class="bb">One picture, two stories:</tspan> Europe leads in BOTH seasons (which we already knew), AND — this is new — Europe hosts more</text>
+  <text x="40" y="1744" class="b">summer than winter games, while North America hosts an <tspan class="bb">equal number of each</tspan> (6 and 6). Reading the two bars together reveals it.</text>
+
+  <!-- ⑥ plain recap (lesson content) -->
+  <rect x="40" y="1782" width="1080" height="122" rx="12" fill="#ECFDF5" stroke="#86EFAC" stroke-width="1.4"/>
+  <text x="60" y="1808" class="ct cTeal">🎯 Bar vs pie — quick recap from this lesson</text>
+  <text x="60" y="1832" class="b">· Use a <tspan class="bb">bar graph</tspan> to compare sizes and rank categories — it handles many categories, easier reading, and side-by-side comparison.</text>
+  <text x="60" y="1856" class="b">· Use a <tspan class="bb">pie chart</tspan> to show each part's share of one whole (the parts must add to 100%); it is best with just a few slices.</text>
+  <text x="60" y="1880" class="b">· Both are built from the <tspan class="bb">same frequency table</tspan> — count first, then pick the chart that answers your question.</text>
+</svg>

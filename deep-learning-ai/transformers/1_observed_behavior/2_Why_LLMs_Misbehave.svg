@@ -1,0 +1,78 @@
+<svg width="1080" height="946" viewBox="0 0 1080 946" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 27px; font-weight: 800; fill: #0F172A; }
+    .ess { font-size: 16px; fill: #475569; }
+    .sec { font-size: 19px; font-weight: 800; fill: #0F172A; }
+    .b { font-size: 14.5px; fill: #334155; }
+    .bb { font-size: 14.5px; font-weight: 700; }
+    .sm { font-size: 13px; fill: #64748B; }
+    .big { font-size: 20px; font-weight: 800; }
+    .code { font-family: "SF Mono","Menlo","Consolas",monospace; font-size: 13px; fill: #0F172A; }
+    /* color classes LAST */
+    .w{fill:#fff} .wg{fill:#CBD5E1}
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#D97706} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+  </style>
+  <defs>
+    <marker id="t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1080" height="946" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">Why LLMs Misbehave 🤖💥 <tspan font-size="16" fill="#94A3B8">· autoregressive dynamics</tspan></text>
+  <text x="40" y="76" class="ess">Same loop as before — but with one brutal twist: <tspan class="cPink bb">there is no backtracking</tspan>. A single bad token can't be undone,</text>
+  <text x="40" y="98" class="ess">so it cascades into the failures you actually see in the wild.</text>
+  <line x1="40" y1="114" x2="1040" y2="114" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ① root cause -->
+  <text x="40" y="148" class="sec">⛓️ The root cause: one bad token → cascade (you can't take it back)</text>
+  <rect x="60" y="170" width="120" height="44" rx="9" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="120" y="197" class="b" text-anchor="middle">Token 1</text>
+  <line x1="180" y1="192" x2="216" y2="192" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <rect x="220" y="170" width="120" height="44" rx="9" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="280" y="197" class="b" text-anchor="middle">Token 2</text>
+  <line x1="340" y1="192" x2="376" y2="192" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <rect x="380" y="170" width="130" height="44" rx="9" fill="#FFE4E6" stroke="#E11D48" stroke-width="2"/>
+  <text x="445" y="197" class="bb cPink" text-anchor="middle">Token n  💥</text>
+  <line x1="510" y1="188" x2="624" y2="160" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <line x1="510" y1="194" x2="624" y2="194" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <line x1="510" y1="200" x2="624" y2="228" stroke="#0D9488" stroke-width="2.2" marker-end="url(#t)"/>
+  <text x="632" y="165" class="bb cPink">🌀 Hallucination</text>
+  <text x="632" y="199" class="bb cPink">🧭 Task drift</text>
+  <text x="632" y="233" class="bb cPink">🔁 Repetition</text>
+
+  <!-- ② failure gallery -->
+  <text x="40" y="282" class="sec">🖼️ The failure gallery (every one is "a low-prob token got picked, then snowballed")</text>
+  <text x="40" y="310" class="b">🌿 <tspan class="bb cGreen">Branching → task drift:</tspan> "Write a Python function" can start <tspan class="code">def</tspan> or <tspan class="code">import re</tspan> (both fine) — but if it samples</text>
+  <text x="40" y="332" class="b">　 <tspan class="code">function</tspan> (0.1%), it commits to <tspan class="bb">JavaScript</tspan> and can't switch back.</text>
+  <text x="40" y="360" class="b">🔢 <tspan class="bb cBlue">Math errors:</tspan> digits come out one at a time; one wrong digit (<tspan class="code">9109</tspan> vs <tspan class="code">9163.78</tspan>) dooms the rest → use a calculator/code tool.</text>
+  <text x="40" y="386" class="b">❄️ <tspan class="bb cPurple">Errors snowball:</tspan> "Is 9677 prime? → <tspan class="cPink bb">No</tspan>" (wrong) then it fabricates a fake factorization to stay consistent with its own mistake.</text>
+  <text x="40" y="412" class="b">🧠 <tspan class="bb cOrange">Lack-of-knowledge hallucination:</tspan> doesn't know a package → invents a "probable" name instead of saying "I don't know".</text>
+  <text x="40" y="434" class="b">　 Famous case: a hallucinated <tspan class="code">pip install huggingface-cli</tspan> got <tspan class="bb">30,000 downloads in 3 months</tspan>.</text>
+  <text x="40" y="462" class="b">📚 <tspan class="bb cAmber">Frequent-pattern default:</tspan> C→F is <tspan class="code">×9/5 + 32</tspan>; change it to <tspan class="code">×7/5 + 31</tspan> and the model STILL returns the common answer (wrong).</text>
+  <text x="40" y="488" class="b">🔁 <tspan class="bb cPink">Repetition loops:</tspan> self-reinforcing same-token loops — worse on older / smaller models.</text>
+
+  <!-- ③ punchline -->
+  <rect x="40" y="515" width="1000" height="56" rx="12" fill="#FFF1F2" stroke="#E11D48" stroke-width="1.6"/>
+  <text x="540" y="548" class="big cPink" text-anchor="middle">🎯 LLMs don't see truth — they see probability.  Likely token ≠ correct token.</text>
+
+  <!-- ⚡ mitigations -->
+  <text x="40" y="608" class="sec">⚡ What to actually do about it</text>
+  <text x="40" y="636" class="b">🛡️ <tspan class="bb">Ground it</tspan> (RAG) · give it <tspan class="bb">tools</tspan> (calculator/code for math) · <tspan class="bb">structured outputs</tspan> · let it <tspan class="bb">reason first</tspan> (CoT / reasoning models) ·</text>
+  <text x="40" y="658" class="b">　 <tspan class="bb">verify or ensemble</tspan> · and remember: post-training (RLHF/DPO) tries to make the most-likely token also the most-correct one.</text>
+
+  <!-- 📡 intel -->
+  <text x="40" y="698" class="sec">📡 2026 reality check</text>
+  <text x="40" y="726" class="b">📦 <tspan class="bb cPink">Slopsquatting</tspan> is a live supply-chain attack: attackers register <tspan class="bb">hallucinated package names</tspan> → ship malware. Jan 2026 a fake</text>
+  <text x="40" y="748" class="b">　 npm pkg spread to <tspan class="bb">237 repos</tspan> via AI agents. Pkg-hallucination: GPT ~5% vs open-source ~22% → <tspan class="cPink bb">ALWAYS verify AI-suggested packages</tspan>.</text>
+  <text x="40" y="776" class="b">📊 Broad hallucination runs <tspan class="bb">15–52%</tspan> across 37 models (2026). Prompt tweaks cut ~22 pts; ensembles catch 30–50%.</text>
+  <text x="40" y="802" class="b">　 ⚠️ Some <tspan class="bb">reasoning models hallucinate MORE</tspan> than older versions — depth ≠ accuracy.</text>
+
+  <!-- 🔑 insight -->
+  <rect x="40" y="834" width="1000" height="96" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="60" y="864" class="bb cBlue">🔑 The structural root is "no backtracking":</text>
+  <text x="60" y="886" class="b">it commits one token forever before seeing the consequences. That's exactly why <tspan class="bb">reasoning models "think" in scratch</tspan></text>
+  <text x="60" y="906" class="b"><tspan class="bb">tokens</tspan> (revise before committing the answer), and why <tspan class="bb">diffusion LLMs</tspan> — which CAN revise tokens — are an exciting alternative.</text>
+</svg>

@@ -1,0 +1,123 @@
+<svg width="900" height="1600" viewBox="0 0 900 1600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 29px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #666; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .code { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px; fill: #1B5E20; }
+    .big { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 20px; font-weight: 700; fill: #1B5E20; }
+    .cell { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 13px; fill: #333; }
+    .chip { fill: #E8F5E9; stroke: #A5D6A7; stroke-width: 1; }
+    .gridline { stroke: #aab4d4; stroke-width: 1; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; } .cR { fill: #C62828; } .cG { fill: #2E7D32; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="1600" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="50" class="title">021 · 逆矩阵的行列式 Determinant of an Inverse</text>
+  <text x="40" y="82" class="subtitle">一句话本质：撤销一个放大 5 倍的变形，必须缩小回 1/5 —— <tspan class="cO" font-weight="700">det(A⁻¹) = 1 / det(A)</tspan>。</text>
+  <text x="40" y="106" class="subtitle">由此再次坐实：det = 0 的矩阵没有逆（1/0 不存在）。det 三部曲在本课收官。</text>
+  <line x1="40" y1="124" x2="860" y2="124" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① det(I) -->
+  <text x="40" y="162" class="sec">① 🪞 先备好工具：det(I) = 1（单位矩阵 identity matrix）</text>
+  <rect x="60" y="180" width="68" height="68" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="94" y1="180" x2="94" y2="248" class="gridline"/>
+  <line x1="60" y1="214" x2="128" y2="214" class="gridline"/>
+  <text x="77" y="202" class="cell" text-anchor="middle" font-weight="700">1</text><text x="111" y="202" class="cell" text-anchor="middle" fill="#aaa">0</text>
+  <text x="77" y="236" class="cell" text-anchor="middle" fill="#aaa">0</text><text x="111" y="236" class="cell" text-anchor="middle" font-weight="700">1</text>
+  <rect x="170" y="194" width="380" height="28" rx="6" class="chip"/>
+  <text x="182" y="213" class="code">det(I) = 1·1 − 0·0 = <tspan class="cO" font-weight="700">1</tspan></text>
+  <text x="40" y="282" class="small">单位矩阵 I（identity matrix）= "什么都不做"的变形机（do-nothing machine）：</text>
+  <text x="40" y="308" class="small">每个点留在原地，面积倍数自然是 <tspan class="cO" font-weight="700">1</tspan>。它是矩阵世界的数字 1。</text>
+
+  <!-- ② formula -->
+  <text x="40" y="360" class="sec">② 📜 公式 The Formula</text>
+  <rect x="50" y="378" width="380" height="36" rx="6" class="chip"/>
+  <text x="62" y="403" class="big">det(A⁻¹) = 1 / det(A)</text>
+  <text x="40" y="442" class="small">A⁻¹（逆矩阵 inverse）是 A 的"撤销键 undo"。A 把面积放大几倍，A⁻¹ 就得缩回几分之一。</text>
+
+  <!-- ③ proof -->
+  <text x="40" y="494" class="sec">③ 🧾 证明 Proof（课件 "Why?" 页，三行推完）</text>
+  <rect x="50" y="510" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="529" class="code">① det(AB) = det(A)·det(B)　　　　<tspan fill="#7B1FA2"># 020 课的乘积公式</tspan></text>
+  <rect x="50" y="546" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="565" class="code">② 取 B = A⁻¹：det(A·A⁻¹) = det(A)·det(A⁻¹)</text>
+  <rect x="50" y="582" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="601" class="code">③ A·A⁻¹ = I，故左边 = det(I) = <tspan class="cO" font-weight="700">1</tspan> = det(A)·det(A⁻¹)</text>
+  <rect x="50" y="618" width="620" height="28" rx="6" class="chip"/>
+  <text x="62" y="637" class="code">∴ det(A⁻¹) = 1 / det(A)　∎</text>
+  <text x="40" y="672" class="small" font-weight="700" fill="#1565C0">全程只用了两件旧工具：乘积公式 + det(I)=1。好的数学就是旧零件拼出新结论。</text>
+
+  <!-- ④ examples -->
+  <text x="40" y="724" class="sec">④ 🧮 课件实例 Examples（含课内 Quiz 官方解）</text>
+
+  <!-- row 1 -->
+  <rect x="60" y="744" width="68" height="68" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="94" y1="744" x2="94" y2="812" class="gridline"/>
+  <line x1="60" y1="778" x2="128" y2="778" class="gridline"/>
+  <text x="77" y="766" class="cell" text-anchor="middle">3</text><text x="111" y="766" class="cell" text-anchor="middle">1</text>
+  <text x="77" y="800" class="cell" text-anchor="middle">1</text><text x="111" y="800" class="cell" text-anchor="middle">2</text>
+  <text x="146" y="782" class="small" font-weight="700">⁻¹ =</text>
+  <rect x="190" y="744" width="112" height="68" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="246" y1="744" x2="246" y2="812" class="gridline"/>
+  <line x1="190" y1="778" x2="302" y2="778" class="gridline"/>
+  <text x="218" y="766" class="cell" text-anchor="middle">0.4</text><text x="274" y="766" class="cell" text-anchor="middle">-0.2</text>
+  <text x="218" y="800" class="cell" text-anchor="middle">-0.2</text><text x="274" y="800" class="cell" text-anchor="middle">0.6</text>
+  <text x="94" y="834" class="tiny" text-anchor="middle" font-weight="700" fill="#EF6C00">det = 5</text>
+  <text x="246" y="834" class="tiny" text-anchor="middle" font-weight="700" fill="#EF6C00">det = 0.2 = 1/5</text>
+  <rect x="340" y="758" width="510" height="28" rx="6" class="chip"/>
+  <text x="352" y="777" class="code">验算：0.4×0.6 − (−0.2)(−0.2) = 0.24 − 0.04 = <tspan class="cO" font-weight="700">0.2</tspan> ✅</text>
+
+  <!-- row 2 -->
+  <rect x="60" y="872" width="68" height="68" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="94" y1="872" x2="94" y2="940" class="gridline"/>
+  <line x1="60" y1="906" x2="128" y2="906" class="gridline"/>
+  <text x="77" y="894" class="cell" text-anchor="middle">5</text><text x="111" y="894" class="cell" text-anchor="middle">2</text>
+  <text x="77" y="928" class="cell" text-anchor="middle">1</text><text x="111" y="928" class="cell" text-anchor="middle">2</text>
+  <text x="146" y="910" class="small" font-weight="700">⁻¹ =</text>
+  <rect x="190" y="872" width="120" height="68" fill="#E3F2FD" stroke="#aab4d4" stroke-width="1.2"/>
+  <line x1="250" y1="872" x2="250" y2="940" class="gridline"/>
+  <line x1="190" y1="906" x2="310" y2="906" class="gridline"/>
+  <text x="220" y="894" class="cell" text-anchor="middle">0.25</text><text x="280" y="894" class="cell" text-anchor="middle">-0.25</text>
+  <text x="220" y="928" class="cell" text-anchor="middle">-0.125</text><text x="280" y="928" class="cell" text-anchor="middle">0.625</text>
+  <text x="94" y="962" class="tiny" text-anchor="middle" font-weight="700" fill="#EF6C00">det = 8</text>
+  <text x="250" y="962" class="tiny" text-anchor="middle" font-weight="700" fill="#EF6C00">det = 0.125 = 1/8</text>
+  <rect x="340" y="886" width="520" height="28" rx="6" class="chip"/>
+  <text x="352" y="905" class="code" font-size="13">0.25×0.625 − (−0.125)(−0.25) = 0.15625 − 0.03125 = <tspan class="cO" font-weight="700">0.125</tspan> ✅</text>
+
+  <!-- row 3: singular -->
+  <text x="40" y="1010" class="small">第三个例子：<tspan class="code" font-weight="700">[1 2; 1 2]⁻¹ = ???</tspan>　det = 0，套公式需要 det(A⁻¹) = 1/0 ——</text>
+  <text x="40" y="1036" class="small" font-weight="700" fill="#C62828">不存在 undefined。奇异矩阵（singular matrix）没有逆，本课用 det 语言再次坐实。</text>
+
+  <!-- 💡 insights -->
+  <text x="40" y="1088" class="sec">💡 补充洞察（课程没明说）</text>
+  <text x="40" y="1118" class="small">💡 黄金类比闭环：早先说"det 是矩阵那个不能为零的数"（数字 a≠0 才有 1/a）只是类比，</text>
+  <text x="40" y="1140" class="small">　 今天它升级为定理：det(A⁻¹) = 1/det(A)，分母不许为 0 ⇒ det = 0 ⇔ 没有逆。全剧贯通。</text>
+  <text x="40" y="1170" class="small">💡 面积直觉：正反两台变形机的面积倍数互为倒数 reciprocal —— ×5 的撤销键必须是 ×0.2，</text>
+  <text x="40" y="1192" class="small">　 两次连用回到 ×1（即 det(I)）。公式根本不用背。</text>
+
+  <!-- ⚠️ pitfalls -->
+  <text x="40" y="1244" class="sec">⚠️ 易错点</text>
+  <text x="40" y="1274" class="small" fill="#C62828">· A⁻¹ 不是"各元素取倒数"：[3 1; 1 2]⁻¹ = [0.4 -0.2; -0.2 0.6]，不是 [1/3 1; 1 1/2]。</text>
+  <text x="40" y="1300" class="small" fill="#C62828">· det(A⁻¹) 是倒数 reciprocal（1/det A），不是相反数 negative（−det A），别混。</text>
+  <text x="40" y="1326" class="small" fill="#C62828">· 0⁻¹ = ??? 的答案不是 0，而是"不存在 undefined"—— 这个问题本身就没有答案。</text>
+
+  <!-- 🔗 connection -->
+  <text x="40" y="1378" class="sec">🔗 承上启下</text>
+  <text x="40" y="1406" class="small">· det 三部曲合龙：019 面积 → 020 串联连乘 → 021 撤销取倒数。一条"面积倍数"直觉贯穿到底。</text>
+  <text x="40" y="1430" class="small" font-weight="700" fill="#1565C0">· "七把钥匙"中 det ≠ 0 ⇔ 可逆 invertible 这一把，今天拿到了正式证明。下一站：怎么求 A⁻¹。</text>
+
+  <line x1="40" y1="1448" x2="860" y2="1448" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="1466" class="tiny" fill="#888" font-size="12">速记：det(I) = 1；det(A⁻¹) = 1/det(A)（撤销 = 倒数）；det = 0 ⇒ 1/0 不存在 ⇒ 没有逆。证明只需乘积公式 + det(I)=1。</text>
+
+  <!-- 🧪 quiz -->
+  <text x="40" y="1496" class="sec" font-size="17">🧪 自测（先答后看最底部灰字）</text>
+  <text x="40" y="1520" class="small">Q1 概念：det(I) 等于多少？从几何上说为什么必然如此？</text>
+  <text x="40" y="1544" class="small">Q2 计算：若 det(A) = 4，det(A⁻¹) = ?</text>
+  <text x="40" y="1568" class="small">Q3 为什么：用本课公式解释，奇异矩阵为什么没有逆？</text>
+  <text x="40" y="1592" class="tiny" fill="#aaa" font-size="11">A1：1 —— I 什么都不做，面积倍数只能是 1。　A2：1/4 = 0.25。　A3：det(A⁻¹) = 1/det(A) = 1/0，不存在，所以 A⁻¹ 不存在。</text>
+</svg>

@@ -1,0 +1,152 @@
+<svg width="1100" height="1900" viewBox="0 0 1100 1900" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; }
+    .title { font-size: 27px; font-weight: 700; fill: #1a1a1a; }
+    .subtitle { font-size: 16px; fill: #555; }
+    .sec { font-size: 19px; font-weight: 700; fill: #1a1a1a; }
+    .ctitle { font-size: 16px; font-weight: 700; }
+    .small { font-size: 14px; fill: #444; }
+    .tiny { font-size: 13px; fill: #555; }
+    .cell { font-size: 14px; font-weight: 700; }
+    .en { font-style: italic; }
+    /* color classes LAST */
+    .w { fill: #fff; } .wg { fill: #CFD8DC; }
+    .cV { fill: #1565C0; } .cT { fill: #00897B; } .cO { fill: #EF6C00; } .cP { fill: #8E24AA; }
+    .cR { fill: #C62828; } .cG { fill: #2E7D32; } .cm { fill: #7B1FA2; } .cGray { fill: #888; }
+  </style>
+
+  <rect x="0" y="0" width="1100" height="1900" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="40" y="46" class="title">可观测性与评估 🔭 <tspan font-size="17" fill="#666" class="en">Observability &amp; Evaluation</tspan></text>
+  <text x="40" y="76" class="subtitle">一句话本质：应对生产难题的第一步，是搭一套<tspan class="cR" font-weight="700">能"看见"系统的评估体系</tspan> —— 既测性能，也测质量。</text>
+  <text x="40" y="100" class="subtitle">核心思维工具：用 <tspan class="cV" font-weight="700">范围 Scope</tspan> × <tspan class="cP" font-weight="700">评估方式 Evaluator Type</tspan> 组成一张网格，每个评估指标都落在其中一格。</text>
+  <line x1="40" y1="118" x2="1060" y2="118" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- ① two metric families -->
+  <text x="40" y="152" class="sec">① 📊 要追踪的两类指标 <tspan class="en">Key Metrics</tspan></text>
+  <rect x="40" y="170" width="500" height="92" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="196" class="ctitle cV">🖥️ 软件性能指标 Software Performance</text>
+  <text x="60" y="222" class="small">延迟 latency、吞吐 throughput、内存 memory、算力 compute。</text>
+  <text x="60" y="246" class="small cGray">→ 系统处理多少请求、要多久、耗多少资源。</text>
+
+  <rect x="560" y="170" width="500" height="92" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="580" y="196" class="ctitle cG">⭐ 质量指标 Quality Metrics</text>
+  <text x="580" y="222" class="small">从<tspan font-weight="700">用户满意度</tspan>到<tspan font-weight="700">检索器召回 recall</tspan>等。</text>
+  <text x="580" y="246" class="small cGray">→ 不只跑得快/省，还要结果达到你设的质量标准。</text>
+
+  <!-- ② how to track -->
+  <text x="40" y="298" class="sec">② 🛠️ 怎么收集与上报 <tspan class="en">How to Track</tspan></text>
+  <rect x="40" y="316" width="320" height="96" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="60" y="340" class="ctitle cO">📈 聚合统计</text>
+  <text x="60" y="364" class="tiny">Aggregate Statistics：看长期</text>
+  <text x="60" y="384" class="tiny">趋势、快速发现<tspan font-weight="700">回归 regression</tspan>。</text>
+
+  <rect x="380" y="316" width="320" height="96" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="400" y="340" class="ctitle cO">📝 详细日志</text>
+  <text x="400" y="364" class="tiny">Detailed Logs：追踪单条 prompt</text>
+  <text x="400" y="384" class="tiny">走完整管线（<tspan font-weight="700">定位差回答根因</tspan>）。</text>
+
+  <rect x="720" y="316" width="340" height="96" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.2"/>
+  <text x="740" y="340" class="ctitle cO">🧪 实验</text>
+  <text x="740" y="364" class="tiny">Experimentation：换模型/改提示/调</text>
+  <text x="740" y="384" class="tiny">检索器前，先安全实验或<tspan font-weight="700">A/B 测试</tspan>。</text>
+
+  <!-- ③ THE GRID -->
+  <text x="40" y="450" class="sec">③ ⭐ 核心框架：范围 × 评估方式 网格（每个指标都住进一格）</text>
+  <text x="40" y="478" class="small"><tspan class="cV" font-weight="700">范围 Scope：</tspan>评的是某个<tspan font-weight="700">组件 Component</tspan> 还是<tspan font-weight="700">整个系统 System</tspan>　|　<tspan class="cP" font-weight="700">评估方式：</tspan>代码 / LLM 当裁判 / 人工反馈。</text>
+
+  <!-- column headers -->
+  <text x="305" y="512" class="cell cG" text-anchor="middle">💻 代码 Code-Based</text>
+  <text x="305" y="530" class="tiny cGray" text-anchor="middle">便宜·确定·自动</text>
+  <text x="610" y="512" class="cell cV" text-anchor="middle">🤖 LLM 当裁判 LLM-as-judge</text>
+  <text x="610" y="530" class="tiny cGray" text-anchor="middle">成本与灵活的折中</text>
+  <text x="915" y="512" class="cell cO" text-anchor="middle">🙋 人工反馈 Human</text>
+  <text x="915" y="530" class="tiny cGray" text-anchor="middle">最贵·抓代码漏掉的</text>
+
+  <!-- row1 Component -->
+  <text x="100" y="578" class="cell" text-anchor="middle">🧩 组件级</text>
+  <text x="100" y="596" class="tiny cGray" text-anchor="middle">Component</text>
+  <rect x="160" y="548" width="290" height="56" rx="9" fill="#EF5350"/>
+  <text x="305" y="582" class="cell w" text-anchor="middle">检索器延迟 Retriever Latency</text>
+  <rect x="465" y="548" width="290" height="56" rx="9" fill="#EF5350"/>
+  <text x="610" y="582" class="cell w" text-anchor="middle">上下文质量 Context quality</text>
+  <rect x="770" y="548" width="290" height="56" rx="9" fill="#EF5350"/>
+  <text x="915" y="575" class="cell w" text-anchor="middle">检索文档相关性</text>
+  <text x="915" y="593" class="tiny w" text-anchor="middle">Retrieved Doc Relevance</text>
+
+  <!-- row2 System -->
+  <text x="100" y="654" class="cell" text-anchor="middle">🌐 系统级</text>
+  <text x="100" y="672" class="tiny cGray" text-anchor="middle">System</text>
+  <rect x="160" y="624" width="290" height="56" rx="9" fill="#EF5350"/>
+  <text x="305" y="658" class="cell w" text-anchor="middle">Token 用量 Token Usage</text>
+  <rect x="465" y="624" width="290" height="56" rx="9" fill="#EF5350"/>
+  <text x="610" y="658" class="cell w" text-anchor="middle">引用准确性 Citation Accuracy</text>
+  <rect x="770" y="624" width="290" height="56" rx="9" fill="#EF5350"/>
+  <text x="915" y="658" class="cell w" text-anchor="middle">点赞 / 踩 Thumbs Up / Down</text>
+
+  <text x="40" y="708" class="small cGray">读法：左→右 越来越贵越灵活；上→下 从"零件"到"整机"。任何一个评估指标，都能在这 6 格里找到位置。</text>
+
+  <!-- ④ scope detail -->
+  <text x="40" y="748" class="sec">④ 🔍 范围详解：System 看"是什么"，Component 看"在哪里 / 为什么"</text>
+  <rect x="40" y="766" width="1020" height="58" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="790" class="small"><tspan class="cV" font-weight="700">🌐 系统级 System：</tspan>端到端整体表现，告诉你<tspan font-weight="700">"存在什么问题"</tspan>（例：整机延迟太高）。</text>
+  <text x="60" y="812" class="small">但要定位根因，得靠组件级评估。</text>
+  <rect x="40" y="832" width="1020" height="58" rx="10" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.2"/>
+  <text x="60" y="856" class="small"><tspan class="cP" font-weight="700">🧩 组件级 Component：</tspan>盯 RAG 的各个零件，告诉你问题出<tspan font-weight="700">"在哪里、为什么"</tspan>。</text>
+  <text x="60" y="878" class="small">例：整机延迟高 → 查"检索器单独的延迟"，才知是检索器、LLM 还是别的部件拖慢。</text>
+
+  <!-- ⑤ three evaluator types -->
+  <text x="40" y="930" class="sec">⑤ ⚖️ 三种评估方式详解（成本 ↔ 灵活度光谱）</text>
+  <rect x="40" y="948" width="320" height="150" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="60" y="974" class="ctitle cG">💻 代码评估 Code-Based</text>
+  <text x="60" y="1000" class="tiny">· 最便宜、最简单、确定性、可自动。</text>
+  <text x="60" y="1022" class="tiny">· 例：每秒处理 prompt 数；</text>
+  <text x="60" y="1042" class="tiny">　单元测试验证 LLM 输出是合法 JSON。</text>
+  <text x="60" y="1066" class="tiny cG" font-weight="700">· 近乎免费、结果可复现。</text>
+  <text x="60" y="1088" class="tiny cGray">适合：延迟、吞吐、Token 等硬指标。</text>
+
+  <rect x="380" y="948" width="320" height="150" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="400" y="974" class="ctitle cV">🤖 LLM 当裁判 LLM-judge</text>
+  <text x="400" y="1000" class="tiny">· 用一个 LLM 给系统表现打分。</text>
+  <text x="400" y="1022" class="tiny">· 能判断"检索文档是否切题"。</text>
+  <text x="400" y="1042" class="tiny">· 比代码灵活、比人工便宜。</text>
+  <text x="400" y="1066" class="tiny cR" font-weight="700">⚠️ 需清晰评分标准 rubric；</text>
+  <text x="400" y="1088" class="tiny cR">　用"相关/不相关"离散标签优于 0–100 分。</text>
+
+  <rect x="720" y="948" width="340" height="150" rx="10" fill="#FFF3E0" stroke="#FFB74D" stroke-width="1.2"/>
+  <text x="740" y="974" class="ctitle cO">🙋 人工反馈 Human</text>
+  <text x="740" y="1000" class="tiny">· 最贵，但能<tspan font-weight="700">抓住代码漏掉的</tspan>。</text>
+  <text x="740" y="1022" class="tiny">· 点赞/踩、文字反馈。</text>
+  <text x="740" y="1042" class="tiny">· 人工预编译测试集 → 之后可快速</text>
+  <text x="740" y="1062" class="tiny">　算召回 recall / 精确率 precision。</text>
+  <text x="740" y="1086" class="tiny cGray">注：测试集最初仍需人来编。</text>
+
+  <!-- ⑥ putting it together -->
+  <text x="40" y="1148" class="sec">⑥ 🧰 综合落地：一套"够用又全面"的起步指标</text>
+  <text x="40" y="1176" class="small">思路：对<tspan font-weight="700">每个主要组件</tspan>和<tspan font-weight="700">整个系统</tspan>，都同时收"性能"和"质量"两类指标，兼顾便宜与昂贵的评估。</text>
+  <rect x="40" y="1192" width="500" height="110" rx="10" fill="#fff" stroke="#90CAF9" stroke-width="1.2"/>
+  <text x="60" y="1216" class="ctitle cV">性能指标（代码评估，便宜易收）</text>
+  <text x="60" y="1240" class="small">延迟 Latency、吞吐 Throughput、</text>
+  <text x="60" y="1262" class="small">内存 Memory、每秒 Token 数。</text>
+  <text x="60" y="1286" class="tiny cGray">组件级和系统级都能直接采集。</text>
+
+  <rect x="560" y="1192" width="500" height="110" rx="10" fill="#fff" stroke="#A5D6A7" stroke-width="1.2"/>
+  <text x="580" y="1216" class="ctitle cG">质量指标（人工 / LLM 评估）</text>
+  <text x="580" y="1240" class="small">· 系统级：用户<tspan font-weight="700">点赞/踩</tspan> → 总体回答质量。</text>
+  <text x="580" y="1262" class="small">· 检索器：<tspan font-weight="700">人工标注集</tspan> → 算 recall / precision。</text>
+  <text x="580" y="1284" class="small">· LLM：用 <tspan font-weight="700">RAGAS</tspan> → 回答相关性、引用质量、抗噪。</text>
+
+  <!-- 📡 2026 intel -->
+  <text x="40" y="1352" class="sec">📡 2026 最新情报（已联网核实 · 截至 2026-06）</text>
+
+  <text x="40" y="1380" class="small">· <tspan class="cR" font-weight="700">🤖 LLM 当裁判的"偏差"已是 2026 评估第一大坑（课件只点到"有偏差"，这里补全）：</tspan>四类系统性偏差 ——<tspan x="60" dy="24"><tspan font-weight="700">① 位置偏差</tspan>（偏向先出现的答案）、<tspan font-weight="700">② 啰嗦偏差</tspan>（把"更长"当"更好"，实测虚高 15–30 分）、</tspan><tspan x="60" dy="24"><tspan font-weight="700">③ 自我偏好</tspan>（给自家模型打高分）、<tspan font-weight="700">④ 同门偏差</tspan>（偏向同厂商模型）。</tspan></text>
+
+  <text x="40" y="1480" class="small">· <tspan class="cG" font-weight="700">缓解三件套（生产里非可选）：</tspan>位置 → 两种顺序各评一次取平均；啰嗦 → 评分标准明写"别偏好更长"<tspan x="60" dy="24">+ 长度归一化；自我偏好 → 用"跨厂商"的裁判模型。RAND 2026-03 的 Judge Reliability Harness 实测结论：</tspan><tspan x="60" dy="24"><tspan class="cR" font-weight="700">没有任何一个裁判模型是全面可靠的</tspan> —— 所以裁判本身也要被评估、被校准。</tspan></text>
+
+  <text x="40" y="1580" class="small">· <tspan class="cV" font-weight="700">🧰 2026 主流评估/可观测工具栈（对应本课"怎么收集"）：</tspan><tspan font-weight="700">RAGAS</tspan>（免参考答案评 RAG，月下载 40 万+，<tspan x="60" dy="24">四指标：上下文精度/召回、忠实度 faithfulness、回答相关性）；<tspan font-weight="700">Arize Phoenix</tspan>（开源、自带 50+ 指标）；</tspan><tspan x="60" dy="24"><tspan font-weight="700">Langfuse</tspan>（生产监控）；<tspan font-weight="700">LangSmith</tspan>（端到端追踪 + 评测）。底层标准正收敛到 <tspan font-weight="700">OpenTelemetry GenAI</tspan> —— </tspan><tspan x="60" dy="24">"插一次桩，到处导出 trace"，可观测性正从"厂商工具"变成"基础设施"。</tspan></text>
+
+  <text x="40" y="1716" class="small cV" font-weight="700">一句话：本课的网格（范围 × 方式）就是 2026 LLMOps 的骨架；新增的只是"裁判也会骗你"这层警惕，<tspan x="40" dy="24">以及把追踪标准统一到 OpenTelemetry。框架没变，工具更成熟、对偏差更警觉了。</tspan></text>
+
+  <text x="40" y="1788" class="small cGray">🧪 个人补充（非课件）：这张"范围 × 方式"网格，本质就是你前端测试金字塔的 AI 版 —— <tspan x="40" dy="24"><tspan font-weight="700">代码评估 ≈ 单元测试</tspan>（快、确定、近乎免费），<tspan font-weight="700">LLM 当裁判 ≈ 集成测试</tspan>（灵活但要校准），</tspan><tspan x="40" dy="24"><tspan font-weight="700">人工反馈 ≈ 真实用户验收</tspan>（最贵但最真）。区别只在：被测对象从"确定的返回值"变成了"概率性的生成内容"，</tspan><tspan x="40" dy="24">所以多了一层"评估裁判本身"的元评估（meta-eval）。这正是 RAG 工程比传统后端更微妙的地方。</tspan></text>
+</svg>
