@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="3241" viewBox="0 0 1120 3241" font-family="'Helvetica Neue',Arial,sans-serif">
+  <style>
+    text{font-family:'Helvetica Neue',Arial,sans-serif}
+    .mono{font-family:'DejaVu Sans Mono','Menlo',monospace}
+    .cBlue{fill:#2563EB}.cTeal{fill:#0D9488}.cOrange{fill:#EA580C}.cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48}.cGreen{fill:#16A34A}.cAmber{fill:#B45309}.cSlate{fill:#334155}
+    .cGray{fill:#94A3B8}.cCode{fill:#6D28D9}
+  </style>
+  <defs>
+    <marker id="arr" markerWidth="11" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrO" markerWidth="11" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#EA580C"/>
+    </marker>
+  </defs>
+
+  <!-- WHITE BACKGROUND FIRST -->
+  <rect x="0" y="0" width="1120" height="3241" fill="#FFFFFF"/>
+
+  <!-- ================= TITLE ================= -->
+  <text x="560" y="52" text-anchor="middle" font-size="27" font-weight="700" class="cPink" xml:space="preserve">A2A: The Agent2Agent Protocol</text>
+  <text x="560" y="86" text-anchor="middle" font-size="18" font-weight="600" class="cSlate" xml:space="preserve">A2A Architecture — discovery, communication, and the agent life cycle</text>
+
+  <!-- ================= ESSENCE ================= -->
+  <rect x="30" y="120" width="1060" height="79" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.4"/>
+  <text x="54" y="150" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cBlue">Essence:</tspan> <tspan font-weight="700" class="cBlue">A2A</tspan> is a shared language that lets any agent — built with <tspan font-weight="700" class="cBlue">any framework</tspan> —</text>
+  <text x="54" y="175" font-size="15" class="cSlate" xml:space="preserve">wrap itself as an A2A agent and work with any other A2A agent over <tspan font-weight="700" class="cBlue">standard web tech</tspan>.</text>
+
+  <!-- ================= S1: COMMON LANGUAGE ================= -->
+  <text x="30" y="234" font-size="19" font-weight="700" class="cTeal" xml:space="preserve">🌐 A common language for agents</text>
+  <rect x="30" y="248" width="1060" height="179" rx="12" fill="#ECFDF5" stroke="#0D9488" stroke-width="1.4"/>
+  <text x="54" y="278" font-size="15" class="cSlate" xml:space="preserve">A2A hides the messy details of agent workflows behind one <tspan font-weight="700" class="cTeal">shared language</tspan>: standardized</text>
+  <text x="54" y="303" font-size="15" class="cSlate" xml:space="preserve">data structures and methods for talking to the outside world.</text>
+  <text x="54" y="328" font-size="15" class="cSlate" xml:space="preserve">It runs on <tspan font-weight="700" class="cTeal">standard web technology</tspan>, so independent systems can talk over:</text>
+  <text x="54" y="353" font-size="15" class="cCode mono" xml:space="preserve">HTTP  ·  JSON-RPC  ·  gRPC  ·  Server-Sent Events (SSE)</text>
+  <text x="54" y="378" font-size="15" class="cSlate" xml:space="preserve">Build an agent in any framework, then <tspan font-weight="700" class="cTeal">wrap it as an A2A agent</tspan> — now it works</text>
+  <text x="54" y="403" font-size="15" class="cSlate" xml:space="preserve">with every other A2A agent, no custom glue code needed.</text>
+
+  <!-- ================= S2: SIMPLE SYSTEM ================= -->
+  <text x="30" y="462" font-size="19" font-weight="700" class="cBlue" xml:space="preserve">🤝 The simple system: Agent A asks Agent B</text>
+  <rect x="30" y="476" width="1060" height="228" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.4"/>
+  <text x="54" y="506" font-size="15" class="cSlate" xml:space="preserve">We build a small system where <tspan font-weight="700" class="cBlue">Agent A</tspan> needs <tspan font-weight="700" class="cBlue">Agent B</tspan> to do something.</text>
+  <text x="54" y="531" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cBlue">Agent A</tspan> is the <tspan font-weight="700" class="cBlue">client agent</tspan> — it makes the request and usually talks to the end user.</text>
+  <text x="54" y="556" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cBlue">Agent B</tspan> is the <tspan font-weight="700" class="cBlue">remote agent</tspan> (the A2A server) — it does the actual work.</text>
+  <!-- figure: two boxes + arrow -->
+  <rect x="120" y="600" width="300" height="86" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.6"/>
+  <text x="270" y="637" text-anchor="middle" font-size="16" font-weight="700" class="cBlue" xml:space="preserve">Agent A</text>
+  <text x="270" y="662" text-anchor="middle" font-size="14" class="cSlate" xml:space="preserve">Client agent</text>
+  <rect x="700" y="600" width="300" height="86" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.6"/>
+  <text x="850" y="637" text-anchor="middle" font-size="16" font-weight="700" class="cBlue" xml:space="preserve">Agent B</text>
+  <text x="850" y="662" text-anchor="middle" font-size="14" class="cSlate" xml:space="preserve">Remote agent (A2A server)</text>
+  <text x="560" y="628" text-anchor="middle" font-size="13" class="cSlate" xml:space="preserve">sends a request</text>
+  <line x1="420" y1="648" x2="694" y2="648" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ================= S3: AGENT CARD ================= -->
+  <text x="30" y="739" font-size="19" font-weight="700" class="cPurple" xml:space="preserve">🪪 Discovery: the Agent Card</text>
+  <rect x="30" y="753" width="1060" height="401" rx="12" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.4"/>
+  <text x="54" y="783" font-size="15" class="cSlate" xml:space="preserve">How does Agent A find Agent B and learn what it can do? Every A2A agent publishes an</text>
+  <text x="54" y="808" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPurple">Agent Card</tspan> — a JSON file, usually hosted at a well-known URL:</text>
+  <text x="54" y="833" font-size="15" class="cCode mono" xml:space="preserve">/.well-known/agent-card.json</text>
+  <text x="54" y="858" font-size="15" class="cSlate" xml:space="preserve">It is the agent's <tspan font-weight="700" class="cPurple">digital business card</tspan> — like robots.txt for web crawlers, or a</text>
+  <text x="54" y="883" font-size="15" class="cSlate" xml:space="preserve">Swagger / OpenAPI definition for REST APIs, but made for agent capabilities.</text>
+  <text x="54" y="908" font-size="15" class="cSlate" xml:space="preserve">Agent B's card tells Agent A everything needed to start a conversation:</text>
+  <!-- figure: card contents box -->
+  <rect x="90" y="938" width="920" height="192" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.4"/>
+  <text x="114" y="968" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPurple">•</tspan>  Name and what the agent can do</text>
+  <text x="114" y="995" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPurple">•</tspan>  Which protocol version it uses</text>
+  <text x="114" y="1022" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPurple">•</tspan>  The URI and protocol bindings, plus supported media types</text>
+  <text x="114" y="1049" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPurple">•</tspan>  Special capabilities: streaming, push notifications, custom extensions</text>
+  <text x="114" y="1076" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPurple">•</tspan>  How to authenticate</text>
+  <text x="114" y="1103" font-size="13" class="cGray" xml:space="preserve">(For this course we assume we already know each agent's URL.)</text>
+
+  <!-- ================= S4: HOW THEY TALK ================= -->
+  <text x="30" y="1189" font-size="19" font-weight="700" class="cAmber" xml:space="preserve">🔌 How they actually talk</text>
+  <rect x="30" y="1203" width="1060" height="104" rx="12" fill="#FFFBEB" stroke="#B45309" stroke-width="1.4"/>
+  <text x="54" y="1233" font-size="15" class="cSlate" xml:space="preserve">The card names the <tspan font-weight="700" class="cAmber">URI</tspan> and <tspan font-weight="700" class="cAmber">protocol bindings</tspan> to use. Agent A sends requests to</text>
+  <text x="54" y="1258" font-size="15" class="cSlate" xml:space="preserve">that URI over whichever binding Agent B supports. A2A allows three bindings:</text>
+  <text x="54" y="1283" font-size="15" class="cCode mono" xml:space="preserve">JSON-RPC  ·  gRPC  ·  HTTP JSON (REST-like)</text>
+
+  <!-- ================= S5: EXECUTION MODES ================= -->
+  <text x="30" y="1342" font-size="19" font-weight="700" class="cBlue" xml:space="preserve">⚙️ Four execution modes</text>
+  <rect x="30" y="1356" width="1060" height="228" rx="12" fill="#F8FAFC" stroke="#334155" stroke-width="1.4"/>
+  <text x="54" y="1386" font-size="15" class="cSlate" xml:space="preserve">Agent A and Agent B can communicate in <tspan font-weight="700" class="cSlate">four execution modes</tspan>:</text>
+  <!-- four cards -->
+  <rect x="54" y="1410" width="240" height="150" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.4"/>
+  <text x="174" y="1444" text-anchor="middle" font-size="15" font-weight="700" class="cBlue" xml:space="preserve">Synchronous</text>
+  <text x="72" y="1475" font-size="13" class="cSlate" xml:space="preserve">Wait for an</text>
+  <text x="72" y="1498" font-size="13" class="cSlate" xml:space="preserve">immediate reply</text>
+
+  <rect x="312" y="1410" width="240" height="150" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.4"/>
+  <text x="432" y="1444" text-anchor="middle" font-size="15" font-weight="700" class="cOrange" xml:space="preserve">Asynchronous</text>
+  <text x="330" y="1475" font-size="13" class="cSlate" xml:space="preserve">Proceed without</text>
+  <text x="330" y="1498" font-size="13" class="cSlate" xml:space="preserve">blocking for a reply</text>
+
+  <rect x="570" y="1410" width="240" height="150" rx="10" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.4"/>
+  <text x="690" y="1444" text-anchor="middle" font-size="15" font-weight="700" class="cPurple" xml:space="preserve">Streaming</text>
+  <text x="588" y="1475" font-size="13" class="cSlate" xml:space="preserve">Send a continuous</text>
+  <text x="588" y="1498" font-size="13" class="cSlate" xml:space="preserve">data flow</text>
+
+  <rect x="828" y="1410" width="238" height="150" rx="10" fill="#FEF2F4" stroke="#E11D48" stroke-width="1.4"/>
+  <text x="947" y="1436" text-anchor="middle" font-size="15" font-weight="700" class="cPink" xml:space="preserve">Push</text>
+  <text x="947" y="1457" text-anchor="middle" font-size="15" font-weight="700" class="cPink" xml:space="preserve">Notifications</text>
+  <text x="846" y="1487" font-size="13" class="cSlate" xml:space="preserve">Alert when a</text>
+  <text x="846" y="1510" font-size="13" class="cSlate" xml:space="preserve">specific event occurs</text>
+
+  <!-- ================= S6: SYNCHRONOUS MESSAGE ================= -->
+  <text x="30" y="1619" font-size="19" font-weight="700" class="cGreen" xml:space="preserve">① Synchronous: the Message object</text>
+  <rect x="30" y="1633" width="1060" height="234" rx="12" fill="#ECFDF5" stroke="#16A34A" stroke-width="1.4"/>
+  <text x="54" y="1663" font-size="15" class="cSlate" xml:space="preserve">To begin, Agent A sends a <tspan font-weight="700" class="cGreen">Message</tspan> wrapped in a send-message request, using the</text>
+  <text x="54" y="1688" font-size="15" class="cSlate" xml:space="preserve"><tspan class="cCode mono">message/send</tspan> method. A Message is one turn in the conversation — like Agent A</text>
+  <text x="54" y="1713" font-size="15" class="cSlate" xml:space="preserve">asking a question. It carries two things:</text>
+  <!-- two sub boxes -->
+  <rect x="90" y="1735" width="440" height="78" rx="10" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.4"/>
+  <text x="112" y="1767" font-size="15" font-weight="700" class="cGreen" xml:space="preserve">Role</text>
+  <text x="112" y="1792" font-size="14" class="cSlate" xml:space="preserve">who is speaking — user or agent</text>
+  <rect x="570" y="1735" width="440" height="78" rx="10" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.4"/>
+  <text x="592" y="1767" font-size="15" font-weight="700" class="cGreen" xml:space="preserve">Parts</text>
+  <text x="592" y="1792" font-size="14" class="cSlate" xml:space="preserve">the content: text, a file, multimodal data, or JSON</text>
+  <text x="54" y="1843" font-size="15" class="cSlate" xml:space="preserve">If the request is simple and finishes fast, Agent B just replies with a Message.</text>
+
+  <!-- ================= S7: ASYNCHRONOUS TASK ================= -->
+  <text x="30" y="1902" font-size="19" font-weight="700" class="cOrange" xml:space="preserve">② Asynchronous: the Task object</text>
+  <rect x="30" y="1916" width="1060" height="383" rx="12" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.4"/>
+  <text x="54" y="1946" font-size="15" class="cSlate" xml:space="preserve">For a bigger or slower request, we do not want to block Agent A. Instead of a Message,</text>
+  <text x="54" y="1971" font-size="15" class="cSlate" xml:space="preserve">Agent B replies with a <tspan font-weight="700" class="cOrange">Task</tspan> — the job it needs to do. A Task has an <tspan font-weight="700" class="cOrange">ID</tspan>, a</text>
+  <text x="54" y="1996" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cOrange">context ID</tspan> that links it back to the message, and a <tspan font-weight="700" class="cOrange">Status</tspan> showing where the job is.</text>
+  <text x="54" y="2021" font-size="15" class="cSlate" xml:space="preserve">The Status moves through a life cycle:</text>
+  <!-- status figure -->
+  <text x="342" y="2072" text-anchor="middle" font-size="13" font-weight="700" class="cOrange" xml:space="preserve">In progress</text>
+  <text x="835" y="2072" text-anchor="middle" font-size="13" font-weight="700" class="cSlate" xml:space="preserve">Terminal states</text>
+  <rect x="100" y="2088" width="140" height="44" rx="8" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.4"/>
+  <text x="170" y="2116" text-anchor="middle" font-size="14" class="cSlate" xml:space="preserve">submitted</text>
+  <line x1="242" y1="2110" x2="284" y2="2110" stroke="#EA580C" stroke-width="2" marker-end="url(#arrO)"/>
+  <rect x="288" y="2088" width="118" height="44" rx="8" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.4"/>
+  <text x="347" y="2116" text-anchor="middle" font-size="14" class="cSlate" xml:space="preserve">working</text>
+  <line x1="408" y1="2110" x2="450" y2="2110" stroke="#EA580C" stroke-width="2" marker-end="url(#arrO)"/>
+  <rect x="454" y="2088" width="160" height="44" rx="8" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.4"/>
+  <text x="534" y="2116" text-anchor="middle" font-size="14" class="cSlate" xml:space="preserve">input-required</text>
+  <line x1="640" y1="2110" x2="722" y2="2110" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="726" y="2088" width="150" height="44" rx="8" fill="#ECFDF5" stroke="#16A34A" stroke-width="1.4"/>
+  <text x="801" y="2116" text-anchor="middle" font-size="14" font-weight="700" class="cGreen" xml:space="preserve">completed</text>
+  <text x="905" y="2116" text-anchor="middle" font-size="13" class="cSlate" xml:space="preserve">or</text>
+  <rect x="936" y="2088" width="120" height="44" rx="8" fill="#FEF2F4" stroke="#E11D48" stroke-width="1.4"/>
+  <text x="996" y="2116" text-anchor="middle" font-size="14" font-weight="700" class="cPink" xml:space="preserve">failed</text>
+  <!-- text after figure -->
+  <text x="54" y="2196" font-size="15" class="cSlate" xml:space="preserve">Agent A gets the task ID, then polls <tspan class="cCode mono">task/get</tspan> for updates. Note: Agent B decides</text>
+  <text x="54" y="2221" font-size="15" class="cSlate" xml:space="preserve">whether to return a Task or a Message — so Agent A must handle both cases.</text>
+  <text x="54" y="2246" font-size="15" class="cSlate" xml:space="preserve">When the Task is completed, its output sits in the <tspan font-weight="700" class="cOrange">artifacts</tspan> field. An Artifact is like a</text>
+  <text x="54" y="2271" font-size="15" class="cSlate" xml:space="preserve">Message: it has an <tspan font-weight="700" class="cOrange">Artifact ID</tspan> and <tspan font-weight="700" class="cOrange">Parts</tspan> holding the real response content.</text>
+
+  <!-- ================= S8: STREAMING SSE ================= -->
+  <text x="30" y="2334" font-size="19" font-weight="700" class="cPurple" xml:space="preserve">③ Streaming with Server-Sent Events (SSE)</text>
+  <rect x="30" y="2348" width="1060" height="204" rx="12" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.4"/>
+  <text x="54" y="2378" font-size="15" class="cSlate" xml:space="preserve">Polling works, but it is not efficient when you want quick updates. If Agent B's card says</text>
+  <text x="54" y="2403" font-size="15" class="cSlate" xml:space="preserve"><tspan class="cCode mono">streaming: true</tspan>, Agent A calls <tspan class="cCode mono">message/stream</tspan> instead. The connection stays open</text>
+  <text x="54" y="2428" font-size="15" class="cSlate" xml:space="preserve">and Agent B <tspan font-weight="700" class="cPurple">pushes updates as they happen</tspan>:</text>
+  <text x="54" y="2453" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPurple">•</tspan>  <tspan font-weight="700" class="cPurple">Task status update events</tspan> — "I am working on part X"; "the task is now completed".</text>
+  <text x="54" y="2478" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPurple">•</tspan>  <tspan font-weight="700" class="cPurple">Task artifact update events</tspan> — a large result streamed in chunks, paragraph by paragraph.</text>
+  <text x="54" y="2503" font-size="15" class="cSlate" xml:space="preserve">The user sees live progress, or the answer appears as it is being generated.</text>
+
+  <!-- ================= S9: PUSH NOTIFICATIONS ================= -->
+  <text x="30" y="2585" font-size="19" font-weight="700" class="cPink" xml:space="preserve">④ Push notifications (webhooks &amp; callbacks)</text>
+  <rect x="30" y="2599" width="1060" height="156" rx="12" fill="#FEF2F4" stroke="#E11D48" stroke-width="1.4"/>
+  <text x="54" y="2629" font-size="15" class="cSlate" xml:space="preserve">What if you have no idea when — or if — Agent B will reply? Use <tspan font-weight="700" class="cPink">webhook push</tspan></text>
+  <text x="54" y="2654" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cPink">notifications</tspan> with the <tspan class="cCode mono">task/pushNotificationConfig/set</tspan> method, or add the config</text>
+  <text x="54" y="2679" font-size="15" class="cSlate" xml:space="preserve">when sending the first message.</text>
+  <text x="54" y="2704" font-size="15" class="cSlate" xml:space="preserve">Agent A gives a <tspan font-weight="700" class="cPink">callback URL</tspan>. Agent B actively pushes a notification to that URL when</text>
+  <text x="54" y="2729" font-size="15" class="cSlate" xml:space="preserve">the task state changes or an artifact is ready. The card advertises <tspan class="cCode mono">pushNotifications: true</tspan>.</text>
+
+  <!-- ================= S10: 2026 INTEL ================= -->
+  <text x="30" y="2788" font-size="19" font-weight="700" class="cAmber" xml:space="preserve">📡 2026 intel</text>
+  <rect x="30" y="2802" width="1060" height="206" rx="12" fill="#FFFBEB" stroke="#B45309" stroke-width="1.4"/>
+  <text x="54" y="2832" font-size="15" class="cSlate" xml:space="preserve">Google donated A2A — the spec, SDKs, and tooling — to the <tspan font-weight="700" class="cAmber">Linux Foundation</tspan> on</text>
+  <text x="54" y="2857" font-size="15" class="cSlate" xml:space="preserve">June 23, 2025. Founding members: AWS, Cisco, Google, Microsoft, Salesforce, SAP,</text>
+  <text x="54" y="2882" font-size="15" class="cSlate" xml:space="preserve">and ServiceNow.</text>
+  <text x="54" y="2907" font-size="15" class="cSlate" xml:space="preserve">By its one-year mark in 2026, <tspan font-weight="700" class="cAmber">150+ organizations</tspan> back the standard, with deep</text>
+  <text x="54" y="2932" font-size="15" class="cSlate" xml:space="preserve">integration across Google, Microsoft, and AWS and real production deployments.</text>
+  <text x="54" y="2957" font-size="15" class="cSlate" xml:space="preserve">Spec note: v1.0 uses <tspan class="cCode mono">/.well-known/agent-card.json</tspan>; the older <tspan class="cCode mono">agent.json</tspan></text>
+  <text x="54" y="2982" font-size="15" class="cSlate" xml:space="preserve">path you may see in v0.x examples is out of date.</text>
+
+  <!-- ================= S11: KEY INSIGHT ================= -->
+  <text x="30" y="3041" font-size="19" font-weight="700" class="cBlue" xml:space="preserve">🔑 Key insight</text>
+  <rect x="30" y="3055" width="1060" height="156" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.4"/>
+  <text x="54" y="3085" font-size="15" class="cSlate" xml:space="preserve">A2A turns any agent into a <tspan font-weight="700" class="cBlue">network service with a public business card</tspan>. Discover the</text>
+  <text x="54" y="3110" font-size="15" class="cSlate" xml:space="preserve">agent through its Agent Card, then pick the execution mode that fits the work:</text>
+  <text x="54" y="3135" font-size="15" class="cSlate" xml:space="preserve">synchronous for fast replies, asynchronous Tasks for long jobs, streaming for live</text>
+  <text x="54" y="3160" font-size="15" class="cSlate" xml:space="preserve">progress, and push notifications for unpredictable timing.</text>
+  <text x="54" y="3185" font-size="15" class="cSlate" xml:space="preserve"><tspan font-weight="700" class="cBlue">Message or Task is always Agent B's choice</tspan> — so Agent A must handle both.</text>
+</svg>

@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 3130" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arw" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <style>
+      .t{font-size:25px;font-weight:700}
+      .sub{font-size:17px}
+      .h{font-size:19px;font-weight:700}
+      .b{font-size:15px}
+      .bb{font-size:15px;font-weight:700}
+      .sm{font-size:13px}
+      .bx{font-size:14px;font-weight:700}
+      .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C}
+      .cPurple{fill:#7C3AED} .cPink{fill:#E11D48} .cGreen{fill:#16A34A}
+      .cAmber{fill:#B45309} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+      .cCode{fill:#6D28D9}
+    </style>
+  </defs>
+
+  <!-- L11: solid white background -->
+  <rect x="0" y="0" width="1160" height="3130" fill="#FFFFFF"/>
+
+  <!-- ===== TITLE ===== -->
+  <text class="t cPink" x="580" y="52" text-anchor="middle" xml:space="preserve">A2A: The Agent2Agent Protocol</text>
+  <text class="sub cSlate" x="580" y="82" text-anchor="middle" xml:space="preserve">Why the Agent2Agent Protocol?</text>
+
+  <!-- ===== ESSENCE ===== -->
+  <rect x="40" y="100" width="1080" height="82" rx="14" fill="#FEF2F4" stroke="#E11D48" stroke-width="1"/>
+  <text class="b cSlate" x="64" y="136" xml:space="preserve"><tspan class="cPink bb">Essence: </tspan>A2A (Agent2Agent) is an open protocol that lets AI agents from any framework, model, or</text>
+  <text class="b cSlate" x="64" y="162" xml:space="preserve">vendor discover each other and work together. Think of it as <tspan class="cPink bb">the HTTP for AI agents</tspan>.</text>
+
+  <!-- ===== SECTION 1: Agents need to talk ===== -->
+  <rect x="40" y="200" width="1080" height="264" rx="14" fill="#FFF7ED" stroke="#EA580C" stroke-width="1"/>
+  <text class="h cOrange" x="64" y="234" xml:space="preserve">🧩 The problem: agents need to talk</text>
+  <text class="b cSlate" x="64" y="268" xml:space="preserve">AI apps are evolving from simple chatbots into <tspan class="cOrange bb">agentic systems</tspan> that reason, plan, call tools, and</text>
+  <text class="b cSlate" x="64" y="291" xml:space="preserve">run multi-step workflows. Hard goals need several agents working together. Example: a</text>
+  <text class="b cSlate" x="64" y="314" xml:space="preserve">trip-planning agent delegates to a flights agent, a hotel agent, and an activities agent — and</text>
+  <text class="b cSlate" x="64" y="337" xml:space="preserve">they must coordinate to plan the best possible trip.</text>
+  <text class="b cSlate" x="64" y="372" xml:space="preserve">But agents are built with many different frameworks — <tspan class="cOrange bb">LangGraph</tspan>, <tspan class="cOrange bb">Microsoft Agent</tspan></text>
+  <text class="b cSlate" x="64" y="395" xml:space="preserve"><tspan class="cOrange bb">Framework</tspan>, <tspan class="cOrange bb">Google ADK</tspan>, <tspan class="cOrange bb">CrewAI</tspan>, <tspan class="cOrange bb">BeeAI</tspan> — that work differently and are not compatible out of</text>
+  <text class="b cSlate" x="64" y="418" xml:space="preserve">the box. So we need a <tspan class="cOrange bb">shared protocol</tspan> so any agent can talk to any other, regardless of the</text>
+  <text class="b cSlate" x="64" y="441" xml:space="preserve">model or framework — even across different teams and organizations.</text>
+
+  <!-- ===== SECTION 2: HTTP story ===== -->
+  <rect x="40" y="484" width="1080" height="312" rx="14" fill="#EFF6FF" stroke="#2563EB" stroke-width="1"/>
+  <text class="h cBlue" x="64" y="518" xml:space="preserve">🚀 Why a standard: the HTTP story</text>
+  <text class="b cSlate" x="64" y="552" xml:space="preserve">In 1989, <tspan class="cBlue bb">Tim Berners-Lee</tspan> proposed the World Wide Web at CERN. To move data he created</text>
+  <text class="b cSlate" x="64" y="575" xml:space="preserve"><tspan class="cCode" style="font-family:Menlo,monospace">HTTP</tspan>. Before it, several protocols competed — <tspan class="cCode" style="font-family:Menlo,monospace">FTP</tspan>, <tspan class="cCode" style="font-family:Menlo,monospace">Telnet</tspan>, <tspan class="cCode" style="font-family:Menlo,monospace">Gopher</tspan> — each for a narrow need. HTTP</text>
+  <text class="b cSlate" x="64" y="598" xml:space="preserve">won because it was <tspan class="cBlue bb">simple and openly governed</tspan>, and that fueled the web's explosive growth.</text>
+  <text class="b cSlate" x="64" y="621" xml:space="preserve">A2A copies that idea for agents: one simple, open standard so any agent can reach any other.</text>
+
+  <!-- analogy figure band -->
+  <!-- row 1: web -->
+  <text class="bx cBlue" x="88" y="700" xml:space="preserve">Web</text>
+  <rect x="150" y="678" width="104" height="34" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
+  <text class="b cSlate" x="202" y="700" text-anchor="middle" xml:space="preserve">FTP</text>
+  <rect x="270" y="678" width="104" height="34" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
+  <text class="b cSlate" x="322" y="700" text-anchor="middle" xml:space="preserve">Telnet</text>
+  <rect x="390" y="678" width="104" height="34" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
+  <text class="b cSlate" x="442" y="700" text-anchor="middle" xml:space="preserve">Gopher</text>
+  <line x1="510" y1="695" x2="556" y2="695" stroke="#334155" stroke-width="2" marker-end="url(#arw)"/>
+  <rect x="574" y="676" width="140" height="38" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text class="bb cBlue" x="644" y="700" text-anchor="middle" xml:space="preserve">HTTP</text>
+  <text class="sm cSlate" x="732" y="700" xml:space="preserve">one open standard, the web took off</text>
+  <!-- row 2: agents -->
+  <text class="bx cBlue" x="88" y="757" xml:space="preserve">Agents</text>
+  <rect x="150" y="735" width="104" height="34" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
+  <text class="b cSlate" x="202" y="757" text-anchor="middle" xml:space="preserve">LangGraph</text>
+  <rect x="270" y="735" width="104" height="34" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
+  <text class="b cSlate" x="322" y="757" text-anchor="middle" xml:space="preserve">ADK</text>
+  <rect x="390" y="735" width="104" height="34" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
+  <text class="b cSlate" x="442" y="757" text-anchor="middle" xml:space="preserve">CrewAI</text>
+  <line x1="510" y1="752" x2="556" y2="752" stroke="#334155" stroke-width="2" marker-end="url(#arw)"/>
+  <rect x="574" y="733" width="140" height="38" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text class="bb cBlue" x="644" y="757" text-anchor="middle" xml:space="preserve">A2A</text>
+  <text class="sm cSlate" x="732" y="757" xml:space="preserve">one open standard, agents interoperate</text>
+
+  <!-- ===== SECTION 3: What A2A is + governance ===== -->
+  <rect x="40" y="816" width="1080" height="290" rx="14" fill="#ECFDF5" stroke="#0D9488" stroke-width="1"/>
+  <text class="h cTeal" x="64" y="850" xml:space="preserve">📜 What A2A is, and who governs it</text>
+  <text class="b cSlate" x="64" y="884" xml:space="preserve">A2A is an open protocol for agent collaboration. Its history matters, because <tspan class="cTeal bb">open governance</tspan></text>
+  <text class="b cSlate" x="64" y="907" xml:space="preserve">is what makes a standard trustworthy:</text>
+  <text class="b cSlate" x="64" y="940" xml:space="preserve"><tspan class="cTeal bb">•</tspan>  Google introduced A2A in <tspan class="cTeal bb">April 2025</tspan>.</text>
+  <text class="b cSlate" x="64" y="963" xml:space="preserve"><tspan class="cTeal bb">•</tspan>  Donated to the <tspan class="cTeal bb">Linux Foundation</tspan> in <tspan class="cTeal bb">June 2025</tspan> — now open source and community-run.</text>
+  <text class="b cSlate" x="64" y="986" xml:space="preserve"><tspan class="cTeal bb">•</tspan>  IBM's Agent Communication Protocol (ACP) was merged into A2A.</text>
+  <text class="b cSlate" x="64" y="1009" xml:space="preserve"><tspan class="cTeal bb">•</tspan>  A Technical Steering Committee (TSC) with 8 major tech companies makes the decisions.</text>
+  <text class="b cSlate" x="64" y="1032" xml:space="preserve"><tspan class="cTeal bb">•</tspan>  The vendor-neutral home means it evolves for the whole community, not one company.</text>
+  <text class="b cSlate" x="64" y="1055" xml:space="preserve"><tspan class="cTeal bb">•</tspan>  Over <tspan class="cTeal bb">150 named partners</tspan> already back it.</text>
+  <text class="b cSlate" x="64" y="1088" xml:space="preserve">Always check the latest spec at <tspan class="cCode" style="font-family:Menlo,monospace">a2a-protocol.org</tspan> — version 1.0 brings real changes.</text>
+
+  <!-- ===== SECTION 4: Capabilities ===== -->
+  <rect x="40" y="1126" width="1080" height="330" rx="14" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1"/>
+  <text class="h cPurple" x="64" y="1160" xml:space="preserve">🛠️ What A2A agents can do</text>
+  <text class="b cSlate" x="64" y="1194" xml:space="preserve">A2A gives agents four core abilities. Every agent stays <tspan class="cPurple bb">opaque</tspan> — it never has to reveal its</text>
+  <text class="b cSlate" x="64" y="1217" xml:space="preserve">internal implementation in order to follow the protocol.</text>
+  <text class="bb cPurple" x="64" y="1252" xml:space="preserve">🔍 Discovery</text>
+  <text class="b cSlate" x="64" y="1275" xml:space="preserve">Agents advertise their capabilities so clients know when and how to use them for a task.</text>
+  <text class="bb cPurple" x="64" y="1305" xml:space="preserve">🤝 Negotiation</text>
+  <text class="b cSlate" x="64" y="1328" xml:space="preserve">Client and agent agree on how to communicate — text, forms, iframe, or audio/video.</text>
+  <text class="bb cPurple" x="64" y="1358" xml:space="preserve">⚙️ Task and state management</text>
+  <text class="b cSlate" x="64" y="1381" xml:space="preserve">They share task status, changes, and dependencies throughout a long-running task.</text>
+  <text class="bb cPurple" x="64" y="1411" xml:space="preserve">💬 Collaboration</text>
+  <text class="b cSlate" x="64" y="1434" xml:space="preserve">Agents can request clarifications, information, or sub-actions from other agents or users.</text>
+
+  <!-- ===== SECTION 5: A2A vs MCP ===== -->
+  <rect x="40" y="1476" width="1080" height="372" rx="14" fill="#EFF6FF" stroke="#2563EB" stroke-width="1"/>
+  <text class="h cBlue" x="64" y="1510" xml:space="preserve">🤝 A2A vs MCP: complementary, not competing</text>
+  <text class="b cSlate" x="64" y="1544" xml:space="preserve">A common question: how does A2A relate to <tspan class="cBlue bb">MCP (Model Context Protocol)</tspan>, created by Anthropic</text>
+  <text class="b cSlate" x="64" y="1567" xml:space="preserve">and also donated to the Linux Foundation? They are complementary — they solve different jobs.</text>
+  <!-- MCP sub-card -->
+  <rect x="64" y="1588" width="1032" height="98" rx="10" fill="#ECFEFF" stroke="#0D9488" stroke-width="1"/>
+  <text class="bb cTeal" x="88" y="1618" xml:space="preserve">MCP — connects an agent to its tools</text>
+  <text class="b cSlate" x="88" y="1642" xml:space="preserve">The standard way an agent does function calling to take action on a user's behalf.</text>
+  <text class="b cSlate" x="88" y="1665" xml:space="preserve">Example: an agent uses <tspan class="cCode" style="font-family:Menlo,monospace">MCP</tspan> to call a weather API tool.</text>
+  <!-- A2A sub-card -->
+  <rect x="64" y="1700" width="1032" height="98" rx="10" fill="#F8FAFC" stroke="#2563EB" stroke-width="1"/>
+  <text class="bb cBlue" x="88" y="1730" xml:space="preserve">A2A — connects an agent to peer agents</text>
+  <text class="b cSlate" x="88" y="1754" xml:space="preserve">The standard way agents collaborate, delegate work, and manage shared workflows.</text>
+  <text class="b cSlate" x="88" y="1777" xml:space="preserve">Example: a Travel agent asks a Flight-booking agent to find flights.</text>
+  <text class="b cSlate" x="64" y="1826" xml:space="preserve">In a real system you use <tspan class="cBlue bb">both</tspan>: A2A to coordinate agents, MCP for each agent to reach its tools.</text>
+
+  <!-- ===== SECTION 6: Agents or Tools ===== -->
+  <rect x="40" y="1868" width="1080" height="186" rx="14" fill="#FFF7ED" stroke="#EA580C" stroke-width="1"/>
+  <text class="h cOrange" x="64" y="1902" xml:space="preserve">🧠 Why not just use agents as tools?</text>
+  <text class="b cSlate" x="64" y="1936" xml:space="preserve">You could make agents talk over MCP, or treat an agent as a tool. But that <tspan class="cOrange bb">reduces</tspan> what the</text>
+  <text class="b cSlate" x="64" y="1959" xml:space="preserve">agent can do. Tools are built for a single, usually deterministic task with a fixed input/output</text>
+  <text class="b cSlate" x="64" y="1982" xml:space="preserve">schema. Agents are <tspan class="cOrange bb">open-ended problem solvers</tspan> that handle ambiguity and multi-step work a</text>
+  <text class="b cSlate" x="64" y="2005" xml:space="preserve">single schema can't describe. So A2A treats agents as peers, not tools.</text>
+  <text class="b cSlate" x="64" y="2033" xml:space="preserve">Read more at <tspan class="cCode" style="font-family:Menlo,monospace">goo.gle/agents-not-tools</tspan>.</text>
+
+  <!-- ===== SECTION 7: Where A2A fits ===== -->
+  <rect x="40" y="2076" width="1080" height="404" rx="14" fill="#F8FAFC" stroke="#334155" stroke-width="1"/>
+  <text class="h cSlate" x="64" y="2110" xml:space="preserve">🏗️ Where A2A fits in the tech stack</text>
+  <text class="b cSlate" x="64" y="2144" xml:space="preserve">A2A is just one layer of a larger agent stack. It works at the <tspan class="cSlate bb">agent orchestration layer</tspan> — above</text>
+  <text class="b cSlate" x="64" y="2167" xml:space="preserve">the models and infrastructure, below the applications:</text>
+  <!-- stack bars -->
+  <rect x="64" y="2189" width="1032" height="44" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1"/>
+  <text class="bb cSlate" x="88" y="2217" xml:space="preserve">Applications</text>
+  <text class="sm cGray" x="1072" y="2217" text-anchor="end" xml:space="preserve">end-user apps</text>
+  <rect x="64" y="2243" width="1032" height="44" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text class="bb cBlue" x="88" y="2271" xml:space="preserve">Agentic orchestration — A2A protocol</text>
+  <text class="sm cBlue" x="1072" y="2271" text-anchor="end" xml:space="preserve">where A2A operates</text>
+  <rect x="64" y="2297" width="1032" height="44" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1"/>
+  <text class="bb cSlate" x="88" y="2325" xml:space="preserve">Foundation models</text>
+  <text class="sm cGray" x="1072" y="2325" text-anchor="end" xml:space="preserve">the LLMs</text>
+  <rect x="64" y="2351" width="1032" height="44" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1"/>
+  <text class="bb cSlate" x="88" y="2379" xml:space="preserve">Cloud infrastructure</text>
+  <text class="sm cGray" x="1072" y="2379" text-anchor="end" xml:space="preserve">compute and storage</text>
+  <rect x="64" y="2405" width="1032" height="44" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1"/>
+  <text class="bb cSlate" x="88" y="2433" xml:space="preserve">Semiconductors</text>
+  <text class="sm cGray" x="1072" y="2433" text-anchor="end" xml:space="preserve">the chips</text>
+
+  <!-- ===== IN PRACTICE ===== -->
+  <rect x="40" y="2500" width="1080" height="230" rx="14" fill="#ECFDF5" stroke="#16A34A" stroke-width="1"/>
+  <text class="h cGreen" x="64" y="2534" xml:space="preserve">⚡ In practice</text>
+  <text class="b cSlate" x="64" y="2568" xml:space="preserve"><tspan class="cGreen bb">•</tspan>  Choose <tspan class="cGreen bb">A2A</tspan> when independent agents (maybe from different teams or vendors) must coordinate;</text>
+  <text class="b cSlate" x="64" y="2591" xml:space="preserve">    choose <tspan class="cGreen bb">MCP</tspan> when one agent needs to call a tool or API.</text>
+  <text class="b cSlate" x="64" y="2621" xml:space="preserve"><tspan class="cGreen bb">•</tspan>  Use both together in a serious agentic system — A2A between agents, MCP down to tools.</text>
+  <text class="b cSlate" x="64" y="2651" xml:space="preserve"><tspan class="cGreen bb">•</tspan>  Because agents stay opaque, you can expose one to partners without leaking your internal design.</text>
+  <text class="b cSlate" x="64" y="2681" xml:space="preserve"><tspan class="cGreen bb">•</tspan>  A2A is model- and framework-agnostic, so it works across LangGraph, ADK, CrewAI, and others.</text>
+  <text class="b cSlate" x="64" y="2711" xml:space="preserve"><tspan class="cGreen bb">•</tspan>  Next up: the A2A architecture, and how it actually enables multi-agent communication.</text>
+
+  <!-- ===== 2026 INTEL ===== -->
+  <rect x="40" y="2750" width="1080" height="186" rx="14" fill="#FFFBEB" stroke="#B45309" stroke-width="1"/>
+  <text class="h cAmber" x="64" y="2784" xml:space="preserve">📡 2026 intel</text>
+  <text class="b cSlate" x="64" y="2818" xml:space="preserve"><tspan class="cAmber bb">•</tspan>  <tspan class="cAmber bb">A2A v1.0 shipped in April 2026</tspan> under the Linux Foundation — the first production-grade release.</text>
+  <text class="b cSlate" x="64" y="2848" xml:space="preserve"><tspan class="cAmber bb">•</tspan>  v1.0 adds Signed Agent Cards (verify who issued a card), multi-tenancy (one endpoint hosts</text>
+  <text class="b cSlate" x="64" y="2871" xml:space="preserve">    many agents), and multi-protocol bindings (the same agent over <tspan class="cCode" style="font-family:Menlo,monospace">JSON-RPC</tspan> and <tspan class="cCode" style="font-family:Menlo,monospace">gRPC</tspan>).</text>
+  <text class="b cSlate" x="64" y="2901" xml:space="preserve"><tspan class="cAmber bb">•</tspan>  <tspan class="cAmber bb">150+ organizations</tspan> now back A2A, with support built into Google, Microsoft, and AWS platforms</text>
+  <text class="b cSlate" x="64" y="2924" xml:space="preserve">    and real production deployments across industries.</text>
+
+  <!-- ===== KEY INSIGHT ===== -->
+  <rect x="40" y="2956" width="1080" height="134" rx="14" fill="#FEF2F4" stroke="#E11D48" stroke-width="1"/>
+  <text class="h cPink" x="64" y="2990" xml:space="preserve">🔑 Key insight</text>
+  <text class="b cSlate" x="64" y="3024" xml:space="preserve">Standards win by being <tspan class="cPink bb">simple and openly governed</tspan>, not by being owned. Just as HTTP let any</text>
+  <text class="b cSlate" x="64" y="3047" xml:space="preserve">page link to any page, A2A lets any agent work with any agent. That shared, vendor-neutral</text>
+  <text class="b cSlate" x="64" y="3070" xml:space="preserve">protocol is what turns isolated agents into real, cross-organization multi-agent systems.</text>
+
+</svg>

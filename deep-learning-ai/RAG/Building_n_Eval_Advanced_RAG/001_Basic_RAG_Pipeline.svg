@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="850" viewBox="0 0 1000 850"><style>text{font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif}</style><defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0 0 L8 3 L0 6 Z" fill="#4A4A4A"/></marker></defs><rect x="0" y="0" width="1000" height="850" fill="#ffffff"/><text x="500" y="66" font-size="42" font-weight="700" fill="#222222" text-anchor="middle">Basic RAG Pipeline</text>
+<rect x="70" y="175" width="860" height="285" rx="24" fill="#7EA6E0"/>
+<text x="98" y="217" font-size="23" font-weight="700" fill="#1a1a1a">Ingestion</text>
+<rect x="144.0" y="263.0" width="110" height="132" fill="#F3F3F3" stroke="#8A8A8A" stroke-width="1.4"/><rect x="152.0" y="271.0" width="110" height="132" fill="#F3F3F3" stroke="#8A8A8A" stroke-width="1.4"/><path d="M160.0 279.0 L250.0 279.0 L270.0 299.0 L270.0 411.0 L160.0 411.0 Z" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.4"/><path d="M250.0 279.0 L250.0 299.0 L270.0 299.0" fill="none" stroke="#8A8A8A" stroke-width="1.4"/>
+<text x="215.0" y="351.0" font-size="17" fill="#1a1a1a" text-anchor="middle">Documents</text>
+<line x1="292.0" y1="345.0" x2="352.0" y2="345.0" stroke="#4A4A4A" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="359.0" y="263.0" width="110" height="132" fill="#F3F3F3" stroke="#8A8A8A" stroke-width="1.4"/><rect x="367.0" y="271.0" width="110" height="132" fill="#F3F3F3" stroke="#8A8A8A" stroke-width="1.4"/><path d="M375.0 279.0 L485.0 279.0 L485.0 411.0 Q 454.2 397.0 430.0 411.0 Q 405.8 425.0 375.0 411.0 Z" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.4"/>
+<text x="430.0" y="351.0" font-size="17" fill="#1a1a1a" text-anchor="middle">Chunks</text>
+<line x1="505.0" y1="345.0" x2="565.0" y2="345.0" stroke="#4A4A4A" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="594.0" y="284.0" width="132" height="122" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<text x="660.0" y="351.0" font-size="17" fill="#1a1a1a" text-anchor="middle">Embeddings</text>
+<line x1="728.0" y1="345.0" x2="788.0" y2="345.0" stroke="#4A4A4A" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M798.0 293.0 L798.0 397.0 A 60.0 15.6 0 0 0 918.0 397.0 L918.0 293.0 Z" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<ellipse cx="858.0" cy="293.0" rx="60.0" ry="15.6" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<path d="M798.0 328.4 A 60.0 15.6 0 0 0 918.0 328.4" fill="none" stroke="#8A8A8A" stroke-width="1.1"/>
+<path d="M798.0 357.5 A 60.0 15.6 0 0 0 918.0 357.5" fill="none" stroke="#8A8A8A" stroke-width="1.1"/>
+<text x="858.0" y="355.0" font-size="17" fill="#1a1a1a" text-anchor="middle">Index</text>
+<rect x="30" y="575" width="610" height="255" rx="24" fill="#E06666"/>
+<text x="58" y="617" font-size="23" font-weight="700" fill="#1a1a1a">Retrieval</text>
+<rect x="69.0" y="644.0" width="122" height="122" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<text x="130.0" y="711.0" font-size="17" fill="#1a1a1a" text-anchor="middle">Query</text>
+<line x1="193.0" y1="705.0" x2="247.0" y2="705.0" stroke="#4A4A4A" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M264.0 657.0 L264.0 753.0 A 58.0 15.1 0 0 0 380.0 753.0 L380.0 657.0 Z" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<ellipse cx="322.0" cy="657.0" rx="58.0" ry="15.1" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<path d="M264.0 689.6 A 58.0 15.1 0 0 0 380.0 689.6" fill="none" stroke="#8A8A8A" stroke-width="1.1"/>
+<path d="M264.0 716.5 A 58.0 15.1 0 0 0 380.0 716.5" fill="none" stroke="#8A8A8A" stroke-width="1.1"/>
+<text x="322.0" y="715.0" font-size="17" fill="#1a1a1a" text-anchor="middle">Index</text>
+<line x1="384.0" y1="705.0" x2="438.0" y2="705.0" stroke="#4A4A4A" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="459.0" y="644.0" width="122" height="122" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<text x="520.0" y="711.0" font-size="17" fill="#1a1a1a" text-anchor="middle">Top K</text>
+<rect x="660" y="575" width="330" height="255" rx="24" fill="#93C47D"/>
+<text x="688" y="617" font-size="23" font-weight="700" fill="#1a1a1a">Synthesis</text>
+<rect x="698.0" y="644.0" width="120" height="122" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<text x="758.0" y="711.0" font-size="17" fill="#1a1a1a" text-anchor="middle">LLM</text>
+<line x1="820.0" y1="705.0" x2="862.0" y2="705.0" stroke="#4A4A4A" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="863.0" y="644.0" width="110" height="122" fill="#ECECEC" stroke="#8A8A8A" stroke-width="1.5"/>
+<text x="918.0" y="711.0" font-size="17" fill="#1a1a1a" text-anchor="middle">Response</text>
+<line x1="583.0" y1="705.0" x2="696.0" y2="701.0" stroke="#4A4A4A" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M130.0 768.0 L130.0 808.0 L758.0 808.0 L758.0 768.0" fill="none" stroke="#4A4A4A" stroke-width="2" marker-end="url(#ah)"/></svg>

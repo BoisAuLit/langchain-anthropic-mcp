@@ -1,0 +1,34 @@
+from typing_extensions import TypedDict
+from langgraph.graph import START, END, StateGraph
+from langgraph.types import interrupt
+
+class State(TypedDict):
+    input: str
+
+def step_1(state: State) -> State:
+    print("---Step 1---")
+    return state
+
+def step_2(state: State) -> State:
+    # 输入超过 5 个字符就暂停，等人 resume 一个更短的输入
+    if len(state['input']) > 5:
+        new_input = interrupt(f"Received input that is longer than 5 characters: {state['input']}")
+        return {"input": new_input}
+
+    print("---Step 2---")
+    return state
+
+def step_3(state: State) -> State:
+    print("---Step 3---")
+    return state
+
+builder = StateGraph(State)
+builder.add_node("step_1", step_1)
+builder.add_node("step_2", step_2)
+builder.add_node("step_3", step_3)
+builder.add_edge(START, "step_1")
+builder.add_edge("step_1", "step_2")
+builder.add_edge("step_2", "step_3")
+builder.add_edge("step_3", END)
+
+graph = builder.compile()

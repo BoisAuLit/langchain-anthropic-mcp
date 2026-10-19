@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="700" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">StateGraph 解剖：声明层 → 执行层（super-step）</text>
+<rect x="20" y="60" width="640" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="32" y="80" font-size="13" font-weight="700" fill="#94a3b8">① 声明层（builder，未编译）</text>
+<rect x="40" y="95" width="280" height="110" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="180.0" y="121" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">State schema</text>
+<text x="180.0" y="145" text-anchor="middle" font-size="13" fill="#bbf7d0" opacity="0.92">TypedDict / dataclass / Pydantic</text>
+<text x="180.0" y="166" text-anchor="middle" font-size="13" fill="#bbf7d0" opacity="0.92">每个 key = 一个 channel</text>
+<text x="180.0" y="187" text-anchor="middle" font-size="13" fill="#bbf7d0" opacity="0.92">Annotated[list, add] 指定 reducer</text>
+<rect x="350" y="95" width="290" height="110" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="495.0" y="121" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">Node = 普通函数</text>
+<text x="495.0" y="145" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">def n(state, runtime: Runtime[Ctx])</text>
+<text x="495.0" y="166" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">返回 增量 dict  或  Command(...)</text>
+<text x="495.0" y="187" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">入参注解 = 它能读到的 key</text>
+<rect x="40" y="225" width="600" height="115" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="340.0" y="251" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">Edge = 控制流</text>
+<text x="340.0" y="275" text-anchor="middle" font-size="13" fill="#f1f5f9" opacity="0.92">add_edge(A, B)   add_edge([A, B], C) ← 等两者都完成</text>
+<text x="340.0" y="296" text-anchor="middle" font-size="13" fill="#f1f5f9" opacity="0.92">add_conditional_edges(A, fn, [B, C])   fn 返回节点名 / END / [Send(...)]</text>
+<text x="340.0" y="317" text-anchor="middle" font-size="13" fill="#f1f5f9" opacity="0.92">Command(goto=..., update=...)  由节点自己决定下一跳</text>
+<path d="M660,210 L720,210" fill="none" stroke="#fbbf24" stroke-width="3" marker-end="url(#ay)"/>
+<rect x="661" y="181" width="78.60000000000001" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="665" y="196" text-anchor="start" font-size="13" font-weight="600" fill="#fde047">compile()</text>
+<rect x="720" y="60" width="660" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="732" y="80" font-size="13" font-weight="700" fill="#94a3b8">② 执行层（CompiledGraph，Pregel / BSP 模型）</text>
+<rect x="740" y="95" width="620" height="110" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1050.0" y="121" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">一个 super-step</text>
+<text x="1050.0" y="145" text-anchor="middle" font-size="13" fill="#ddd6fe" opacity="0.92">1. 选出所有被激活的节点 → 并行执行（互相看不到对方写入）</text>
+<text x="1050.0" y="166" text-anchor="middle" font-size="13" fill="#ddd6fe" opacity="0.92">2. 收集全部增量 → 按 key 用 reducer 合并（无 reducer 则覆盖）</text>
+<text x="1050.0" y="187" text-anchor="middle" font-size="13" fill="#ddd6fe" opacity="0.92">3. 写 checkpoint（若有 checkpointer）→ 算下一步激活谁</text>
+<rect x="740" y="225" width="300" height="115" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="890.0" y="251" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">停下来的条件</text>
+<text x="890.0" y="275" text-anchor="middle" font-size="13" fill="#fde68a" opacity="0.92">没有节点被激活（到 END）</text>
+<text x="890.0" y="296" text-anchor="middle" font-size="13" fill="#fde68a" opacity="0.92">interrupt() / interrupt_before</text>
+<text x="890.0" y="317" text-anchor="middle" font-size="13" fill="#fde68a" opacity="0.92">GraphRecursionError（默认 25 步）</text>
+<rect x="1060" y="225" width="300" height="115" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="1210.0" y="251" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">随 config 一起进来的</text>
+<text x="1210.0" y="275" text-anchor="middle" font-size="13" fill="#a5f3fc" opacity="0.92">thread_id → checkpointer 定位会话</text>
+<text x="1210.0" y="296" text-anchor="middle" font-size="13" fill="#a5f3fc" opacity="0.92">context=Ctx(...) → 运行时只读配置</text>
+<text x="1210.0" y="317" text-anchor="middle" font-size="13" fill="#a5f3fc" opacity="0.92">recursion_limit=N</text>
+<text x="20" y="400" text-anchor="start" font-size="15" fill="#fde047" font-weight="700">一次 invoke 的时间线（fan-out 例子：A → {B, C} → D）</text>
+<circle cx="120" cy="450" r="22" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="120" y="453.96" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">START</text>
+<circle cx="390" cy="450" r="22" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="390" y="453.96" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">step 1</text>
+<circle cx="660" cy="450" r="22" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="660" y="453.96" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">step 2</text>
+<circle cx="930" cy="450" r="22" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="930" y="453.96" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">step 3</text>
+<circle cx="1200" cy="450" r="22" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="1200" y="453.96" text-anchor="middle" font-size="11" font-weight="700" fill="#94a3b8">END</text>
+<path d="M144,450 L366,450" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M414,450 L636,450" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M684,450 L906,450" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M954,450 L1176,450" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="260" y="488" width="180" height="86" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="350.0" y="514" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">A</text>
+<text x="350.0" y="538" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">读 state₀ → 写 Δ_A</text>
+<rect x="530" y="488" width="180" height="86" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="620.0" y="514" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">B ∥ C</text>
+<text x="620.0" y="538" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">都读 state₁</text>
+<text x="620.0" y="559" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">各写 Δ_B, Δ_C</text>
+<rect x="800" y="488" width="180" height="86" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="890.0" y="514" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">D</text>
+<text x="890.0" y="538" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">读 state₂</text>
+<rect x="260" y="590" width="180" height="46" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="350.0" y="616" text-anchor="middle" font-size="12" font-weight="700" fill="#bbf7d0">state₁ = reduce(state₀, Δ_A)</text>
+<rect x="530" y="590" width="180" height="46" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="620.0" y="616" text-anchor="middle" font-size="11" font-weight="700" fill="#bbf7d0">state₂ = reduce(state₁, Δ_B, Δ_C)</text>
+<rect x="800" y="590" width="180" height="46" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="890.0" y="616" text-anchor="middle" font-size="12" font-weight="700" fill="#bbf7d0">state₃ → 返回 / checkpoint</text>
+<text x="20" y="670" text-anchor="start" font-size="13" fill="#fbbf24">并行节点同写一个无 reducer 的 key → InvalidUpdateError；有 reducer → 合并，但顺序不可控（要顺序就自己写排序 reducer）</text>
+</svg>

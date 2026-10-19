@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 540" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="540" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">LangGraph 库 · CLI · Server(API) · SDK · Studio · Deployment 各是什么</text>
+<rect x="300" y="60" width="250" height="100" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="425.0" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">LangGraph SDK</text>
+<text x="425.0" y="110" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">get_client(url)</text>
+<text x="425.0" y="130" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">client.threads / runs / assistants / store</text>
+<text x="425.0" y="150" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">Python / JS</text>
+<path d="M425,162 L425,186" fill="none" stroke="#a78bfa" stroke-width="2" marker-end="url(#ap)"/>
+<rect x="570" y="60" width="250" height="100" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="695.0" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">RemoteGraph</text>
+<text x="695.0" y="110" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">把远端 graph 当本地 graph</text>
+<text x="695.0" y="130" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">invoke / stream，可作子图</text>
+<path d="M695,162 L695,186" fill="none" stroke="#a78bfa" stroke-width="2" marker-end="url(#ap)"/>
+<rect x="840" y="60" width="250" height="100" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="965.0" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">LangSmith Studio</text>
+<text x="965.0" y="110" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">浏览器 UI</text>
+<text x="965.0" y="130" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">可视化、断点、改 state</text>
+<path d="M965,162 L965,186" fill="none" stroke="#a78bfa" stroke-width="2" marker-end="url(#ap)"/>
+<rect x="1110" y="60" width="250" height="100" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1235.0" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">任何 HTTP 客户端</text>
+<text x="1235.0" y="110" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">curl / 前端 fetch</text>
+<text x="1235.0" y="130" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">文档在 /docs</text>
+<path d="M1235,162 L1235,186" fill="none" stroke="#a78bfa" stroke-width="2" marker-end="url(#ap)"/>
+<rect x="300" y="190" width="1060" height="150" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="314" y="216" text-anchor="start" font-size="14" font-weight="700" fill="#a5f3fc">LangGraph Server = 运行你的 graph 的 HTTP 服务（本地 langgraph dev / Docker / LangSmith Deployment 都是它）</text>
+<text x="314" y="240" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">对象：Assistant（graph + config）· Thread（一条 checkpoint 链，UUID）· Run（一次执行）· Store · Cron</text>
+<text x="314" y="260" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">自动注入 checkpointer + store（Postgres）→ 代码里 compile() 时不要再传；Redis 做任务队列</text>
+<text x="314" y="280" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">Thread 必须先 threads.create()（实测：不存在 → 404；非 UUID → 422）；thread_id=None → 无状态 run</text>
+<text x="314" y="300" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">同一 thread 并发两次 run → double-texting：reject / enqueue / interrupt / rollback（实测本机默认 enqueue）</text>
+<rect x="30" y="190" width="240" height="150" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="44" y="216" text-anchor="start" font-size="14" font-weight="700" fill="#fde68a">LangGraph CLI</text>
+<text x="44" y="240" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">langgraph.json 声明 graphs / env / deps</text>
+<text x="44" y="260" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">langgraph dev：本地起 Server</text>
+<text x="44" y="280" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">  （内存运行，落盘 .langgraph_api/）</text>
+<text x="44" y="300" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">langgraph build：打 Docker 镜像</text>
+<text x="44" y="320" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">langgraph up：docker compose 起全套</text>
+<path d="M272,265 L296,265" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="30" y="380" width="1330" height="60" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="695.0" y="406" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">LangGraph 库（pip install langgraph）：StateGraph / compile / invoke / checkpointer / Store —— Server 内部跑的就是它；本地直接用时，checkpointer、thread_id、并发都由你自己管</text>
+<path d="M830,342 L830,376" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<text x="30" y="475" text-anchor="start" font-size="14" fill="#fde047" font-weight="700">一句话：库是引擎；CLI 负责启动；Server 把引擎包成 API 并替你管持久化；SDK / RemoteGraph / Studio 是三种客户端；LangSmith Deployment 是托管版 Server。</text>
+<text x="30" y="505" text-anchor="start" font-size="13" fill="#94a3b8">旧名对照：LangGraph Platform / Cloud → LangSmith Deployment；LangGraph Studio → LangSmith Studio。</text>
+</svg>

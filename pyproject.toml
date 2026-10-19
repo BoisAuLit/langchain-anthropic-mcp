@@ -39,6 +39,14 @@ dependencies = [
     "deepagents>=0.6.1",
     "markdownify>=1.2.2",
     "html2text>=2025.4.15",
+    "crewai>=1.15.22",
+    "crewai-tools>=1.15.22",
+    "exa-py>=2.25.0",
+    "pandas>=3.0.6",
+    "matplotlib>=3.11.2",
+    "seaborn>=0.13.2",
+    "dlai-grader>=2.3.0",
+    "dill>=0.4.1",
 ]
 
 [build-system]

@@ -1,0 +1,282 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="3326" viewBox="0 0 1160 3326" font-family="'Helvetica Neue',Arial,sans-serif">
+  <style>
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#B45309} .cSlate{fill:#334155}
+    .cGray{fill:#94A3B8} .cCode{fill:#6D28D9}
+    text{ -webkit-font-smoothing:antialiased; }
+    .b{font-weight:700}
+    .mono{font-family:'SF Mono',Menlo,Consolas,monospace}
+  </style>
+
+  <!-- L11: solid white background first -->
+  <rect x="0" y="0" width="1160" height="3326" fill="#FFFFFF"/>
+
+  <!-- ============ TITLE ============ -->
+  <text x="40" y="58" font-size="27" class="b cPink" xml:space="preserve">Agent Skills with Anthropic</text>
+  <text x="40" y="90" font-size="18" class="cSlate" xml:space="preserve">Skills with the Claude API — running your custom Skills programmatically</text>
+
+  <!-- ============ ESSENCE ============ -->
+  <rect x="40" y="110" width="1080" height="86" rx="12" fill="#FEF2F4" stroke="#E11D48" stroke-width="1.3"/>
+  <text x="64" y="146" font-size="15.5" class="cSlate" xml:space="preserve"><tspan class="b cPink">Essence:</tspan> The same Skill format runs on every Claude surface, but the Claude API does not set up the</text>
+  <text x="64" y="172" font-size="15.5" class="cSlate" xml:space="preserve">runtime for you. You must add two things yourself — the <tspan class="b cPink">code execution tool</tspan> (a sandbox container) and the <tspan class="b cPink">Files API</tspan>.</text>
+
+  <!-- ============ SECTION 1: WHERE SKILLS WORK ============ -->
+  <text x="40" y="238" font-size="19" class="b cBlue" xml:space="preserve">🧩 Where Skills work across the Claude ecosystem</text>
+
+  <rect x="40" y="254" width="1080" height="256" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.2"/>
+  <text x="64" y="286" font-size="15" class="cSlate" xml:space="preserve">A Skill is a folder of instructions that Claude reads on demand. The <tspan class="b cBlue">skill files never change</tspan> between</text>
+  <text x="64" y="310" font-size="15" class="cSlate" xml:space="preserve">environments — but how each environment gives Claude a computer to run them does change.</text>
+
+  <!-- platform boxes -->
+  <!-- box1 -->
+  <rect x="66" y="330" width="235" height="52" rx="9" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.1"/>
+  <text x="183" y="352" font-size="13" class="b cSlate" text-anchor="middle" xml:space="preserve">Claude.ai +</text>
+  <text x="183" y="370" font-size="13" class="b cSlate" text-anchor="middle" xml:space="preserve">Claude Desktop</text>
+  <!-- box2 highlighted (API) -->
+  <rect x="331" y="330" width="235" height="52" rx="9" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.8"/>
+  <text x="448" y="358" font-size="13.5" class="b cOrange" text-anchor="middle" xml:space="preserve">The Claude API</text>
+  <text x="448" y="376" font-size="11.5" class="cOrange" text-anchor="middle" xml:space="preserve">(this lesson)</text>
+  <!-- box3 -->
+  <rect x="596" y="330" width="235" height="52" rx="9" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.1"/>
+  <text x="713" y="361" font-size="13" class="b cSlate" text-anchor="middle" xml:space="preserve">Claude Code</text>
+  <!-- box4 -->
+  <rect x="861" y="330" width="234" height="52" rx="9" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.1"/>
+  <text x="978" y="361" font-size="13" class="b cSlate" text-anchor="middle" xml:space="preserve">Claude Agent SDK app</text>
+
+  <!-- arrows down to Skill boxes -->
+  <line x1="183" y1="382" x2="183" y2="402" stroke="#94A3B8" stroke-width="1.6"/>
+  <polygon points="183,408 179,400 187,400" fill="#94A3B8"/>
+  <line x1="448" y1="382" x2="448" y2="402" stroke="#EA580C" stroke-width="1.6"/>
+  <polygon points="448,408 444,400 452,400" fill="#EA580C"/>
+  <line x1="713" y1="382" x2="713" y2="402" stroke="#94A3B8" stroke-width="1.6"/>
+  <polygon points="713,408 709,400 717,400" fill="#94A3B8"/>
+  <line x1="978" y1="382" x2="978" y2="402" stroke="#94A3B8" stroke-width="1.6"/>
+  <polygon points="978,408 974,400 982,400" fill="#94A3B8"/>
+
+  <!-- Skill pills -->
+  <rect x="133" y="408" width="100" height="32" rx="8" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.1"/>
+  <text x="183" y="429" font-size="13" class="b cPurple" text-anchor="middle" xml:space="preserve">Skill</text>
+  <rect x="398" y="408" width="100" height="32" rx="8" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.1"/>
+  <text x="448" y="429" font-size="13" class="b cPurple" text-anchor="middle" xml:space="preserve">Skill</text>
+  <rect x="663" y="408" width="100" height="32" rx="8" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.1"/>
+  <text x="713" y="429" font-size="13" class="b cPurple" text-anchor="middle" xml:space="preserve">Skill</text>
+  <rect x="928" y="408" width="100" height="32" rx="8" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.1"/>
+  <text x="978" y="429" font-size="13" class="b cPurple" text-anchor="middle" xml:space="preserve">Skill</text>
+
+  <!-- caption under diagram -->
+  <text x="64" y="470" font-size="14.5" class="cSlate" xml:space="preserve"><tspan class="b cGreen">Claude.ai / Desktop</tspan> give Claude a container automatically. <tspan class="b cBlue">Claude Code / Agent SDK</tspan> use your local files.</text>
+  <text x="64" y="494" font-size="14.5" class="cSlate" xml:space="preserve">Only the <tspan class="b cOrange">Claude API</tspan> has neither — so you provide the runtime by hand. That is what we do below.</text>
+
+  <!-- not-shared note -->
+  <rect x="40" y="526" width="1080" height="74" rx="12" fill="#FFFBEB" stroke="#B45309" stroke-width="1.2"/>
+  <text x="64" y="558" font-size="15" class="cSlate" xml:space="preserve"><tspan class="b cAmber">⚠ Not shared:</tspan> Skills you create in Claude.ai or Claude Desktop are <tspan class="b cAmber">not</tspan> visible to the Claude API or</text>
+  <text x="64" y="582" font-size="15" class="cSlate" xml:space="preserve">Claude Code. Each surface manages its own skills, so for the API we upload the skill folders again.</text>
+
+  <!-- ============ SECTION 2: CODE EXECUTION TOOL ============ -->
+  <text x="40" y="644" font-size="19" class="b cTeal" xml:space="preserve">⚙️ The Code Execution Tool — a sandbox for Claude</text>
+
+  <rect x="40" y="660" width="1080" height="300" rx="12" fill="#ECFEFF" stroke="#0D9488" stroke-width="1.2"/>
+  <text x="64" y="692" font-size="15" class="cSlate" xml:space="preserve">Skills integrate with the <tspan class="b cTeal">Messages API</tspan> through the <tspan class="b cTeal">code execution tool</tspan>. This tool gives your request a</text>
+  <text x="64" y="716" font-size="15" class="cSlate" xml:space="preserve">private container where Claude can run <tspan class="b cTeal">bash / shell commands</tspan> and <tspan class="b cTeal">create, view, and edit files</tspan> — the</text>
+  <text x="64" y="740" font-size="15" class="cSlate" xml:space="preserve">exact abilities a Skill needs. Everything runs inside a safe, isolated sandbox.</text>
+
+  <!-- sandbox flow diagram -->
+  <!-- Messages API box -->
+  <rect x="66" y="772" width="150" height="46" rx="9" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.2"/>
+  <text x="141" y="800" font-size="13" class="b cTeal" text-anchor="middle" xml:space="preserve">Messages API</text>
+  <!-- arrow -->
+  <line x1="216" y1="795" x2="252" y2="795" stroke="#0D9488" stroke-width="1.6"/>
+  <polygon points="258,795 250,791 250,799" fill="#0D9488"/>
+  <!-- Claude box -->
+  <rect x="258" y="772" width="120" height="46" rx="9" fill="#FEF2F4" stroke="#E11D48" stroke-width="1.2"/>
+  <text x="318" y="800" font-size="14" class="b cPink" text-anchor="middle" xml:space="preserve">Claude</text>
+  <!-- arrow with label above -->
+  <text x="470" y="784" font-size="11.5" class="cSlate" text-anchor="middle" xml:space="preserve">run bash · create / edit files</text>
+  <line x1="378" y1="795" x2="558" y2="795" stroke="#0D9488" stroke-width="1.6"/>
+  <polygon points="564,795 556,791 556,799" fill="#0D9488"/>
+  <!-- container box -->
+  <rect x="564" y="770" width="531" height="168" rx="10" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.4"/>
+  <text x="588" y="800" font-size="14" class="b cTeal" xml:space="preserve">🖥  Execution sandbox (container)</text>
+  <rect x="588" y="814" width="200" height="30" rx="7" fill="#ECFDF5" stroke="#16A34A" stroke-width="1"/>
+  <text x="688" y="834" font-size="12.5" class="b cGreen mono" text-anchor="middle" xml:space="preserve">Working dir: /tmp</text>
+  <text x="588" y="868" font-size="13" class="cSlate" xml:space="preserve">• Limited <tspan class="b cTeal">RAM, disk, and CPU</tspan></text>
+  <text x="588" y="890" font-size="13" class="cSlate" xml:space="preserve">• <tspan class="b cOrange">No internet connection</tspan> (API only) — cannot install new packages</text>
+  <text x="588" y="912" font-size="13" class="cSlate" xml:space="preserve">• <tspan class="b cTeal">Pre-installed Python libraries</tspan> come out of the box</text>
+  <text x="588" y="934" font-size="13" class="cSlate" xml:space="preserve">• Container expires after about <tspan class="b cTeal">30 days</tspan></text>
+
+  <!-- ============ SECTION 3: FILES API ============ -->
+  <text x="40" y="1004" font-size="19" class="b cPurple" xml:space="preserve">📁 The Files API — moving files in and out</text>
+
+  <rect x="40" y="1020" width="1080" height="256" rx="12" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.2"/>
+  <text x="64" y="1052" font-size="15" class="cSlate" xml:space="preserve">The container starts empty and has no internet, so you need a way to give it files and take results</text>
+  <text x="64" y="1076" font-size="15" class="cSlate" xml:space="preserve">back. The <tspan class="b cPurple">Files API</tspan> uploads and downloads files, and returns a <tspan class="b cCode mono">file_id</tspan> you use to reference each one.</text>
+
+  <!-- 3-step horizontal flow -->
+  <!-- step 1 -->
+  <rect x="66" y="1100" width="300" height="86" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2"/>
+  <text x="216" y="1128" font-size="13.5" class="b cPurple" text-anchor="middle" xml:space="preserve">1 · Upload</text>
+  <text x="216" y="1150" font-size="12.5" class="cSlate" text-anchor="middle" xml:space="preserve">Send your input file (a .tex</text>
+  <text x="216" y="1168" font-size="12.5" class="cSlate" text-anchor="middle" xml:space="preserve">or .csv) into the container.</text>
+  <!-- arrow -->
+  <line x1="366" y1="1143" x2="406" y2="1143" stroke="#7C3AED" stroke-width="1.6"/>
+  <polygon points="412,1143 404,1139 404,1147" fill="#7C3AED"/>
+  <!-- step 2 -->
+  <rect x="412" y="1100" width="336" height="86" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2"/>
+  <text x="580" y="1128" font-size="13.5" class="b cPurple" text-anchor="middle" xml:space="preserve">2 · Claude works in the container</text>
+  <text x="580" y="1150" font-size="12.5" class="cSlate" text-anchor="middle" xml:space="preserve">Reads skills from /skills, runs code,</text>
+  <text x="580" y="1168" font-size="12.5" class="cSlate" text-anchor="middle" xml:space="preserve">writes new files to the output dir.</text>
+  <!-- arrow -->
+  <line x1="748" y1="1143" x2="788" y2="1143" stroke="#7C3AED" stroke-width="1.6"/>
+  <polygon points="794,1143 786,1139 786,1147" fill="#7C3AED"/>
+  <!-- step 3 -->
+  <rect x="794" y="1100" width="301" height="86" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2"/>
+  <text x="944" y="1128" font-size="13.5" class="b cPurple" text-anchor="middle" xml:space="preserve">3 · Download</text>
+  <text x="944" y="1150" font-size="12.5" class="cSlate" text-anchor="middle" xml:space="preserve">Take the result back out using</text>
+  <text x="944" y="1168" font-size="12.5" class="cSlate" text-anchor="middle" xml:space="preserve">its returned file_id.</text>
+
+  <text x="64" y="1216" font-size="14.5" class="cSlate" xml:space="preserve">Anthropic's <tspan class="b cPurple">built-in skills</tspan> also live in this container — ready-made helpers for <tspan class="b cCode mono">pptx</tspan>, <tspan class="b cCode mono">pdf</tspan>, <tspan class="b cCode mono">xlsx</tspan>, and <tspan class="b cCode mono">docx</tspan>.</text>
+  <text x="64" y="1240" font-size="14.5" class="cSlate" xml:space="preserve"><tspan class="b cPurple">Requirement:</tspan> to use any Skill with the API you must also turn on the code execution tool.</text>
+
+  <!-- ============ SECTION 4: DEMO PART 1 ============ -->
+  <text x="40" y="1308" font-size="19" class="b cOrange" xml:space="preserve">🧪 Demo Part 1 — the Practice Question Generator skill</text>
+
+  <rect x="40" y="1324" width="1080" height="72" rx="12" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.2"/>
+  <text x="64" y="1356" font-size="15" class="cSlate" xml:space="preserve">Goal: from a LaTeX lecture-notes file, have the skill write practice questions as a Markdown file.</text>
+  <text x="64" y="1380" font-size="15" class="cSlate" xml:space="preserve">Three request steps: <tspan class="b cOrange">upload the skill</tspan>, <tspan class="b cOrange">upload the input file</tspan>, then <tspan class="b cOrange">send the message</tspan>.</text>
+
+  <!-- code card -->
+  <rect x="40" y="1412" width="1080" height="388" rx="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.1"/>
+  <text x="64" y="1440" font-size="12.5" class="cGreen mono" xml:space="preserve"># 1) Upload the skill folder — you get back a skill_id</text>
+  <text x="64" y="1462" font-size="12.5" class="cCode mono" xml:space="preserve">skill = client.beta.skills.create(</text>
+  <text x="64" y="1482" font-size="12.5" class="cCode mono" xml:space="preserve">    display_title="Practice Question Generator",</text>
+  <text x="64" y="1502" font-size="12.5" class="cCode mono" xml:space="preserve">    files=files_from_dir("./custom_skills/generating-practice-questions"),</text>
+  <text x="64" y="1522" font-size="12.5" class="cCode mono" xml:space="preserve">    betas=["skills-2025-10-02"])</text>
+  <text x="64" y="1552" font-size="12.5" class="cGreen mono" xml:space="preserve"># 2) Upload the input file — you get back a file object with an id</text>
+  <text x="64" y="1574" font-size="12.5" class="cCode mono" xml:space="preserve">file = client.beta.files.upload(file=open("./lecture_notes/notes04.tex", "rb"))</text>
+  <text x="64" y="1604" font-size="12.5" class="cGreen mono" xml:space="preserve"># 3) Send the message — skills go in "container", tools enable code execution</text>
+  <text x="64" y="1626" font-size="12.5" class="cCode mono" xml:space="preserve">response = client.beta.messages.create(</text>
+  <text x="64" y="1646" font-size="12.5" class="cCode mono" xml:space="preserve">    model="claude-sonnet-4-5-20250929", max_tokens=4096,</text>
+  <text x="64" y="1666" font-size="12.5" class="cCode mono" xml:space="preserve">    betas=["skills-2025-10-02", "code-execution-2025-08-25", "files-api-2025-04-14"],</text>
+  <text x="64" y="1686" font-size="12.5" class="cCode mono" xml:space="preserve">    container={"skills": [{"type": "custom", "skill_id": skill.id, "version": "latest"}]},</text>
+  <text x="64" y="1706" font-size="12.5" class="cCode mono" xml:space="preserve">    messages=[{"role": "user", "content": [</text>
+  <text x="64" y="1726" font-size="12.5" class="cCode mono" xml:space="preserve">        {"type": "text", "text": "Generate practice questions from these notes"},</text>
+  <text x="64" y="1746" font-size="12.5" class="cCode mono" xml:space="preserve">        {"type": "container_upload", "file_id": file.id}]}],</text>
+  <text x="64" y="1766" font-size="12.5" class="cCode mono" xml:space="preserve">    tools=[{"type": "code_execution_20250825", "name": "code_execution"}])</text>
+  <text x="64" y="1790" font-size="12" class="cGray mono" xml:space="preserve"># three beta headers are always needed together: skills · code-execution · files-api</text>
+
+  <!-- what Claude did: progressive disclosure flow -->
+  <text x="40" y="1848" font-size="16" class="b cOrange" xml:space="preserve">What Claude did in the container — progressive disclosure</text>
+
+  <rect x="40" y="1864" width="1080" height="128" rx="12" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.2"/>
+  <!-- 5 boxes -->
+  <rect x="64" y="1892" width="185" height="80" rx="9" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.1"/>
+  <text x="156" y="1918" font-size="12.5" class="b cSlate" text-anchor="middle" xml:space="preserve">1 · Read</text>
+  <text x="156" y="1938" font-size="12" class="cCode mono" text-anchor="middle" xml:space="preserve">SKILL.md</text>
+  <text x="156" y="1958" font-size="11.5" class="cSlate" text-anchor="middle" xml:space="preserve">detect the skill</text>
+
+  <rect x="275" y="1892" width="185" height="80" rx="9" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.1"/>
+  <text x="367" y="1918" font-size="12.5" class="b cSlate" text-anchor="middle" xml:space="preserve">2 · Read input</text>
+  <text x="367" y="1938" font-size="12" class="cCode mono" text-anchor="middle" xml:space="preserve">notes04.tex</text>
+  <text x="367" y="1958" font-size="11.5" class="cSlate" text-anchor="middle" xml:space="preserve">the lecture notes</text>
+
+  <rect x="486" y="1892" width="185" height="80" rx="9" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.6"/>
+  <text x="578" y="1914" font-size="12.5" class="b cPurple" text-anchor="middle" xml:space="preserve">3 · Read only</text>
+  <text x="578" y="1933" font-size="11.5" class="cCode mono" text-anchor="middle" xml:space="preserve">markdown_template</text>
+  <text x="578" y="1952" font-size="11.5" class="cPurple" text-anchor="middle" xml:space="preserve">when needed</text>
+  <text x="578" y="1968" font-size="10.5" class="cSlate" text-anchor="middle" xml:space="preserve">(progressive disclosure)</text>
+
+  <rect x="697" y="1892" width="185" height="80" rx="9" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.1"/>
+  <text x="789" y="1918" font-size="12.5" class="b cSlate" text-anchor="middle" xml:space="preserve">4 · Create</text>
+  <text x="789" y="1938" font-size="11.5" class="cCode mono" text-anchor="middle" xml:space="preserve">/tmp/...notes04.md</text>
+  <text x="789" y="1958" font-size="11.5" class="cSlate" text-anchor="middle" xml:space="preserve">write questions</text>
+
+  <rect x="908" y="1892" width="188" height="80" rx="9" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.1"/>
+  <text x="1002" y="1918" font-size="12.5" class="b cSlate" text-anchor="middle" xml:space="preserve">5 · Copy out</text>
+  <text x="1002" y="1938" font-size="11.5" class="cCode mono" text-anchor="middle" xml:space="preserve">OUTPUT_DIR</text>
+  <text x="1002" y="1958" font-size="11.5" class="cSlate" text-anchor="middle" xml:space="preserve">return a file_id</text>
+
+  <!-- arrows between boxes (in gaps) -->
+  <line x1="249" y1="1932" x2="269" y2="1932" stroke="#EA580C" stroke-width="1.6"/>
+  <polygon points="275,1932 267,1928 267,1936" fill="#EA580C"/>
+  <line x1="460" y1="1932" x2="480" y2="1932" stroke="#EA580C" stroke-width="1.6"/>
+  <polygon points="486,1932 478,1928 478,1936" fill="#EA580C"/>
+  <line x1="671" y1="1932" x2="691" y2="1932" stroke="#EA580C" stroke-width="1.6"/>
+  <polygon points="697,1932 689,1928 689,1936" fill="#EA580C"/>
+  <line x1="882" y1="1932" x2="902" y2="1932" stroke="#EA580C" stroke-width="1.6"/>
+  <polygon points="908,1932 900,1928 900,1936" fill="#EA580C"/>
+
+  <text x="40" y="2028" font-size="14.5" class="cSlate" xml:space="preserve"><tspan class="b cPurple">Progressive disclosure</tspan> means Claude reads <tspan class="b cOrange">SKILL.md</tspan> first, and only opens extra files (like the template)</text>
+  <text x="40" y="2052" font-size="14.5" class="cSlate" xml:space="preserve">when the task actually needs them. This keeps the context small. Finally you download the file by its id.</text>
+
+  <!-- ============ SECTION 5: DEMO PART 2 ============ -->
+  <text x="40" y="2116" font-size="19" class="b cGreen" xml:space="preserve">Demo Part 2 — combine a custom skill with a built-in one</text>
+
+  <rect x="40" y="2132" width="1080" height="76" rx="12" fill="#ECFDF5" stroke="#16A34A" stroke-width="1.2"/>
+  <text x="64" y="2164" font-size="15" class="cSlate" xml:space="preserve">Now analyze a <tspan class="b cGreen">retail sales CSV</tspan> with a custom time-series skill, then write the results as a <tspan class="b cGreen">Word document</tspan></text>
+  <text x="64" y="2188" font-size="15" class="cSlate" xml:space="preserve">using Anthropic's built-in <tspan class="b cCode mono">docx</tspan> skill. You can list several skills in one <tspan class="b cCode mono">container</tspan>.</text>
+
+  <!-- code card -->
+  <rect x="40" y="2224" width="1080" height="128" rx="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.1"/>
+  <text x="64" y="2252" font-size="12.5" class="cGreen mono" xml:space="preserve"># mix a custom skill (by id) with a built-in Anthropic skill (by name)</text>
+  <text x="64" y="2274" font-size="12.5" class="cCode mono" xml:space="preserve">container={"skills": [</text>
+  <text x="64" y="2294" font-size="12.5" class="cCode mono" xml:space="preserve">    {"type": "custom",    "skill_id": ts_skill.id, "version": "latest"},   # analyzing-time-series</text>
+  <text x="64" y="2314" font-size="12.5" class="cCode mono" xml:space="preserve">    {"type": "anthropic", "skill_id": "docx"}]}                            # built-in Word skill</text>
+  <text x="64" y="2340" font-size="12" class="cGray mono" xml:space="preserve"># same three beta headers as before: skills · code-execution · files-api</text>
+
+  <!-- what happened + output -->
+  <rect x="40" y="2368" width="640" height="196" rx="12" fill="#ECFDF5" stroke="#16A34A" stroke-width="1.2"/>
+  <text x="64" y="2398" font-size="14.5" class="b cGreen" xml:space="preserve">What Claude did</text>
+  <text x="64" y="2424" font-size="13.5" class="cSlate" xml:space="preserve">• Read <tspan class="b cGreen">both</tspan> SKILL.md files (custom + docx)</text>
+  <text x="64" y="2448" font-size="13.5" class="cSlate" xml:space="preserve">• Examined the first 20 lines of the CSV</text>
+  <text x="64" y="2472" font-size="13.5" class="cSlate" xml:space="preserve">• Ran the skill's diagnostics + visualize scripts</text>
+  <text x="64" y="2496" font-size="13.5" class="cSlate" xml:space="preserve">• Read <tspan class="b cCode mono">summary.txt</tspan> (the script output)</text>
+  <text x="64" y="2520" font-size="13.5" class="cSlate" xml:space="preserve">• Built the <tspan class="b cGreen">.docx</tspan> with the built-in skill</text>
+  <text x="64" y="2544" font-size="13.5" class="cSlate" xml:space="preserve">• Copied it out → downloaded by <tspan class="b cCode mono">file_id</tspan></text>
+
+  <!-- mock output doc -->
+  <rect x="700" y="2368" width="420" height="196" rx="12" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2"/>
+  <text x="724" y="2396" font-size="12.5" class="b cGreen" xml:space="preserve">📄 retail_sales_analysis_report.docx</text>
+  <rect x="724" y="2410" width="372" height="140" rx="8" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
+  <text x="744" y="2434" font-size="12.5" class="b cSlate" xml:space="preserve">Retail Sales Time Series Analysis</text>
+  <text x="744" y="2456" font-size="11.5" class="cSlate" xml:space="preserve">Executive summary · key findings table</text>
+  <text x="744" y="2476" font-size="11.5" class="cSlate" xml:space="preserve">Seasonality: strong (period 12 months)</text>
+  <!-- tiny mock chart -->
+  <rect x="744" y="2488" width="150" height="52" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="0.9"/>
+  <polyline points="750,2530 768,2518 786,2524 804,2506 822,2514 840,2498 858,2508 876,2494 888,2500" fill="none" stroke="#2563EB" stroke-width="1.6"/>
+  <text x="908" y="2508" font-size="11.5" class="cSlate" xml:space="preserve">plots +</text>
+  <text x="908" y="2526" font-size="11.5" class="cSlate" xml:space="preserve">statistics</text>
+
+  <!-- ============ SECTION 6: DELETE ============ -->
+  <text x="40" y="2624" font-size="19" class="b cPink" xml:space="preserve">Deleting a skill — versions first, then the skill</text>
+
+  <rect x="40" y="2640" width="1080" height="118" rx="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.1"/>
+  <text x="64" y="2668" font-size="12.5" class="cGreen mono" xml:space="preserve"># a skill can have many versions — delete each version, then the skill itself</text>
+  <text x="64" y="2690" font-size="12.5" class="cCode mono" xml:space="preserve">versions = client.beta.skills.versions.list(skill_id)</text>
+  <text x="64" y="2712" font-size="12.5" class="cCode mono" xml:space="preserve">for v in versions.data:</text>
+  <text x="64" y="2732" font-size="12.5" class="cCode mono" xml:space="preserve">    client.beta.skills.versions.delete(skill_id, v.version)</text>
+  <text x="64" y="2752" font-size="12.5" class="cCode mono" xml:space="preserve">client.beta.skills.delete(skill_id)</text>
+
+  <!-- ============ IN PRACTICE ============ -->
+  <text x="40" y="2818" font-size="19" class="b cBlue" xml:space="preserve">⚡ In practice</text>
+
+  <rect x="40" y="2834" width="1080" height="146" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.2"/>
+  <text x="64" y="2864" font-size="14.5" class="cSlate" xml:space="preserve">• Always send the <tspan class="b cBlue">three beta headers together</tspan> — skills, code-execution, files-api — or the request fails.</text>
+  <text x="64" y="2890" font-size="14.5" class="cSlate" xml:space="preserve">• The skill folder is uploaded once and reused by <tspan class="b cCode mono">skill_id</tspan>; pick a version or use <tspan class="b cCode mono">"latest"</tspan>.</text>
+  <text x="64" y="2916" font-size="14.5" class="cSlate" xml:space="preserve">• Remember there is <tspan class="b cBlue">no internet</tspan> in the API container — depend only on pre-installed libraries.</text>
+  <text x="64" y="2942" font-size="14.5" class="cSlate" xml:space="preserve">• The skill files are identical to Claude.ai; only the <tspan class="b cBlue">wiring around them</tspan> (container + Files API) differs.</text>
+  <text x="64" y="2968" font-size="14.5" class="cSlate" xml:space="preserve">• Evaluate the output against what the skill promised, then edit the skill and re-upload to improve it.</text>
+
+  <!-- ============ 2026 INTEL ============ -->
+  <text x="40" y="3040" font-size="19" class="b cTeal" xml:space="preserve">📡 2026 intel</text>
+
+  <rect x="40" y="3056" width="1080" height="126" rx="12" fill="#ECFEFF" stroke="#0D9488" stroke-width="1.2"/>
+  <text x="64" y="3086" font-size="14.5" class="cSlate" xml:space="preserve">• Skills are managed through the <tspan class="b cTeal">/v1/skills</tspan> endpoint (<tspan class="b cCode mono">client.beta.skills</tspan>), which handles upload,</text>
+  <text x="64" y="3110" font-size="14.5" class="cSlate" xml:space="preserve">  versioning, listing, and deletion of custom skills — separate from the built-in Anthropic skills.</text>
+  <text x="64" y="3134" font-size="14.5" class="cSlate" xml:space="preserve">• The code execution tool is still the required runtime for Skills; each request provisions a fresh container.</text>
+  <text x="64" y="3158" font-size="14.5" class="cSlate" xml:space="preserve">• Built-in skills for <tspan class="b cCode mono">pptx</tspan>, <tspan class="b cCode mono">pdf</tspan>, <tspan class="b cCode mono">xlsx</tspan>, and <tspan class="b cCode mono">docx</tspan> ship ready to use — no upload needed, just name them.</text>
+
+  <!-- ============ KEY INSIGHT ============ -->
+  <rect x="40" y="3210" width="1080" height="86" rx="12" fill="#FFFBEB" stroke="#B45309" stroke-width="1.3"/>
+  <text x="64" y="3244" font-size="15.5" class="cSlate" xml:space="preserve"><tspan class="b cAmber">🔑 Key insight:</tspan> A Skill is just instructions — it does nothing without a computer to run on. Claude.ai hands</text>
+  <text x="64" y="3270" font-size="15.5" class="cSlate" xml:space="preserve">Claude that computer for free; on the API you build it from the code execution tool plus the Files API.</text>
+</svg>

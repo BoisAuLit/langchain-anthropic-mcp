@@ -22,6 +22,7 @@ dependencies = [
     "pygments>=2.20.0",
     "cryptography>=46.0.7",
     "langfuse",
+    "python-dotenv>=1.2.2",
 ]
 
 

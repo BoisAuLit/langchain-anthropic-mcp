@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 460" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="460" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">interrupt() 生命周期：暂停 → 人 → Command(resume) → 节点从头重跑</text>
+<rect x="40" y="80" width="240" height="120" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="160.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">① 节点执行</text>
+<text x="160.0" y="130" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">answer = interrupt(payload)</text>
+<text x="160.0" y="151" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">← 执行到这里暂停</text>
+<text x="160.0" y="172" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">payload 必须可 JSON 序列化</text>
+<rect x="330" y="80" width="240" height="120" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="450.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">② 图暂停</text>
+<text x="450.0" y="130" text-anchor="middle" font-size="13" fill="#fde68a" opacity="0.92">checkpointer 写入当前 state</text>
+<text x="450.0" y="151" text-anchor="middle" font-size="13" fill="#fde68a" opacity="0.92">invoke 返回 {'__interrupt__': [...]}</text>
+<text x="450.0" y="172" text-anchor="middle" font-size="13" fill="#fde68a" opacity="0.92">get_state(cfg).next == ('节点',)</text>
+<rect x="620" y="80" width="240" height="120" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="740.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">③ 人介入</text>
+<text x="740.0" y="130" text-anchor="middle" font-size="13" fill="#a5f3fc" opacity="0.92">UI / Slack / CLI 展示 payload</text>
+<text x="740.0" y="151" text-anchor="middle" font-size="13" fill="#a5f3fc" opacity="0.92">可以几小时后再回来</text>
+<text x="740.0" y="172" text-anchor="middle" font-size="13" fill="#a5f3fc" opacity="0.92">也可 update_state 改别的 key</text>
+<rect x="910" y="80" width="240" height="120" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1030.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">④ 续跑</text>
+<text x="1030.0" y="130" text-anchor="middle" font-size="13" fill="#ddd6fe" opacity="0.92">graph.invoke(Command(resume=值), cfg)</text>
+<text x="1030.0" y="151" text-anchor="middle" font-size="13" fill="#ddd6fe" opacity="0.92">同一个 thread_id</text>
+<text x="1030.0" y="172" text-anchor="middle" font-size="13" fill="#ddd6fe" opacity="0.92">resume 值 = interrupt() 的返回值</text>
+<rect x="1200" y="80" width="160" height="120" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1280.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">⑤ 继续</text>
+<text x="1280.0" y="130" text-anchor="middle" font-size="13" fill="#bbf7d0" opacity="0.92">节点余下代码</text>
+<text x="1280.0" y="151" text-anchor="middle" font-size="13" fill="#bbf7d0" opacity="0.92">→ 后续节点</text>
+<text x="1280.0" y="172" text-anchor="middle" font-size="13" fill="#bbf7d0" opacity="0.92">→ END</text>
+<path d="M280,140 L324,140" fill="none" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ay)"/>
+<path d="M570,140 L614,140" fill="none" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ay)"/>
+<path d="M860,140 L904,140" fill="none" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ay)"/>
+<path d="M1150,140 L1194,140" fill="none" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ay)"/>
+<rect x="40" y="240" width="640" height="120" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="54" y="266" text-anchor="start" font-size="14" font-weight="700" fill="#fca5a5">⚠️ 续跑时节点从头重跑</text>
+<text x="54" y="290" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">interrupt() 之前的代码会再执行一次 → 副作用（发邮件、扣款）要幂等，或移到 interrupt() 之后</text>
+<text x="54" y="310" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">不要用 try/except 包住 interrupt()（会吞掉暂停信号）</text>
+<text x="54" y="330" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">多个 interrupt 按调用顺序配对 → 别放在条件/随机循环里</text>
+<rect x="720" y="240" width="640" height="120" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="734" y="266" text-anchor="start" font-size="14" font-weight="700" fill="#f1f5f9">前置条件 &amp; 读取</text>
+<text x="734" y="290" text-anchor="start" font-size="12" fill="#f1f5f9" opacity="0.92">compile(checkpointer=…) + config={'configurable': {'thread_id': …}}</text>
+<text x="734" y="310" text-anchor="start" font-size="12" fill="#f1f5f9" opacity="0.92">待处理中断：result['__interrupt__']  或  graph.get_state(cfg).interrupts</text>
+<text x="734" y="330" text-anchor="start" font-size="12" fill="#f1f5f9" opacity="0.92">并行分支多个中断：Command(resume={interrupt_id: 值, ...}) 一次全部恢复</text>
+<text x="40" y="400" text-anchor="start" font-size="13" fill="#fbbf24">对比：interrupt_before=['tools'] 是「到这个节点统一停」，不带 payload、拿不到人的回复 → 官方现定位为调试工具；NodeInterrupt 已弃用。</text>
+<text x="40" y="430" text-anchor="start" font-size="13" fill="#94a3b8">SDK 侧完全对称：client.runs.stream(thread_id, assistant, command=Command(resume=值))；Studio 里可直接点续跑。</text>
+</svg>

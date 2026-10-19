@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 3460" font-family="'Helvetica Neue',Arial,sans-serif">
+  <style>
+    .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+    .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#B45309} .cSlate{fill:#334155}
+    .cGray{fill:#94A3B8} .cCode{fill:#6D28D9}
+    text{font-size:15px}
+    .title{font-size:25px;font-weight:700}
+    .sub{font-size:16px}
+    .sec{font-size:19px;font-weight:700}
+    .b{font-weight:700}
+    .sm{font-size:13px}
+    .mono{font-family:'DejaVu Sans Mono','Courier New',monospace}
+  </style>
+
+  <!-- WHITE BACKGROUND -->
+  <rect x="0" y="0" width="1200" height="3460" fill="#FFFFFF"/>
+
+  <!-- ============ TITLE ============ -->
+  <text x="600" y="52" text-anchor="middle" class="title cPink" xml:space="preserve">Agent Skills with Anthropic</text>
+  <text x="600" y="84" text-anchor="middle" class="sub cSlate" xml:space="preserve">Why Use Skills? — Part II</text>
+
+  <!-- ============ ESSENCE ============ -->
+  <rect x="60" y="106" width="1080" height="124" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="84" y="146" class="cSlate" xml:space="preserve"><tspan class="b cSlate">Essence:</tspan> A <tspan class="b cSlate">skill</tspan> is a folder of instructions, scripts, and assets that an agent loads on demand. Skills give a</text>
+  <text x="84" y="174" class="cSlate" xml:space="preserve">simple general-purpose agent the <tspan class="b cSlate">domain expertise</tspan>, <tspan class="b cSlate">repeatable workflows</tspan>, and <tspan class="b cSlate">new capabilities</tspan> it lacks — and</text>
+  <text x="84" y="202" class="cSlate" xml:space="preserve">they are now an <tspan class="b cSlate">open standard</tspan>, so one skill works across many different AI products.</text>
+
+  <!-- ============ SECTION 1: WHAT IS A SKILL ============ -->
+  <text x="60" y="256" class="sec cBlue" xml:space="preserve">📁 What is an Agent Skill?</text>
+  <rect x="60" y="272" width="1080" height="500" rx="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/>
+
+  <text x="84" y="308" class="cSlate" xml:space="preserve">• A skill is a <tspan class="b cBlue">lightweight, open format</tspan> for extending what an AI agent can do.</text>
+  <text x="84" y="336" class="cSlate" xml:space="preserve">• A skill is a <tspan class="b cBlue">folder of organized files</tspan>: a <tspan class="mono cCode">SKILL.md</tspan> file plus subfolders that hold instructions,</text>
+  <text x="84" y="360" class="cSlate" xml:space="preserve">  scripts, images, and other resources it can reference.</text>
+  <text x="84" y="388" class="cSlate" xml:space="preserve">• The <tspan class="mono cCode">SKILL.md</tspan> is not just text — it can <tspan class="b cBlue">point to scripts</tspan> and say when to run them (for</text>
+  <text x="84" y="412" class="cSlate" xml:space="preserve">  example, a PDF skill that converts pages to images or fills form fields).</text>
+
+  <!-- Figure band: folder tree + filesystem + agent -->
+  <!-- folder tree box -->
+  <rect x="84" y="440" width="386" height="308" rx="10" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5"/>
+  <text x="106" y="474" class="mono b cBlue" xml:space="preserve">designing-newsletters/</text>
+  <text x="130" y="502" class="mono cSlate" xml:space="preserve">├─ </text><text x="176" y="502" class="mono cBlue" xml:space="preserve">SKILL.md</text>
+  <text x="130" y="530" class="mono cSlate" xml:space="preserve">├─ </text><text x="176" y="530" class="mono cOrange" xml:space="preserve">references/</text>
+  <text x="154" y="558" class="mono cSlate" xml:space="preserve">└─ </text><text x="200" y="558" class="mono cOrange" xml:space="preserve">style-guide.md</text>
+  <text x="130" y="586" class="mono cSlate" xml:space="preserve">└─ </text><text x="176" y="586" class="mono cGreen" xml:space="preserve">assets/</text>
+  <text x="154" y="614" class="mono cSlate" xml:space="preserve">├─ </text><text x="200" y="614" class="mono cGreen" xml:space="preserve">header.png</text>
+  <text x="154" y="642" class="mono cSlate" xml:space="preserve">├─ </text><text x="200" y="642" class="mono cTeal" xml:space="preserve">icons/</text>
+  <text x="154" y="670" class="mono cSlate" xml:space="preserve">└─ </text><text x="200" y="670" class="mono cGreen" xml:space="preserve">templates/</text>
+  <text x="178" y="698" class="mono cSlate" xml:space="preserve">├─ </text><text x="224" y="698" class="mono cGreen" xml:space="preserve">newsletter.html</text>
+  <text x="178" y="726" class="mono cSlate" xml:space="preserve">└─ </text><text x="224" y="726" class="mono cGreen" xml:space="preserve">layout.docx</text>
+
+  <!-- filesystem box -->
+  <rect x="560" y="480" width="220" height="228" rx="10" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5"/>
+  <text x="670" y="514" text-anchor="middle" class="cSlate b" xml:space="preserve">Filesystem</text>
+  <rect x="586" y="530" width="168" height="46" rx="8" fill="#DDD6FE"/>
+  <text x="670" y="559" text-anchor="middle" class="cSlate" xml:space="preserve">Skill</text>
+  <rect x="586" y="586" width="168" height="46" rx="8" fill="#DDD6FE"/>
+  <text x="670" y="615" text-anchor="middle" class="cSlate" xml:space="preserve">Skill</text>
+  <rect x="586" y="642" width="168" height="46" rx="8" fill="#DDD6FE"/>
+  <text x="670" y="671" text-anchor="middle" class="cSlate" xml:space="preserve">Skill</text>
+
+  <!-- agent box -->
+  <rect x="900" y="520" width="216" height="148" rx="12" fill="#EDE7D9" stroke="#C9BE9E" stroke-width="1.5"/>
+  <text x="1008" y="600" text-anchor="middle" class="cSlate b" font-size="19" xml:space="preserve">Agent</text>
+
+  <!-- arrow: Agent -> Filesystem (horizontal, own lane) -->
+  <line x1="898" y1="594" x2="796" y2="594" stroke="#334155" stroke-width="2"/>
+  <polygon points="796,594 810,588 810,600" fill="#334155"/>
+  <text x="847" y="576" text-anchor="middle" class="sm cGray" xml:space="preserve">loads</text>
+
+  <!-- ============ SECTION 2: WHY (single -> general purpose) ============ -->
+  <text x="60" y="826" class="sec cOrange" xml:space="preserve">🤖 Why Skills? From single-purpose agents to one general agent</text>
+  <rect x="60" y="842" width="1080" height="470" rx="12" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.5"/>
+
+  <text x="84" y="878" class="cSlate" xml:space="preserve">We used to build a <tspan class="b cOrange">separate agent for each job</tspan> — coding, research, finance, marketing — each with</text>
+  <text x="84" y="902" class="cSlate" xml:space="preserve">its own tools and context. But under the hood they all need the same thing: a <tspan class="b cOrange">simple scaffolding</tspan>.</text>
+
+  <!-- OLD side row of agent chips -->
+  <text x="84" y="946" class="cSlate b" xml:space="preserve">Old idea: many single-purpose agents</text>
+  <rect x="84" y="960" width="228" height="64" rx="10" fill="#FFFFFF" stroke="#FDBA74" stroke-width="1.5"/>
+  <text x="198" y="998" text-anchor="middle" class="cSlate" xml:space="preserve">Coding Agent</text>
+  <rect x="330" y="960" width="228" height="64" rx="10" fill="#FFFFFF" stroke="#FDBA74" stroke-width="1.5"/>
+  <text x="444" y="998" text-anchor="middle" class="cSlate" xml:space="preserve">Research Agent</text>
+  <rect x="576" y="960" width="228" height="64" rx="10" fill="#FFFFFF" stroke="#FDBA74" stroke-width="1.5"/>
+  <text x="690" y="998" text-anchor="middle" class="cSlate" xml:space="preserve">Finance Agent</text>
+  <rect x="822" y="960" width="228" height="64" rx="10" fill="#FFFFFF" stroke="#FDBA74" stroke-width="1.5"/>
+  <text x="936" y="998" text-anchor="middle" class="cSlate" xml:space="preserve">Marketing Agent</text>
+
+  <!-- down arrow (vertical, own lane, centered) -->
+  <line x1="600" y1="1036" x2="600" y2="1074" stroke="#334155" stroke-width="2"/>
+  <polygon points="600,1074 594,1060 606,1060" fill="#334155"/>
+
+  <!-- NEW side: general purpose agent -->
+  <text x="84" y="1110" class="cSlate b" xml:space="preserve">New idea: one general-purpose agent — code is the universal interface</text>
+
+  <rect x="84" y="1126" width="300" height="150" rx="12" fill="#EDE7D9" stroke="#C9BE9E" stroke-width="1.5"/>
+  <text x="234" y="1162" text-anchor="middle" class="cSlate b" font-size="17" xml:space="preserve">General Agent</text>
+  <rect x="128" y="1184" width="88" height="60" rx="8" fill="#B8860B"/>
+  <text x="172" y="1220" text-anchor="middle" fill="#FFFFFF" class="b" xml:space="preserve">LLM</text>
+  <rect x="252" y="1184" width="88" height="60" rx="8" fill="#FFFFFF" stroke="#C9BE9E" stroke-width="1.5"/>
+  <text x="296" y="1220" text-anchor="middle" class="mono cSlate" xml:space="preserve">&lt;/&gt;</text>
+
+  <!-- arrow to skills need (horizontal, own lane) -->
+  <line x1="400" y1="1201" x2="452" y2="1201" stroke="#334155" stroke-width="2"/>
+  <polygon points="452,1201 438,1195 438,1207" fill="#334155"/>
+
+  <rect x="470" y="1150" width="646" height="102" rx="12" fill="#FFFFFF" stroke="#FDBA74" stroke-width="1.5"/>
+  <text x="494" y="1186" class="cSlate" xml:space="preserve">• <tspan class="b cOrange">Simple scaffolding:</tspan> just <tspan class="mono cCode">bash</tspan> and a <tspan class="mono cCode">filesystem</tspan> — easy to test, scale, understand.</text>
+  <text x="494" y="1214" class="cSlate" xml:space="preserve">• But it still needs <tspan class="b cOrange">context</tspan> and <tspan class="b cOrange">domain expertise</tspan> to do the job <tspan class="b cOrange">reliably</tspan>.</text>
+  <text x="494" y="1242" class="cSlate" xml:space="preserve">• <tspan class="b cOrange">Skills fill that gap</tspan> — and travel with the agent across ecosystems.</text>
+
+  <!-- ============ SECTION 3: THREE THINGS SKILLS PROVIDE ============ -->
+  <text x="60" y="1366" class="sec cTeal" xml:space="preserve">🎯 What Skills give an agent (loaded on demand)</text>
+  <rect x="60" y="1382" width="1080" height="322" rx="12" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.5"/>
+
+  <text x="84" y="1418" class="cSlate" xml:space="preserve">Skills provide <tspan class="b cTeal">procedural knowledge</tspan> and company-, team-, and user-specific context. Three kinds:</text>
+
+  <!-- three pillars, each a full-width row: label chip + use cases -->
+  <!-- pillar 1 -->
+  <rect x="84" y="1436" width="220" height="70" rx="10" fill="#DDD6FE"/>
+  <text x="194" y="1466" text-anchor="middle" class="cSlate b" xml:space="preserve">Domain</text>
+  <text x="194" y="1489" text-anchor="middle" class="cSlate b" xml:space="preserve">Expertise</text>
+  <text x="330" y="1460" class="cSlate" xml:space="preserve">Do a task <tspan class="b cTeal">your way</tspan>: brand guidelines and templates, legal review</text>
+  <text x="330" y="1484" class="cSlate" xml:space="preserve">processes, data analysis methodologies.</text>
+
+  <!-- pillar 2 -->
+  <rect x="84" y="1524" width="220" height="70" rx="10" fill="#DDD6FE"/>
+  <text x="194" y="1554" text-anchor="middle" class="cSlate b" xml:space="preserve">Repeatable</text>
+  <text x="194" y="1577" text-anchor="middle" class="cSlate b" xml:space="preserve">Workflow</text>
+  <text x="330" y="1548" class="cSlate" xml:space="preserve"><tspan class="b cTeal">Predictable steps</tspan> in a non-deterministic system: weekly marketing</text>
+  <text x="330" y="1572" class="cSlate" xml:space="preserve">campaign review, customer call prep, quarterly business review.</text>
+
+  <!-- pillar 3 -->
+  <rect x="84" y="1612" width="220" height="70" rx="10" fill="#DDD6FE"/>
+  <text x="194" y="1642" text-anchor="middle" class="cSlate b" xml:space="preserve">New</text>
+  <text x="194" y="1665" text-anchor="middle" class="cSlate b" xml:space="preserve">Capabilities</text>
+  <text x="330" y="1636" class="cSlate" xml:space="preserve">Things it <tspan class="b cTeal">could not do before</tspan>: create presentations, generate Excel</text>
+  <text x="330" y="1660" class="cSlate" xml:space="preserve">sheets or PDF reports, build MCP servers, run scripts when needed.</text>
+
+  <!-- ============ SECTION 4: WITHOUT SKILLS ============ -->
+  <text x="60" y="1758" class="sec cPink" xml:space="preserve">🚫 The old way — without Skills</text>
+  <rect x="60" y="1774" width="1080" height="140" rx="12" fill="#FEF2F4" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="84" y="1810" class="cSlate" xml:space="preserve">• You had to <tspan class="b cPink">describe your instructions and requirements every time</tspan>.</text>
+  <text x="84" y="1842" class="cSlate" xml:space="preserve">• You had to <tspan class="b cPink">bundle all references and supporting files</tspan> into context every time.</text>
+  <text x="84" y="1874" class="cSlate" xml:space="preserve">• You had to work hard to keep the <tspan class="b cPink">workflow and outputs consistent</tspan> across people and runs.</text>
+
+  <!-- ============ SECTION 5: PORTABLE ============ -->
+  <text x="60" y="1968" class="sec cGreen" xml:space="preserve">🔁 Skills are Portable</text>
+  <rect x="60" y="1984" width="1080" height="228" rx="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+  <text x="84" y="2020" class="cSlate" xml:space="preserve">Because Skills are an <tspan class="b cGreen">open standard</tspan>, one skill runs unchanged in Claude Code, Claude.ai, the</text>
+  <text x="84" y="2044" class="cSlate" xml:space="preserve">Claude Agent SDK and API — and in a growing list of other agent products. Build once, share, scale.</text>
+
+  <!-- figure: two products -> one skill (orthogonal arrows) -->
+  <rect x="150" y="2072" width="280" height="118" rx="12" fill="#EDE7D9" stroke="#C9BE9E" stroke-width="1.5"/>
+  <text x="290" y="2110" text-anchor="middle" class="cSlate b" xml:space="preserve">Claude Code</text>
+  <text x="290" y="2150" text-anchor="middle" class="cSlate sm" xml:space="preserve">agent + code interface</text>
+
+  <rect x="510" y="2101" width="180" height="60" rx="10" fill="#DDD6FE"/>
+  <text x="600" y="2137" text-anchor="middle" class="cSlate b" xml:space="preserve">Skill</text>
+
+  <rect x="770" y="2072" width="280" height="118" rx="12" fill="#EDE7D9" stroke="#C9BE9E" stroke-width="1.5"/>
+  <text x="910" y="2110" text-anchor="middle" class="cSlate b" xml:space="preserve">Agent built with SDK</text>
+  <text x="910" y="2150" text-anchor="middle" class="cSlate sm" xml:space="preserve">API, Gemini CLI, Codex…</text>
+
+  <!-- arrows into the shared skill (horizontal lanes) -->
+  <line x1="432" y1="2131" x2="502" y2="2131" stroke="#334155" stroke-width="2"/>
+  <polygon points="502,2131 488,2125 488,2137" fill="#334155"/>
+  <line x1="768" y1="2131" x2="698" y2="2131" stroke="#334155" stroke-width="2"/>
+  <polygon points="698,2131 712,2125 712,2137" fill="#334155"/>
+
+  <!-- ============ SECTION 6: COMPOSABLE ============ -->
+  <text x="60" y="2268" class="sec cPurple" xml:space="preserve">🧩 Skills are Composable</text>
+  <rect x="60" y="2284" width="1080" height="200" rx="12" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1.5"/>
+  <text x="84" y="2320" class="cSlate" xml:space="preserve">Combine custom and built-in skills into one <tspan class="b cPurple">complex, predictable workflow</tspan>. Each box below is one</text>
+  <text x="84" y="2344" class="cSlate" xml:space="preserve">skill; the agent chains them left to right:</text>
+
+  <!-- four skill boxes joined by orthogonal arrows -->
+  <rect x="84" y="2372" width="228" height="94" rx="10" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="1.5"/>
+  <text x="198" y="2400" text-anchor="middle" class="cSlate b sm" xml:space="preserve">BigQuery skill</text>
+  <text x="198" y="2426" text-anchor="middle" class="cSlate sm" xml:space="preserve">Provide marketing</text>
+  <text x="198" y="2446" text-anchor="middle" class="cSlate sm" xml:space="preserve">data schema</text>
+
+  <rect x="352" y="2372" width="228" height="94" rx="10" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="1.5"/>
+  <text x="466" y="2400" text-anchor="middle" class="cSlate b sm" xml:space="preserve">Campaign analysis</text>
+  <text x="466" y="2426" text-anchor="middle" class="cSlate sm" xml:space="preserve">Analyze the</text>
+  <text x="466" y="2446" text-anchor="middle" class="cSlate sm" xml:space="preserve">marketing data</text>
+
+  <rect x="620" y="2372" width="228" height="94" rx="10" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="1.5"/>
+  <text x="734" y="2400" text-anchor="middle" class="cSlate b sm" xml:space="preserve">Company brand</text>
+  <text x="734" y="2426" text-anchor="middle" class="cSlate sm" xml:space="preserve">Fonts, colors,</text>
+  <text x="734" y="2446" text-anchor="middle" class="cSlate sm" xml:space="preserve">logos, guidelines</text>
+
+  <rect x="888" y="2372" width="228" height="94" rx="10" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="1.5"/>
+  <text x="1002" y="2400" text-anchor="middle" class="cSlate b sm" xml:space="preserve">PowerPoint skill</text>
+  <text x="1002" y="2426" text-anchor="middle" class="cSlate sm" xml:space="preserve">Create the</text>
+  <text x="1002" y="2446" text-anchor="middle" class="cSlate sm" xml:space="preserve">slide deck</text>
+
+  <!-- connector arrows between boxes (horizontal, own lanes) -->
+  <line x1="314" y1="2419" x2="350" y2="2419" stroke="#7C3AED" stroke-width="2"/>
+  <polygon points="350,2419 338,2413 338,2425" fill="#7C3AED"/>
+  <line x1="582" y1="2419" x2="618" y2="2419" stroke="#7C3AED" stroke-width="2"/>
+  <polygon points="618,2419 606,2413 606,2425" fill="#7C3AED"/>
+  <line x1="850" y1="2419" x2="886" y2="2419" stroke="#7C3AED" stroke-width="2"/>
+  <polygon points="886,2419 874,2413 874,2425" fill="#7C3AED"/>
+
+  <!-- ============ SECTION 7: PROGRESSIVE DISCLOSURE ============ -->
+  <text x="60" y="2538" class="sec cBlue" xml:space="preserve">🪟 How Skills Work: Progressive Disclosure</text>
+  <rect x="60" y="2554" width="1080" height="442" rx="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/>
+  <text x="84" y="2590" class="cSlate" xml:space="preserve">You can have <tspan class="b cBlue">hundreds of skills</tspan>. To protect the context window, a skill is loaded in <tspan class="b cBlue">three stages</tspan> —</text>
+  <text x="84" y="2614" class="cSlate" xml:space="preserve">only what is needed enters context. The context window is a public good: fewer tokens = clearer answers.</text>
+
+  <!-- Tier 1 -->
+  <rect x="84" y="2636" width="1032" height="72" rx="10" fill="#DBEAFE" stroke="#60A5FA" stroke-width="1.5"/>
+  <text x="108" y="2668" class="cSlate" xml:space="preserve"><tspan class="b cBlue">1 · Metadata</tspan> — the skill's name and description.</text>
+  <text x="108" y="2692" class="cSlate" xml:space="preserve"><tspan class="b cBlue">Always loaded</tspan> so the agent knows the skill exists and when to trigger it (~30–50 tokens each).</text>
+
+  <!-- Tier 2 -->
+  <rect x="84" y="2720" width="1032" height="72" rx="10" fill="#E0F2FE" stroke="#7DD3FC" stroke-width="1.5"/>
+  <text x="108" y="2752" class="cSlate" xml:space="preserve"><tspan class="b cBlue">2 · Instructions</tspan> — the body of <tspan class="mono cCode">SKILL.md</tspan>.</text>
+  <text x="108" y="2776" class="cSlate" xml:space="preserve"><tspan class="b cBlue">Loaded only when the skill is triggered</tspan> — the full steps enter context at that moment, not before.</text>
+
+  <!-- Tier 3 -->
+  <rect x="84" y="2804" width="1032" height="82" rx="10" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5"/>
+  <text x="108" y="2836" class="cSlate" xml:space="preserve"><tspan class="b cAmber">3 · Resources</tspan> — extra reference files and scripts.</text>
+  <text x="108" y="2860" class="cSlate" xml:space="preserve"><tspan class="b cAmber">Loaded only as needed.</tspan> Scripts run through <tspan class="mono cCode">bash</tspan> separately, so their code never pollutes the</text>
+  <text x="108" y="2882" class="cSlate" xml:space="preserve">context window — the agent adds only what is truly necessary.</text>
+
+  <text x="84" y="2932" class="cSlate" xml:space="preserve"><tspan class="b cBlue">Result:</tspan> Claude uses <tspan class="mono cCode">bash</tspan> + a filesystem to read files and run scripts on demand, keeping the</text>
+  <text x="84" y="2956" class="cSlate" xml:space="preserve">context small while still reaching a large library of skills.</text>
+
+  <!-- ============ SECTION 8: 2026 INTEL ============ -->
+  <text x="60" y="3040" class="sec cAmber" xml:space="preserve">📡 2026 intel</text>
+  <rect x="60" y="3056" width="1080" height="196" rx="12" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5"/>
+  <text x="84" y="3092" class="cSlate" xml:space="preserve">• On <tspan class="b cAmber">Dec 18, 2025</tspan>, Anthropic published the Agent Skills specification as a <tspan class="b cAmber">public open standard</tspan>:</text>
+  <text x="84" y="3116" class="cSlate" xml:space="preserve">  a folder + a <tspan class="mono cCode">SKILL.md</tspan> (YAML frontmatter) + the three-tier progressive-disclosure design.</text>
+  <text x="84" y="3148" class="cSlate" xml:space="preserve">• By <tspan class="b cAmber">early March 2026</tspan> (~12 weeks later), OpenAI Codex, Microsoft, JetBrains, Cursor, Gemini CLI,</text>
+  <text x="84" y="3172" class="cSlate" xml:space="preserve">  Block's Goose and 25+ other agent products had shipped compatible implementations.</text>
+  <text x="84" y="3204" class="cSlate" xml:space="preserve">• A skill you build for Claude runs <tspan class="b cAmber">identically</tspan> in those tools — one format, 20+ platforms.</text>
+  <text x="84" y="3236" class="cSlate sm" xml:space="preserve">Sources listed in the chat reply.</text>
+
+  <!-- ============ KEY INSIGHT ============ -->
+  <text x="60" y="3296" class="sec cTeal" xml:space="preserve">🔑 Key insight</text>
+  <rect x="60" y="3312" width="1080" height="118" rx="12" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.5"/>
+  <text x="84" y="3348" class="cSlate" xml:space="preserve">Skills turn a <tspan class="b cTeal">simple, general agent</tspan> into a reliable expert without bloating it. Package the <tspan class="b cTeal">how</tspan></text>
+  <text x="84" y="3372" class="cSlate" xml:space="preserve">once — instructions, scripts, assets — and progressive disclosure loads it only when relevant. The</text>
+  <text x="84" y="3396" class="cSlate" xml:space="preserve">agent stays <tspan class="b cTeal">portable, composable, and cheap on context</tspan> while gaining deep, repeatable skill.</text>
+</svg>

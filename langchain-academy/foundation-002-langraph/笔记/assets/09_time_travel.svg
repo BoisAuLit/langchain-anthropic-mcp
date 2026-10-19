@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 440" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="440" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">Time travel：checkpoint 链 → 重放（replay）与分叉（fork）</text>
+<rect x="50" y="80" width="140" height="60" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="120.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">cp0</text>
+<text x="120.0" y="130" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">next: 输入</text>
+<path d="M192,110 L288,110" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<rect x="290" y="80" width="140" height="60" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="360.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">cp1</text>
+<text x="360.0" y="130" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">next: assistant</text>
+<path d="M432,110 L528,110" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<rect x="530" y="80" width="140" height="60" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="600.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">cp2</text>
+<text x="600.0" y="130" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">next: tools</text>
+<path d="M672,110 L768,110" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<rect x="770" y="80" width="140" height="60" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="840.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">cp3</text>
+<text x="840.0" y="130" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">next: assistant</text>
+<path d="M912,110 L1008,110" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<rect x="1010" y="80" width="140" height="60" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1080.0" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">cp4</text>
+<text x="1080.0" y="130" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">next: END</text>
+<text x="50" y="168" text-anchor="start" font-size="12" fill="#bbf7d0">↑ get_state_history(cfg) 返回这条链（新 → 旧），每个元素是 StateSnapshot：.values .next .config</text>
+<rect x="40" y="190" width="400" height="108" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="240.0" y="216" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">重放 Replay</text>
+<text x="240.0" y="240" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">graph.stream(None, cp1.config)</text>
+<text x="240.0" y="260" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">cp1 已执行过 → 不重新算，只重播其后的步骤</text>
+<text x="240.0" y="280" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">用途：复现 bug、看当时的 state</text>
+<path d="M240,190 L330,142" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ac)"/>
+<rect x="470" y="190" width="440" height="108" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="690.0" y="216" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">分叉 Fork</text>
+<text x="690.0" y="240" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">new_cfg = update_state(cp1.config, {...}) → 新 checkpoint cp1'</text>
+<text x="690.0" y="260" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">graph.stream(None, new_cfg) → 从 cp1' 真正重新执行</text>
+<text x="690.0" y="280" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">messages 带原 id = 覆盖；不带 id = 追加</text>
+<rect x="960" y="200" width="140" height="60" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1030.0" y="226" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">cp1'</text>
+<text x="1030.0" y="250" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">next: assistant</text>
+<path d="M390,142 Q700,150 958,228" fill="none" stroke="#a78bfa" stroke-width="2" marker-end="url(#ap)"/>
+<path d="M1102,230 L1180,230" fill="none" stroke="#a78bfa" stroke-width="2" marker-end="url(#ap)"/>
+<rect x="1182" y="200" width="160" height="60" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1262.0" y="226" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">cp2'</text>
+<text x="1262.0" y="250" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">新分支继续</text>
+<text x="40" y="335" text-anchor="start" font-size="13" fill="#fde047" font-weight="700">fork 的价值：前面昂贵的步骤（抓日志、RAG、分析）只做一次，从同一 checkpoint 并行试多种 prompt / 模型 / 策略。</text>
+<text x="40" y="400" text-anchor="start" font-size="13" fill="#94a3b8">SDK：client.threads.get_history(tid) · client.threads.update_state(tid, values, checkpoint_id=…) · client.runs.stream(tid, asst, input=None, checkpoint_id=…)</text>
+</svg>

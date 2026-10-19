@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1030" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="1030" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">002 子图：父图 + 两个子图的全部 state（key、channel 类型、真实运行值）</text>
+<rect x="30" y="55" width="660" height="160" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="75" font-size="13" font-weight="700" fill="#94a3b8">父图 EntryGraphState —— 5 个 channel</text>
+<rect x="50" y="80" width="300" height="22" rx="11.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="200.0" y="95.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">raw_logs: List[Log]</text>
+<text x="365" y="96" text-anchor="start" font-size="12" fill="#94a3b8">LastValue</text>
+<rect x="50" y="106" width="300" height="22" rx="11.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="200.0" y="121.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">cleaned_logs: List[Log]</text>
+<text x="365" y="122" text-anchor="start" font-size="12" fill="#94a3b8">LastValue</text>
+<rect x="50" y="132" width="300" height="22" rx="11.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="200.0" y="147.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">fa_summary: str</text>
+<text x="365" y="148" text-anchor="start" font-size="12" fill="#94a3b8">LastValue</text>
+<rect x="50" y="158" width="300" height="22" rx="11.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="200.0" y="173.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">report: str</text>
+<text x="365" y="174" text-anchor="start" font-size="12" fill="#94a3b8">LastValue</text>
+<rect x="50" y="184" width="300" height="22" rx="11.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="200.0" y="199.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">processed_logs: Annotated[List, add]</text>
+<text x="365" y="200" text-anchor="start" font-size="12" fill="#94a3b8">BinaryOperatorAggregate(reducer=add)</text>
+<rect x="720" y="55" width="650" height="160" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="732" y="75" font-size="13" font-weight="700" fill="#94a3b8">Log —— 一条日志（TypedDict）</text>
+<text x="740" y="95" text-anchor="start" font-size="13" fill="#e2e8f0">必填：id · question · answer</text>
+<text x="740" y="118" text-anchor="start" font-size="13" fill="#e2e8f0">Optional：docs · grade · grader · feedback</text>
+<text x="740" y="148" text-anchor="start" font-size="13" fill="#fde047" font-weight="700">本课输入 raw_logs = [log1, log2]：</text>
+<text x="740" y="170" text-anchor="start" font-size="12" fill="#bbf7d0">log1 = {id:"1", question:"How can I import ChatOllama?", answer:…}            ← 无 grade</text>
+<text x="740" y="192" text-anchor="start" font-size="12" fill="#fca5a5">log2 = {id:"2", question:"…Chroma…", answer:…, grade:0, grader:…, feedback:…}   ← 有 grade = 失败</text>
+<rect x="30" y="400" width="80" height="32" rx="16.0" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+<text x="70.0" y="420.68" text-anchor="middle" font-size="13" font-weight="600" fill="#94a3b8">START</text>
+<rect x="130" y="375" width="190" height="82" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="225.0" y="401" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">clean_logs</text>
+<text x="225.0" y="425" text-anchor="middle" font-size="12" fill="#f1f5f9" opacity="0.92">读 raw_logs</text>
+<text x="225.0" y="445" text-anchor="middle" font-size="12" fill="#f1f5f9" opacity="0.92">写 cleaned_logs = raw_logs</text>
+<path d="M112,416 L126,416" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="350" y="235" width="760" height="205" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="362" y="255" font-size="13" font-weight="700" fill="#94a3b8">failure_analysis = fa_builder.compile()   state=FailureAnalysisState   output_schema=FailureAnalysisOutputState</text>
+<rect x="370" y="265" width="170" height="90" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="455.0" y="291" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">进入时拿到</text>
+<text x="455.0" y="315" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">cleaned_logs=[log1,log2]</text>
+<text x="455.0" y="334" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">processed_logs=[]</text>
+<text x="455.0" y="353" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">（父∩子 且有值的 key）</text>
+<rect x="560" y="265" width="250" height="90" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="685.0" y="291" text-anchor="middle" font-size="13" font-weight="700" fill="#ddd6fe">get_failures</text>
+<text x="685.0" y="315" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">写 failures=[log2]</text>
+<text x="685.0" y="334" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">（私有 key，不会回父图）</text>
+<rect x="830" y="265" width="260" height="90" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="960.0" y="291" text-anchor="middle" font-size="13" font-weight="700" fill="#ddd6fe">generate_summary</text>
+<text x="960.0" y="315" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">写 fa_summary="Poor quality retrieval…"</text>
+<text x="960.0" y="334" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">写 processed_logs=</text>
+<text x="960.0" y="353" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">  [failure-analysis-on-log-2]</text>
+<path d="M542,310 L556,310" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M812,310 L826,310" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<text x="370" y="383" text-anchor="start" font-size="12" fill="#e2e8f0">FailureAnalysisState: cleaned_logs · failures · fa_summary · processed_logs</text>
+<text x="370" y="405" text-anchor="start" font-size="12" fill="#fde047" font-weight="700">OutputState 只放行 fa_summary · processed_logs → 回父图；cleaned_logs / failures 留在子图</text>
+<text x="370" y="427" text-anchor="start" font-size="11" fill="#94a3b8">子图里 processed_logs 是 LastValue（无 reducer）；回到父图后才按 add 合并</text>
+<rect x="350" y="470" width="760" height="205" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="362" y="490" font-size="13" font-weight="700" fill="#94a3b8">question_summarization = qs_builder.compile()   state=QuestionSummarizationState   output_schema=QuestionSummarizationOutputState</text>
+<rect x="370" y="500" width="170" height="90" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="455.0" y="526" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">进入时拿到</text>
+<text x="455.0" y="550" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">cleaned_logs=[log1,log2]</text>
+<text x="455.0" y="569" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">processed_logs=[]</text>
+<text x="455.0" y="588" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">（父∩子 且有值的 key）</text>
+<rect x="560" y="500" width="250" height="90" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="685.0" y="526" text-anchor="middle" font-size="13" font-weight="700" fill="#fed7aa">generate_summary</text>
+<text x="685.0" y="550" text-anchor="middle" font-size="11" fill="#fed7aa" opacity="0.92">写 qs_summary="Questions…"（私有）</text>
+<text x="685.0" y="569" text-anchor="middle" font-size="11" fill="#fed7aa" opacity="0.92">写 processed_logs=</text>
+<text x="685.0" y="588" text-anchor="middle" font-size="11" fill="#fed7aa" opacity="0.92">  [summary-on-log-1, summary-on-log-2]</text>
+<rect x="830" y="500" width="260" height="90" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="960.0" y="526" text-anchor="middle" font-size="13" font-weight="700" fill="#fed7aa">send_to_slack</text>
+<text x="960.0" y="550" text-anchor="middle" font-size="11" fill="#fed7aa" opacity="0.92">读 qs_summary</text>
+<text x="960.0" y="569" text-anchor="middle" font-size="11" fill="#fed7aa" opacity="0.92">写 report="foo bar baz"</text>
+<path d="M542,545 L556,545" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M812,545 L826,545" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<text x="370" y="618" text-anchor="start" font-size="12" fill="#e2e8f0">QuestionSummarizationState: cleaned_logs · qs_summary · report · processed_logs</text>
+<text x="370" y="640" text-anchor="start" font-size="12" fill="#fde047" font-weight="700">OutputState 只放行 report · processed_logs → 回父图；cleaned_logs / qs_summary 留在子图</text>
+<text x="370" y="662" text-anchor="start" font-size="11" fill="#94a3b8">子图里 processed_logs 是 LastValue（无 reducer）；回到父图后才按 add 合并</text>
+<path d="M322,400 Q336,330 346,330" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<path d="M322,432 Q336,575 346,575" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="1250" y="400" width="80" height="32" rx="16.0" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+<text x="1290.0" y="420.68" text-anchor="middle" font-size="13" font-weight="600" fill="#94a3b8">END</text>
+<path d="M1112,330 Q1180,330 1246,410" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<path d="M1112,575 Q1180,575 1246,422" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<text x="1140" y="300" text-anchor="start" font-size="12" fill="#fbbf24" font-weight="700">并行（同一 super-step）</text>
+<text x="30" y="705" text-anchor="start" font-size="15" fill="#fde047" font-weight="700">父图 5 个 channel 的演变（本机实测，顺序：失败分析先回来）</text>
+<rect x="30" y="720" width="325" height="160" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="44" y="746" text-anchor="start" font-size="13" font-weight="700" fill="#e2e8f0">① invoke 输入后</text>
+<text x="44" y="770" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">raw_logs = [log1, log2]</text>
+<text x="44" y="789" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">cleaned_logs = ∅</text>
+<text x="44" y="808" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">fa_summary = ∅</text>
+<text x="44" y="827" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">report = ∅</text>
+<text x="44" y="846" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">processed_logs = []</text>
+<path d="M357,800 L366,800" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="370" y="720" width="325" height="160" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="384" y="746" text-anchor="start" font-size="13" font-weight="700" fill="#f1f5f9">② clean_logs 后</text>
+<text x="384" y="770" text-anchor="start" font-size="11" fill="#f1f5f9" opacity="0.92">raw_logs = [log1, log2]</text>
+<text x="384" y="789" text-anchor="start" font-size="11" fill="#f1f5f9" opacity="0.92">cleaned_logs = [log1, log2]</text>
+<text x="384" y="808" text-anchor="start" font-size="11" fill="#f1f5f9" opacity="0.92">fa_summary = ∅</text>
+<text x="384" y="827" text-anchor="start" font-size="11" fill="#f1f5f9" opacity="0.92">report = ∅</text>
+<text x="384" y="846" text-anchor="start" font-size="11" fill="#f1f5f9" opacity="0.92">processed_logs = []</text>
+<path d="M697,800 L706,800" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="710" y="720" width="325" height="160" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="724" y="746" text-anchor="start" font-size="13" font-weight="700" fill="#ddd6fe">③ failure_analysis 回来</text>
+<text x="724" y="770" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">raw_logs = [log1, log2]</text>
+<text x="724" y="789" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">cleaned_logs = [log1, log2]</text>
+<text x="724" y="808" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">fa_summary = "Poor quality retrieval of Chroma…"</text>
+<text x="724" y="827" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">report = ∅</text>
+<text x="724" y="846" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">processed_logs = ["failure-analysis-on-log-2"]</text>
+<path d="M1037,800 L1046,800" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="1050" y="720" width="325" height="160" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1064" y="746" text-anchor="start" font-size="13" font-weight="700" fill="#fed7aa">④ question_summarization 回来 = 最终</text>
+<text x="1064" y="770" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">raw_logs = [log1, log2]</text>
+<text x="1064" y="789" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">cleaned_logs = [log1, log2]</text>
+<text x="1064" y="808" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">fa_summary = "Poor quality retrieval of Chroma…"</text>
+<text x="1064" y="827" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">report = "foo bar baz"</text>
+<text x="1064" y="846" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">processed_logs = [failure-analysis-on-log-2,</text>
+<text x="1064" y="865" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">    summary-on-log-1, summary-on-log-2]</text>
+<rect x="30" y="895" width="1340" height="120" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="44" y="921" text-anchor="start" font-size="14" font-weight="700" fill="#fde68a">三条规则（均实测）</text>
+<text x="44" y="945" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">① 子图的输入 = 父图当前有值的 channel ∩ 子图 state 的 key（FA 实际收到 cleaned_logs, processed_logs；fa_summary 还没值所以没收到）</text>
+<text x="44" y="965" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">② 子图的输出 = output_schema 里的 key；没写 output_schema 时 4 个 key 全带出 → 两个并行子图都带出 cleaned_logs → 父图 LastValue 被写两次 → InvalidUpdateError</text>
+<text x="44" y="985" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">③ 同名 key 在不同 graph 可以有不同 channel 类型：processed_logs 子图里 LastValue、父图里 add 合并；两个子图各交一份，父图拼成 3 条（顺序看谁先完成）</text>
+</svg>

@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 2920" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="7.5" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748B"/>
+    </marker>
+    <style>
+      .title{font-size:26px;font-weight:700}
+      .sub{font-size:18px;font-weight:400}
+      .h{font-size:19px;font-weight:700}
+      .b{font-size:15px;font-weight:400}
+      .s{font-size:13px;font-weight:400}
+      .tb{font-size:14px;font-weight:400}
+      .lbl{font-size:14px;font-weight:700}
+      .bold{font-weight:700}
+      .mono{font-family:'DejaVu Sans Mono','Courier New',monospace}
+      .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C}
+      .cPurple{fill:#7C3AED} .cPink{fill:#E11D48} .cGreen{fill:#16A34A}
+      .cAmber{fill:#B45309} .cSlate{fill:#334155} .cGray{fill:#94A3B8}
+      .cCode{fill:#6D28D9} .cWhite{fill:#FFFFFF} .cRed{fill:#DC2626}
+    </style>
+  </defs>
+
+  <!-- L11 white background -->
+  <rect x="0" y="0" width="1200" height="2920" fill="#FFFFFF"/>
+
+  <!-- ===== Title ===== -->
+  <text class="title cPink" x="60" y="52" xml:space="preserve">Agent Skills with Anthropic</text>
+  <text class="sub cSlate" x="60" y="86" xml:space="preserve">Skills vs Tools, MCP, and Subagents — how the pieces of the agent ecosystem fit together</text>
+
+  <!-- ===== Essence ===== -->
+  <rect x="60" y="110" width="1080" height="80" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1"/>
+  <text class="b cSlate" x="84" y="142" xml:space="preserve"><tspan class="cBlue bold">Essence:  </tspan>MCP connects the agent to data, tools give raw actions, subagents isolate the</text>
+  <text class="b cSlate" x="84" y="168" xml:space="preserve">work, and skills bundle the repeatable know-how that ties everything together into a workflow.</text>
+
+  <!-- ===== Ecosystem diagram ===== -->
+  <text class="h cBlue" x="60" y="222" xml:space="preserve">The agent ecosystem at a glance</text>
+  <rect x="60" y="238" width="1080" height="430" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- arrows drawn first (below labels) -->
+  <!-- agent -> filesystem (left) -->
+  <line x1="500" y1="375" x2="424" y2="375" stroke="#64748B" stroke-width="2" marker-end="url(#ar)"/>
+  <!-- agent -> MCP bus -->
+  <line x1="700" y1="375" x2="780" y2="375" stroke="#64748B" stroke-width="2"/>
+  <line x1="780" y1="315" x2="780" y2="435" stroke="#64748B" stroke-width="2"/>
+  <line x1="780" y1="315" x2="846" y2="315" stroke="#64748B" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="780" y1="375" x2="846" y2="375" stroke="#64748B" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="780" y1="435" x2="846" y2="435" stroke="#64748B" stroke-width="2" marker-end="url(#ar)"/>
+  <!-- agent -> subagents bus -->
+  <line x1="600" y1="450" x2="600" y2="505" stroke="#64748B" stroke-width="2"/>
+  <line x1="385" y1="505" x2="815" y2="505" stroke="#64748B" stroke-width="2"/>
+  <line x1="385" y1="505" x2="385" y2="536" stroke="#64748B" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="600" y1="505" x2="600" y2="536" stroke="#64748B" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="815" y1="505" x2="815" y2="536" stroke="#64748B" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- Filesystem / Skills card -->
+  <rect x="250" y="300" width="170" height="150" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text class="s cSlate bold" x="335" y="322" text-anchor="middle">Filesystem</text>
+  <rect x="268" y="340" width="134" height="26" rx="5" fill="#DCD8F0" stroke="#B9B2E6" stroke-width="1"/>
+  <text class="s cPurple bold" x="335" y="358" text-anchor="middle">Skill</text>
+  <rect x="268" y="372" width="134" height="26" rx="5" fill="#DCD8F0" stroke="#B9B2E6" stroke-width="1"/>
+  <text class="s cPurple bold" x="335" y="390" text-anchor="middle">Skill</text>
+  <rect x="268" y="404" width="134" height="26" rx="5" fill="#DCD8F0" stroke="#B9B2E6" stroke-width="1"/>
+  <text class="s cPurple bold" x="335" y="422" text-anchor="middle">Skill</text>
+
+  <!-- Agent card -->
+  <rect x="500" y="300" width="200" height="150" rx="12" fill="#ECE6D8" stroke="#C9BCA0" stroke-width="1"/>
+  <text class="b cSlate bold" x="600" y="331" text-anchor="middle">Agent</text>
+  <rect x="525" y="356" width="58" height="38" rx="7" fill="#C8811F" stroke="#A96A16" stroke-width="1"/>
+  <text class="s cWhite bold" x="554" y="380" text-anchor="middle">LLM</text>
+  <rect x="613" y="356" width="56" height="38" rx="5" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1"/>
+  <text class="s cSlate" x="641" y="381" text-anchor="middle">&lt;/&gt;</text>
+  <rect x="545" y="406" width="110" height="32" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text class="s cSlate bold" x="600" y="427" text-anchor="middle">Tools</text>
+
+  <!-- MCP servers -->
+  <rect x="850" y="293" width="210" height="44" rx="7" fill="#CFE3D4" stroke="#86B79A" stroke-width="1"/>
+  <text class="s cSlate bold" x="955" y="320" text-anchor="middle">MCP server 1</text>
+  <rect x="850" y="353" width="210" height="44" rx="7" fill="#CFE3D4" stroke="#86B79A" stroke-width="1"/>
+  <text class="s cSlate bold" x="955" y="380" text-anchor="middle">MCP server 2</text>
+  <rect x="850" y="413" width="210" height="44" rx="7" fill="#CFE3D4" stroke="#86B79A" stroke-width="1"/>
+  <text class="s cSlate bold" x="955" y="440" text-anchor="middle">MCP server 3</text>
+
+  <!-- Subagents -->
+  <rect x="300" y="540" width="170" height="60" rx="8" fill="#ECE6D8" stroke="#C9BCA0" stroke-width="1"/>
+  <text class="b cSlate bold" x="385" y="575" text-anchor="middle">Subagent</text>
+  <rect x="515" y="540" width="170" height="60" rx="8" fill="#ECE6D8" stroke="#C9BCA0" stroke-width="1"/>
+  <text class="b cSlate bold" x="600" y="575" text-anchor="middle">Subagent</text>
+  <rect x="730" y="540" width="170" height="60" rx="8" fill="#ECE6D8" stroke="#C9BCA0" stroke-width="1"/>
+  <text class="b cSlate bold" x="815" y="575" text-anchor="middle">Subagent</text>
+
+  <!-- caption line inside band -->
+  <text class="s cGray" x="600" y="640" text-anchor="middle">One main agent, its skills on the filesystem, MCP servers for data, and subagents it can dispatch.</text>
+
+  <!-- ===== Skills vs MCP ===== -->
+  <text class="h cTeal" x="60" y="700" xml:space="preserve">Skills vs MCP — instructions vs access</text>
+  <rect x="60" y="716" width="1080" height="240" rx="10" fill="#ECFDF5" stroke="#0D9488" stroke-width="1"/>
+  <text class="b cSlate" x="98" y="749" xml:space="preserve"><tspan x="80">•</tspan><tspan x="98" class="cTeal bold">MCP connects your agent to the outside.</tspan><tspan> The Model Context Protocol</tspan><tspan x="98" dy="26">(</tspan><tspan class="cCode mono">MCP</tspan><tspan>) links your agent to external systems and data: a database,</tspan><tspan x="98" dy="26">Google Drive, or any API the model does not already know about.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cTeal bold">Skills teach the agent what to do with that data.</tspan><tspan> A skill is the set</tspan><tspan x="98" dy="26">of instructions that turns raw tools and data into a repeatable workflow,</tspan><tspan x="98" dy="26">like "compute metric X using columns A and B of this table".</tspan><tspan x="80" dy="30">•</tspan><tspan x="98">Think of </tspan><tspan class="cTeal bold">MCP</tspan><tspan> as the underlying tooling, and the </tspan><tspan class="cTeal bold">skill</tspan><tspan> as the recipe that</tspan><tspan x="98" dy="26">puts those tools together to produce the result you want.</tspan></text>
+
+  <!-- ===== Skills vs Tools ===== -->
+  <text class="h cOrange" x="60" y="988" xml:space="preserve">Skills vs Tools — a bookshelf, not a hammer</text>
+  <rect x="60" y="1004" width="1080" height="240" rx="10" fill="#FFF7ED" stroke="#EA580C" stroke-width="1"/>
+  <text class="b cSlate" x="98" y="1037" xml:space="preserve"><tspan x="80">•</tspan><tspan x="98" class="cOrange bold">Tools are low level:</tspan><tspan> think of a hammer, a saw, and nails. Tools give</tspan><tspan x="98" dy="26">the agent raw capabilities like </tspan><tspan class="cCode mono">Read</tspan><tspan>, </tspan><tspan class="cCode mono">Write</tspan><tspan>, </tspan><tspan class="cCode mono">Edit</tspan><tspan>, </tspan><tspan class="cCode mono">Bash</tspan><tspan>, and </tspan><tspan class="cCode mono">Grep</tspan><tspan>.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cOrange bold">A skill is higher level,</tspan><tspan> like the instructions for how to build a</tspan><tspan x="98" dy="26">bookshelf. It bundles specialized knowledge, extra files, and scripts.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cOrange bold">Tools power skills under the hood:</tspan><tspan> reading a </tspan><tspan class="cCode mono">SKILL.md</tspan><tspan> file, loading</tspan><tspan x="98" dy="26">its folders, and running its scripts all happen through tools.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cOrange bold">Key difference:</tspan><tspan> tool definitions always live in the context window,</tspan><tspan x="98" dy="26">while </tspan><tspan class="cOrange bold">skills load progressively</tspan><tspan> — only when they are needed.</tspan></text>
+
+  <!-- ===== Skills vs Subagents ===== -->
+  <text class="h cPurple" x="60" y="1276" xml:space="preserve">Skills vs Subagents — helpers with their own context</text>
+  <rect x="60" y="1292" width="1080" height="240" rx="10" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1"/>
+  <text class="b cSlate" x="98" y="1325" xml:space="preserve"><tspan x="80">•</tspan><tspan x="98">A </tspan><tspan class="cPurple bold">subagent</tspan><tspan> is a helper the main agent spawns. It has its own isolated</tspan><tspan x="98" dy="26" class="cPurple bold">context</tspan><tspan> and fine-grained </tspan><tspan class="cPurple bold">tool permissions,</tspan><tspan> runs tasks in parallel, and</tspan><tspan x="98" dy="26">reports its results back to the parent agent.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cPurple bold">Skills and subagents work together.</tspan><tspan> A skill can give expertise to the</tspan><tspan x="98" dy="26">main agent or to any subagent. Example: a </tspan><tspan class="cCode mono">Code Reviewer</tspan><tspan> subagent whose</tspan><tspan x="98" dy="26">job is to review code using your team's own code-review skill.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cPurple bold">Rule of thumb:</tspan><tspan> use </tspan><tspan class="cPurple bold">skills</tspan><tspan> for procedural, predictable workflows, and</tspan><tspan x="98" dy="26" class="cPurple bold">subagents</tspan><tspan> for full agentic logic — only when a specialized task needs it.</tspan></text>
+
+  <!-- ===== Customer Insight Analyzer ===== -->
+  <text class="h cBlue" x="60" y="1564" xml:space="preserve">Putting it together: a Customer Insight Analyzer</text>
+  <rect x="60" y="1580" width="1080" height="214" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1"/>
+  <text class="b cSlate" x="98" y="1613" xml:space="preserve"><tspan x="80">•</tspan><tspan x="98">A </tspan><tspan class="cBlue bold">main agent</tspan><tspan> is the orchestrator. It pulls customer data, such as</tspan><tspan x="98" dy="26">interview notes and survey responses, through </tspan><tspan class="cBlue bold">MCP servers</tspan><tspan> (for example,</tspan><tspan x="98" dy="26">a Google Drive MCP server pointing at a Drive folder).</tspan><tspan x="80" dy="30">•</tspan><tspan x="98">It dispatches </tspan><tspan class="cBlue bold">subagents</tspan><tspan> — an Interview Analyzer and a Survey Analyzer —</tspan><tspan x="98" dy="26">to work in isolation and in parallel, returning results faster.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cBlue bold">Skills</tspan><tspan> tell each agent how to do the work in a predictable way: how to</tspan><tspan x="98" dy="26">categorize feedback, summarize findings, and analyze interviews and surveys.</tspan></text>
+
+  <!-- ===== Summary table ===== -->
+  <text class="h cTeal" x="60" y="1826" xml:space="preserve">Summary — Skills vs Prompts vs Subagents vs MCP</text>
+  <rect x="60" y="1842" width="1080" height="366" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- header + feature column fills -->
+  <rect x="80" y="1862" width="1040" height="42" fill="#E2E8F0"/>
+  <rect x="80" y="1904" width="150" height="284" fill="#F1F5F9"/>
+  <!-- grid vertical lines -->
+  <line x1="230" y1="1862" x2="230" y2="2188" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="452" y1="1862" x2="452" y2="2188" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="674" y1="1862" x2="674" y2="2188" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="896" y1="1862" x2="896" y2="2188" stroke="#CBD5E1" stroke-width="1"/>
+  <!-- grid horizontal lines -->
+  <line x1="80" y1="1862" x2="1120" y2="1862" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="80" y1="1904" x2="1120" y2="1904" stroke="#94A3B8" stroke-width="1"/>
+  <line x1="80" y1="1961" x2="1120" y2="1961" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="80" y1="2018" x2="1120" y2="2018" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="80" y1="2075" x2="1120" y2="2075" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="80" y1="2132" x2="1120" y2="2132" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="80" y1="2188" x2="1120" y2="2188" stroke="#CBD5E1" stroke-width="1"/>
+  <!-- outer verticals -->
+  <line x1="80" y1="1862" x2="80" y2="2188" stroke="#CBD5E1" stroke-width="1"/>
+  <line x1="1120" y1="1862" x2="1120" y2="2188" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- header text -->
+  <text class="lbl cSlate" x="96" y="1889">Feature</text>
+  <text class="lbl cSlate" x="246" y="1889">Skills</text>
+  <text class="lbl cSlate" x="468" y="1889">Prompts</text>
+  <text class="lbl cSlate" x="690" y="1889">Subagents</text>
+  <text class="lbl cSlate" x="912" y="1889">MCP</text>
+
+  <!-- row 1: What it provides (1904-1961) -->
+  <text class="lbl cSlate" x="96" y="1937">What it provides</text>
+  <text class="tb cSlate" x="246" y="1937">Procedural knowledge</text>
+  <text class="tb cSlate" x="468" y="1927">Moment-to-moment</text>
+  <text class="tb cSlate" x="468" y="1949">instructions</text>
+  <text class="tb cSlate" x="690" y="1937">Task delegation</text>
+  <text class="tb cSlate" x="912" y="1937">Tool connectivity</text>
+
+  <!-- row 2: Persistence (1961-2018) -->
+  <text class="lbl cSlate" x="96" y="1994">Persistence</text>
+  <text class="tb cSlate" x="246" y="1994">Across conversations</text>
+  <text class="tb cSlate" x="468" y="1994">Single conversation</text>
+  <text class="tb cSlate" x="690" y="1994">Across sessions</text>
+  <text class="tb cSlate" x="912" y="1994">Continuous connection</text>
+
+  <!-- row 3: Contains (2018-2075) -->
+  <text class="lbl cSlate" x="96" y="2051">Contains</text>
+  <text class="tb cSlate" x="246" y="2051">Instructions + code + assets</text>
+  <text class="tb cSlate" x="468" y="2051">Natural language</text>
+  <text class="tb cSlate" x="690" y="2051">Full agent logic</text>
+  <text class="tb cSlate" x="912" y="2051">Tool definitions</text>
+
+  <!-- row 4: When it loads (2075-2132) -->
+  <text class="lbl cSlate" x="96" y="2108">When it loads</text>
+  <text class="tb cSlate" x="246" y="2108">Dynamically, as needed</text>
+  <text class="tb cSlate" x="468" y="2108">Each turn</text>
+  <text class="tb cSlate" x="690" y="2108">When invoked</text>
+  <text class="tb cSlate" x="912" y="2108">Always available</text>
+
+  <!-- row 5: Best for (2132-2188) -->
+  <text class="lbl cSlate" x="96" y="2165">Best for</text>
+  <text class="tb cSlate" x="246" y="2165">Specialized expertise</text>
+  <text class="tb cSlate" x="468" y="2165">Quick requests</text>
+  <text class="tb cSlate" x="690" y="2165">Specialized tasks</text>
+  <text class="tb cSlate" x="912" y="2165">Data access</text>
+
+  <!-- ===== In practice ===== -->
+  <text class="h cGreen" x="60" y="2240" xml:space="preserve">In practice</text>
+  <rect x="60" y="2256" width="1080" height="214" rx="10" fill="#ECFDF5" stroke="#16A34A" stroke-width="1"/>
+  <text class="b cSlate" x="98" y="2289" xml:space="preserve"><tspan x="80">•</tspan><tspan x="98">Treat the </tspan><tspan class="cGreen bold">context window as a public good.</tspan><tspan> Load only what each step</tspan><tspan x="98" dy="26">needs: MCP brings in data, subagents keep work out of the main context,</tspan><tspan x="98" dy="26">and skills load progressively.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cGreen bold">Prompts</tspan><tspan> are the smallest, most atomic unit but do not scale across teams.</tspan><tspan x="98" dy="26">Bundle them into </tspan><tspan class="cGreen bold">skills</tspan><tspan> so workflows become repeatable and portable.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98" class="cGreen bold">Persistence:</tspan><tspan> subagents persist across sessions; skills persist across every</tspan><tspan x="98" dy="26">conversation between the user and the AI application.</tspan></text>
+
+  <!-- ===== 2026 intel ===== -->
+  <text class="h cAmber" x="60" y="2502" xml:space="preserve">2026 intel</text>
+  <rect x="60" y="2518" width="1080" height="214" rx="10" fill="#FFFBEB" stroke="#B45309" stroke-width="1"/>
+  <text class="b cSlate" x="98" y="2551" xml:space="preserve"><tspan x="80">•</tspan><tspan x="98">Anthropic released </tspan><tspan class="cAmber bold">Agent Skills</tspan><tspan> as an open specification in December</tspan><tspan x="98" dy="26">2025. A </tspan><tspan class="cCode mono">SKILL.md</tspan><tspan> uses three-level </tspan><tspan class="cAmber bold">progressive disclosure:</tspan><tspan> metadata,</tspan><tspan x="98" dy="26">then body, then referenced files.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98">2026 guidance: </tspan><tspan class="cAmber bold">MCP for access, Skills for know-how, Subagents for</tspan><tspan x="98" dy="26" class="cAmber bold">isolation.</tspan><tspan> A </tspan><tspan class="cCode mono">CLAUDE.md</tspan><tspan> is always loaded, but skills load on demand, so</tspan><tspan x="98" dy="26">a 50-skill library does not slow the agent like a huge always-on prompt.</tspan><tspan x="80" dy="30">•</tspan><tspan x="98">Next lesson: Claude's </tspan><tspan class="cAmber bold">pre-built skills</tspan><tspan> and the </tspan><tspan class="cAmber bold">skill creator</tspan><tspan> skill.</tspan></text>
+
+  <!-- ===== Key insight ===== -->
+  <text class="h cPink" x="60" y="2764" xml:space="preserve">Key insight</text>
+  <rect x="60" y="2780" width="1080" height="110" rx="10" fill="#FEF2F4" stroke="#E11D48" stroke-width="1"/>
+  <text class="b cSlate" x="84" y="2813" xml:space="preserve"><tspan class="cPink bold">MCP</tspan><tspan> gives access. </tspan><tspan class="cPink bold">Tools</tspan><tspan> give raw actions. </tspan><tspan class="cPink bold">Subagents</tspan><tspan> give isolated, parallel work.</tspan><tspan x="84" dy="26">And </tspan><tspan class="cPink bold">Skills</tspan><tspan> give the repeatable know-how that ties all of these pieces together into</tspan><tspan x="84" dy="26">one reliable, portable workflow.</tspan></text>
+</svg>

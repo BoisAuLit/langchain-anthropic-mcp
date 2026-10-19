@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 520" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="520" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">Command：一个对象，四个字段，三个出现位置</text>
+<text x="30" y="70" text-anchor="start" font-size="15" fill="#fde047" font-weight="700">出现在哪（谁返回 / 谁传入）</text>
+<rect x="30" y="85" width="270" height="80" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="165.0" y="111" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">① 节点 return</text>
+<text x="165.0" y="135" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">return Command(update=…, goto=…)</text>
+<rect x="30" y="185" width="270" height="80" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="165.0" y="211" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">② 工具 return</text>
+<text x="165.0" y="235" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">tool 里 return Command(update=…)</text>
+<text x="165.0" y="255" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">改 state（如 user_info）</text>
+<rect x="30" y="285" width="270" height="80" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="165.0" y="311" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">③ invoke / stream 的输入</text>
+<text x="165.0" y="335" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">graph.invoke(Command(resume=…), cfg)</text>
+<text x="165.0" y="355" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">续跑 / 跳转 / 改 state</text>
+<rect x="400" y="150" width="260" height="130" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="530.0" y="176" text-anchor="middle" font-size="17" font-weight="700" fill="#f1f5f9">Command(</text>
+<text x="530.0" y="200" text-anchor="middle" font-size="15" fill="#f1f5f9" opacity="0.92">update=…</text>
+<text x="530.0" y="223" text-anchor="middle" font-size="15" fill="#f1f5f9" opacity="0.92">goto=…</text>
+<text x="530.0" y="246" text-anchor="middle" font-size="15" fill="#f1f5f9" opacity="0.92">resume=…</text>
+<text x="530.0" y="269" text-anchor="middle" font-size="15" fill="#f1f5f9" opacity="0.92">graph=…  )</text>
+<path d="M302,125 L396,190" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<path d="M302,225 L396,215" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<path d="M302,325 L396,245" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="780" y="70" width="590" height="78" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="1075.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">update → 写 state</text>
+<text x="1075.0" y="120" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">dict / (key, val) 列表；走 reducer</text>
+<text x="1075.0" y="140" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">等价于「节点 return 的增量」</text>
+<path d="M662,215 L776,109" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<rect x="780" y="160" width="590" height="78" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1075.0" y="186" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">goto → 下一跳</text>
+<text x="1075.0" y="210" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">"b" · ["b","c"]（并行）· Send(…) · END</text>
+<text x="1075.0" y="230" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">不用 add_conditional_edges</text>
+<path d="M662,215 L776,199" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<rect x="780" y="250" width="590" height="78" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1075.0" y="276" text-anchor="middle" font-size="14" font-weight="700" fill="#fed7aa">resume → 续跑 interrupt()</text>
+<text x="1075.0" y="300" text-anchor="middle" font-size="12" fill="#fed7aa" opacity="0.92">值 = interrupt() 的返回值</text>
+<text x="1075.0" y="320" text-anchor="middle" font-size="12" fill="#fed7aa" opacity="0.92">多个中断：{interrupt_id: 值}</text>
+<path d="M662,215 L776,289" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<rect x="780" y="340" width="590" height="78" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="1075.0" y="366" text-anchor="middle" font-size="14" font-weight="700" fill="#fca5a5">graph → 发给谁</text>
+<text x="1075.0" y="390" text-anchor="middle" font-size="12" fill="#fca5a5" opacity="0.92">默认 None = 当前图</text>
+<text x="1075.0" y="410" text-anchor="middle" font-size="12" fill="#fca5a5" opacity="0.92">Command.PARENT = 最近的父图（子图跳出）</text>
+<path d="M662,215 L776,379" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<text x="30" y="400" text-anchor="start" font-size="14" fill="#fbbf24" font-weight="700">⚠️ goto 不会取消静态边：节点既有 add_edge(a, b) 又 return Command(goto="c") → b、c 都会执行（实测）。</text>
+<text x="30" y="430" text-anchor="start" font-size="13" fill="#94a3b8">返回类型写 -&gt; Command[Literal["b","c"]]：只为让 get_graph() / Studio 画出 goto 的边，不写也能跑。</text>
+<text x="30" y="458" text-anchor="start" font-size="13" fill="#94a3b8">PARENT 跳转的节点（子图里）不要写 Literal[父图节点]：子图会因「边指向未知节点」而 compile 失败（实测）。</text>
+</svg>

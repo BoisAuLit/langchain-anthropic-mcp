@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="3232" viewBox="0 0 1120 3232" font-family="'Helvetica Neue',Arial,sans-serif">
+<defs>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M0,0 L7,3 L0,6 Z" fill="#475569"/>
+</marker>
+</defs>
+<style>
+.title{font-size:26px;font-weight:700;}
+.sub{font-size:14px;font-weight:400;}
+.h{font-size:19px;font-weight:700;}
+.b{font-size:15px;font-weight:400;}
+.bb{font-size:15px;font-weight:700;}
+.sm{font-size:13px;font-weight:400;}
+.smb{font-size:13px;font-weight:700;}
+.code{font-size:14px;font-weight:400;font-family:'DejaVu Sans Mono','Menlo',monospace;}
+.lbl{font-size:14px;font-weight:700;}
+.lblsm{font-size:12px;font-weight:400;}
+.cBlue{fill:#2563EB}.cTeal{fill:#0D9488}.cOrange{fill:#EA580C}.cPurple{fill:#7C3AED}
+.cPink{fill:#E11D48}.cGreen{fill:#16A34A}.cAmber{fill:#B45309}.cSlate{fill:#334155}
+.cGray{fill:#94A3B8}.cCode{fill:#6D28D9}.cWhite{fill:#FFFFFF}
+</style>
+
+<!-- L11 white background -->
+<rect x="0" y="0" width="1120" height="3232" fill="#FFFFFF"/>
+
+<!-- ================= TITLE ================= -->
+<text x="560" y="54" text-anchor="middle" class="title cPink" xml:space="preserve">Building &amp; Evaluating Advanced RAG Pipelines</text>
+<text x="560" y="86" text-anchor="middle" class="sub cSlate" xml:space="preserve">LlamaIndex + TruLens (TruEra) — basic vs advanced retrieval, benchmarked with the RAG triad</text>
+
+<!-- ================= ESSENCE ================= -->
+<rect x="40" y="108" width="1040" height="111" rx="12" fill="#F8FAFC" stroke="#CBD5E1"/>
+<text x="64" y="141" class="b cSlate" xml:space="preserve"><tspan class="bb cPink">Essence:</tspan> A basic RAG pipeline runs in three stages — ingestion, retrieval, and</text>
+<text x="64" y="167" class="b cSlate" xml:space="preserve">synthesis. Two advanced retrieval methods — sentence-window and auto-merging — add</text>
+<text x="64" y="193" class="b cSlate" xml:space="preserve">richer context at answer time. TruLens scores every version on the RAG triad to benchmark.</text>
+
+<!-- ================= SECTION 1: BASIC PIPELINE ================= -->
+<text x="40" y="259" class="h cBlue" xml:space="preserve">🧱  The basic RAG pipeline — three stages</text>
+
+<!-- diagram card -->
+<rect x="40" y="279" width="1040" height="349" rx="12" fill="#EFF6FF" stroke="#93C5FD"/>
+
+<!-- Phase 1: Ingestion -->
+<text x="64" y="311" class="bb cBlue" xml:space="preserve">1 · Ingestion — build the index (done once)</text>
+<rect x="200" y="322" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<rect x="390" y="322" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<rect x="580" y="322" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<rect x="770" y="322" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<text x="275" y="355" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Documents</text>
+<text x="465" y="355" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Chunks</text>
+<text x="655" y="355" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Embeddings</text>
+<text x="845" y="355" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Index</text>
+<line x1="352" y1="350" x2="386" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="542" y1="350" x2="576" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="732" y1="350" x2="766" y2="350" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- Phase 2: Retrieval -->
+<text x="64" y="418" class="bb cBlue" xml:space="preserve">2 · Retrieval — find relevant chunks</text>
+<rect x="295" y="433" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<rect x="485" y="433" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<rect x="675" y="433" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<text x="370" y="466" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Query</text>
+<text x="560" y="466" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Index</text>
+<text x="750" y="466" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Top-K chunks</text>
+<line x1="447" y1="461" x2="481" y2="461" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="637" y1="461" x2="671" y2="461" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- Phase 3: Synthesis -->
+<text x="64" y="529" class="bb cBlue" xml:space="preserve">3 · Synthesis — generate the answer</text>
+<rect x="390" y="544" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<rect x="580" y="544" width="150" height="56" rx="8" fill="#FFFFFF" stroke="#60A5FA"/>
+<text x="465" y="577" text-anchor="middle" class="lbl cSlate" xml:space="preserve">LLM prompt</text>
+<text x="655" y="577" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Response</text>
+<line x1="542" y1="572" x2="576" y2="572" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- explanation card -->
+<rect x="40" y="648" width="1040" height="119" rx="12" fill="#EFF6FF" stroke="#93C5FD"/>
+<text x="64" y="681" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">Ingestion:</tspan> load documents, split into chunks, embed each chunk, store the vectors in an index.</text>
+<text x="64" y="711" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">Retrieval:</tspan> embed the user query, then fetch the top-K chunks most similar to it.</text>
+<text x="64" y="741" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">Synthesis:</tspan> place those chunks and the query into the LLM prompt to write the final answer.</text>
+
+<!-- ================= SECTION 2: SETUP ================= -->
+<text x="40" y="807" class="h cTeal" xml:space="preserve">⚙️  Set up the baseline with LlamaIndex + TruLens</text>
+<rect x="40" y="827" width="1040" height="233" rx="12" fill="#ECFEFF" stroke="#5EEAD4"/>
+<text x="64" y="860" class="b cSlate" xml:space="preserve">We build a simple LlamaIndex app over one PDF (Andrew Ng's "How to Build a Career in AI").</text>
+<text x="64" y="890" class="b cSlate" xml:space="preserve">The 41 PDF pages are merged into <tspan class="bb cTeal">one document</tspan> — this helps the advanced retrievers blend</text>
+<text x="64" y="920" class="b cSlate" xml:space="preserve">text more accurately later on.</text>
+<text x="64" y="952" class="code cCode" xml:space="preserve">llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)</text>
+<text x="64" y="978" class="code cCode" xml:space="preserve">index = VectorStoreIndex.from_documents([document])</text>
+<text x="64" y="1004" class="code cCode" xml:space="preserve">query_engine = index.as_query_engine()</text>
+<text x="64" y="1036" class="b cSlate" xml:space="preserve">That single <tspan class="bb cTeal">from_documents</tspan> call chunks, embeds (BGE-small), and indexes — all in one step.</text>
+
+<!-- ================= SECTION 3: RAG TRIAD ================= -->
+<text x="40" y="1100" class="h cPurple" xml:space="preserve">🧪  Evaluate with the RAG triad (TruLens)</text>
+<rect x="40" y="1120" width="1040" height="85" rx="12" fill="#FAF5FF" stroke="#D8B4FE"/>
+<text x="64" y="1153" class="b cSlate" xml:space="preserve">TruLens uses an <tspan class="bb cPurple">LLM as a judge</tspan> to score each answer with three pairwise checks between</text>
+<text x="64" y="1179" class="b cSlate" xml:space="preserve">the query, the retrieved context, and the response. High on all three = low hallucination.</text>
+
+<!-- three metric boxes -->
+<rect x="40" y="1225" width="320" height="135" rx="10" fill="#FAF5FF" stroke="#C084FC"/>
+<rect x="400" y="1225" width="320" height="135" rx="10" fill="#FAF5FF" stroke="#C084FC"/>
+<rect x="760" y="1225" width="320" height="135" rx="10" fill="#FAF5FF" stroke="#C084FC"/>
+<text x="200" y="1258" text-anchor="middle" class="bb cPurple" xml:space="preserve">Context Relevance</text>
+<text x="560" y="1258" text-anchor="middle" class="bb cPurple" xml:space="preserve">Answer Relevance</text>
+<text x="920" y="1258" text-anchor="middle" class="bb cPurple" xml:space="preserve">Groundedness</text>
+<text x="200" y="1284" text-anchor="middle" class="smb cGray" xml:space="preserve">query  ↔  context</text>
+<text x="560" y="1284" text-anchor="middle" class="smb cGray" xml:space="preserve">query  ↔  response</text>
+<text x="920" y="1284" text-anchor="middle" class="smb cGray" xml:space="preserve">context  ↔  response</text>
+<text x="200" y="1312" text-anchor="middle" class="b cSlate" xml:space="preserve">Is the retrieved context</text>
+<text x="200" y="1336" text-anchor="middle" class="b cSlate" xml:space="preserve">relevant to the question?</text>
+<text x="560" y="1312" text-anchor="middle" class="b cSlate" xml:space="preserve">Is the answer relevant</text>
+<text x="560" y="1336" text-anchor="middle" class="b cSlate" xml:space="preserve">to the question?</text>
+<text x="920" y="1312" text-anchor="middle" class="b cSlate" xml:space="preserve">Is the answer supported</text>
+<text x="920" y="1336" text-anchor="middle" class="b cSlate" xml:space="preserve">by the context?</text>
+
+<!-- baseline result note -->
+<rect x="40" y="1380" width="1040" height="85" rx="12" fill="#FAF5FF" stroke="#D8B4FE"/>
+<text x="64" y="1413" class="b cSlate" xml:space="preserve"><tspan class="bb cPurple">Baseline result:</tspan> answer relevance and groundedness are already high, but context relevance is</text>
+<text x="64" y="1439" class="b cSlate" xml:space="preserve">low (0.26). That weak score is the target the two advanced retrievers try to fix.</text>
+
+<!-- ================= SECTION 4: SENTENCE WINDOW ================= -->
+<text x="40" y="1505" class="h cOrange" xml:space="preserve">🪟  Advanced #1 — sentence-window retrieval</text>
+<rect x="40" y="1525" width="1040" height="111" rx="12" fill="#FFF7ED" stroke="#FDBA74"/>
+<text x="64" y="1558" class="b cSlate" xml:space="preserve">Embed and retrieve <tspan class="bb cOrange">single sentences</tspan> (very granular matching). After a sentence is found,</text>
+<text x="64" y="1584" class="b cSlate" xml:space="preserve">replace it with a <tspan class="bb cOrange">window</tspan> of the sentences around it before sending to the LLM.</text>
+<text x="64" y="1610" class="b cSlate" xml:space="preserve">So you match precisely, but give the LLM more context to answer well.</text>
+
+<!-- sentence window diagram -->
+<rect x="40" y="1656" width="1040" height="158" rx="12" fill="#FFF7ED" stroke="#FDBA74"/>
+<text x="560" y="1686" text-anchor="middle" class="bb cOrange" xml:space="preserve">Window the LLM sees  (S2–S4)</text>
+<line x1="319" y1="1700" x2="801" y2="1700" stroke="#EA580C" stroke-width="2"/>
+<line x1="319" y1="1700" x2="319" y2="1716" stroke="#EA580C" stroke-width="2"/>
+<line x1="801" y1="1700" x2="801" y2="1716" stroke="#EA580C" stroke-width="2"/>
+<rect x="153" y="1718" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#FDBA74"/>
+<rect x="319" y="1718" width="150" height="50" rx="8" fill="#FFEDD5" stroke="#FB923C"/>
+<rect x="485" y="1718" width="150" height="50" rx="8" fill="#FED7AA" stroke="#EA580C" stroke-width="2"/>
+<rect x="651" y="1718" width="150" height="50" rx="8" fill="#FFEDD5" stroke="#FB923C"/>
+<rect x="817" y="1718" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#FDBA74"/>
+<text x="228" y="1749" text-anchor="middle" class="lbl cSlate" xml:space="preserve">S1</text>
+<text x="394" y="1749" text-anchor="middle" class="lbl cSlate" xml:space="preserve">S2</text>
+<text x="560" y="1749" text-anchor="middle" class="lbl cSlate" xml:space="preserve">S3 · match</text>
+<text x="726" y="1749" text-anchor="middle" class="lbl cSlate" xml:space="preserve">S4</text>
+<text x="892" y="1749" text-anchor="middle" class="lbl cSlate" xml:space="preserve">S5</text>
+<text x="560" y="1796" text-anchor="middle" class="b cSlate" xml:space="preserve">Match on one sentence (S3), then expand to its surrounding window before synthesis.</text>
+
+<!-- ================= SECTION 5: AUTO-MERGING ================= -->
+<text x="40" y="1862" class="h cPink" xml:space="preserve">🌳  Advanced #2 — auto-merging retrieval</text>
+<rect x="40" y="1882" width="1040" height="111" rx="12" fill="#FEF2F4" stroke="#FDA4AF"/>
+<text x="64" y="1915" class="b cSlate" xml:space="preserve">Build a <tspan class="bb cPink">hierarchy</tspan>: large parent nodes, each split into several smaller child nodes.</text>
+<text x="64" y="1941" class="b cSlate" xml:space="preserve">Retrieve on the small children. If a parent has <tspan class="bb cPink">most of its children</tspan> retrieved, merge them</text>
+<text x="64" y="1967" class="b cSlate" xml:space="preserve">and hand the LLM the whole parent instead — one clean, complete block of text.</text>
+
+<!-- auto-merging tree diagram -->
+<rect x="40" y="2013" width="1040" height="185" rx="12" fill="#FEF2F4" stroke="#FDA4AF"/>
+<rect x="460" y="2035" width="200" height="56" rx="8" fill="#FECDD3" stroke="#E11D48" stroke-width="2"/>
+<text x="560" y="2069" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Parent · 512 tokens</text>
+<line x1="560" y1="2091" x2="560" y2="2115" stroke="#9F1239" stroke-width="2"/>
+<line x1="245" y1="2115" x2="875" y2="2115" stroke="#9F1239" stroke-width="2"/>
+<line x1="245" y1="2115" x2="245" y2="2135" stroke="#9F1239" stroke-width="2"/>
+<line x1="455" y1="2115" x2="455" y2="2135" stroke="#9F1239" stroke-width="2"/>
+<line x1="665" y1="2115" x2="665" y2="2135" stroke="#9F1239" stroke-width="2"/>
+<line x1="875" y1="2115" x2="875" y2="2135" stroke="#9F1239" stroke-width="2"/>
+<rect x="170" y="2135" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#FDA4AF"/>
+<rect x="380" y="2135" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#FDA4AF"/>
+<rect x="590" y="2135" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#FDA4AF"/>
+<rect x="800" y="2135" width="150" height="50" rx="8" fill="#FFFFFF" stroke="#FDA4AF"/>
+<text x="245" y="2166" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Child · 128t</text>
+<text x="455" y="2166" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Child · 128t</text>
+<text x="665" y="2166" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Child · 128t</text>
+<text x="875" y="2166" text-anchor="middle" class="lbl cSlate" xml:space="preserve">Child · 128t</text>
+
+<rect x="40" y="2218" width="1040" height="59" rx="12" fill="#FEF2F4" stroke="#FDA4AF"/>
+<text x="64" y="2253" class="b cSlate" xml:space="preserve">The four children together hold the <tspan class="bb cPink">same text</tspan> as their parent, so merging loses nothing.</text>
+
+<!-- ================= SECTION 6: RESULTS ================= -->
+<text x="40" y="2323" class="h cBlue" xml:space="preserve">📊  Results — three engines on the RAG triad</text>
+
+<!-- chart card -->
+<rect x="40" y="2343" width="1040" height="317" rx="12" fill="#F8FAFC" stroke="#CBD5E1"/>
+<text x="140" y="2374" class="smb cSlate" xml:space="preserve">Feedback scores (0–1, higher is better)</text>
+<!-- legend -->
+<rect x="636" y="2363" width="14" height="14" fill="#2563EB"/>
+<text x="656" y="2375" class="sm cSlate" xml:space="preserve">Groundedness</text>
+<rect x="812" y="2363" width="14" height="14" fill="#EA580C"/>
+<text x="832" y="2375" class="sm cSlate" xml:space="preserve">Context Relevance</text>
+
+<!-- gridlines -->
+<line x1="140" y1="2400" x2="1000" y2="2400" stroke="#E2E8F0"/>
+<line x1="140" y1="2452" x2="1000" y2="2452" stroke="#E2E8F0"/>
+<line x1="140" y1="2505" x2="1000" y2="2505" stroke="#E2E8F0"/>
+<line x1="140" y1="2557" x2="1000" y2="2557" stroke="#E2E8F0"/>
+<!-- axes -->
+<line x1="140" y1="2400" x2="140" y2="2610" stroke="#94A3B8"/>
+<line x1="140" y1="2610" x2="1000" y2="2610" stroke="#94A3B8"/>
+<!-- y labels (value*210 from baseline 2610) -->
+<text x="126" y="2404" text-anchor="end" class="sm cGray" xml:space="preserve">1.0</text>
+<text x="126" y="2456" text-anchor="end" class="sm cGray" xml:space="preserve">0.75</text>
+<text x="126" y="2509" text-anchor="end" class="sm cGray" xml:space="preserve">0.5</text>
+<text x="126" y="2561" text-anchor="end" class="sm cGray" xml:space="preserve">0.25</text>
+<text x="126" y="2614" text-anchor="end" class="sm cGray" xml:space="preserve">0</text>
+
+<!-- Direct group (center 300): G=0.801 h168.2, C=0.255 h53.6 -->
+<rect x="241" y="2442" width="54" height="168" fill="#2563EB"/>
+<rect x="305" y="2556" width="54" height="54" fill="#EA580C"/>
+<text x="268" y="2436" text-anchor="middle" class="sm cSlate" xml:space="preserve">0.80</text>
+<text x="332" y="2550" text-anchor="middle" class="sm cSlate" xml:space="preserve">0.26</text>
+<!-- Sentence group (center 580): G=0.878 h184.4, C=0.368 h77.3 -->
+<rect x="521" y="2426" width="54" height="184" fill="#2563EB"/>
+<rect x="585" y="2533" width="54" height="77" fill="#EA580C"/>
+<text x="548" y="2420" text-anchor="middle" class="sm cSlate" xml:space="preserve">0.88</text>
+<text x="612" y="2527" text-anchor="middle" class="sm cSlate" xml:space="preserve">0.37</text>
+<!-- Auto group (center 860): G=1.000 h210, C=0.435 h91.4 -->
+<rect x="801" y="2400" width="54" height="210" fill="#2563EB"/>
+<rect x="865" y="2519" width="54" height="91" fill="#EA580C"/>
+<text x="828" y="2394" text-anchor="middle" class="sm cSlate" xml:space="preserve">1.00</text>
+<text x="892" y="2513" text-anchor="middle" class="sm cSlate" xml:space="preserve">0.44</text>
+<!-- category labels -->
+<text x="300" y="2634" text-anchor="middle" class="smb cSlate" xml:space="preserve">Direct (baseline)</text>
+<text x="580" y="2634" text-anchor="middle" class="smb cSlate" xml:space="preserve">Sentence-window</text>
+<text x="860" y="2634" text-anchor="middle" class="smb cSlate" xml:space="preserve">Auto-merging</text>
+
+<!-- takeaways card -->
+<rect x="40" y="2680" width="1040" height="149" rx="12" fill="#EFF6FF" stroke="#93C5FD"/>
+<text x="64" y="2713" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">Auto-merging wins:</tspan> groundedness 1.00 and context relevance 0.44, up from 0.80 / 0.26.</text>
+<text x="64" y="2743" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">Answer relevance</tspan> stays high for all three (~0.93) — it was never the problem.</text>
+<text x="64" y="2773" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">Sentence-window</tspan> lands in the middle: groundedness 0.88, context relevance 0.37.</text>
+<text x="64" y="2803" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">Cost drops too:</tspan> auto-merging $0.0008 vs baseline $0.0029 per run; latency ~2.2s for all.</text>
+
+<!-- ================= SECTION 7: 2026 INTEL ================= -->
+<text x="40" y="2869" class="h cAmber" xml:space="preserve">📡  2026 intel</text>
+<rect x="40" y="2889" width="1040" height="149" rx="12" fill="#FFFBEB" stroke="#FCD34D"/>
+<text x="64" y="2922" class="b cSlate" xml:space="preserve">• <tspan class="bb cAmber">TruEra</tspan> (makers of TruLens) was acquired by Snowflake in 2024; TruLens stays open source.</text>
+<text x="64" y="2952" class="b cSlate" xml:space="preserve">• TruLens now integrates with Snowflake Cortex and modern agent frameworks, not just RAG.</text>
+<text x="64" y="2982" class="b cSlate" xml:space="preserve">• LlamaIndex moved imports to <tspan class="code cCode">llama_index.core</tspan>; gpt-3.5-turbo is legacy — prefer newer models.</text>
+<text x="64" y="3012" class="b cSlate" xml:space="preserve">• The RAG triad (context relevance, groundedness, answer relevance) is still the standard eval.</text>
+
+<!-- ================= KEY INSIGHT ================= -->
+<text x="40" y="3078" class="h cGreen" xml:space="preserve">🔑  Key insight</text>
+<rect x="40" y="3098" width="1040" height="102" rx="12" fill="#ECFDF5" stroke="#6EE7B7"/>
+<text x="64" y="3131" class="b cSlate" xml:space="preserve"><tspan class="bb cGreen">Better retrieval — not a bigger model — fixed the weak metric.</tspan> Give the LLM the right,</text>
+<text x="64" y="3161" class="b cSlate" xml:space="preserve">complete context (windowed or merged) and both grounding and cost improve together.</text>
+<text x="64" y="3191" class="b cSlate" xml:space="preserve">Always benchmark each change against a baseline using the same evaluation triad.</text>
+
+</svg>

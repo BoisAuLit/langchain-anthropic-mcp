@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="560" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">两层记忆：checkpointer（thread 内）与 Store（跨 thread）</text>
+<rect x="30" y="60" width="560" height="230" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="80" font-size="13" font-weight="700" fill="#94a3b8">短期记忆 · 每个 thread 一份（checkpointer）</text>
+<rect x="50" y="92" width="250" height="84" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="175.0" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">thread_id = "1"</text>
+<text x="175.0" y="142" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">messages: [H, AI, H, AI, …]</text>
+<text x="175.0" y="162" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">summary / 其他 state key</text>
+<rect x="320" y="92" width="250" height="84" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="445.0" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">thread_id = "2"</text>
+<text x="445.0" y="142" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">messages: [H, AI]</text>
+<text x="445.0" y="162" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">全新、互不可见</text>
+<rect x="50" y="192" width="520" height="70" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="310.0" y="218" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">compile(checkpointer=InMemorySaver() | SqliteSaver | PostgresSaver)</text>
+<text x="310.0" y="242" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">每个 super-step 写一个 checkpoint；config={'configurable': {'thread_id': …}}</text>
+<rect x="640" y="120" width="240" height="130" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="654" y="146" text-anchor="start" font-size="14" font-weight="700" fill="#ddd6fe">graph 节点</text>
+<text x="654" y="170" text-anchor="start" font-size="12" fill="#ddd6fe" opacity="0.92">call_model(state, config, store)</text>
+<text x="654" y="190" text-anchor="start" font-size="12" fill="#ddd6fe" opacity="0.92">  ├ store.search(ns) → 拼进 system prompt</text>
+<text x="654" y="210" text-anchor="start" font-size="12" fill="#ddd6fe" opacity="0.92">write_memory(...)</text>
+<text x="654" y="230" text-anchor="start" font-size="12" fill="#ddd6fe" opacity="0.92">  └ store.put(ns, key, value)</text>
+<path d="M590,160 L636,160" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<path d="M636,215 L590,215" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<rect x="920" y="60" width="460" height="220" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="932" y="80" font-size="13" font-weight="700" fill="#94a3b8">长期记忆 · 所有 thread 共享（Store）</text>
+<rect x="940" y="95" width="420" height="160" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="954" y="121" text-anchor="start" font-size="13" font-weight="700" fill="#bbf7d0">compile(store=InMemoryStore() | PostgresStore)</text>
+<text x="954" y="145" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">namespace = ("memory", user_id)      ← 元组，像文件夹</text>
+<text x="954" y="165" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">  key = "user_profile"               ← 像文件名</text>
+<text x="954" y="185" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">  value = {"name": "Lance", ...}     ← dict</text>
+<text x="954" y="205" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">put / get / search(query=…语义) / delete</text>
+<text x="954" y="225" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">user_id 来自 config / runtime.context</text>
+<path d="M880,160 L936,160" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<path d="M936,215 L880,215" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<text x="30" y="320" text-anchor="start" font-size="15" fill="#fde047" font-weight="700">记忆的三种内容（人类记忆类比） × 两种写入时机</text>
+<rect x="30" y="340" width="430" height="95" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="245.0" y="366" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">Semantic 语义：事实</text>
+<text x="245.0" y="390" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">用户是谁、偏好、ToDo 清单</text>
+<text x="245.0" y="410" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">存法：profile（单文档）或 collection（多文档）</text>
+<rect x="480" y="340" width="430" height="95" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="695.0" y="366" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">Episodic 情景：经历</text>
+<text x="695.0" y="390" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">过去做过什么、成功案例</text>
+<text x="695.0" y="410" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">存法：few-shot 示例、事件日志</text>
+<rect x="930" y="340" width="440" height="95" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="1150.0" y="366" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">Procedural 程序：怎么做</text>
+<text x="1150.0" y="390" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">用户要求的格式 / 规则 / 偏好</text>
+<text x="1150.0" y="410" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">存法：instructions 字符串，注入 system prompt</text>
+<rect x="30" y="455" width="650" height="80" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="355.0" y="481" text-anchor="middle" font-size="14" font-weight="700" fill="#fed7aa">Hot path（对话中写）</text>
+<text x="355.0" y="505" text-anchor="middle" font-size="12" fill="#fed7aa" opacity="0.92">每轮结束就反思、写 store（module-5 做法）</text>
+<text x="355.0" y="525" text-anchor="middle" font-size="12" fill="#fed7aa" opacity="0.92">即时可用，但每轮多一次 LLM 调用、延迟高</text>
+<rect x="720" y="455" width="650" height="80" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1045.0" y="481" text-anchor="middle" font-size="14" font-weight="700" fill="#fed7aa">Background（后台写）</text>
+<text x="1045.0" y="505" text-anchor="middle" font-size="12" fill="#fed7aa" opacity="0.92">对话结束 / 定时任务异步提炼记忆</text>
+<text x="1045.0" y="525" text-anchor="middle" font-size="12" fill="#fed7aa" opacity="0.92">不拖慢回复，但有延迟；适合生产</text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 430" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="430" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">三种「下一步去哪」的机制</text>
+<rect x="30" y="70" width="420" height="300" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="44" y="96" text-anchor="start" font-size="15" font-weight="700" fill="#f1f5f9">条件边 add_conditional_edges</text>
+<text x="44" y="120" text-anchor="start" font-size="13" fill="#f1f5f9" opacity="0.92">声明位置：图结构（compile 前）</text>
+<text x="44" y="141" text-anchor="start" font-size="13" fill="#f1f5f9" opacity="0.92">决定者：一个纯函数 fn(state) → 节点名</text>
+<text x="44" y="162" text-anchor="start" font-size="13" fill="#f1f5f9" opacity="0.92">可返回："B" / END / ["B","C"] / [Send(...)]</text>
+<text x="44" y="183" text-anchor="start" font-size="13" fill="#f1f5f9" opacity="0.92">第三参数列出可能目标 → 画图正确</text>
+<text x="44" y="204" text-anchor="start" font-size="13" fill="#f1f5f9" opacity="0.92">适合：固定的分支逻辑、路由</text>
+<rect x="490" y="70" width="420" height="300" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="504" y="96" text-anchor="start" font-size="15" font-weight="700" fill="#ddd6fe">Command(goto=…, update=…)</text>
+<text x="504" y="120" text-anchor="start" font-size="13" fill="#ddd6fe" opacity="0.92">声明位置：节点函数的返回值</text>
+<text x="504" y="141" text-anchor="start" font-size="13" fill="#ddd6fe" opacity="0.92">决定者：节点自己（可同时写 state）</text>
+<text x="504" y="162" text-anchor="start" font-size="13" fill="#ddd6fe" opacity="0.92">goto 可为节点名 / END / [Send(...)]</text>
+<text x="504" y="183" text-anchor="start" font-size="13" fill="#ddd6fe" opacity="0.92">graph=Command.PARENT → 跳到父图节点</text>
+<text x="504" y="204" text-anchor="start" font-size="13" fill="#ddd6fe" opacity="0.92">适合：多 agent handoff、tool 内改 state</text>
+<rect x="950" y="70" width="420" height="300" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="964" y="96" text-anchor="start" font-size="15" font-weight="700" fill="#fed7aa">Send(node, state)</text>
+<text x="964" y="120" text-anchor="start" font-size="13" fill="#fed7aa" opacity="0.92">声明位置：条件边或 Command.goto 的返回列表</text>
+<text x="964" y="141" text-anchor="start" font-size="13" fill="#fed7aa" opacity="0.92">决定者：运行时按数据量展开 N 份</text>
+<text x="964" y="162" text-anchor="start" font-size="13" fill="#fed7aa" opacity="0.92">每个 Send 带自己的 state（可与总 state 不同）</text>
+<text x="964" y="183" text-anchor="start" font-size="13" fill="#fed7aa" opacity="0.92">目标节点写回的 key 需配 reducer 汇总</text>
+<text x="964" y="204" text-anchor="start" font-size="13" fill="#fed7aa" opacity="0.92">适合：map-reduce、动态并行</text>
+<text x="30" y="405" text-anchor="start" font-size="14" fill="#fde047" font-weight="700">口诀：结构固定用条件边；节点要边改 state 边跳转用 Command；不知道要并行几份用 Send。</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 470" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="470" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">Slack 审批：interrupt 暂停 → Slack 按钮 → Bolt 回调 → Command(resume) 续跑</text>
+<rect x="30" y="70" width="300" height="150" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="44" y="96" text-anchor="start" font-size="14" font-weight="700" fill="#e2e8f0">LangGraph（你的进程）</text>
+<text x="44" y="120" text-anchor="start" font-size="12" fill="#e2e8f0" opacity="0.92">① notify 节点：chat_postMessage(blocks=按钮)</text>
+<text x="44" y="140" text-anchor="start" font-size="12" fill="#e2e8f0" opacity="0.92">   按钮 value = thread_id</text>
+<text x="44" y="160" text-anchor="start" font-size="12" fill="#e2e8f0" opacity="0.92">② approval 节点：interrupt(payload)</text>
+<text x="44" y="180" text-anchor="start" font-size="12" fill="#e2e8f0" opacity="0.92">   → 暂停，checkpoint 写入 Postgres</text>
+<rect x="400" y="70" width="260" height="150" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="414" y="96" text-anchor="start" font-size="14" font-weight="700" fill="#ddd6fe">Slack</text>
+<text x="414" y="120" text-anchor="start" font-size="12" fill="#ddd6fe" opacity="0.92">频道里出现消息 + [Approve] [Reject]</text>
+<text x="414" y="140" text-anchor="start" font-size="12" fill="#ddd6fe" opacity="0.92"></text>
+<text x="414" y="160" text-anchor="start" font-size="12" fill="#ddd6fe" opacity="0.92">人点击 → Slack 把</text>
+<text x="414" y="180" text-anchor="start" font-size="12" fill="#ddd6fe" opacity="0.92">interactivity payload 发给你的 App</text>
+<rect x="730" y="70" width="300" height="150" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="744" y="96" text-anchor="start" font-size="14" font-weight="700" fill="#a5f3fc">Bolt 回调（同一服务）</text>
+<text x="744" y="120" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">③ @app.action("approve")</text>
+<text x="744" y="140" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">   ack() ← 3 秒内必须</text>
+<text x="744" y="160" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">④ get_state(cfg).next 判重</text>
+<text x="744" y="180" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">⑤ graph.invoke(Command(resume=…), cfg)</text>
+<text x="744" y="200" text-anchor="start" font-size="12" fill="#a5f3fc" opacity="0.92">⑥ chat_update 去掉按钮</text>
+<rect x="1100" y="70" width="270" height="150" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1114" y="96" text-anchor="start" font-size="14" font-weight="700" fill="#bbf7d0">续跑</text>
+<text x="1114" y="120" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">approval 节点从头重跑</text>
+<text x="1114" y="140" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">interrupt() 返回 resume 的值</text>
+<text x="1114" y="160" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">→ 后续节点 → END</text>
+<text x="1114" y="180" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">status = deployed / cancelled</text>
+<path d="M332,120 L396,120" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<path d="M662,120 L726,120" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<path d="M1032,120 L1096,120" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="347.0" y="93" width="26.0" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="364" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="#fde047">①</text>
+<rect x="670.0" y="93" width="40.0" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="694" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="#fde047">点击</text>
+<rect x="1047.0" y="93" width="26.0" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="1064" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="#fde047">⑤</text>
+<rect x="30" y="250" width="640" height="100" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="44" y="276" text-anchor="start" font-size="14" font-weight="700" fill="#fde68a">两种连接方式（Slack App 里二选一）</text>
+<text x="44" y="300" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">Socket Mode：App-level token (xapp-, connections:write)，无需公网 URL → 本地开发首选</text>
+<text x="44" y="320" text-anchor="start" font-size="12" fill="#fde68a" opacity="0.92">HTTP：Interactivity Request URL = https://你的域名/slack/events，需公网 HTTPS + 签名校验 → 生产</text>
+<rect x="710" y="250" width="660" height="100" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="724" y="276" text-anchor="start" font-size="14" font-weight="700" fill="#fca5a5">⚠️ 三个必踩坑</text>
+<text x="724" y="300" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">Slack 发消息放在 interrupt() 所在节点 → 续跑重跑节点 → 发两条（实测）：拆成 notify 节点</text>
+<text x="724" y="320" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">ack() 超过 3 秒 → Slack 显示失败：先 ack()，再续跑</text>
+<text x="724" y="340" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">用户双击按钮 → 重复续跑：用 get_state().next 判重 + chat_update 去掉按钮</text>
+<text x="30" y="395" text-anchor="start" font-size="13" fill="#94a3b8">远程部署（LangSmith Deployment / langgraph dev）：⑤ 换成 client.runs.create(thread_id, assistant_id, command={"resume": …})，其余相同。</text>
+<text x="30" y="425" text-anchor="start" font-size="13" fill="#94a3b8">checkpointer 必须是跨进程持久的（PostgresSaver / Server 自带），否则服务重启后无法续跑。</text>
+</svg>

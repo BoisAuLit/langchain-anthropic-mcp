@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="600" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">LangGraph Server 架构：客户端 → API → 队列 → 持久化</text>
+<rect x="30" y="60" width="330" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="80" font-size="13" font-weight="700" fill="#94a3b8">客户端（任选）</text>
+<rect x="50" y="95" width="290" height="60" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="195.0" y="121" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">LangGraph SDK</text>
+<text x="195.0" y="145" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">client = get_client(url=…)  · Python / JS</text>
+<rect x="50" y="170" width="290" height="60" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="195.0" y="196" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">RemoteGraph</text>
+<text x="195.0" y="220" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">像本地 graph 一样 .invoke/.stream，可当子图</text>
+<rect x="50" y="245" width="290" height="60" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="195.0" y="271" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">LangSmith Studio / 直接 HTTP</text>
+<text x="195.0" y="295" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">浏览器可视化调试 · /docs 里的 REST</text>
+<path d="M360,200 L420,200" fill="none" stroke="#22d3ee" stroke-width="3" marker-end="url(#ac)"/>
+<rect x="358" y="171" width="41.6" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="362" y="186" text-anchor="start" font-size="13" font-weight="600" fill="#a5f3fc">HTTP</text>
+<rect x="420" y="60" width="560" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="432" y="80" font-size="13" font-weight="700" fill="#94a3b8">LangGraph Server（langgraph-api 镜像）</text>
+<rect x="440" y="95" width="250" height="110" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="565.0" y="121" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">HTTP worker</text>
+<text x="565.0" y="145" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">收请求 → 生成 run_id</text>
+<text x="565.0" y="165" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">订阅 Redis 把更新流回客户端</text>
+<text x="565.0" y="185" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">/assistants /threads /runs /store</text>
+<rect x="710" y="95" width="250" height="110" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="835.0" y="121" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">Queue worker</text>
+<text x="835.0" y="145" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">从队列取 run 执行 graph</text>
+<text x="835.0" y="165" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">每步把事件发布到 Redis</text>
+<text x="835.0" y="185" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">每步写 checkpoint 到 Postgres</text>
+<path d="M690,150 L706,150" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="440" y="230" width="520" height="110" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="700.0" y="256" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">你的代码（langgraph.json 指向）</text>
+<text x="700.0" y="280" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">"graphs": {"task_maistro": "./task_maistro.py:graph"}</text>
+<text x="700.0" y="300" text-anchor="middle" font-size="12" fill="#ddd6fe" opacity="0.92">+ requirements.txt / dependencies  + env  + configuration.py（可配置字段）</text>
+<rect x="1000" y="60" width="380" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="1012" y="80" font-size="13" font-weight="700" fill="#94a3b8">基础设施（docker compose 自动拉起）</text>
+<rect x="1020" y="95" width="340" height="100" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="1190.0" y="121" text-anchor="middle" font-size="14" font-weight="700" fill="#fca5a5">Redis</text>
+<text x="1190.0" y="145" text-anchor="middle" font-size="12" fill="#fca5a5" opacity="0.92">任务队列 + 发布/订阅</text>
+<text x="1190.0" y="165" text-anchor="middle" font-size="12" fill="#fca5a5" opacity="0.92">streaming 的通道</text>
+<rect x="1020" y="215" width="340" height="125" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1190.0" y="241" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">PostgreSQL</text>
+<text x="1190.0" y="265" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">checkpoints（thread 历史）</text>
+<text x="1190.0" y="285" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">store（跨 thread 长期记忆）</text>
+<text x="1190.0" y="305" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">assistants / runs / threads 元数据</text>
+<path d="M960,120 L1016,120" fill="none" stroke="#f87171" stroke-width="2" marker-end="url(#ar)"/>
+<path d="M960,280 L1016,280" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<text x="30" y="400" text-anchor="start" font-size="15" fill="#fde047" font-weight="700">概念层级</text>
+<rect x="30" y="420" width="240" height="70" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="150.0" y="446" text-anchor="middle" font-size="15" font-weight="700" fill="#e2e8f0">Graph</text>
+<text x="150.0" y="470" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">代码里的 StateGraph</text>
+<path d="M272,455 L298,455" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="302" y="420" width="240" height="70" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="422.0" y="446" text-anchor="middle" font-size="15" font-weight="700" fill="#f1f5f9">Assistant</text>
+<text x="422.0" y="470" text-anchor="middle" font-size="12" fill="#f1f5f9" opacity="0.92">Graph + config（人设）</text>
+<path d="M544,455 L570,455" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="574" y="420" width="240" height="70" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="694.0" y="446" text-anchor="middle" font-size="15" font-weight="700" fill="#a5f3fc">Thread</text>
+<text x="694.0" y="470" text-anchor="middle" font-size="12" fill="#a5f3fc" opacity="0.92">一段持久会话</text>
+<path d="M816,455 L842,455" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="846" y="420" width="240" height="70" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="966.0" y="446" text-anchor="middle" font-size="15" font-weight="700" fill="#fde68a">Run</text>
+<text x="966.0" y="470" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">一次执行</text>
+<path d="M1088,455 L1114,455" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="1118" y="420" width="240" height="70" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1238.0" y="446" text-anchor="middle" font-size="15" font-weight="700" fill="#bbf7d0">Store</text>
+<text x="1238.0" y="470" text-anchor="middle" font-size="12" fill="#bbf7d0" opacity="0.92">跨 thread 记忆</text>
+<text x="30" y="530" text-anchor="start" font-size="13" fill="#94a3b8">命令：langgraph dev（本地热重载，内存 DB，Studio 连 127.0.0.1:2024） · langgraph build -t img（打 Docker 镜像） · docker compose up（镜像 + Redis + Postgres）</text>
+<text x="30" y="560" text-anchor="start" font-size="13" fill="#fbbf24">🆕 命名：LangGraph Platform/Cloud → LangSmith Deployment；LangGraph Studio → LangSmith Studio。API、SDK、CLI 名字不变。</text>
+</svg>

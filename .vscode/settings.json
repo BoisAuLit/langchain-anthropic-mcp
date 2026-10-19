@@ -1,6 +1,5 @@
 {
   "workbench.colorCustomizations": {
-    "tab.activeBackground": "#0000ff",
     "editor.selectionHighlightBackground": "#cc7e1800",
     "editor.findMatchHighlightBackground": "#9ed4206b",
     "editor.symbolHighlightBorder": "#00ff00",
@@ -23,12 +22,19 @@
     "statusBar.background": "#1857a4",
     "statusBar.foreground": "#e7e7e7",
     "statusBarItem.hoverBackground": "#1f6fd0",
-    "statusBarItem.remoteBackground": "#1857a4",
+    "statusBarItem.remoteBackground": "#530c2c",
     "statusBarItem.remoteForeground": "#e7e7e7",
     "titleBar.activeBackground": "#1857a4",
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#1857a499",
-    "titleBar.inactiveForeground": "#e7e7e799"
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "activityBarTop.activeBackground": "#1f6fd0",
+    "activityBarTop.background": "#1f6fd0",
+    "activityBarTop.foreground": "#e7e7e7",
+    "activityBarTop.inactiveForeground": "#e7e7e799",
+    "commandCenter.foreground": "#e7e7e7",
+    "statusBar.debuggingBackground": "#1857a4",
+    "statusBar.debuggingForeground": "#e7e7e7"
   },
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
   "python.terminal.activateEnvironment": true,

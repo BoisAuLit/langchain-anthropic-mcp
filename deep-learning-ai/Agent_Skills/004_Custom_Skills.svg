@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="2912" viewBox="0 0 1200 2912" xml:space="preserve" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+<defs>
+<style>
+  text{ xml:space:preserve; }
+  .title{ font-size:25px; font-weight:700; }
+  .h{ font-size:19px; font-weight:700; }
+  .b{ font-size:15px; font-weight:400; }
+  .bb{ font-size:15px; font-weight:700; }
+  .s{ font-size:13px; font-weight:400; }
+  .sb{ font-size:13px; font-weight:700; }
+  .code{ font-family:ui-monospace, Menlo, Consolas, monospace; font-size:14px; }
+  .cBlue{fill:#2563EB} .cTeal{fill:#0D9488} .cOrange{fill:#EA580C} .cPurple{fill:#7C3AED}
+  .cPink{fill:#E11D48} .cGreen{fill:#16A34A} .cAmber{fill:#B45309} .cSlate{fill:#334155}
+  .cGray{fill:#94A3B8} .cCode{fill:#6D28D9} .cWhite{fill:#FFFFFF}
+</style>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+  <path d="M0 0 L7 3 L0 6 Z" fill="#94A3B8"/>
+</marker>
+</defs>
+
+<!-- ===== WHITE BACKGROUND ===== -->
+<rect x="0" y="0" width="1200" height="2912" fill="#FFFFFF"/>
+
+<!-- ===== TITLE ===== -->
+<text x="60" y="54" class="title cPink">🧩 Creating Custom Skills</text>
+<text x="60" y="82" class="b cSlate">Agent Skills with Anthropic · DeepLearning.AI — how a skill is structured, and the best practices for production skills.</text>
+
+<!-- ===== ESSENCE ===== -->
+<rect x="60" y="100" width="1080" height="96" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="84" y="134" class="b cSlate"><tspan class="bb cSlate">Essence: </tspan>A skill is one folder holding a <tspan class="bb cPink">SKILL.md</tspan> file — a YAML frontmatter (<tspan class="code cCode">name</tspan> + <tspan class="code cCode">description</tspan>) plus a</text>
+<text x="84" y="160" class="b cSlate">Markdown body of instructions — with optional <tspan class="bb cPink">scripts</tspan>, <tspan class="bb cPink">references</tspan>, and <tspan class="bb cPink">assets</tspan> that load only when they are actually needed.</text>
+<text x="84" y="186" class="s cGray">The name and description are mission-critical: they tell the agent what the skill does and when to trigger it.</text>
+
+<!-- ===== SECTION 2 : SKILL STRUCTURE ===== -->
+<text x="60" y="240" class="h cBlue">🗂️ Skill structure — anatomy of a skill</text>
+
+<!-- anatomy diagram card -->
+<rect x="60" y="256" width="1080" height="322" rx="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+<text x="90" y="286" class="b cSlate">One skill = one folder named exactly like the skill. Only <tspan class="code cCode">SKILL.md</tspan> is required; everything else is optional.</text>
+
+<!-- SKILL.md box -->
+<rect x="90" y="300" width="1020" height="122" rx="9" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.4"/>
+<text x="110" y="326" class="bb cBlue">SKILL.md  —  the only required file</text>
+<rect x="110" y="336" width="980" height="34" rx="6" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
+<text x="126" y="358" class="b cSlate"><tspan class="bb cSlate">YAML frontmatter</tspan>  —  <tspan class="code cCode">name</tspan> + <tspan class="code cCode">description</tspan> (required), plus optional metadata fields.</text>
+<rect x="110" y="376" width="980" height="34" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+<text x="126" y="398" class="b cSlate"><tspan class="bb cSlate">Markdown body</tspan>  —  step-by-step instructions, input / output format, and common edge cases.</text>
+
+<!-- down arrow -->
+<line x1="600" y1="424" x2="600" y2="448" stroke="#94A3B8" stroke-width="2" marker-end="url(#arr)"/>
+<text x="90" y="468" class="s cGray">Optional directories — referenced from SKILL.md and loaded only when needed (progressive disclosure):</text>
+
+<!-- three optional dir boxes -->
+<rect x="90" y="478" width="320" height="86" rx="9" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.2"/>
+<text x="108" y="504" class="bb cAmber">/scripts</text>
+<text x="108" y="526" class="s cSlate">Code to run; document its</text>
+<text x="108" y="545" class="s cSlate">dependencies + error handling.</text>
+
+<rect x="440" y="478" width="320" height="86" rx="9" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.2"/>
+<text x="458" y="504" class="bb cAmber">/references</text>
+<text x="458" y="526" class="s cSlate">Extra docs read on demand;</text>
+<text x="458" y="545" class="s cSlate">add a table of contents if &gt;100 lines.</text>
+
+<rect x="790" y="478" width="320" height="86" rx="9" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.2"/>
+<text x="808" y="504" class="bb cAmber">/assets</text>
+<text x="808" y="526" class="s cSlate">Output templates, images,</text>
+<text x="808" y="545" class="s cSlate">logos, data files, schemas.</text>
+
+<!-- ===== SECTION 3 : FRONTMATTER ===== -->
+<text x="60" y="622" class="h cTeal">📇 Frontmatter — the required fields</text>
+
+<rect x="60" y="638" width="1080" height="236" rx="12" fill="#ECFDF5" stroke="#5EEAD4" stroke-width="1.2"/>
+<text x="86" y="668" class="bb cTeal">name</text>
+<text x="86" y="692" class="b cSlate">• Maximum <tspan class="bb cTeal">64 characters</tspan>; only lowercase letters, numbers, and hyphens (never start or end with a hyphen).</text>
+<text x="86" y="716" class="b cSlate">• Must <tspan class="bb cTeal">match the parent folder name</tspan> exactly, or the skill will not load.</text>
+<text x="86" y="740" class="b cSlate">• Recommended: use the gerund (verb + <tspan class="code cCode">-ing</tspan>) form, e.g. <tspan class="code cCode">generating-practice-questions</tspan>.</text>
+
+<line x1="86" y1="758" x2="1114" y2="758" stroke="#A7F3D0" stroke-width="1"/>
+
+<text x="86" y="784" class="bb cTeal">description</text>
+<text x="86" y="808" class="b cSlate">• Maximum <tspan class="bb cTeal">1024 characters</tspan>, non-empty. Describe both <tspan class="bb cTeal">what the skill does</tspan> and <tspan class="bb cTeal">when to use it</tspan>.</text>
+<text x="86" y="832" class="b cSlate">• Lean into specific <tspan class="bb cTeal">keywords</tspan> that should make the agent trigger this skill.</text>
+<text x="86" y="856" class="s cGray">Optional fields also exist: license, compatibility (max 500 chars), metadata (arbitrary key-value), allowed-tools (experimental).</text>
+
+<!-- ===== SECTION 4 : BODY CONTENT ===== -->
+<text x="60" y="908" class="h cPurple">📝 Body content — best practices</text>
+
+<rect x="60" y="924" width="1080" height="212" rx="12" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1.2"/>
+<text x="86" y="954" class="b cSlate">There are <tspan class="bb cPurple">no format restrictions</tspan> on the body, but for predictable workflows follow these habits:</text>
+<text x="86" y="982" class="b cSlate">• Give clear <tspan class="bb cPurple">step-by-step instructions</tspan>, an input / output format, and the common edge cases.</text>
+<text x="86" y="1006" class="b cSlate">• Keep <tspan class="code cCode">SKILL.md</tspan> <tspan class="bb cPurple">under 500 lines</tspan> — move detailed material into separate reference files.</text>
+<text x="86" y="1030" class="b cSlate">• Use <tspan class="bb cPurple">progressive disclosure</tspan>: show the basics, link to advanced / domain content loaded only when needed.</text>
+<text x="86" y="1054" class="b cSlate">• Keep references <tspan class="bb cPurple">one level deep</tspan> from <tspan class="code cCode">SKILL.md</tspan> (avoid nested file references).</text>
+<text x="86" y="1078" class="b cSlate">• Be clear and concise; use consistent terminology.</text>
+<text x="86" y="1102" class="b cSlate">• Always use <tspan class="bb cPurple">forward slashes</tspan> in file paths — even on Windows — so the skill works across environments.</text>
+<text x="86" y="1126" class="s cGray">The agent-skills specification is still evolving, so some existing skills (even Anthropic's) do not yet follow it exactly.</text>
+
+<!-- ===== SECTION 5 : DEGREES OF FREEDOM ===== -->
+<text x="60" y="1178" class="h cOrange">🎚️ Degrees of freedom — how much to constrain the skill</text>
+
+<rect x="60" y="1194" width="1080" height="150" rx="12" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.2"/>
+<text x="86" y="1224" class="b cSlate"><tspan class="bb cOrange">High freedom</tspan>  —  general text-based directions; many approaches are valid (good for creative output).</text>
+<text x="86" y="1252" class="b cSlate"><tspan class="bb cOrange">Medium freedom</tspan>  —  instructions give customizable pseudocode or patterns; a preferred way, some variation OK.</text>
+<text x="86" y="1280" class="b cSlate"><tspan class="bb cOrange">Low freedom</tspan>  —  instructions point to specific scripts; one exact sequence must be followed (best for best-practice tasks).</text>
+<text x="86" y="1316" class="b cSlate">For complex work, <tspan class="bb cOrange">break into small sequential skills</tspan> rather than one huge skill — systems can handle 100+ skills.</text>
+
+<!-- ===== SECTION 6 : EXAMPLE SKILL 1 ===== -->
+<text x="60" y="1388" class="h cPink">🧪 Example 1 — generating-practice-questions</text>
+
+<rect x="60" y="1404" width="1080" height="200" rx="12" fill="#FEF2F4" stroke="#FDA4AF" stroke-width="1.2"/>
+<text x="86" y="1434" class="b cSlate"><tspan class="bb cPink">Goal:</tspan> generate educational practice questions from lecture notes to test understanding. A <tspan class="bb cPink">medium-freedom</tspan> skill.</text>
+<text x="86" y="1462" class="b cSlate">• <tspan class="bb cPink">Input</tspan> — supported formats: PDF (extract with <tspan class="code cCode">pdfplumber</tspan>), LaTeX, Markdown, plain text; pull out learning objectives.</text>
+<text x="86" y="1490" class="b cSlate">• <tspan class="bb cPink">Question structure</tspan> — a fixed order: True/False → Explanatory → Coding → Use Case, each with sub-guidelines.</text>
+<text x="86" y="1518" class="b cSlate">• <tspan class="bb cPink">Output</tspan> depends on the request; instead of inlining every example, it points to <tspan class="code cCode">assets/</tspan> templates (LaTeX, Markdown).</text>
+<text x="86" y="1546" class="b cSlate">• Domain-specific examples live in <tspan class="code cCode">references/</tspan>, loaded only when needed — efficient use of the context window.</text>
+<text x="86" y="1574" class="s cGray">Skill-creator score: 9/10 — mainly could tighten the input-format section for conciseness.</text>
+
+<!-- ===== SECTION 7 : EXAMPLE SKILL 2 ===== -->
+<text x="60" y="1626" class="h cGreen">🧪 Example 2 — analyzing-time-series</text>
+
+<rect x="60" y="1642" width="1080" height="238" rx="12" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.2"/>
+<text x="86" y="1672" class="b cSlate"><tspan class="bb cGreen">Goal:</tspan> understand a time-series CSV before forecasting. A <tspan class="bb cGreen">low-freedom</tspan>, deterministic workflow built on 3 Python scripts</text>
+<text x="86" y="1696" class="b cSlate">(<tspan class="code cCode">visualize.py</tspan>, <tspan class="code cCode">diagnose.py</tspan>, <tspan class="code cCode">ts_utils.py</tspan>). The body pins the exact steps to run, in order:</text>
+
+<!-- 3-step orthogonal flow -->
+<rect x="86" y="1712" width="316" height="58" rx="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.3"/>
+<text x="104" y="1736" class="bb cGreen">Step 1 · Diagnose</text>
+<text x="104" y="1757" class="s cSlate">run diagnose.py → summary.txt</text>
+<line x1="402" y1="1741" x2="428" y2="1741" stroke="#94A3B8" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="440" y="1712" width="316" height="58" rx="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.3"/>
+<text x="458" y="1736" class="bb cGreen">Step 2 · Plots (optional)</text>
+<text x="458" y="1757" class="s cSlate">run visualize.py → plots/</text>
+<line x1="756" y1="1741" x2="782" y2="1741" stroke="#94A3B8" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="794" y="1712" width="316" height="58" rx="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.3"/>
+<text x="812" y="1736" class="bb cGreen">Step 3 · Report</text>
+<text x="812" y="1757" class="s cSlate">summarize + interpret findings</text>
+
+<text x="86" y="1800" class="b cSlate">• Guidance for reading results lives in <tspan class="code cCode">references/interpretation.md</tspan>; the output is a fixed tree of files and folders.</text>
+<text x="86" y="1824" class="b cSlate">• Because scripts need libraries, the skill lists <tspan class="bb cGreen">dependencies</tspan> explicitly so they can be installed.</text>
+<text x="86" y="1848" class="s cGray">Dependencies: pandas, numpy, matplotlib, statsmodels, scipy.  ·  Skill-creator score: 10/10 (exemplary, only 79 lines).</text>
+
+<!-- ===== SECTION 8 : EVALUATE WITH SKILL-CREATOR ===== -->
+<text x="60" y="1900" class="h cBlue">🔎 Evaluate skills with the skill-creator</text>
+
+<rect x="60" y="1916" width="1080" height="212" rx="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+<text x="86" y="1946" class="b cSlate">Run your finished skills through the <tspan class="bb cBlue">skill-creator</tspan> skill — it checks them against best practices out of the box.</text>
+<text x="86" y="1974" class="b cSlate">• In Claude Code it is not built in, so install it from a <tspan class="bb cBlue">marketplace</tspan>: add <tspan class="code cCode">anthropic/skills</tspan> (holds two collections —</text>
+<text x="86" y="1998" class="b cSlate">  <tspan class="code cCode">document-skills</tspan> for Excel / PowerPoint / Word / PDF, and <tspan class="code cCode">example-skills</tspan> including skill-creator).</text>
+<text x="86" y="2022" class="b cSlate">• Install at project scope, restart Claude Code (it writes <tspan class="code cCode">enabledPlugins</tspan> to <tspan class="code cCode">.claude/settings.json</tspan>), check with <tspan class="code cCode">/skills</tspan>.</text>
+<text x="86" y="2046" class="b cSlate">• Ask it to evaluate your skills, using <tspan class="bb cBlue">two subagents in parallel</tspan> — one per skill — for a fast first review.</text>
+<text x="86" y="2070" class="b cSlate">• It scores each criterion (frontmatter, conciseness, degrees of freedom, progressive disclosure, no duplication…)</text>
+<text x="86" y="2094" class="b cSlate">  and returns concrete recommendations you can act on before shipping.</text>
+<text x="86" y="2118" class="s cGray">Results here: generating-practice-questions 9/10, analyzing-time-series 10/10.</text>
+
+<!-- ===== SECTION 9 : UNIT TESTS / EVALUATION ===== -->
+<text x="60" y="2170" class="h cTeal">✅ Evaluation — write unit tests for skills</text>
+
+<rect x="60" y="2186" width="1080" height="212" rx="12" fill="#ECFEFF" stroke="#67E8F9" stroke-width="1.2"/>
+<text x="86" y="2216" class="b cSlate">Best-practice checks are not enough — also test that the skill actually <tspan class="bb cTeal">works</tspan>, like a software unit test.</text>
+<text x="86" y="2244" class="b cSlate">A test harness names the <tspan class="code cCode">skills</tspan>, a set of <tspan class="code cCode">queries</tspan>, the input <tspan class="code cCode">files</tspan>, and the <tspan class="code cCode">expected_behavior</tspan>. For example:</text>
+<text x="86" y="2272" class="b cSlate">• <tspan class="bb cTeal">practice-questions</tspan> — query "generate and save to <tspan class="code cCode">.md</tspan> / <tspan class="code cCode">.tex</tspan> / <tspan class="code cCode">.pdf</tspan>"; expect correct library, objectives</text>
+<text x="86" y="2296" class="b cSlate">  extracted, all 4 question types, correct templates, LaTeX compiles, saved to the right file.</text>
+<text x="86" y="2320" class="b cSlate">• <tspan class="bb cTeal">time-series</tspan> — assume the scripts are unit-tested; verify the workflow runs in the correct order, returns a</text>
+<text x="86" y="2344" class="b cSlate">  summary, interprets findings, and creates the results folder with every file in its right place.</text>
+<text x="86" y="2372" class="b cSlate">Also: <tspan class="bb cTeal">gather human feedback</tspan>, and <tspan class="bb cTeal">test across every model</tspan> you plan to run the skill on.</text>
+
+<!-- ===== SECTION 10 : 2026 INTEL ===== -->
+<text x="60" y="2424" class="h cBlue">📡 2026 intel</text>
+
+<rect x="60" y="2440" width="1080" height="188" rx="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+<text x="86" y="2470" class="b cSlate">• The <tspan class="bb cBlue">SKILL.md</tspan> format is now an open standard: only <tspan class="code cCode">name</tspan> + <tspan class="code cCode">description</tspan> are required; spec-compliant runtimes</text>
+<text x="86" y="2494" class="b cSlate">  ignore any frontmatter keys they do not recognize, so skills stay portable across tools.</text>
+<text x="86" y="2518" class="b cSlate">• Safety rule from the spec: <tspan class="bb cBlue">avoid angle brackets</tspan> (<tspan class="code cCode">&lt;</tspan> or <tspan class="code cCode">&gt;</tspan>) in frontmatter — they can inject unintended</text>
+<text x="86" y="2542" class="b cSlate">  instructions into the system prompt.</text>
+<text x="86" y="2566" class="b cSlate">• The public <tspan class="code cCode">anthropic/skills</tspan> repo ships ready-made skills (document + example collections) you can install,</text>
+<text x="86" y="2590" class="b cSlate">  read, and copy as templates for your own.</text>
+<text x="86" y="2614" class="s cGray">Skills and their spec are in active development across model providers and agent tooling — expect folder conventions to keep shifting.</text>
+
+<!-- ===== SECTION 11 : KEY INSIGHT ===== -->
+<text x="60" y="2666" class="h cAmber">🔑 Key insight</text>
+
+<rect x="60" y="2682" width="1080" height="110" rx="12" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.2"/>
+<text x="86" y="2714" class="b cSlate">Treat a skill like a small, well-tested program: a tight <tspan class="bb cAmber">name + description</tspan> so the agent triggers it, a lean body</text>
+<text x="86" y="2738" class="b cSlate">that <tspan class="bb cAmber">discloses detail progressively</tspan>, the right <tspan class="bb cAmber">degree of freedom</tspan> for the task, and both a <tspan class="bb cAmber">best-practice review</tspan></text>
+<text x="86" y="2762" class="b cSlate">(skill-creator) and <tspan class="bb cAmber">behavioral unit tests</tspan> before it goes to production.</text>
+
+<!-- ===== NEXT LESSON ===== -->
+<rect x="60" y="2812" width="1080" height="66" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="84" y="2846" class="b cSlate"><tspan class="bb cSlate">Next:</tspan> bring these two skills into Jupyter notebooks and run them with the Claude Messages API using code-execution</text>
+<text x="84" y="2870" class="b cSlate">tools, to produce outputs programmatically.</text>
+
+</svg>

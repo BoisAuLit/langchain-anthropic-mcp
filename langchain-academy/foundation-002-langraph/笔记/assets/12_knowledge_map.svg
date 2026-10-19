@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="760" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">LangGraph 知识地图：6 个 module → 15 份笔记</text>
+<rect x="30" y="70" width="215" height="40" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="137.5" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#f1f5f9">M1 骨架</text>
+<rect x="30" y="125" width="215" height="34" rx="17.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="137.5" y="146.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">State / Node / Edge</text>
+<rect x="30" y="169" width="215" height="34" rx="17.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="137.5" y="190.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">StateGraph → compile()</text>
+<rect x="30" y="213" width="215" height="34" rx="17.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="137.5" y="234.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">MessagesState + add_messages</text>
+<rect x="30" y="257" width="215" height="34" rx="17.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="137.5" y="278.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">bind_tools → ToolNode</text>
+<rect x="30" y="301" width="215" height="34" rx="17.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="137.5" y="322.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">Router → ReAct 回边</text>
+<rect x="30" y="345" width="215" height="34" rx="17.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="137.5" y="366.32" text-anchor="middle" font-size="12" font-weight="600" fill="#f1f5f9">checkpointer + thread_id</text>
+<text x="137" y="420" text-anchor="middle" font-size="13" fill="#fde047" font-weight="700">笔记 07 · 02 · 01 · 03 · 04 · 15</text>
+<path d="M248,90 L258,90" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="258" y="70" width="215" height="40" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="365.5" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#bbf7d0">M2 State</text>
+<rect x="258" y="125" width="215" height="34" rx="17.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="365.5" y="146.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">TypedDict / dataclass / Pydantic</text>
+<rect x="258" y="169" width="215" height="34" rx="17.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="365.5" y="190.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">Reducer（默认覆盖）</text>
+<rect x="258" y="213" width="215" height="34" rx="17.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="365.5" y="234.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">Private / Input / Output schema</text>
+<rect x="258" y="257" width="215" height="34" rx="17.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="365.5" y="278.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">RemoveMessage / trim / filter</text>
+<rect x="258" y="301" width="215" height="34" rx="17.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="365.5" y="322.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">滚动摘要 summary</text>
+<rect x="258" y="345" width="215" height="34" rx="17.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="365.5" y="366.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">SqliteSaver 持久化</text>
+<text x="365" y="420" text-anchor="middle" font-size="13" fill="#fde047" font-weight="700">笔记 05 · 07 · 06 · 04</text>
+<path d="M476,90 L486,90" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="486" y="70" width="215" height="40" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="593.5" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#fde68a">M3 HITL</text>
+<rect x="486" y="125" width="215" height="34" rx="17.0" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="593.5" y="146.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fde68a">stream_mode 四种</text>
+<rect x="486" y="169" width="215" height="34" rx="17.0" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="593.5" y="190.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fde68a">token 流 messages</text>
+<rect x="486" y="213" width="215" height="34" rx="17.0" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="593.5" y="234.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fde68a">interrupt() + Command(resume)</text>
+<rect x="486" y="257" width="215" height="34" rx="17.0" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="593.5" y="278.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fde68a">update_state（带 id 覆盖）</text>
+<rect x="486" y="301" width="215" height="34" rx="17.0" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="593.5" y="322.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fde68a">get_state_history</text>
+<rect x="486" y="345" width="215" height="34" rx="17.0" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="593.5" y="366.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fde68a">replay / fork</text>
+<text x="593" y="420" text-anchor="middle" font-size="13" fill="#fde047" font-weight="700">笔记 08 · 09 · 13 · 14</text>
+<path d="M704,90 L714,90" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="714" y="70" width="215" height="40" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="821.5" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#ddd6fe">M4 控制流</text>
+<rect x="714" y="125" width="215" height="34" rx="17.0" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="821.5" y="146.32" text-anchor="middle" font-size="12" font-weight="600" fill="#ddd6fe">fan-out / fan-in</text>
+<rect x="714" y="169" width="215" height="34" rx="17.0" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="821.5" y="190.32" text-anchor="middle" font-size="12" font-weight="600" fill="#ddd6fe">Send 动态并行</text>
+<rect x="714" y="213" width="215" height="34" rx="17.0" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="821.5" y="234.32" text-anchor="middle" font-size="12" font-weight="600" fill="#ddd6fe">子图：重叠 key 通信</text>
+<rect x="714" y="257" width="215" height="34" rx="17.0" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="821.5" y="278.32" text-anchor="middle" font-size="12" font-weight="600" fill="#ddd6fe">output_schema 收窄</text>
+<rect x="714" y="301" width="215" height="34" rx="17.0" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="821.5" y="322.32" text-anchor="middle" font-size="12" font-weight="600" fill="#ddd6fe">map-reduce 模板</text>
+<rect x="714" y="345" width="215" height="34" rx="17.0" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="821.5" y="366.32" text-anchor="middle" font-size="12" font-weight="600" fill="#ddd6fe">研究助手 = 全部拼起来</text>
+<text x="821" y="420" text-anchor="middle" font-size="13" fill="#fde047" font-weight="700">笔记 07 · 13</text>
+<path d="M932,90 L942,90" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="942" y="70" width="215" height="40" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1049.5" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#fed7aa">M5 记忆</text>
+<rect x="942" y="125" width="215" height="34" rx="17.0" fill="#2d2418" stroke="#fb923c" stroke-width="1.5"/>
+<text x="1049.5" y="146.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fed7aa">Store (ns, key, value)</text>
+<rect x="942" y="169" width="215" height="34" rx="17.0" fill="#2d2418" stroke="#fb923c" stroke-width="1.5"/>
+<text x="1049.5" y="190.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fed7aa">profile vs collection</text>
+<rect x="942" y="213" width="215" height="34" rx="17.0" fill="#2d2418" stroke="#fb923c" stroke-width="1.5"/>
+<text x="1049.5" y="234.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fed7aa">Trustcall patch / insert</text>
+<rect x="942" y="257" width="215" height="34" rx="17.0" fill="#2d2418" stroke="#fb923c" stroke-width="1.5"/>
+<text x="1049.5" y="278.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fed7aa">语义 / 情景 / 程序性</text>
+<rect x="942" y="301" width="215" height="34" rx="17.0" fill="#2d2418" stroke="#fb923c" stroke-width="1.5"/>
+<text x="1049.5" y="322.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fed7aa">memory agent 路由</text>
+<rect x="942" y="345" width="215" height="34" rx="17.0" fill="#2d2418" stroke="#fb923c" stroke-width="1.5"/>
+<text x="1049.5" y="366.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fed7aa">语义检索</text>
+<text x="1049" y="420" text-anchor="middle" font-size="13" fill="#fde047" font-weight="700">笔记 10 · 04</text>
+<path d="M1160,90 L1170,90" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="1170" y="70" width="215" height="40" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="1277.5" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#a5f3fc">M6 部署</text>
+<rect x="1170" y="125" width="215" height="34" rx="17.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1277.5" y="146.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">langgraph.json</text>
+<rect x="1170" y="169" width="215" height="34" rx="17.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1277.5" y="190.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">dev / build / compose</text>
+<rect x="1170" y="213" width="215" height="34" rx="17.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1277.5" y="234.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">Assistant = graph+config</text>
+<rect x="1170" y="257" width="215" height="34" rx="17.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1277.5" y="278.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">Thread / Run / Store SDK</text>
+<rect x="1170" y="301" width="215" height="34" rx="17.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1277.5" y="322.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">double-texting 4 策略</text>
+<rect x="1170" y="345" width="215" height="34" rx="17.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1277.5" y="366.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">RemoteGraph</text>
+<text x="1277" y="420" text-anchor="middle" font-size="13" fill="#fde047" font-weight="700">笔记 11 · 15</text>
+<rect x="30" y="450" width="1340" height="120" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="700.0" y="476" text-anchor="middle" font-size="16" font-weight="700" fill="#e2e8f0">一条主线</text>
+<text x="700.0" y="500" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">State 是共享黑板 → Node 往黑板写增量 → Reducer 决定怎么合并 → Edge/Command/Send 决定谁下一个写</text>
+<text x="700.0" y="521" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">→ checkpointer 把每一步黑板存成 checkpoint（thread 内记忆、可暂停可回退）→ Store 存跨 thread 的长期记忆</text>
+<text x="700.0" y="542" text-anchor="middle" font-size="13" fill="#e2e8f0" opacity="0.92">→ 把 graph 交给 Server，就有了 Assistant / Thread / Run 的 API，任何客户端都能调</text>
+<rect x="30" y="590" width="650" height="140" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="44" y="616" text-anchor="start" font-size="15" font-weight="700" fill="#fca5a5">最常踩的 5 个坑</text>
+<text x="44" y="640" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">① 并行写同 key 没 reducer → InvalidUpdateError</text>
+<text x="44" y="660" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">② 没挂 checkpointer 就想多轮记忆 / 断点 → 失忆 / 报错</text>
+<text x="44" y="680" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">③ 视图层 trim 以为改了 state（checkpoint 还在变胖）</text>
+<text x="44" y="700" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">④ interrupt() 续跑节点从头重跑，副作用翻倍</text>
+<text x="44" y="720" text-anchor="start" font-size="12" fill="#fca5a5" opacity="0.92">⑤ 用 __main__ 里的 Pydantic 对象做 state → 反序列化警告</text>
+<rect x="720" y="590" width="650" height="140" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="734" y="616" text-anchor="start" font-size="15" font-weight="700" fill="#bbf7d0">2026 新写法（课件里的旧名仍能跑）</text>
+<text x="734" y="640" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">InMemorySaver ← MemorySaver   ·   interrupt() ← NodeInterrupt / interrupt_before</text>
+<text x="734" y="660" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">create_agent ← create_react_agent   ·   context_schema ← config_schema</text>
+<text x="734" y="680" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">stream_mode="messages" 本地可用 ← astream_events</text>
+<text x="734" y="700" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">LangSmith Deployment / Studio ← LangGraph Platform / Studio</text>
+<text x="734" y="720" text-anchor="start" font-size="12" fill="#bbf7d0" opacity="0.92">input_schema= / output_schema= ← input= / output=</text>
+</svg>

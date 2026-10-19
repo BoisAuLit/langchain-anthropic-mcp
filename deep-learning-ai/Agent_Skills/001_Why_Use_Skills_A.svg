@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="3000" viewBox="0 0 1120 3000" font-family="'Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748B"/>
+    </marker>
+    <style>
+      .title{font-size:25px;font-weight:700}
+      .sub{font-size:16px;font-weight:400}
+      .h{font-size:19px;font-weight:700}
+      .b{font-size:15px;font-weight:400}
+      .bb{font-size:15px;font-weight:700}
+      .sm{font-size:13px;font-weight:400}
+      .smb{font-size:13px;font-weight:700}
+      .code{font-size:14px;font-weight:400;font-family:'SF Mono',Menlo,Consolas,monospace}
+      .codeb{font-size:14px;font-weight:700;font-family:'SF Mono',Menlo,Consolas,monospace}
+      .cBlue{fill:#2563EB}.cTeal{fill:#0D9488}.cOrange{fill:#EA580C}.cPurple{fill:#7C3AED}
+      .cPink{fill:#E11D48}.cGreen{fill:#16A34A}.cAmber{fill:#B45309}.cSlate{fill:#334155}
+      .cGray{fill:#94A3B8}.cCode{fill:#6D28D9}.cWhite{fill:#FFFFFF}
+    </style>
+  </defs>
+
+  <!-- L11 solid white background -->
+  <rect x="0" y="0" width="1120" height="3000" fill="#FFFFFF"/>
+
+  <!-- ===== HEADER ===== -->
+  <text x="40" y="60" class="title cPink" xml:space="preserve">🧩 Agent Skills with Anthropic</text>
+  <text x="40" y="92" class="sub cSlate" xml:space="preserve">Why Use Skills? — Part I  ·  turning a repeated prompt into a reusable, shareable asset</text>
+  <line x1="40" y1="110" x2="1080" y2="110" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- ===== ESSENCE ===== -->
+  <rect x="40" y="128" width="1040" height="100" rx="12" fill="#F8FAFC" stroke="#334155" stroke-width="1.2"/>
+  <text x="66" y="162" class="b cSlate" xml:space="preserve"><tspan class="bb cSlate">Essence:</tspan> A Skill is a folder of instructions — a <tspan class="bb cSlate">SKILL.md</tspan> file plus any helper files — that turns a</text>
+  <text x="66" y="186" class="b cSlate" xml:space="preserve">repeated prompt into a reusable, shareable asset. The agent loads it only when a task matches,</text>
+  <text x="66" y="210" class="b cSlate" xml:space="preserve">so most of the detail stays out of the context window until it is actually needed.</text>
+
+  <!-- ===== S1: What is a Skill ===== -->
+  <text x="40" y="262" class="h cBlue" xml:space="preserve">What is a Skill?</text>
+  <rect x="40" y="278" width="1040" height="168" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.2"/>
+  <text x="66" y="310" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">•</tspan>  A Skill is a folder of instructions that packages a <tspan class="bb cBlue">repeated workflow</tspan>, specialized knowledge,</text>
+  <text x="90" y="334" class="b cSlate" xml:space="preserve">or a new capability for your agent.</text>
+  <text x="66" y="358" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">•</tspan>  Rule of thumb: if you type the <tspan class="bb cBlue">same prompt</tspan> across many conversations, make it a Skill.</text>
+  <text x="66" y="382" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">•</tspan>  The main file is <tspan class="bb cBlue">SKILL.md</tspan>. A skill can also bundle helper files that load only when needed.</text>
+  <text x="66" y="418" class="b cSlate" xml:space="preserve"><tspan class="bb cBlue">•</tspan>  You build a skill once, then <tspan class="bb cBlue">reuse</tspan> it, <tspan class="bb cBlue">share</tspan> it with your team, and <tspan class="bb cBlue">edit</tspan> it in one place.</text>
+
+  <!-- ===== S2: The problem ===== -->
+  <text x="40" y="462" class="h cOrange" xml:space="preserve">The problem: repeating the same prompt</text>
+  <rect x="40" y="478" width="1040" height="290" rx="12" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.2"/>
+  <text x="66" y="510" class="b cSlate" xml:space="preserve"><tspan class="bb cOrange">Example —</tspan> a weekly marketing-campaign analysis on a CSV (columns for date, campaign, impressions,</text>
+  <text x="66" y="534" class="b cSlate" xml:space="preserve">clicks, conversions, spend, and revenue). Every week you do the same thing by hand:</text>
+
+  <!-- figure: repeated manual flow -->
+  <text x="560" y="560" class="smb cOrange" text-anchor="middle" xml:space="preserve">Repeated by hand — every single week</text>
+  <rect x="107" y="574" width="258" height="64" rx="9" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.4"/>
+  <text x="236" y="600" class="bb cSlate" text-anchor="middle" xml:space="preserve">Long prompt + CSV</text>
+  <text x="236" y="622" class="sm cSlate" text-anchor="middle" xml:space="preserve">+ budget rules file</text>
+  <rect x="431" y="574" width="258" height="64" rx="9" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.4"/>
+  <text x="560" y="611" class="bb cSlate" text-anchor="middle" xml:space="preserve">Claude analyzes</text>
+  <rect x="755" y="574" width="258" height="64" rx="9" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.4"/>
+  <text x="884" y="600" class="bb cSlate" text-anchor="middle" xml:space="preserve">Report</text>
+  <text x="884" y="622" class="sm cSlate" text-anchor="middle" xml:space="preserve">funnel + efficiency</text>
+  <line x1="371" y1="606" x2="423" y2="606" stroke="#64748B" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="695" y1="606" x2="747" y2="606" stroke="#64748B" stroke-width="2" marker-end="url(#ah)"/>
+
+  <text x="66" y="686" class="b cSlate" xml:space="preserve"><tspan class="bb cOrange">•</tspan>  You must supply all the documentation and domain knowledge yourself, every single time.</text>
+  <text x="66" y="710" class="b cSlate" xml:space="preserve"><tspan class="bb cOrange">•</tspan>  Everything you paste flows into the <tspan class="bb cOrange">context window</tspan> — even parts a given task does not need.</text>
+  <text x="66" y="734" class="b cSlate" xml:space="preserve"><tspan class="bb cOrange">•</tspan>  The prompt is <tspan class="bb cOrange">not reusable</tspan>: you copy and paste it again for every new conversation.</text>
+
+  <!-- ===== S3: The fix, SKILL.md ===== -->
+  <text x="40" y="788" class="h cTeal" xml:space="preserve">The fix: package it into SKILL.md</text>
+  <rect x="40" y="804" width="1040" height="430" rx="12" fill="#ECFEFF" stroke="#0D9488" stroke-width="1.2"/>
+  <text x="66" y="836" class="b cSlate" xml:space="preserve"><tspan class="bb cTeal">•</tspan>  SKILL.md is a <tspan class="bb cTeal">Markdown</tspan> file that holds the same instructions you used to paste by hand.</text>
+  <text x="66" y="860" class="b cSlate" xml:space="preserve"><tspan class="bb cTeal">•</tspan>  It lists your Input Requirements, Data Quality Check, Funnel Analysis, Efficiency Analysis,</text>
+  <text x="90" y="884" class="b cSlate" xml:space="preserve">and the Output Format you expect.</text>
+  <text x="66" y="908" class="b cSlate" xml:space="preserve"><tspan class="bb cTeal">•</tspan>  One section on Budget Reallocation points to a <tspan class="bb cTeal">separate file, read only when the user asks</tspan></text>
+  <text x="90" y="932" class="b cSlate" xml:space="preserve">about it — so unused details stay out of the context window.</text>
+
+  <!-- figure: SKILL.md document with its body sections -->
+  <rect x="200" y="962" width="720" height="252" rx="10" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.4"/>
+  <rect x="200" y="962" width="720" height="34" rx="10" fill="#CCFBF1"/>
+  <rect x="200" y="980" width="720" height="16" fill="#CCFBF1"/>
+  <text x="220" y="985" class="codeb cTeal" xml:space="preserve">📄 SKILL.md</text>
+  <text x="220" y="1028" class="codeb cSlate" xml:space="preserve"># Marketing Campaign Analysis</text>
+  <text x="220" y="1054" class="code cSlate" xml:space="preserve">## Input Requirements</text>
+  <text x="220" y="1078" class="code cSlate" xml:space="preserve">## Data Quality Check</text>
+  <text x="220" y="1102" class="code cSlate" xml:space="preserve">## Funnel Analysis</text>
+  <text x="220" y="1126" class="code cSlate" xml:space="preserve">## Efficiency Analysis</text>
+  <text x="220" y="1150" class="code cSlate" xml:space="preserve">## Output Format</text>
+  <text x="220" y="1174" class="code cSlate" xml:space="preserve">## Budget Reallocation</text>
+  <text x="244" y="1196" class="sm cTeal" xml:space="preserve">→ references/budget_reallocation_rules.md  (read only when asked)</text>
+
+  <!-- ===== S4: YAML frontmatter ===== -->
+  <text x="40" y="1268" class="h cPurple" xml:space="preserve">Required metadata: name + description</text>
+  <rect x="40" y="1284" width="1040" height="314" rx="12" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.2"/>
+  <text x="66" y="1316" class="b cSlate" xml:space="preserve"><tspan class="bb cPurple">•</tspan>  At the very top of SKILL.md you add a small block of <tspan class="bb cPurple">YAML</tspan> metadata.</text>
+  <text x="66" y="1340" class="b cSlate" xml:space="preserve"><tspan class="bb cPurple">•</tspan>  Every skill requires two fields — <tspan class="bb cPurple">name</tspan> and <tspan class="bb cPurple">description</tspan> — and nothing else is mandatory.</text>
+  <text x="66" y="1364" class="b cSlate" xml:space="preserve"><tspan class="bb cPurple">•</tspan>  <tspan class="bb cPurple">name</tspan> identifies the skill (for reference and in the UI). <tspan class="bb cPurple">description</tspan> tells the model when to</text>
+  <text x="90" y="1388" class="b cSlate" xml:space="preserve">use it — a good description is what makes the skill get picked up automatically.</text>
+
+  <rect x="66" y="1408" width="988" height="172" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2"/>
+  <text x="86" y="1434" class="code cCode" xml:space="preserve">---</text>
+  <text x="86" y="1456" class="code cCode" xml:space="preserve"><tspan class="codeb cCode">name:</tspan> analyzing-marketing-campaign</text>
+  <text x="86" y="1478" class="code cCode" xml:space="preserve"><tspan class="codeb cCode">description:</tspan> Analyze weekly marketing campaign performance data across channels.</text>
+  <text x="86" y="1500" class="code cCode" xml:space="preserve">  Use when analyzing multi-channel data to calculate funnel metrics (CTR, CVR),</text>
+  <text x="86" y="1522" class="code cCode" xml:space="preserve">  compute efficiency metrics (ROAS, CPA, Net Profit), or get budget reallocation</text>
+  <text x="86" y="1544" class="code cCode" xml:space="preserve">  recommendations based on performance rules.</text>
+  <text x="86" y="1566" class="code cCode" xml:space="preserve">---</text>
+
+  <!-- ===== S5: Folder + references ===== -->
+  <text x="40" y="1632" class="h cGreen" xml:space="preserve">Build the folder (and a references/ folder)</text>
+  <rect x="40" y="1648" width="1040" height="358" rx="12" fill="#ECFDF5" stroke="#16A34A" stroke-width="1.2"/>
+  <text x="66" y="1680" class="b cSlate" xml:space="preserve"><tspan class="bb cGreen">•</tspan>  Make a folder named after the skill, and put <tspan class="bb cGreen">SKILL.md</tspan> at its top level.</text>
+  <text x="66" y="1704" class="b cSlate" xml:space="preserve"><tspan class="bb cGreen">•</tspan>  Add a <tspan class="bb cGreen">references/</tspan> folder for extra files. references is the standard folder name for the</text>
+  <text x="90" y="1728" class="b cSlate" xml:space="preserve">files a skill bundles alongside SKILL.md.</text>
+  <text x="66" y="1752" class="b cSlate" xml:space="preserve"><tspan class="bb cGreen">•</tspan>  Naming rules: use <tspan class="bb cGreen">lowercase letters</tspan>, <tspan class="bb cGreen">dashes between words</tspan>, and no reserved words such</text>
+  <text x="90" y="1776" class="b cSlate" xml:space="preserve">as “claude” or “anthropic”.</text>
+
+  <!-- figure: folder tree -->
+  <!-- tree guide lines -->
+  <line x1="159" y1="1832" x2="159" y2="1902" stroke="#94A3B8" stroke-width="1.4"/>
+  <line x1="159" y1="1862" x2="182" y2="1862" stroke="#94A3B8" stroke-width="1.4"/>
+  <line x1="159" y1="1902" x2="182" y2="1902" stroke="#94A3B8" stroke-width="1.4"/>
+  <line x1="203" y1="1912" x2="203" y2="1938" stroke="#94A3B8" stroke-width="1.4"/>
+  <line x1="203" y1="1938" x2="226" y2="1938" stroke="#94A3B8" stroke-width="1.4"/>
+  <!-- root folder -->
+  <path d="M148,1817 h8 l3,4 h13 v13 h-24 z" fill="#16A34A"/>
+  <text x="182" y="1832" class="bb cSlate" xml:space="preserve">analyzing-marketing-campaign/</text>
+  <text x="470" y="1832" class="sm cGray" xml:space="preserve">← top-level skill folder</text>
+  <!-- SKILL.md file -->
+  <rect x="184" y="1851" width="14" height="18" rx="2" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.3"/>
+  <text x="210" y="1867" class="bb cSlate" xml:space="preserve">SKILL.md</text>
+  <text x="470" y="1867" class="sm cGray" xml:space="preserve">← instructions + name/description</text>
+  <!-- references folder -->
+  <path d="M184,1889 h7 l3,3 h11 v12 h-21 z" fill="#16A34A"/>
+  <text x="210" y="1903" class="bb cSlate" xml:space="preserve">references/</text>
+  <text x="470" y="1903" class="sm cGray" xml:space="preserve">← standard name for bundled files</text>
+  <!-- budget file -->
+  <rect x="228" y="1925" width="14" height="18" rx="2" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.3"/>
+  <text x="254" y="1941" class="bb cSlate" xml:space="preserve">budget_reallocation_rules.md</text>
+  <text x="470" y="1941" class="sm cGray" xml:space="preserve">← loaded only when asked</text>
+
+  <text x="66" y="1984" class="b cSlate" xml:space="preserve"><tspan class="bb cGreen">•</tspan>  Then <tspan class="bb cGreen">zip</tspan> the whole folder — that single zip file is your shareable skill.</text>
+
+  <!-- ===== S6: Upload and auto-use ===== -->
+  <text x="40" y="2040" class="h cPink" xml:space="preserve">Upload once, then Claude uses it on its own</text>
+  <rect x="40" y="2056" width="1040" height="282" rx="12" fill="#FEF2F4" stroke="#E11D48" stroke-width="1.2"/>
+  <text x="66" y="2088" class="b cSlate" xml:space="preserve"><tspan class="bb cPink">•</tspan>  In Claude AI, open <tspan class="bb cPink">Settings &gt; Capabilities &gt; Skills</tspan>, click Add, and upload the zip.</text>
+  <text x="66" y="2112" class="b cSlate" xml:space="preserve"><tspan class="bb cPink">•</tspan>  In a new chat, attach your CSV and ask. Claude reads the <tspan class="bb cPink">name + description</tspan> and picks the</text>
+  <text x="90" y="2136" class="b cSlate" xml:space="preserve">skill up on its own — no copy-paste prompt needed.</text>
+  <text x="66" y="2160" class="b cSlate" xml:space="preserve"><tspan class="bb cPink">•</tspan>  It opens the referenced budget file <tspan class="bb cPink">only when</tspan> your request is about reallocation.</text>
+
+  <!-- figure: progressive disclosure 3-stage flow -->
+  <text x="560" y="2200" class="smb cPink" text-anchor="middle" xml:space="preserve">How the agent loads a skill — progressive disclosure</text>
+  <rect x="107" y="2214" width="258" height="72" rx="9" fill="#FFFFFF" stroke="#E11D48" stroke-width="1.4"/>
+  <text x="236" y="2240" class="bb cSlate" text-anchor="middle" xml:space="preserve">1 · Discovery</text>
+  <text x="236" y="2264" class="sm cSlate" text-anchor="middle" xml:space="preserve">load name + description</text>
+  <rect x="431" y="2214" width="258" height="72" rx="9" fill="#FFFFFF" stroke="#E11D48" stroke-width="1.4"/>
+  <text x="560" y="2240" class="bb cSlate" text-anchor="middle" xml:space="preserve">2 · Activation</text>
+  <text x="560" y="2264" class="sm cSlate" text-anchor="middle" xml:space="preserve">read full SKILL.md</text>
+  <rect x="755" y="2214" width="258" height="72" rx="9" fill="#FFFFFF" stroke="#E11D48" stroke-width="1.4"/>
+  <text x="884" y="2240" class="bb cSlate" text-anchor="middle" xml:space="preserve">3 · Execution</text>
+  <text x="884" y="2264" class="sm cSlate" text-anchor="middle" xml:space="preserve">run code / open files</text>
+  <line x1="371" y1="2250" x2="423" y2="2250" stroke="#64748B" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="695" y1="2250" x2="747" y2="2250" stroke="#64748B" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="560" y="2318" class="sm cSlate" text-anchor="middle" xml:space="preserve">An agent can know about dozens of skills for less context than one fully loaded skill.</text>
+
+  <!-- ===== S7: Why skills win ===== -->
+  <text x="40" y="2382" class="h cAmber" xml:space="preserve">Why skills are worth it</text>
+  <rect x="40" y="2398" width="1040" height="172" rx="12" fill="#FFFBEB" stroke="#B45309" stroke-width="1.2"/>
+  <text x="66" y="2430" class="b cSlate" xml:space="preserve"><tspan class="bb cAmber">Reusable —</tspan> build the workflow once and run it every week without rewriting the prompt.</text>
+  <text x="66" y="2454" class="b cSlate" xml:space="preserve"><tspan class="bb cAmber">Context-efficient —</tspan> only name + description load up front; the full details load on demand.</text>
+  <text x="66" y="2478" class="b cSlate" xml:space="preserve"><tspan class="bb cAmber">Portable —</tspan> Skills are an open standard, so the same folder works in Codex, Gemini CLI, and more.</text>
+  <text x="66" y="2502" class="b cSlate" xml:space="preserve"><tspan class="bb cAmber">Shareable and editable —</tspan> hand it to teammates and update the workflow in one place.</text>
+  <text x="66" y="2526" class="b cSlate" xml:space="preserve"><tspan class="bb cAmber">Built-in skills exist too —</tspan> creating the Excel report is itself a skill that ships with Claude.</text>
+
+  <!-- ===== 2026 INTEL ===== -->
+  <text x="40" y="2604" class="h cSlate" xml:space="preserve">2026 intel</text>
+  <rect x="40" y="2620" width="1040" height="172" rx="12" fill="#F8FAFC" stroke="#334155" stroke-width="1.2"/>
+  <text x="66" y="2652" class="b cSlate" xml:space="preserve"><tspan class="bb cSlate">•</tspan>  Anthropic released <tspan class="bb cSlate">Agent Skills</tspan> as an open standard on 18 Dec 2025. By mid-2026, about 40</text>
+  <text x="90" y="2676" class="b cSlate" xml:space="preserve">skills-compatible products are listed on agentskills.io — Codex, GitHub Copilot, Cursor, more.</text>
+  <text x="66" y="2700" class="b cSlate" xml:space="preserve"><tspan class="bb cSlate">•</tspan>  Progressive disclosure runs in three stages: <tspan class="bb cSlate">Discovery</tspan> (name + description), <tspan class="bb cSlate">Activation</tspan></text>
+  <text x="90" y="2724" class="b cSlate" xml:space="preserve">(full SKILL.md), and <tspan class="bb cSlate">Execution</tspan> (run code or open referenced files as needed).</text>
+  <text x="66" y="2748" class="b cSlate" xml:space="preserve"><tspan class="bb cSlate">•</tspan>  An agent can be aware of dozens of skills for less context than one activated skill.</text>
+
+  <!-- ===== KEY INSIGHT ===== -->
+  <text x="40" y="2826" class="h cBlue" xml:space="preserve">Key insight</text>
+  <rect x="40" y="2842" width="1040" height="124" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.2"/>
+  <text x="66" y="2876" class="b cSlate" xml:space="preserve">A Skill separates <tspan class="bb cBlue">what to do</tspan> from the chat itself. Instead of re-pasting a large prompt every</text>
+  <text x="66" y="2900" class="b cSlate" xml:space="preserve">time, you store it once as a <tspan class="bb cBlue">SKILL.md folder</tspan> — and the agent loads only the piece it needs,</text>
+  <text x="66" y="2924" class="b cSlate" xml:space="preserve">exactly when it needs it. Build once, reuse everywhere, and stay light on context.</text>
+</svg>

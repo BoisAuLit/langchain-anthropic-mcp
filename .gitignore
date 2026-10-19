@@ -214,3 +214,6 @@ __marimo__/
 uv.lock
 *.pdf
 *.joblib
+*.png
+*.jpeg
+*.jpg
