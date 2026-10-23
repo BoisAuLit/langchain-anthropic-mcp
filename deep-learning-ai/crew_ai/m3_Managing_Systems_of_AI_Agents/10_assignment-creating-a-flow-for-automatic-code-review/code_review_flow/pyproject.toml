@@ -20,3 +20,4 @@ build-backend = "hatchling.build"
 
 [tool.crewai]
 type = "flow"
+project_id = "3623fe43-9131-4483-baa6-67608f9b5933"

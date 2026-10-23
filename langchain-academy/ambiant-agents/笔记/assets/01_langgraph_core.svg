@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="560" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">LangGraph 三件套 + 两种路由 + create_agent</text>
+<rect x="30" y="60" width="640" height="230" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="80" font-size="13" font-weight="700" fill="#94a3b8">① State / Node / Edge</text>
+<rect x="50" y="92" width="180" height="82" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="140.0" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#f1f5f9">State</text>
+<text x="140.0" y="142" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">TypedDict schema</text>
+<text x="140.0" y="161" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">默认 reducer = 覆盖</text>
+<rect x="260" y="92" width="180" height="82" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="350.0" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#bbf7d0">Node</text>
+<text x="350.0" y="142" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">函数：state → dict</text>
+<text x="350.0" y="161" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">返回 = 对 state 的更新</text>
+<rect x="470" y="92" width="180" height="82" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="560.0" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#fde68a">Edge</text>
+<text x="560.0" y="142" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">add_edge 固定</text>
+<text x="560.0" y="161" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">add_conditional_edges 运行时</text>
+<path d="M232,133 L256,133" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M442,133 L466,133" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<text x="50" y="200" text-anchor="start" font-size="12" fill="#e2e8f0">MessagesState：messages 字段配 add_messages reducer → 追加不覆盖</text>
+<text x="50" y="224" text-anchor="start" font-size="12" fill="#fbbf24" font-weight="700">Node 返回 dict = 改 state；条件边函数返回「节点名」= 选路；别混</text>
+<text x="50" y="248" text-anchor="start" font-size="12" fill="#94a3b8">compile(checkpointer=InMemorySaver()) + thread_id → 多轮 / 暂停续跑</text>
+<rect x="700" y="60" width="670" height="230" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="712" y="80" font-size="13" font-weight="700" fill="#94a3b8">② 两种路由写法</text>
+<rect x="720" y="95" width="300" height="120" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="734" y="121" text-anchor="start" font-size="14" font-weight="700" fill="#e2e8f0">条件边</text>
+<text x="734" y="145" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">node 只改 state</text>
+<text x="734" y="164" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">add_conditional_edges("a", fn, map)</text>
+<text x="734" y="183" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">fn 读 state → 返回节点名</text>
+<text x="734" y="202" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">适合纯判断（如 tools_condition）</text>
+<rect x="1050" y="95" width="300" height="120" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1064" y="121" text-anchor="start" font-size="14" font-weight="700" fill="#ddd6fe">Command（本课主用）</text>
+<text x="1064" y="145" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">node 内 return Command(</text>
+<text x="1064" y="164" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">  update={...}, goto="b")</text>
+<text x="1064" y="183" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">改 state + 选下一跳一步到位</text>
+<text x="1064" y="202" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">需要注解 -&gt; Command[Literal[...]]</text>
+<text x="720" y="245" text-anchor="start" font-size="12" fill="#a5f3fc">Command(resume=值) 作为 invoke 输入 → interrupt(...) 的返回值 = 该值，从暂停行继续</text>
+<text x="720" y="268" text-anchor="start" font-size="12" fill="#fbbf24" font-weight="700">goto 不取消静态边：别给同一节点既加 add_edge 又 return Command(goto)</text>
+<rect x="30" y="320" width="1340" height="215" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="340" font-size="13" font-weight="700" fill="#94a3b8">③ 预制 agent：create_react_agent（langgraph.prebuilt，1.0 起弃用）→ create_agent（langchain.agents）</text>
+<rect x="50" y="355" width="400" height="150" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="64" y="381" text-anchor="start" font-size="13" font-weight="700" fill="#fca5a5">旧（课程视频 / 上游仓库仍用）</text>
+<text x="64" y="405" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">from langgraph.prebuilt import create_react_agent</text>
+<text x="64" y="424" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">create_react_agent(model, tools, prompt=...)</text>
+<text x="64" y="443" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92"></text>
+<text x="64" y="462" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">1.2 仍能跑：LangGraphDeprecatedSinceV10</text>
+<text x="64" y="481" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">2.0 删除</text>
+<path d="M454,430 L496,430" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="500" y="355" width="420" height="150" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="514" y="381" text-anchor="start" font-size="13" font-weight="700" fill="#bbf7d0">新（langchain 1.4.6 实测）</text>
+<text x="514" y="405" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">from langchain.agents import create_agent</text>
+<text x="514" y="424" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">create_agent(model, tools, system_prompt=...,</text>
+<text x="514" y="443" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">             checkpointer=..., store=...,</text>
+<text x="514" y="462" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">             middleware=[HITL / Summarization / Todo ...])</text>
+<text x="514" y="481" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">state_schema 只接受 TypedDict</text>
+<rect x="950" y="355" width="400" height="150" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="964" y="381" text-anchor="start" font-size="13" font-weight="700" fill="#a5f3fc">不变的部分</text>
+<text x="964" y="405" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">返回 CompiledStateGraph</text>
+<text x="964" y="424" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">invoke({"messages": [...]}, config)</text>
+<text x="964" y="443" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">可当子图 add_node("agent", agent)</text>
+<text x="964" y="462" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">interrupt / Command / checkpointer 全同</text>
+<text x="964" y="481" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">deepagents.create_deep_agent 在它之上</text>
+</svg>

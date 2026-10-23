@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="560" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">全流程：4 个阶段串成一张图；子图当节点；recursion_limit 的真相</text>
+<rect x="40" y="70" width="300" height="90" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="190.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">clarify_with_user</text>
+<text x="190.0" y="120" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">需要追问 → END</text>
+<text x="190.0" y="139" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">否则 → brief</text>
+<path d="M342,115 L372,115" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="375" y="70" width="300" height="90" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="525.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">write_research_brief</text>
+<text x="525.0" y="120" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">research_brief</text>
+<text x="525.0" y="139" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">supervisor_messages[0]</text>
+<path d="M677,115 L707,115" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="710" y="70" width="300" height="90" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="860.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">supervisor_subgraph</text>
+<text x="860.0" y="120" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">编译好的 supervisor_agent</text>
+<text x="860.0" y="139" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">直接 add_node 当节点</text>
+<path d="M1012,115 L1042,115" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="1045" y="70" width="300" height="90" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="1195.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">final_report_generation</text>
+<text x="1195.0" y="120" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">notes 拼成 findings</text>
+<text x="1195.0" y="139" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">writer_model 写报告</text>
+<text x="40" y="190" text-anchor="start" font-size="12" fill="#e2e8f0">AgentState 在阶段间传递：messages → research_brief / supervisor_messages → notes / raw_notes → final_report</text>
+<text x="40" y="213" text-anchor="start" font-size="12" fill="#94a3b8">对外接口 AgentInputState 只有 messages；子图共享父图里同名 key（supervisor_messages / notes / raw_notes / research_brief）</text>
+<rect x="30" y="240" width="660" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="260" font-size="13" font-weight="700" fill="#94a3b8">② recursion_limit（2026-10 实测，langgraph 1.2.0）</text>
+<rect x="50" y="275" width="300" height="110" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="64" y="301" text-anchor="start" font-size="13" font-weight="700" fill="#fca5a5">课程写法 ❌</text>
+<text x="64" y="325" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">{"configurable": {"thread_id": "1",</text>
+<text x="64" y="344" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">                  "recursion_limit": 50}}</text>
+<text x="64" y="363" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">configurable 里的 recursion_limit 被忽略</text>
+<rect x="370" y="275" width="300" height="110" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="384" y="301" text-anchor="start" font-size="13" font-weight="700" fill="#bbf7d0">正确写法 ✅</text>
+<text x="384" y="325" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">{"configurable": {"thread_id": "1"},</text>
+<text x="384" y="344" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92"> "recursion_limit": 50}</text>
+<text x="384" y="363" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">必须是 config 顶层 key</text>
+<text x="50" y="415" text-anchor="start" font-size="12" fill="#e2e8f0">实测：40 步循环 + configurable 里 limit=10 照样跑完；顶层 limit=10 → GraphRecursionError</text>
+<text x="50" y="438" text-anchor="start" font-size="12" fill="#fbbf24">默认值：DEFAULT_RECURSION_LIMIT = env LANGGRAPH_DEFAULT_RECURSION_LIMIT 或 10007（不是 25）</text>
+<text x="50" y="461" text-anchor="start" font-size="12" fill="#fbbf24">→ 课程的 50 从未生效，能跑通是因为默认值已经够大；deepagents 自己设 9999</text>
+<text x="50" y="484" text-anchor="start" font-size="12" fill="#94a3b8">计数规则仍对：每执行一个 node 算一步；子图各自计数</text>
+<rect x="720" y="240" width="650" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="732" y="260" font-size="13" font-weight="700" fill="#94a3b8">③ 全程的评估点（LangSmith）</text>
+<rect x="740" y="280" width="50" height="32" rx="16.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="765.0" y="300.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">L1</text>
+<text x="805" y="301" text-anchor="start" font-size="12" fill="#e2e8f0">brief 抓住 criteria？有没有瞎编？</text>
+<text x="1090" y="301" text-anchor="start" font-size="11" fill="#94a3b8">LLM-as-judge ×2</text>
+<rect x="740" y="338" width="50" height="32" rx="16.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="765.0" y="358.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">L2</text>
+<text x="805" y="359" text-anchor="start" font-size="12" fill="#e2e8f0">该停还是该继续搜？</text>
+<text x="1090" y="359" text-anchor="start" font-size="11" fill="#94a3b8">只跑 llm_call 节点</text>
+<rect x="740" y="396" width="50" height="32" rx="16.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="765.0" y="416.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">L4</text>
+<text x="805" y="417" text-anchor="start" font-size="12" fill="#e2e8f0">该不该并行派单？</text>
+<text x="1090" y="417" text-anchor="start" font-size="11" fill="#94a3b8">只跑 supervisor 节点</text>
+<rect x="740" y="454" width="50" height="32" rx="16.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="765.0" y="474.32" text-anchor="middle" font-size="12" font-weight="600" fill="#a5f3fc">L5</text>
+<text x="805" y="475" text-anchor="start" font-size="12" fill="#e2e8f0">报告：引用、不编造、按 brief 结构</text>
+<text x="1090" y="475" text-anchor="start" font-size="11" fill="#94a3b8">prompt 约束 + 人工 / judge</text>
+<text x="740" y="520" text-anchor="start" font-size="12" fill="#fbbf24">共同技巧：dataset 里放手工构造的中间状态，evaluator 只看一个决策</text>
+</svg>

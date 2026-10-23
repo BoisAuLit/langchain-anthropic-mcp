@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="600" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">HITL：同一条生命周期，两套 payload 约定</text>
+<rect x="40" y="70" width="310" height="90" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="195.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">① 节点里 interrupt(payload)</text>
+<text x="195.0" y="120" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">graph 暂停，checkpointer 存 state</text>
+<text x="195.0" y="139" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">thread 状态 = interrupted</text>
+<path d="M352,115 L372,115" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="375" y="70" width="310" height="90" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="530.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">② UI / SDK 读出 payload</text>
+<text x="530.0" y="120" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">按字段渲染按钮</text>
+<text x="530.0" y="139" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">Studio / Agent Inbox / Chat UI / Slack</text>
+<path d="M687,115 L707,115" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="710" y="70" width="310" height="90" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="865.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">③ 人做决定</text>
+<text x="865.0" y="120" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">accept · edit · response · ignore</text>
+<text x="865.0" y="139" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">（approve · edit · respond · reject）</text>
+<path d="M1022,115 L1042,115" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="1045" y="70" width="310" height="90" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1200.0" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">④ Command(resume=决定)</text>
+<text x="1200.0" y="120" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">同 thread_id 续跑</text>
+<text x="1200.0" y="139" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">interrupt() 返回这个值，节点从头重跑</text>
+<path d="M1200,164 C1200,215 700,215 700,215 C350,215 195,215 195,164" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ac)"/>
+<rect x="501.9846153846154" y="217" width="388.0307692307693" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="700" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">handler 按 type 分支：执行 / 改参数再执行 / 把人话当反馈 / END</text>
+<rect x="40" y="260" width="650" height="320" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="52" y="280" font-size="13" font-weight="700" fill="#94a3b8">A. 本课手写（Agent Inbox 约定，HumanInterrupt）</text>
+<rect x="60" y="295" width="610" height="130" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="74" y="321" text-anchor="start" font-size="13" font-weight="700" fill="#e2e8f0">interrupt([request])[0] 的 request</text>
+<text x="74" y="345" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">{"action_request": {"action": "write_email", "args": {...}},</text>
+<text x="74" y="364" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92"> "config": {"allow_ignore": T, "allow_respond": T, "allow_edit": T, "allow_accept": T},</text>
+<text x="74" y="383" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92"> "description": "&lt;原邮件 markdown + 工具参数&gt;"}</text>
+<text x="74" y="402" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">resume: [{"type": "accept"|"edit"|"response"|"ignore", "args": ...}]</text>
+<text x="60" y="455" text-anchor="start" font-size="12" fill="#4ade80">能拦任何东西（triage 级也行），payload 随便定</text>
+<text x="60" y="478" text-anchor="start" font-size="12" fill="#fbbf24">HumanInterrupt 等类型 1.0 起 deprecated（迁往 langchain.agents.interrupt）</text>
+<text x="60" y="501" text-anchor="start" font-size="12" fill="#f87171">agent-inbox 仓库 2026-09-20 归档；dev.agentinbox.ai 仍在线</text>
+<text x="60" y="524" text-anchor="start" font-size="12" fill="#94a3b8">Studio 任何 payload 都能看 + 续跑</text>
+<rect x="720" y="260" width="650" height="320" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="732" y="280" font-size="13" font-weight="700" fill="#94a3b8">B. HumanInTheLoopMiddleware（langchain 1.x，实测 1.4.6）</text>
+<rect x="740" y="295" width="610" height="130" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="754" y="321" text-anchor="start" font-size="13" font-weight="700" fill="#a5f3fc">result["__interrupt__"][0].value（batched）</text>
+<text x="754" y="345" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">{"action_requests": [{"name": "write_email", "args": {...}, "description": "..."}],</text>
+<text x="754" y="364" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92"> "review_configs": [{"action_name": "write_email",</text>
+<text x="754" y="383" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">    "allowed_decisions": ["approve","edit","reject","respond"]}]}</text>
+<text x="754" y="402" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">resume: {"decisions": [{"type": "approve"}]}（顺序对应）</text>
+<text x="740" y="455" text-anchor="start" font-size="12" fill="#4ade80">只拦工具调用；create_agent(middleware=[...]) / deepagents interrupt_on= 同一层</text>
+<text x="740" y="478" text-anchor="start" font-size="12" fill="#fbbf24">Agent Chat UI 的 inbox 视图认这套格式（不认 A）</text>
+<text x="740" y="501" text-anchor="start" font-size="12" fill="#94a3b8">per_call 模式：每个调用单独中断 {"type": "tool_approval", "tool_call_id": ...}</text>
+<text x="740" y="524" text-anchor="start" font-size="12" fill="#f87171">respond 只给 Question 类工具用；拦副作用工具用 reject</text>
+</svg>

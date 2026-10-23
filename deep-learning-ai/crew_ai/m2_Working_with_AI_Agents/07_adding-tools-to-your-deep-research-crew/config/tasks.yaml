@@ -30,7 +30,10 @@ write_final_report:
     using all verified research data. Structure it with clear sections, include citations,
     and provide actionable insights.
     ### START CODE HERE ###
-    None
+    Call the "Create custom plots" tool once, passing it the full verified research
+    from the previous task as a single string, to generate charts from the quantitative data.
+    Embed every chart the tool reports in the report with Markdown image syntax, using
+    the exact relative path it returns, e.g. ![Chart title](plots/plot_1_<timestamp>.png).
     ### END CODE HERE ###
   # update the expected output to include charts whenever possible 
   expected_output: >
@@ -38,5 +41,6 @@ write_final_report:
     findings that answer the user query, 3) Supporting evidence and analysis, 4) Complete
     source citations, 5) Key insights and recommendations
     ### START CODE HERE ###
-    None
+    Whenever the data allows it, include the generated charts inside the report as
+    Markdown images (![title](plots/<file>.png)), each placed in the relevant section.
     ### END CODE HERE ###

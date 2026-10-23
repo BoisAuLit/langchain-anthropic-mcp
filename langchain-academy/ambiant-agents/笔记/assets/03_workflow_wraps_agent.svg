@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 520" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="520" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">Email assistant = workflow 包 agent</text>
+<circle cx="70" cy="120" r="28" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="70" y="124.32" text-anchor="middle" font-size="12" font-weight="700" fill="#94a3b8">START</text>
+<rect x="150" y="80" width="230" height="80" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="265.0" y="106" text-anchor="middle" font-size="15" font-weight="700" fill="#fde68a">triage_router</text>
+<text x="265.0" y="130" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">structured output → classification</text>
+<text x="265.0" y="149" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">return Command(update, goto)</text>
+<path d="M98,120 L146,120" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<circle cx="300" cy="300" r="28" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="300" y="304.32" text-anchor="middle" font-size="12" font-weight="700" fill="#94a3b8">END</text>
+<path d="M265,162 L300,268" fill="none" stroke="#f87171" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="226" y="215" width="105.92307692307692" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="230" y="230" text-anchor="start" font-size="11" font-weight="600" fill="#e2e8f0">ignore / notify</text>
+<rect x="440" y="50" width="920" height="280" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="452" y="70" font-size="13" font-weight="700" fill="#94a3b8">response_agent（子图，compile 后 add_node 当节点）</text>
+<rect x="470" y="100" width="220" height="80" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="580.0" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#f1f5f9">llm_call</text>
+<text x="580.0" y="150" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">system prompt + messages</text>
+<text x="580.0" y="169" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">bind_tools(tool_choice="any")</text>
+<path d="M382,120 L466,120" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="392.0846153846154" y="89" width="55.830769230769235" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="424" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">respond</text>
+<rect x="800" y="100" width="240" height="80" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="920.0" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#bbf7d0">tool_handler</text>
+<text x="920.0" y="150" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">执行 tool_calls</text>
+<text x="920.0" y="169" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">→ ToolMessage 追加</text>
+<path d="M692,130 L796,130" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="704.3846153846154" y="103" width="71.23076923076923" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="744" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">有工具调用</text>
+<path d="M800,160 L692,160" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<rect x="709.6307692307693" y="167" width="60.73846153846154" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="744" y="182" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">回到 LLM</text>
+<circle cx="1240" cy="140" r="28" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="1240" y="144.32" text-anchor="middle" font-size="12" font-weight="700" fill="#94a3b8">END</text>
+<path d="M1042,140 L1208,140" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+<rect x="1077.4307692307693" y="113" width="87.13846153846156" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="1125" y="128" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">tool == Done</text>
+<text x="470" y="230" text-anchor="start" font-size="12" fill="#e2e8f0">should_continue：最后一条 AIMessage 的 tool_calls 里有 Done → END，否则 tool_handler</text>
+<text x="470" y="254" text-anchor="start" font-size="12" fill="#94a3b8">3_hitl：tool_handler 换成 interrupt_handler（副作用工具前 interrupt）；4_memory：节点多一个 store 参数</text>
+<text x="470" y="278" text-anchor="start" font-size="12" fill="#a5f3fc">在 create_agent 里：llm_call = model 节点，tool_handler = ToolNode，Done 可省（无 tool_calls 即停）</text>
+<rect x="30" y="360" width="1340" height="140" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="380" font-size="13" font-weight="700" fill="#94a3b8">State（继承 MessagesState）</text>
+<rect x="50" y="395" width="420" height="85" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="64" y="421" text-anchor="start" font-size="14" font-weight="700" fill="#e2e8f0">messages</text>
+<text x="64" y="445" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">list[BaseMessage]，add_messages 追加；子图和父图共享</text>
+<rect x="490" y="395" width="420" height="85" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="504" y="421" text-anchor="start" font-size="14" font-weight="700" fill="#a5f3fc">email_input</text>
+<text x="504" y="445" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">dict：author / to / subject / email_thread；StateInput 只暴露这一项给外部</text>
+<rect x="930" y="395" width="420" height="85" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="944" y="421" text-anchor="start" font-size="14" font-weight="700" fill="#fde68a">classification_decision</text>
+<text x="944" y="445" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">Literal[ignore, respond, notify]；triage 写、eval 读</text>
+</svg>

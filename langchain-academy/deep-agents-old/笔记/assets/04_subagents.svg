@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="620" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">子 agent：一条消息进、一条消息出；4 种形态 + 动态派单</text>
+<rect x="40" y="70" width="300" height="120" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="190.0" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#f1f5f9">主 agent（supervisor）</text>
+<text x="190.0" y="120" text-anchor="middle" font-size="12" fill="#f1f5f9" opacity="0.92">messages: [... 很长 ...]</text>
+<text x="190.0" y="140" text-anchor="middle" font-size="12" fill="#f1f5f9" opacity="0.92">调 task(description, subagent_type)</text>
+<text x="190.0" y="160" text-anchor="middle" font-size="12" fill="#f1f5f9" opacity="0.92">拿回一条 ToolMessage</text>
+<path d="M342,110 L470,110" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="343.11538461538464" y="83" width="117.76923076923077" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="406" y="98" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">1 条 HumanMessage</text>
+<path d="M470,150 L342,150" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<rect x="346.24615384615385" y="155" width="111.50769230769232" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="406" y="170" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">1 条 ToolMessage</text>
+<rect x="475" y="60" width="330" height="140" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="489" y="86" text-anchor="start" font-size="14" font-weight="700" fill="#bbf7d0">子 agent（isolated，默认）</text>
+<text x="489" y="110" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">messages = [HumanMessage(description)]</text>
+<text x="489" y="129" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">其余 state（files…）原样可见</text>
+<text x="489" y="148" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">自己的 system_prompt / tools / model</text>
+<text x="489" y="167" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">不能再调 task（递归拒绝）</text>
+<text x="40" y="225" text-anchor="start" font-size="13" fill="#fbbf24" font-weight="700">灵魂一行没变：subagent_state["messages"] = [HumanMessage(content=description)]</text>
+<text x="40" y="250" text-anchor="start" font-size="12" fill="#94a3b8">回传：Command(update={只保留子 agent 改过的 key, messages: [ToolMessage(最后一条 AIMessage 文本 | structured_response JSON)]})</text>
+<rect x="40" y="290" width="310" height="110" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="54" y="316" text-anchor="start" font-size="14" font-weight="700" fill="#bbf7d0">isolated</text>
+<text x="54" y="340" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">{"name","description",</text>
+<text x="54" y="359" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92"> "system_prompt","tools"}</text>
+<text x="54" y="378" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">只给任务描述</text>
+<rect x="375" y="290" width="310" height="110" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="389" y="316" text-anchor="start" font-size="14" font-weight="700" fill="#fde68a">fork（0.7.x 实验）</text>
+<text x="389" y="340" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">+ "mode": "fork"</text>
+<text x="389" y="359" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">继承父对话 + 父 prompt</text>
+<text x="389" y="378" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">适合 reviewer</text>
+<rect x="710" y="290" width="310" height="110" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="724" y="316" text-anchor="start" font-size="14" font-weight="700" fill="#ddd6fe">CompiledSubAgent</text>
+<text x="724" y="340" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">{"runnable": create_agent(...)</text>
+<text x="724" y="359" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">  或任意 graph}</text>
+<text x="724" y="378" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">state 必须有 messages</text>
+<rect x="1045" y="290" width="310" height="110" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1059" y="316" text-anchor="start" font-size="14" font-weight="700" fill="#fed7aa">AsyncSubAgent（0.5+）</text>
+<text x="1059" y="340" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">AsyncSubAgent(name, description,</text>
+<text x="1059" y="359" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">  graph_id, url)</text>
+<text x="1059" y="378" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">远程 Agent Protocol 服务器</text>
+<rect x="40" y="420" width="640" height="180" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="52" y="440" font-size="13" font-weight="700" fill="#94a3b8">动态子 agent：谁来数「做到第几个」</text>
+<rect x="60" y="455" width="290" height="125" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="74" y="481" text-anchor="start" font-size="13" font-weight="700" fill="#fca5a5">模型逐个调 task</text>
+<text x="74" y="505" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">task("summarize 1 of 1000")</text>
+<text x="74" y="524" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">task("summarize 2 of 1000")</text>
+<text x="74" y="543" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">… 没人保证到 1000</text>
+<text x="74" y="562" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">4 个 genre OK，1000 份不行</text>
+<rect x="380" y="455" width="285" height="125" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="394" y="481" text-anchor="start" font-size="13" font-weight="700" fill="#a5f3fc">代码循环（interpreter 里）</text>
+<text x="394" y="505" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">for t in transcripts:</text>
+<text x="394" y="524" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">    task(description=t)</text>
+<text x="394" y="543" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">循环 = 覆盖保证</text>
+<text x="394" y="562" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">task() 本身没变</text>
+<rect x="710" y="420" width="660" height="180" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="722" y="440" font-size="13" font-weight="700" fill="#94a3b8">async 子 agent 的 4 个工具（与 task 并存）</text>
+<rect x="730" y="455" width="420" height="28" rx="14.0" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="940.0" y="473.32" text-anchor="middle" font-size="12" font-weight="600" fill="#e2e8f0">start_async_task → 立刻返回 task_id</text>
+<rect x="730" y="489" width="420" height="28" rx="14.0" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="940.0" y="507.32" text-anchor="middle" font-size="12" font-weight="600" fill="#e2e8f0">check_async_task → 查状态 / 取结果</text>
+<rect x="730" y="523" width="420" height="28" rx="14.0" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="940.0" y="541.32" text-anchor="middle" font-size="12" font-weight="600" fill="#e2e8f0">update_async_task → 同 thread 追加指令</text>
+<rect x="730" y="557" width="420" height="28" rx="14.0" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="940.0" y="575.32" text-anchor="middle" font-size="12" font-weight="600" fill="#e2e8f0">cancel_async_task → 停止</text>
+<text x="1170" y="475" text-anchor="start" font-size="11" fill="#94a3b8">AsyncTask 记录存在</text>
+<text x="1170" y="493" text-anchor="start" font-size="11" fill="#a5f3fc">state["async_tasks"]</text>
+<text x="1170" y="511" text-anchor="start" font-size="11" fill="#94a3b8">→ 摘要压缩也不丢</text>
+<text x="1170" y="545" text-anchor="start" font-size="11" fill="#94a3b8">主 agent 报 task_id 就走，</text>
+<text x="1170" y="563" text-anchor="start" font-size="11" fill="#fbbf24" font-weight="700">不要原地轮询</text>
+</svg>

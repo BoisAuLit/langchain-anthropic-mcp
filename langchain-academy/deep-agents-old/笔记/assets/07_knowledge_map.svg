@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="560" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">Deep Agent = ReAct 循环 + 三件武器 + harness</text>
+<rect x="520" y="60" width="360" height="90" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="700.0" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#f1f5f9">ReAct 循环（笔记 01）</text>
+<text x="700.0" y="110" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">agent ⇄ tools 状态机；LLM 无状态</text>
+<text x="700.0" y="129" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">工具拿 state 靠注入：InjectedState / ToolRuntime</text>
+<rect x="60" y="200" width="360" height="110" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="240.0" y="226" text-anchor="middle" font-size="15" font-weight="700" fill="#fde68a">📋 TODO 治忘（02）</text>
+<text x="240.0" y="250" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">write_todos 整体重写 + 回显</text>
+<text x="240.0" y="269" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">0.7：TodoListMiddleware opt-in</text>
+<path d="M700,152 L240,196" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="520" y="200" width="360" height="110" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="700.0" y="226" text-anchor="middle" font-size="15" font-weight="700" fill="#bbf7d0">📁 Files 治挤（03）</text>
+<text x="700.0" y="250" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">文件 = 注意力开关</text>
+<text x="700.0" y="269" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">StateBackend → Backend 家族</text>
+<text x="700.0" y="288" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">offload &gt;20k · 摘要 &gt;85%</text>
+<path d="M700,152 L700,196" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="980" y="200" width="360" height="110" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1160.0" y="226" text-anchor="middle" font-size="15" font-weight="700" fill="#ddd6fe">🧱 Subagents 治乱（04）</text>
+<text x="1160.0" y="250" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">一进一出；messages=[description]</text>
+<text x="1160.0" y="269" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">isolated / fork / compiled / async</text>
+<text x="1160.0" y="288" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">dynamic：代码循环派单</text>
+<path d="M700,152 L1160,196" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="300" y="360" width="800" height="90" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="700.0" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#a5f3fc">harness：create_deep_agent（05）</text>
+<text x="700.0" y="410" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">Filesystem → SubAgent → Summarization → … → Skills → caching → Memory</text>
+<text x="700.0" y="429" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">HITL(interrupt_on) · Skills(SKILL.md) · Memory(/memories) · MCP · 权限 · sandbox / interpreter</text>
+<path d="M240,312 L320,356" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<path d="M700,312 L700,356" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<path d="M1160,312 L1080,356" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<rect x="300" y="480" width="800" height="60" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="700.0" y="506" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">新旧课程地图 + 时间线 + 部署 / MDA（06）</text>
+<text x="700.0" y="530" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">from scratch（2025）→ deepagents 0.7.28（2026-10）→ langgraph dev → mda deploy</text>
+<path d="M700,452 L700,476" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+</svg>

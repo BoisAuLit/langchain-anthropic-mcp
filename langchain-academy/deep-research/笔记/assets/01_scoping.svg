@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="560" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">Scoping：先问清楚，再写 brief —— structured output 做判断，Command 做路由</text>
+<rect x="30" y="60" width="820" height="250" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="80" font-size="13" font-weight="700" fill="#94a3b8">① scoping workflow（1_a）</text>
+<rect x="50" y="100" width="150" height="70" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="125.0" y="126" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">START</text>
+<text x="125.0" y="150" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">AgentInputState</text>
+<text x="125.0" y="169" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">只有 messages</text>
+<rect x="240" y="90" width="250" height="100" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="365.0" y="116" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">clarify_with_user</text>
+<text x="365.0" y="140" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">with_structured_output(ClarifyWithUser)</text>
+<text x="365.0" y="159" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">need_clarification ?</text>
+<text x="365.0" y="178" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">→ Command(goto, update)</text>
+<rect x="560" y="90" width="270" height="100" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="695.0" y="116" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">write_research_brief</text>
+<text x="695.0" y="140" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">with_structured_output(ResearchQuestion)</text>
+<text x="695.0" y="159" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">写 research_brief</text>
+<text x="695.0" y="178" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">+ supervisor_messages 首条</text>
+<path d="M202,135 L236,135" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M492,135 L556,135" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<rect x="498.34615384615387" y="107" width="43.30769230769231" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="524" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">False</text>
+<path d="M365,192 C365,240 160,240 160,240" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="266" y="243" width="287.0" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="270" y="258" text-anchor="start" font-size="11" font-weight="600" fill="#e2e8f0">True → goto=END，把问题当 AIMessage 发给用户</text>
+<rect x="50" y="215" width="150" height="50" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="125.0" y="241" text-anchor="middle" font-size="13" font-weight="700" fill="#fde68a">END</text>
+<text x="125.0" y="265" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">等用户下一轮回答</text>
+<text x="560" y="230" text-anchor="start" font-size="12" fill="#94a3b8">同 thread 再 invoke → 历史 + 新回答进 clarify</text>
+<text x="560" y="252" text-anchor="start" font-size="12" fill="#94a3b8">→ need_clarification=False → 写 brief</text>
+<rect x="880" y="60" width="490" height="250" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="892" y="80" font-size="13" font-weight="700" fill="#94a3b8">② 两个 Pydantic schema = 模型的「答题卡」</text>
+<rect x="900" y="95" width="450" height="90" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="914" y="121" text-anchor="start" font-size="13" font-weight="700" fill="#ddd6fe">ClarifyWithUser</text>
+<text x="914" y="145" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">need_clarification: bool   ← 决定路由</text>
+<text x="914" y="164" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">question: str              ← 要问的话</text>
+<text x="914" y="183" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">verification: str          ← 不用问时的确认语</text>
+<rect x="900" y="200" width="450" height="60" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="914" y="226" text-anchor="start" font-size="13" font-weight="700" fill="#ddd6fe">ResearchQuestion</text>
+<text x="914" y="250" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">research_brief: str        ← 后面所有阶段的「需求文档」</text>
+<text x="900" y="290" text-anchor="start" font-size="12" fill="#fbbf24">Field(description=...) 就是给模型看的填写说明</text>
+<rect x="30" y="335" width="1340" height="200" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="355" font-size="13" font-weight="700" fill="#94a3b8">③ 为什么值得单独一节</text>
+<rect x="50" y="370" width="420" height="140" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="260.0" y="396" text-anchor="middle" font-size="13" font-weight="700" fill="#a5f3fc">用户初始请求几乎都缺 context</text>
+<text x="260.0" y="420" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">范围 / 受众 / 特定要求 / 术语</text>
+<text x="260.0" y="439" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">瞎猜 → 研究跑偏 = 白做</text>
+<text x="260.0" y="458" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">所以：先用最便宜的一次 LLM 调用</text>
+<text x="260.0" y="477" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">判断「够不够写 brief」</text>
+<rect x="500" y="370" width="420" height="140" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="710.0" y="396" text-anchor="middle" font-size="13" font-weight="700" fill="#fde68a">structured output 的两种角色</text>
+<text x="710.0" y="420" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">① 当 router：bool 字段决定 goto</text>
+<text x="710.0" y="439" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">② 当生成器：research_brief 字段</text>
+<text x="710.0" y="458" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">同一个 with_structured_output，</text>
+<text x="710.0" y="477" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">只是 schema 不同</text>
+<rect x="950" y="370" width="400" height="140" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1150.0" y="396" text-anchor="middle" font-size="13" font-weight="700" fill="#bbf7d0">评估 brief 好不好（LangSmith）</text>
+<text x="1150.0" y="420" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">evaluator 1：逐条 criteria 是否抓住</text>
+<text x="1150.0" y="439" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">evaluator 2：有没有瞎编假设</text>
+<text x="1150.0" y="458" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">LLM-as-judge：二元 pass/fail、XML 分段、</text>
+<text x="1150.0" y="477" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">拿不准倾向 FAIL</text>
+</svg>

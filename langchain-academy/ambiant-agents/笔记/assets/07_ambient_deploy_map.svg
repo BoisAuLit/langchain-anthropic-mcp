@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="600" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">Ambient agent = 事件触发 + 长时间后台运行 + HITL + Memory；一张图索引全部笔记</text>
+<rect x="30" y="60" width="660" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="80" font-size="13" font-weight="700" fill="#94a3b8">ambient 循环（本课的 email assistant）</text>
+<rect x="50" y="96" width="180" height="82" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="140.0" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#a5f3fc">事件源</text>
+<text x="140.0" y="146" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">Gmail 轮询 / cron graph</text>
+<text x="140.0" y="165" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">run_ingest.py → 新邮件</text>
+<rect x="260" y="96" width="200" height="82" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="360.0" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">triage（03）</text>
+<text x="360.0" y="146" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">ignore / notify / respond</text>
+<text x="360.0" y="165" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0.92">structured output</text>
+<rect x="490" y="96" width="180" height="82" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="580.0" y="122" text-anchor="middle" font-size="14" font-weight="700" fill="#f1f5f9">response agent（03）</text>
+<text x="580.0" y="146" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">llm_call ⇄ tools</text>
+<text x="580.0" y="165" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">Done 退出</text>
+<path d="M232,135 L256,135" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M462,135 L486,135" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="260" y="208" width="200" height="82" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="360.0" y="234" text-anchor="middle" font-size="14" font-weight="700" fill="#ddd6fe">interrupt → 人（05）</text>
+<text x="360.0" y="258" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">Agent Inbox / Chat UI / Slack</text>
+<text x="360.0" y="277" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">accept edit response ignore</text>
+<path d="M580,180 L360,204" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="496" y="185" width="83.07692307692308" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="500" y="200" text-anchor="start" font-size="11" font-weight="600" fill="#e2e8f0">副作用前暂停</text>
+<rect x="490" y="208" width="180" height="82" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="580.0" y="234" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">Store 画像（06）</text>
+<text x="580.0" y="258" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">反馈 → LLM 改写</text>
+<text x="580.0" y="277" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">下次生成先读</text>
+<path d="M462,249 L486,249" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<text x="50" y="310" text-anchor="start" font-size="12" fill="#e2e8f0">评估（04）：triage == / tool calls ⊆ / LLM 裁判，pytest 或 evaluate()</text>
+<text x="50" y="334" text-anchor="start" font-size="12" fill="#94a3b8">原语（01 / 02）：State·Node·Edge、Command、interrupt、工具四类</text>
+<rect x="720" y="60" width="650" height="300" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="732" y="80" font-size="13" font-weight="700" fill="#94a3b8">部署名字对照（2026-10）</text>
+<rect x="740" y="100" width="200" height="32" rx="16.0" fill="#2d1f1f" stroke="#f87171" stroke-width="1.5"/>
+<text x="840.0" y="120.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fca5a5">LangGraph Platform</text>
+<path d="M944,116 L966,116" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="970" y="100" width="380" height="32" rx="16.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="1160.0" y="120.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">LangSmith Deployment（Cloud / Hybrid / Self-hosted）</text>
+<rect x="740" y="148" width="200" height="32" rx="16.0" fill="#2d1f1f" stroke="#f87171" stroke-width="1.5"/>
+<text x="840.0" y="168.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fca5a5">LangGraph Studio 桌面版</text>
+<path d="M944,164 L966,164" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="970" y="148" width="380" height="32" rx="16.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="1160.0" y="168.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">浏览器版 Studio（langgraph dev 自动打开）</text>
+<rect x="740" y="196" width="200" height="32" rx="16.0" fill="#2d1f1f" stroke="#f87171" stroke-width="1.5"/>
+<text x="840.0" y="216.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fca5a5">Agent Inbox</text>
+<path d="M944,212 L966,212" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="970" y="196" width="380" height="32" rx="16.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="1160.0" y="216.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">仓库 2026-09-20 归档；Agent Chat UI 内置 inbox</text>
+<rect x="740" y="244" width="200" height="32" rx="16.0" fill="#2d1f1f" stroke="#f87171" stroke-width="1.5"/>
+<text x="840.0" y="264.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fca5a5">langgraph dev</text>
+<path d="M944,260 L966,260" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="970" y="244" width="380" height="32" rx="16.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="1160.0" y="264.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">不变：Agent Server API（assistants/threads/runs/store/crons）</text>
+<rect x="740" y="292" width="200" height="32" rx="16.0" fill="#2d1f1f" stroke="#f87171" stroke-width="1.5"/>
+<text x="840.0" y="312.32" text-anchor="middle" font-size="12" font-weight="600" fill="#fca5a5">create_react_agent</text>
+<path d="M944,308 L966,308" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="970" y="292" width="380" height="32" rx="16.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="1160.0" y="312.32" text-anchor="middle" font-size="12" font-weight="600" fill="#bbf7d0">langchain.agents.create_agent（旧名弃用）</text>
+<path d="M60,470 L1340,470" fill="none" stroke="#94a3b8" stroke-width="3"/>
+<circle cx="100" cy="470" r="9" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="100" y="470.36" text-anchor="middle" font-size="1" font-weight="700" fill="#e2e8f0"></text>
+<text x="100" y="440" text-anchor="middle" font-size="12" fill="#fde047" font-weight="700">2025-06</text>
+<text x="100" y="505" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">课程发布</text>
+<text x="100" y="525" text-anchor="middle" font-size="11" fill="#94a3b8">langgraph 0.4</text>
+<circle cx="420" cy="470" r="9" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="420" y="470.36" text-anchor="middle" font-size="1" font-weight="700" fill="#fde68a"></text>
+<text x="420" y="440" text-anchor="middle" font-size="12" fill="#fde047" font-weight="700">2025-10</text>
+<text x="420" y="505" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">LangGraph / LangChain 1.0</text>
+<text x="420" y="525" text-anchor="middle" font-size="11" fill="#94a3b8">create_agent · middleware</text>
+<circle cx="740" cy="470" r="9" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="740" y="470.36" text-anchor="middle" font-size="1" font-weight="700" fill="#e2e8f0"></text>
+<text x="740" y="440" text-anchor="middle" font-size="12" fill="#fde047" font-weight="700">2026-08-11</text>
+<text x="740" y="505" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">上游只换 trace 链接</text>
+<text x="740" y="525" text-anchor="middle" font-size="11" fill="#94a3b8">代码仍是 2025-10</text>
+<circle cx="1000" cy="470" r="9" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="1000" y="470.36" text-anchor="middle" font-size="1" font-weight="700" fill="#fca5a5"></text>
+<text x="1000" y="440" text-anchor="middle" font-size="12" fill="#fde047" font-weight="700">2026-09-20</text>
+<text x="1000" y="505" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">agent-inbox 归档</text>
+<text x="1000" y="525" text-anchor="middle" font-size="11" fill="#94a3b8">Agent Chat UI 接棒</text>
+<circle cx="1260" cy="470" r="9" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="1260" y="470.36" text-anchor="middle" font-size="1" font-weight="700" fill="#a5f3fc"></text>
+<text x="1260" y="440" text-anchor="middle" font-size="12" fill="#fde047" font-weight="700">2026-10-20</text>
+<text x="1260" y="505" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="700">本笔记核实</text>
+<text x="1260" y="525" text-anchor="middle" font-size="11" fill="#94a3b8">lg 1.2.16 · lc 1.4.6</text>
+</svg>

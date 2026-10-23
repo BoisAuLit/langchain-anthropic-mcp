@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 640" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="640" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">create_deep_agent = create_agent + 一叠 middleware（harness）</text>
+<rect x="30" y="70" width="250" height="100" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="155.0" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#f1f5f9">你写的</text>
+<text x="155.0" y="120" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">model · tools · system_prompt</text>
+<text x="155.0" y="139" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">subagents · skills · memory</text>
+<text x="155.0" y="158" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">backend · permissions · interrupt_on</text>
+<path d="M282,120 L330,120" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="335" y="60" width="560" height="560" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="347" y="80" font-size="13" font-weight="700" fill="#94a3b8">middleware 栈（0.7.28 实际顺序，上→下）</text>
+<rect x="355" y="95" width="520" height="54" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="369" y="121" text-anchor="start" font-size="13" font-weight="700" fill="#a5f3fc">FilesystemMiddleware</text>
+<text x="369" y="145" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">ls/read/write/edit/delete/glob/grep(+execute)；offload &gt;20k</text>
+<rect x="355" y="158" width="520" height="54" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="369" y="184" text-anchor="start" font-size="13" font-weight="700" fill="#bbf7d0">SubAgentMiddleware（有 subagents 或默认 GP）</text>
+<text x="369" y="208" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">task 工具；general-purpose 子 agent 自动加入</text>
+<rect x="355" y="221" width="520" height="54" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="369" y="247" text-anchor="start" font-size="13" font-weight="700" fill="#e2e8f0">_ParentNotifier · Summarization · PatchToolCalls</text>
+<text x="369" y="271" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">历史 &gt;85% 摘要；修补残缺 tool call</text>
+<rect x="355" y="284" width="520" height="54" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="369" y="310" text-anchor="start" font-size="13" font-weight="700" fill="#fed7aa">AsyncSubAgentMiddleware（有 AsyncSubAgent 时）</text>
+<text x="369" y="334" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">start/check/update/cancel_async_task</text>
+<rect x="355" y="347" width="520" height="54" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="369" y="373" text-anchor="start" font-size="13" font-weight="700" fill="#ddd6fe">harness profile 的额外 middleware</text>
+<text x="369" y="397" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">按模型：haiku-4-5 / sonnet-4-6 / opus-4-7 / codex / nemotron</text>
+<rect x="355" y="410" width="520" height="54" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="369" y="436" text-anchor="start" font-size="13" font-weight="700" fill="#fde68a">SkillsMiddleware（有 skills= 时）</text>
+<text x="369" y="460" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">SKILL.md 的 name+description 进 system prompt</text>
+<rect x="355" y="473" width="520" height="54" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="369" y="499" text-anchor="start" font-size="13" font-weight="700" fill="#e2e8f0">prompt caching</text>
+<text x="369" y="523" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">Anthropic 显式 cache 断点</text>
+<rect x="355" y="536" width="520" height="54" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="369" y="562" text-anchor="start" font-size="13" font-weight="700" fill="#fca5a5">MemoryMiddleware（有 memory= 时）</text>
+<text x="369" y="586" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">&lt;agent_memory&gt; 块；edit_file 更新</text>
+<text x="355" y="608" text-anchor="start" font-size="11" fill="#94a3b8">你传的 middleware= 插在核心层之后、profile/caching/memory 之前；同名可替换默认（如 Summarization）</text>
+<rect x="920" y="60" width="450" height="290" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="932" y="80" font-size="13" font-weight="700" fill="#94a3b8">模型每轮看到的</text>
+<rect x="940" y="95" width="410" height="60" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="954" y="121" text-anchor="start" font-size="13" font-weight="700" fill="#e2e8f0">system prompt</text>
+<text x="954" y="145" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">你的 system_prompt（0.7 起没有大段默认 base prompt）</text>
+<rect x="940" y="165" width="410" height="60" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="954" y="191" text-anchor="start" font-size="13" font-weight="700" fill="#e2e8f0">+ 各 middleware 注入的片段</text>
+<text x="954" y="215" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">skills 列表 · &lt;agent_memory&gt; · profile 的小段指引</text>
+<rect x="940" y="235" width="410" height="95" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="954" y="261" text-anchor="start" font-size="13" font-weight="700" fill="#a5f3fc">工具 schema（默认 8 个）</text>
+<text x="954" y="285" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">ls read_file write_file edit_file</text>
+<text x="954" y="304" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">delete glob grep task</text>
+<text x="954" y="323" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">+ write_todos（TodoListMiddleware）+ 你的 tools</text>
+<rect x="920" y="370" width="450" height="250" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="932" y="390" font-size="13" font-weight="700" fill="#94a3b8">外围能力（都是参数，不是新概念）</text>
+<rect x="940" y="400" width="410" height="28" rx="14.0" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+<text x="1145.0" y="418.32" text-anchor="middle" font-size="12" font-weight="600" fill="#94a3b8">interrupt_on={"send_email": True} → HITL</text>
+<rect x="940" y="436" width="410" height="28" rx="14.0" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+<text x="1145.0" y="454.32" text-anchor="middle" font-size="12" font-weight="600" fill="#94a3b8">checkpointer=MemorySaver() → thread 记忆 / 暂停恢复</text>
+<rect x="940" y="472" width="410" height="28" rx="14.0" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+<text x="1145.0" y="490.32" text-anchor="middle" font-size="12" font-weight="600" fill="#94a3b8">store= → StoreBackend 跨 thread 记忆</text>
+<rect x="940" y="508" width="410" height="28" rx="14.0" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+<text x="1145.0" y="526.32" text-anchor="middle" font-size="12" font-weight="600" fill="#94a3b8">response_format= → 结构化输出</text>
+<rect x="940" y="544" width="410" height="28" rx="14.0" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+<text x="1145.0" y="562.32" text-anchor="middle" font-size="12" font-weight="600" fill="#94a3b8">context_schema= → runtime.context（user_id…）</text>
+<rect x="940" y="580" width="410" height="28" rx="14.0" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+<text x="1145.0" y="598.32" text-anchor="middle" font-size="12" font-weight="600" fill="#94a3b8">MultiServerMCPClient().get_tools() → MCP 工具</text>
+</svg>

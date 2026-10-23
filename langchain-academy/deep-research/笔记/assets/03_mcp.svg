@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="560" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">MCP：工具不自己写，从 server 拉；adapter 每次调用新开 session</text>
+<rect x="30" y="60" width="700" height="260" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="80" font-size="13" font-weight="700" fill="#94a3b8">① client ↔ server（3_a 用 filesystem server）</text>
+<rect x="50" y="100" width="260" height="90" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="180.0" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#f1f5f9">MultiServerMCPClient(mcp_config)</text>
+<text x="180.0" y="150" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">{"filesystem": {"command": "npx",</text>
+<text x="180.0" y="169" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92"> "args": [..server-filesystem, path],</text>
+<text x="180.0" y="188" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92"> "transport": "stdio"}}</text>
+<rect x="450" y="100" width="260" height="90" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="580.0" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#bbf7d0">MCP server（子进程）</text>
+<text x="580.0" y="150" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">npx @modelcontextprotocol/server-filesystem</text>
+<text x="580.0" y="169" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">read_file / list_directory / search_files ...</text>
+<text x="580.0" y="188" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">JSON-RPC over stdin/stdout</text>
+<path d="M312,130 L446,130" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="301.0" y="103" width="148.0" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="379" y="118" text-anchor="middle" font-size="10" font-weight="600" fill="#e2e8f0">initialize → tools/list</text>
+<path d="M446,160 L312,160" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#ac)"/>
+<rect x="287.6923076923077" y="163" width="174.6153846153846" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="379" y="178" text-anchor="middle" font-size="10" font-weight="600" fill="#e2e8f0">tool 元数据 → StructuredTool</text>
+<text x="50" y="225" text-anchor="start" font-size="12" fill="#e2e8f0">tools = await client.get_tools()   → 名字 / 描述 / 参数 schema 全由 server 定义</text>
+<text x="50" y="248" text-anchor="start" font-size="12" fill="#e2e8f0">model.bind_tools(mcp_tools + [think_tool])  → 和自定义工具混用</text>
+<text x="50" y="271" text-anchor="start" font-size="12" fill="#fbbf24">await tool.ainvoke(args)  → MCP 工具只有 async 实现（coroutine=），sync invoke 故意没实现</text>
+<text x="50" y="294" text-anchor="start" font-size="12" fill="#94a3b8">get_mcp_client() 懒初始化：模块 import 时不起子进程（langgraph dev 友好）</text>
+<rect x="760" y="60" width="610" height="260" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="772" y="80" font-size="13" font-weight="700" fill="#94a3b8">② 每次工具调用 adapter 做了什么（0.2.2 源码）</text>
+<rect x="780" y="100" width="135" height="70" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="847.5" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">建连接</text>
+<text x="847.5" y="150" text-anchor="middle" font-size="10" fill="#e2e8f0" opacity="0.92">create_session(conn)</text>
+<path d="M917,135 L926,135" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="928" y="100" width="135" height="70" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="995.5" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#fde68a">握手</text>
+<text x="995.5" y="150" text-anchor="middle" font-size="10" fill="#fde68a" opacity="0.92">session.initialize()</text>
+<path d="M1065,135 L1074,135" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="1076" y="100" width="135" height="70" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1143.5" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#bbf7d0">调用</text>
+<text x="1143.5" y="150" text-anchor="middle" font-size="10" fill="#bbf7d0" opacity="0.92">session.call_tool(...)</text>
+<path d="M1213,135 L1222,135" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="1224" y="100" width="135" height="70" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="1291.5" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#fca5a5">关闭</text>
+<text x="1291.5" y="150" text-anchor="middle" font-size="10" fill="#fca5a5" opacity="0.92">退出 async with</text>
+<text x="780" y="205" text-anchor="start" font-size="12" fill="#e2e8f0">get_tools() 返回的工具只记住 connection，不持有 session → 每次调用三趟往返</text>
+<text x="780" y="228" text-anchor="start" font-size="12" fill="#fbbf24">本课 llm_call + tool_node 各调一次 get_tools()，每轮再多开两次子进程会话（能跑，但浪费）</text>
+<text x="780" y="251" text-anchor="start" font-size="12" fill="#4ade80">高频复用：async with client.session("filesystem") as s: tools = await load_mcp_tools(s)</text>
+<text x="780" y="274" text-anchor="start" font-size="12" fill="#4ade80">（工具绑定这条 session，必须在 with 块内调用）</text>
+<rect x="30" y="345" width="1340" height="190" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="365" font-size="13" font-weight="700" fill="#94a3b8">③ transport：本地 vs 远程</text>
+<rect x="50" y="380" width="400" height="130" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="250.0" y="406" text-anchor="middle" font-size="13" font-weight="700" fill="#a5f3fc">stdio（本地）</text>
+<text x="250.0" y="430" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">client 起子进程，同生命周期</text>
+<text x="250.0" y="449" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">快、进程隔离、要本地装 server</text>
+<text x="250.0" y="468" text-anchor="middle" font-size="11" fill="#a5f3fc" opacity="0.92">适合私有工具 / 文件操作</text>
+<rect x="480" y="380" width="420" height="130" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="690.0" y="406" text-anchor="middle" font-size="13" font-weight="700" fill="#ddd6fe">streamable_http（远程，别名 "http"）</text>
+<text x="690.0" y="430" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">MCP 规范 2025-03 起的标准，端点 .../mcp</text>
+<text x="690.0" y="449" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">headers 带 Bearer / OAuth（OAuthClientProvider）</text>
+<text x="690.0" y="468" text-anchor="middle" font-size="11" fill="#ddd6fe" opacity="0.92">适合 SaaS（Linear / Asana / Cloudflare ...）</text>
+<rect x="930" y="380" width="420" height="130" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="1140.0" y="406" text-anchor="middle" font-size="13" font-weight="700" fill="#fca5a5">sse（旧式远程）</text>
+<text x="1140.0" y="430" text-anchor="middle" font-size="11" fill="#fca5a5" opacity="0.92">老端点 .../sse 才用 "transport": "sse"</text>
+<text x="1140.0" y="449" text-anchor="middle" font-size="11" fill="#fca5a5" opacity="0.92">课程示例把 "http" 配在 /sse 上是矛盾的</text>
+<text x="1140.0" y="468" text-anchor="middle" font-size="11" fill="#fca5a5" opacity="0.92">websocket 也支持，少见</text>
+</svg>

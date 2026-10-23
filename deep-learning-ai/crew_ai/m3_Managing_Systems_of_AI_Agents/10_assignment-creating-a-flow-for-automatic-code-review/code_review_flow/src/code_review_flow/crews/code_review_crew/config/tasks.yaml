@@ -41,11 +41,16 @@ summarize_findings:
   ### START CODE HERE ###
   # write the expected output in detail following the exercise instructions
   expected_output: >
-    None
+    A JSON with keys:
+    'confidence' (integer between 0 and 100, your confidence score of the code changes),
+    'findings' (string, a summary of the key findings from both the code quality and security analyses),
+    'fix' (a list of what must be fixed, each item with the description of the issue, the possible solutions
+    and the explanation of why the fix is needed), and
+    'recommendations' (any additional recommendations or observations).
   name: Summarize Findings
   agent: tech_lead
   # write the context (list of tasks that need to finish before this one)
   context:
-  - None
-  - None
+  - analyze_code_quality
+  - review_security
   ### END CODE HERE ###

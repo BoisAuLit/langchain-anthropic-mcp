@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 640" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="640" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">2026-10：从零手搓（本课）↔ deepagents 官方 deep research，逐件对照</text>
+<text x="330" y="70" text-anchor="middle" font-size="14" fill="#fde047" font-weight="700">本课（LangGraph 手搓，2025-07）</text>
+<text x="1050" y="70" text-anchor="middle" font-size="14" fill="#fde047" font-weight="700">deepagents 0.7 官方例子（2026）</text>
+<rect x="40" y="98" width="90" height="34" rx="17.0" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="85.0" y="119.68" text-anchor="middle" font-size="13" font-weight="600" fill="#f1f5f9">scoping</text>
+<rect x="150" y="90" width="560" height="50" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="430.0" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">clarify_with_user + write_research_brief</text>
+<path d="M714,115 L756,115" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="760" y="90" width="600" height="50" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="1060.0" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#f1f5f9">prompt：write_file(/research_request.md)，不清楚直接问</text>
+<rect x="40" y="160" width="90" height="34" rx="17.0" fill="#1a2e1f" stroke="#4ade80" stroke-width="1.5"/>
+<text x="85.0" y="181.68" text-anchor="middle" font-size="13" font-weight="600" fill="#bbf7d0">research</text>
+<rect x="150" y="152" width="560" height="50" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="430.0" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">手搓 ReAct + compress_research 子图</text>
+<path d="M714,177 L756,177" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="760" y="152" width="600" height="50" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1060.0" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#bbf7d0">subagents=[{name: research-agent, tools: [tavily_search, think_tool]}]</text>
+<rect x="40" y="222" width="90" height="34" rx="17.0" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="85.0" y="243.68" text-anchor="middle" font-size="13" font-weight="600" fill="#ddd6fe">派单</text>
+<rect x="150" y="214" width="560" height="50" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="430.0" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">ConductResearch / ResearchComplete + asyncio.gather</text>
+<path d="M714,239 L756,239" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="760" y="214" width="600" height="50" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="1060.0" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#ddd6fe">内置 task 工具 + TodoListMiddleware(write_todos)</text>
+<rect x="40" y="284" width="90" height="34" rx="17.0" fill="#2a2418" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="85.0" y="305.68" text-anchor="middle" font-size="13" font-weight="600" fill="#fde68a">预算</text>
+<rect x="150" y="276" width="560" height="50" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="430.0" y="302" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">prompt：5 次搜索 / 3 并发 / 6 轮；think_tool</text>
+<path d="M714,301 L756,301" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="760" y="276" width="600" height="50" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="1060.0" y="302" text-anchor="middle" font-size="13" font-weight="700" fill="#fde68a">prompt：3 并发 / 3 轮；think_tool 原样保留</text>
+<rect x="40" y="346" width="90" height="34" rx="17.0" fill="#0f2729" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="85.0" y="367.68" text-anchor="middle" font-size="13" font-weight="600" fill="#a5f3fc">state</text>
+<rect x="150" y="338" width="560" height="50" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="430.0" y="364" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">AgentState: brief / notes / raw_notes / final_report</text>
+<path d="M714,363 L756,363" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="760" y="338" width="600" height="50" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="1060.0" y="364" text-anchor="middle" font-size="13" font-weight="700" fill="#a5f3fc">文件：/research_request.md /final_report.md（backend）</text>
+<rect x="40" y="408" width="90" height="34" rx="17.0" fill="#2d2418" stroke="#fb923c" stroke-width="1.5"/>
+<text x="85.0" y="429.68" text-anchor="middle" font-size="13" font-weight="600" fill="#fed7aa">报告</text>
+<rect x="150" y="400" width="560" height="50" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="430.0" y="426" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">final_report_generation 节点</text>
+<path d="M714,425 L756,425" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="760" y="400" width="600" height="50" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1060.0" y="426" text-anchor="middle" font-size="13" font-weight="700" fill="#fed7aa">主代理 write_file 后回读请求核对</text>
+<rect x="30" y="475" width="1340" height="150" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="495" font-size="13" font-weight="700" fill="#94a3b8">没变的东西（本课最保值的部分）</text>
+<rect x="50" y="505" width="320" height="100" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="210.0" y="531" text-anchor="middle" font-size="13" font-weight="700" fill="#bbf7d0">先 scoping 再研究</text>
+<text x="210.0" y="555" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">不问清楚就研究 = 白做</text>
+<text x="210.0" y="574" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">2026 例子只是把它写进 prompt</text>
+<rect x="390" y="505" width="320" height="100" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="550.0" y="531" text-anchor="middle" font-size="13" font-weight="700" fill="#bbf7d0">搜索要有预算 + think_tool</text>
+<text x="550.0" y="555" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">简单 2–3 次 / 复杂 5 次</text>
+<text x="550.0" y="574" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">每次搜完强制反思</text>
+<rect x="730" y="505" width="320" height="100" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="890.0" y="531" text-anchor="middle" font-size="13" font-weight="700" fill="#bbf7d0">能单线就别派单</text>
+<text x="890.0" y="555" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">对比类才并行</text>
+<text x="890.0" y="574" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">子代理 context 隔离、只回传结果</text>
+<rect x="1070" y="505" width="280" height="100" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="1210.0" y="531" text-anchor="middle" font-size="13" font-weight="700" fill="#bbf7d0">压缩防漂移 + 每步可测</text>
+<text x="1210.0" y="555" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">末尾重申任务</text>
+<text x="1210.0" y="574" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">只测一个决策</text>
+</svg>

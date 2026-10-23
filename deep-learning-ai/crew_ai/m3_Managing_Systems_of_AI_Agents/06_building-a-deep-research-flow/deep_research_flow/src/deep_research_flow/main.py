@@ -11,20 +11,20 @@ os.environ["CREWAI_TESTING"] = "true"
 class ResearchState(BaseModel):
     user_query: str = ""
     ### START CODE HERE ###
-    needs_research: None = None # set the default value to False
-    research_report: None = None # set the default value to an empty string
-    final_answer: None = None # set the default value to an empty string
+    needs_research: bool = False
+    research_report: str = ""
+    final_answer: str = ""
     ### END CODE HERE ###
 
 ### START CODE HERE ###
 # add persistence to the flow
-@None()
+@persist()
 ### END CODE HERE ###
 
 class DeepResearchFlow(Flow[ResearchState]):
     # define the entrypoint
     ### START CODE HERE ###
-    @None()
+    @start()
     ### END CODE HERE ###
     def start_conversation(self):
         """Entry point for the flow"""
@@ -37,15 +37,18 @@ class DeepResearchFlow(Flow[ResearchState]):
 
     # define the router
     ### START CODE HERE ###
-    @None(start_conversation)
+    @router(start_conversation)
     ### END CODE HERE ###
     def analyze_query(self):
         """Router: Should trigger research?"""
         print("🤔 Analyzing query complexity...")
         
         ### START CODE HERE ###
-        prompt = (# Write the prompt for the LLM to decide if the query is simple or requires research 
-                  None
+        prompt = (# Write the prompt for the LLM to decide if the query is simple or requires research
+                  ""
+                  "Analyze this query and respond with exactly one word: SIMPLE or RESEARCH\n\n"
+                  "SIMPLE: greetings, basic questions, well-known facts, context-based queries\n"
+                  "RESEARCH: complex topics requiring comprehensive investigation, current events, detailed analysis, multi-faceted questions\n\n"
                   f"Query: \"{self.state.user_query}\"\n\n"
                   "Response (one word only):")
         ### END CODE HERE ###
@@ -70,20 +73,22 @@ class DeepResearchFlow(Flow[ResearchState]):
         print("✨ Generating direct answer...")
         
         ### START CODE HERE ###
-        prompt = (# Write the missing part of the query for the LLM 
-                 None
+        prompt = (# Write the missing part of the query for the LLM
+                 ""
+                 "Provide a direct, helpful, and comprehensive answer to this query. "
+                 "Be informative but concise.\n\n"
                  f"Query: \"{self.state.user_query}\"\n\n"
                  "Answer:"
                  )
         # set up the LLM
-        llm = None(model="gpt-4o-mini")
+        llm = LLM(model="gpt-4o-mini",)
         # call the llm with the prompt and save the result to the final_answer state variable
-        self.state.final_answer = llm.call(messages=None)
+        self.state.final_answer = llm.call(messages=prompt)
         ### END CODE HERE ###
 
     # define the clarification task (if research is needed)
     ### START CODE HERE ###
-    @None(None)
+    @listen("RESEARCH")
     #### END CODE HERE ###
     def clarify_query(self):
         """LLM: Clarification before research"""
@@ -112,7 +117,7 @@ class DeepResearchFlow(Flow[ResearchState]):
     
     # define the research execution task
     ### START CODE HERE ###
-    @None("clarify_query")
+    @listen("clarify_query")
     ### END CODE HERE ###
     def execute_research(self):
         """Execute the Deep Research Crew"""
@@ -125,13 +130,13 @@ class DeepResearchFlow(Flow[ResearchState]):
         ### START CODE HERE ###
 
         # kickoff the crew with the user query as input
-        result = research_crew.crew().None(
+        result = research_crew.crew().kickoff(
             # use the value in the user_query state variable as the input
-            inputs={"user_query": self.None.None}
+            inputs={"user_query": self.state.user_query}
         )
 
         # update the research_report state variable with the crew's output (use the `raw` attribute)
-        self.state.research_report = result.None
+        self.state.research_report = result.raw
         ### END CODE HERE ###
         
         print("✅ Research completed successfully!")
@@ -139,7 +144,7 @@ class DeepResearchFlow(Flow[ResearchState]):
         
     # define the task to save and summarize the report
     ### START CODE HERE ###
-    @None(None)
+    @listen(execute_research)
     ### END CODE HERE ###
     def save_report_and_summarize(self):
         """
@@ -150,7 +155,7 @@ class DeepResearchFlow(Flow[ResearchState]):
             with open("../research_report.md", "w", encoding="utf-8") as f:
                 ### START CODE HERE ###
                 # write the content of the research_report state variable to the file
-                f.write(self.state.None)
+                f.write(self.state.research_report)
                 ### END CODE HERE ###
             print("✅ Report saved successfully!")
         except Exception as e:
@@ -182,7 +187,7 @@ class DeepResearchFlow(Flow[ResearchState]):
 def kickoff():
     ### START CODE HERE ###
     # instantiate the DeepResearchFlow with tracing enabled
-    deep_research_flow = DeepResearchFlow(None=True)
+    deep_research_flow = DeepResearchFlow(tracing=True)
     ### END CODE HERE ###
     
     # kickoff the flow with a custom id, so you can persist the state

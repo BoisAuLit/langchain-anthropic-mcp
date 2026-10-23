@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="600" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">文件系统：模型看到的工具面不变，Backend 决定文件住哪</text>
+<rect x="30" y="70" width="200" height="90" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="130.0" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#f1f5f9">LLM</text>
+<text x="130.0" y="120" text-anchor="middle" font-size="12" fill="#f1f5f9" opacity="0.92">只会打字：</text>
+<text x="130.0" y="140" text-anchor="middle" font-size="12" fill="#f1f5f9" opacity="0.92">write_file("/a.md", "...")</text>
+<rect x="290" y="60" width="360" height="110" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="470.0" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">工具面（永远一样）</text>
+<text x="470.0" y="110" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">ls · read_file · write_file · edit_file</text>
+<text x="470.0" y="130" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">delete · glob · grep</text>
+<text x="470.0" y="150" text-anchor="middle" font-size="12" fill="#e2e8f0" opacity="0.92">+ execute（仅 shell 型 backend）</text>
+<path d="M232,115 L286,115" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="720" y="70" width="180" height="90" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="810.0" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#fde68a">Backend</text>
+<text x="810.0" y="120" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">BackendProtocol</text>
+<text x="810.0" y="140" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">决定「文件住哪」</text>
+<path d="M652,115 L716,115" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<path d="M720,115 L695,115 L695,455" fill="none" stroke="#fbbf24" stroke-width="2"/>
+<rect x="720" y="200" width="650" height="60" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="734" y="226" text-anchor="start" font-size="13" font-weight="700" fill="#a5f3fc">StateBackend()（默认）</text>
+<text x="734" y="250" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">state["files"]，随 thread 走 = 本课的 dict；值是 FileData{content, encoding, created_at, modified_at}</text>
+<path d="M695,230 L716,230" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="720" y="275" width="650" height="60" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="734" y="301" text-anchor="start" font-size="13" font-weight="700" fill="#bbf7d0">FilesystemBackend(root_dir, virtual_mode=True)</text>
+<text x="734" y="325" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">真实磁盘；路径被限制在 root_dir 内</text>
+<path d="M695,305 L716,305" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="720" y="350" width="650" height="60" rx="10" fill="#2e1065" stroke="#a78bfa" stroke-width="2"/>
+<text x="734" y="376" text-anchor="start" font-size="13" font-weight="700" fill="#ddd6fe">StoreBackend(namespace=fn)</text>
+<text x="734" y="400" text-anchor="start" font-size="11" fill="#ddd6fe" opacity="0.92">LangGraph Store，跨 thread 持久 → 长期记忆 /memories/</text>
+<path d="M695,380 L716,380" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="720" y="425" width="650" height="60" rx="10" fill="#2d2418" stroke="#fb923c" stroke-width="2"/>
+<text x="734" y="451" text-anchor="start" font-size="13" font-weight="700" fill="#fed7aa">LocalShellBackend / LangSmithSandbox</text>
+<text x="734" y="475" text-anchor="start" font-size="11" fill="#fed7aa" opacity="0.92">多一个 execute：本机 shell（不隔离）/ 云端沙盒（隔离，sandbox-as-a-tool）</text>
+<path d="M695,455 L716,455" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="960" y="500" width="410" height="70" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="1165.0" y="526" text-anchor="middle" font-size="13" font-weight="700" fill="#e2e8f0">CompositeBackend(default=…, routes={…})</text>
+<text x="1165.0" y="550" text-anchor="middle" font-size="11" fill="#e2e8f0" opacity="0.92">按路径前缀路由：/memories/ → Store，其余 → State</text>
+<rect x="30" y="200" width="640" height="370" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="220" font-size="13" font-weight="700" fill="#94a3b8">安全与减负都在代码层，不在 prompt 里</text>
+<rect x="50" y="235" width="290" height="150" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="64" y="261" text-anchor="start" font-size="12" font-weight="700" fill="#fca5a5">permissions=[FilesystemPermission(...)]</text>
+<text x="64" y="285" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">operations: read | write</text>
+<text x="64" y="304" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">paths: glob（/reference/**）</text>
+<text x="64" y="323" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">mode: allow | deny | interrupt</text>
+<text x="64" y="342" text-anchor="start" font-size="11" fill="#fca5a5" opacity="0.92">按顺序首个命中生效；没命中 = 允许</text>
+<rect x="360" y="235" width="290" height="150" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="374" y="261" text-anchor="start" font-size="12" font-weight="700" fill="#bbf7d0">自动 offloading（FilesystemMiddleware）</text>
+<text x="374" y="285" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">工具结果 &gt; ~20k token →</text>
+<text x="374" y="304" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">  /large_tool_results/&lt;tool_call_id&gt;</text>
+<text x="374" y="323" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">用户消息 &gt; ~50k token →</text>
+<text x="374" y="342" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">  /conversation_history/</text>
+<text x="374" y="361" text-anchor="start" font-size="11" fill="#bbf7d0" opacity="0.92">模型只看首尾 5 行预览 + 路径</text>
+<rect x="50" y="405" width="290" height="150" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="64" y="431" text-anchor="start" font-size="12" font-weight="700" fill="#fde68a">read_file 新格式（0.7）</text>
+<text x="64" y="455" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">@@ lines 2-2 of 2 @@</text>
+<text x="64" y="474" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">world</text>
+<text x="64" y="493" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">状态头 + 原文，不再逐行加行号</text>
+<text x="64" y="512" text-anchor="start" font-size="11" fill="#fde68a" opacity="0.92">offset / limit 分页照旧</text>
+<rect x="360" y="405" width="290" height="150" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="374" y="431" text-anchor="start" font-size="12" font-weight="700" fill="#a5f3fc">SummarizationMiddleware</text>
+<text x="374" y="455" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">context &gt; 85% 模型上限时触发</text>
+<text x="374" y="474" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">旧消息 → 一条 HumanMessage 摘要</text>
+<text x="374" y="493" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">原文 → /conversation_history/{session}.md</text>
+<text x="374" y="512" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">state["messages"] 原文不删，只改送模型的</text>
+</svg>

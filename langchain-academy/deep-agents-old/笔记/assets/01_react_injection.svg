@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 540" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, Helvetica, Arial, sans-serif">
+<defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker><marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/></marker><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/></marker></defs>
+<rect width="1400" height="540" rx="12" fill="#0f172a"/>
+<text x="700.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#fde047">ReAct 循环是 LangGraph 状态机；工具拿 state 靠「注入」</text>
+<rect x="30" y="60" width="620" height="440" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="42" y="80" font-size="13" font-weight="700" fill="#94a3b8">① 循环不在 LLM 里，在 graph 里</text>
+<circle cx="90" cy="160" r="28" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="90" y="164.32" text-anchor="middle" font-size="12" font-weight="700" fill="#94a3b8">START</text>
+<rect x="150" y="120" width="230" height="80" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+<text x="265.0" y="146" text-anchor="middle" font-size="15" font-weight="700" fill="#f1f5f9">agent 节点</text>
+<text x="265.0" y="170" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">调 LLM → AIMessage</text>
+<text x="265.0" y="189" text-anchor="middle" font-size="11" fill="#f1f5f9" opacity="0.92">LLM 无状态：每轮重发全部 messages</text>
+<rect x="440" y="120" width="190" height="80" rx="10" fill="#1a2e1f" stroke="#4ade80" stroke-width="2"/>
+<text x="535.0" y="146" text-anchor="middle" font-size="14" font-weight="700" fill="#bbf7d0">tools 节点 (ToolNode)</text>
+<text x="535.0" y="170" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">并发执行所有 tool_calls</text>
+<text x="535.0" y="189" text-anchor="middle" font-size="11" fill="#bbf7d0" opacity="0.92">每个 → 一条 ToolMessage</text>
+<circle cx="265" cy="330" r="28" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+<text x="265" y="334.32" text-anchor="middle" font-size="12" font-weight="700" fill="#94a3b8">END</text>
+<path d="M118,160 L146,160" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#ag)"/>
+<path d="M380,150 L436,150" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="359.6384615384615" y="97" width="92.72307692307693" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="410" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">有 tool_calls</text>
+<path d="M440,180 L384,180" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#an)"/>
+<rect x="370.38461538461536" y="209" width="71.23076923076923" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="410" y="224" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">无条件回边</text>
+<path d="M265,200 L265,298" fill="none" stroke="#f87171" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="271" y="240" width="104.56923076923077" height="22" rx="5" fill="#0f172a" opacity="0.92"/>
+<text x="275" y="255" text-anchor="start" font-size="11" font-weight="600" fill="#e2e8f0">tool_calls 为空</text>
+<text x="50" y="400" text-anchor="start" font-size="13" fill="#e2e8f0">state = {messages: [...], ...}；messages 用 add_messages 追加</text>
+<text x="50" y="425" text-anchor="start" font-size="12" fill="#94a3b8">input_tokens 单调上涨（192 → 328 → 363 → 399 → 436）= 每轮重发完整历史</text>
+<text x="50" y="450" text-anchor="start" font-size="12" fill="#fbbf24" font-weight="700">退出条件只有一个：AIMessage.tool_calls == []</text>
+<rect x="690" y="60" width="680" height="440" rx="12" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="702" y="80" font-size="13" font-weight="700" fill="#94a3b8">② 工具参数 = LLM 当场打出来的文本 → state 它填不出来</text>
+<rect x="710" y="110" width="300" height="90" rx="10" fill="#2d1f1f" stroke="#f87171" stroke-width="2"/>
+<text x="860.0" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="#fca5a5">LLM 看到的 schema</text>
+<text x="860.0" y="160" text-anchor="middle" font-size="12" fill="#fca5a5" opacity="0.92">calculator_wstate(operation, a, b)</text>
+<text x="860.0" y="180" text-anchor="middle" font-size="12" fill="#fca5a5" opacity="0.92">没有 state / tool_call_id</text>
+<rect x="1050" y="110" width="300" height="90" rx="10" fill="#2a2418" stroke="#fbbf24" stroke-width="2"/>
+<text x="1200.0" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="#fde68a">ToolNode 执行时</text>
+<text x="1200.0" y="160" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">框架把 state、tool_call_id 填进去</text>
+<text x="1200.0" y="180" text-anchor="middle" font-size="12" fill="#fde68a" opacity="0.92">工具签名里多出的参数对 LLM 隐形</text>
+<path d="M1012,155 L1046,155" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#ay)"/>
+<rect x="710" y="240" width="300" height="110" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+<text x="724" y="266" text-anchor="start" font-size="13" font-weight="700" fill="#e2e8f0">旧写法（仍可用）</text>
+<text x="724" y="290" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">state: Annotated[S, InjectedState]</text>
+<text x="724" y="309" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">tool_call_id: Annotated[str,</text>
+<text x="724" y="328" text-anchor="start" font-size="11" fill="#e2e8f0" opacity="0.92">            InjectedToolCallId]</text>
+<rect x="1050" y="240" width="300" height="110" rx="10" fill="#0f2729" stroke="#22d3ee" stroke-width="2"/>
+<text x="1064" y="266" text-anchor="start" font-size="13" font-weight="700" fill="#a5f3fc">LangChain 1.x 推荐</text>
+<text x="1064" y="290" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">runtime: ToolRuntime</text>
+<text x="1064" y="309" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">runtime.state / .tool_call_id</text>
+<text x="1064" y="328" text-anchor="start" font-size="11" fill="#a5f3fc" opacity="0.92">.config .context .store .tools</text>
+<text x="710" y="390" text-anchor="start" font-size="13" fill="#e2e8f0" font-weight="700">要改多个 state 字段 → return Command(update={...})</text>
+<text x="710" y="414" text-anchor="start" font-size="12" fill="#94a3b8">用了 Command 框架不再自动包 ToolMessage → 自己造 → 必须有 tool_call_id → 必须注入</text>
+<text x="710" y="438" text-anchor="start" font-size="12" fill="#fbbf24" font-weight="700">三者互为前提：Command ⇄ ToolMessage ⇄ tool_call_id 注入</text>
+<text x="710" y="470" text-anchor="start" font-size="12" fill="#4ade80">本机实测（langchain 1.4.6）：两种写法发给 LLM 的 schema 相同，执行结果相同</text>
+</svg>
